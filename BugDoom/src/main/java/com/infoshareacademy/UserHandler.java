@@ -11,11 +11,13 @@ public class UserHandler {
 //Create username with password
     static void createUser() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("username ");
+        System.out.println("name ");
         String username = scanner.nextLine();
+        System.out.println("Last name ");
+        String userLastName = scanner.nextLine();
         System.out.println("password ");
         String password = scanner.nextLine();
-        User user = new User(username, password);
+        User user = new User(username, userLastName, password);
         //Make sure that text file is in place.
         try {
             if(!file.exists()) {
@@ -24,7 +26,7 @@ public class UserHandler {
             //Save user with password in file.
             FileWriter fileWriter = new FileWriter(file, true);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-            bufferedWriter.write(user.getUsername() + "," + user.getPassword());
+            bufferedWriter.write(user.getUsername() + "," + user.getUserLastName() + "," + user.getPassword());
             bufferedWriter.newLine();
             bufferedWriter.close();
             System.out.println("User created successfully.");
@@ -36,11 +38,13 @@ public class UserHandler {
     //Login menu. Might add more later on, like name, lastname etc.
     static void logIn() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("username ");
+        System.out.println("name ");
         String username = scanner.nextLine();
+        System.out.println("last name");
+        String userLastName = scanner.nextLine();
         System.out.println("password ");
         String password = scanner.nextLine();
-//           Check if in saved file username (part[0]) and password (part[1])
+//           Check if in saved file username (part[0]), userLastName (part[1]) and password (part[2])
 //           match to any saved in array of strings separeted by a comma.
 //           If both conditions are true, it means that the username and password match a record in the file,
 //           and the code will print "Login successfull." and return.
@@ -51,7 +55,7 @@ public class UserHandler {
             while (fileScanner.hasNextLine()) {
                 String line = fileScanner.nextLine();
                 String[] parts = line.split(",");
-                if (parts[0].equals(username) && parts[1].equals(password)) {
+                if (parts[0].equals(username) && parts[1].equals(userLastName) && parts[2].equals(password)) {
                     System.out.println("Login successfull.");
                     return;
                 }
