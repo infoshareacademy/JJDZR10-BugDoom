@@ -1,5 +1,7 @@
 package com.infoshareacademy;
 
+import com.infoshareacademy.service.Menu;
+
 /**
  * Hello world!
  *
