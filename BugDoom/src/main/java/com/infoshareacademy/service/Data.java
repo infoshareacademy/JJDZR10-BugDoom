@@ -1,12 +1,12 @@
 package com.infoshareacademy.service;
 
 import com.google.gson.Gson;
-import com.infoshareacademy.User;
+import com.infoshareacademy.modele.*;
 
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.Scanner;
 
 public class Data {
@@ -48,8 +48,8 @@ public class Data {
                         if (field.contains("id")) {
                             String[] idInFile = field.split(":");
                             if (idInFile[1].equals(id)) {
-                                T user = gson.fromJson(line, T.class);
-                                return user;
+                                User user = gson.fromJson(line, User.class);
+                                return (T) user;
                             }
                         }
                     }
@@ -65,8 +65,8 @@ public class Data {
                         if (field.contains("id")) {
                             String[] idInFile = field.split(":");
                             if (idInFile[1].equals(id)) {
-                                T track = gson.fromJson(line, T.class);
-                                return track;
+                                Track track = gson.fromJson(line, Track.class);
+                                return (T) track;
                             }
                         }
                     }
@@ -82,8 +82,8 @@ public class Data {
                         if (field.contains("id")) {
                             String[] idInFile = field.split(":");
                             if (idInFile[1].equals(id)) {
-                                T controlPoint = gson.fromJson(line, T.class);
-                                return controlPoint;
+                                ControlPoint controlPoint = gson.fromJson(line, ControlPoint.class);
+                                return (T) controlPoint;
                             }
                         }
                     }
