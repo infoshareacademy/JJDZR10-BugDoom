@@ -1,0 +1,74 @@
+BugDoom - Planer Biegów na Orientacje
+Podstawowy Schemat Biznesowy Aplikacji
+
+1. Dla kogo tworzymy aplikacje?
+-> Nasza aplikacja w pierwszej kolejności zostanie stworzona dla osoby organizującej biegi - organizator
+-> W drugiej fazie, zostanie stworzona część dla użytkownika - biegacz
+
+2. Co organizator będzię mógł zrobić w naszej aplikacji?
+Kategoria : Planowanie Trasy
+-> Stworzyć trasę biegu na orientacje dla biegaczy
+     - lokalizacja biegu(miasto/las)
+     - poziom trudności (łatwa/średnia/trudna)
+     - start/meta
+     - długość trasy
+     - punkty kontrolne (współrzędne x/y)
+-> Edycja trasy/Usuwanie trasy
+     - np usuwanie/dodawanie pukntów kontrolnych, długość trasy, start/meta
+-> Pokazanie podglądu trasy
+     - wyświetlenie podsumowania stworzonej trasy
+
+Kategoria : Data, czas i miejsce biegu
+-> Dostęp do kalendarza oraz wybór daty tworzonego wydarzenia/biegu
+-> Wybór godziny rozpoczęcia biegu według czasu lokalnego
+-> Miejsce biegu dla tras w mieście oraz w terenie(las)
+
+Kategoria : Formularz zgłoszeniowy dla użytkownika - biegacz
+-> Organizator będzie mógł edytować podpuknty formularza dla biegacza,
+   który będzie mógł dopasować do własnej trasy biegów
+    - np wybór biegu
+-> Organizator będzie mógł w miejscu formularza dodać własną treść bądź plik np. Regulamin Biegu
+
+Kategoria : Materiały dla biegacza
+-> Organizator będzie mógł załączyć pakiet informacyjny dla biegacza po wypełnieniu formularza
+    - wygenerowana mapa pdf
+    - porady przed i po biegu
+    - zasady/reguły biegu
+
+Kategoria : Feedback biegu przez użytkownika - biegacz
+-> Organizator udostępni użytkownikowi ocene trasy/biegu w skali od 1-5
+
+3. Użytkownik - Organizator
+-> Możliwość Rejestracji do stworzenia konta (formularz)
+-> Możliwość zalogowania się do własnego konta
+-> Konto organizatora:
+    - Edycja danych osobowych
+    - Formularze
+    - Załączniki
+    - Aktywne biegi (liczba uczestkników, wybrane trasy itd)
+    - Zorganizowane biegi (historia tras, oceny tras, liczba uczestników)
+    - Maile użytkowników - do wysyłania powiadomień o nadchodzących biegach (opcjonalne)
+
+4. Użytkownik - Biegacz
+-> Możliwość Rejestracji do stworzenia konta (formularz)
+-> Możliwość zalogowania się do własnego konta
+-> Konto biegacza:
+        - Edycja danych osobowych
+        - "Moje Biegi" (aktywne/poprzednie biegi)
+        - "Zapisy" (możliwość zapisania się na bieg, dodawanie użytkowników towarzyszących, wypełnianie formularza,
+          odczyt dokumentów dodanych przez organizatora, kontakt do organizatora (mail)"
+
+5. Menu - Strona Startowa
+-> Zakładki stałe strony startowej (dostępne cały czas nawet bez logowania)
+   - Aktualności (newsy o nadchodzących biegach)
+   - Poradnik (dla organizatora i biegacza - tekst)
+   - Wyniki biegów
+-> Co chcesz zrobić - zaloguj się/zarejestruj
+-> Strona po rejestracji/zalogowaniu się
+-> Powitanie użytkownika "Witaj (imie)"
+-> Co chesz zrobić? - podanie opcji do wyboru dla organizatora/biegacza
+
+6. Źródła danych: pliki tekstowe, integracja map google, integracja kalendarza, godziny,
+   pobieranie danych od użytkownika, formularze, raporty,
+
+
