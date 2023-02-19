@@ -1,10 +1,18 @@
 package com.infoshareacademy.model;
 
 public class ControlPoint {
-    // współrzędne x i y składają się na koordynaty
+    private String id;
     int x;
     int y;
     int [][] coordinates;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public int getX() {
         return x;

@@ -1,21 +1,37 @@
 package com.infoshareacademy.model;
 
 public class User {
-    private int id;
+    private String id;
     private String login;
     private String name;
     private String password;
 
     //Constructor for the User class.
     User(int id, String login, String name, String password) {
-        this.id = id;
         this.login = login;
         this.name = name;
         this.password = password;
     }
 
-    //Set getters for them.
-//Returns the username for the User object.
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
     public String getLogin() {
         return login;
     }
@@ -26,10 +42,5 @@ public class User {
 
     public String getPassword() {
         return password;
-    }
-
-    public int getId() {
-        return id;
-
     }
 }

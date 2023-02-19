@@ -1,12 +1,21 @@
 package com.infoshareacademy.model;
 
 public class Track {
+    private String id;
     private ControlPoint startPoint;
     private ControlPoint endPoint;
     private ControlPoint checkpoint;
     private int length;
     private String difficulty;
     private String location;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public ControlPoint getStartPoint() {
         return startPoint;
