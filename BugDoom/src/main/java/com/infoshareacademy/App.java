@@ -10,7 +10,8 @@ public class App {
     public static void main(String[] args) {
         Map map = new Map();
         map.drawMap();
-        map.createStart();
+        map.setNumberOfCheckpoints();
+        map.createCheckpoints();
 
     }
 }
