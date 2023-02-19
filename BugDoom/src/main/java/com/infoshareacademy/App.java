@@ -1,8 +1,5 @@
 package com.infoshareacademy;
 
-import com.infoshareacademy.modele.ControlPoint;
-import com.infoshareacademy.service.Data;
-
 /**
  * Hello world!
  *

@@ -6,7 +6,6 @@ import com.infoshareacademy.modele.*;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.util.Scanner;
 
 public class Data {
@@ -17,18 +16,18 @@ public class Data {
         // save it to a file, each class has their own file
         try {
             if (objectToSave instanceof User) {
-                FileWriter writer = new FileWriter("User.json");
-                writer.append(json);
+                FileWriter writer = new FileWriter("User.json", true);
+                writer.append(json + "\n");
                 writer.close();
             }
             if (objectToSave instanceof Track) {
-                FileWriter writer = new FileWriter("Track.json");
-                writer.append(json);
+                FileWriter writer = new FileWriter("Track.json", true);
+                writer.append(json + "\n");
                 writer.close();
             }
             if (objectToSave instanceof ControlPoint) {
-                FileWriter writer = new FileWriter("ControlPoint.json");
-                writer.append(json);
+                FileWriter writer = new FileWriter("ControlPoint.json", true);
+                writer.append(json + "\n");
                 writer.close();
             }
         } catch (IOException e) {
