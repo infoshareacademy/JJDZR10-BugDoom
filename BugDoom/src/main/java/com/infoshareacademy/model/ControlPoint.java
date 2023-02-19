@@ -2,9 +2,9 @@ package com.infoshareacademy.model;
 
 public class ControlPoint {
     private String id;
-    int x;
-    int y;
-    int [][] coordinates;
+    private int x;
+    private int y;
+    private int [][] coordinates;
 
     public String getId() {
         return id;
