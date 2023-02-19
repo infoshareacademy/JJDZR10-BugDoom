@@ -1,4 +1,4 @@
-package com.infoshareacademy.modele;
+package com.infoshareacademy.model;
 
 public class ControlPoint {
     private String id;

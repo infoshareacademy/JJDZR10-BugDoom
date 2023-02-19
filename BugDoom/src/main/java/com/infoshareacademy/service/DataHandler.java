@@ -1,14 +1,14 @@
 package com.infoshareacademy.service;
 
 import com.google.gson.Gson;
-import com.infoshareacademy.modele.*;
+import com.infoshareacademy.model.*;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class Data {
+public class DataHandler {
     public static <T> void appendToFile(T objectToSave) {
         // saving an object to Json
         Gson gson = new Gson();
