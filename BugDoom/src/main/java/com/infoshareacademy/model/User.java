@@ -7,7 +7,8 @@ public class User {
     private String password;
 
     //Constructor for the User class.
-    User(int id, String login, String name, String password) {
+    public User(String id, String login, String name, String password) {
+        this.id = id;
         this.login = login;
         this.name = name;
         this.password = password;
