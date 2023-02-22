@@ -1,7 +1,7 @@
 package com.infoshareacademy.model;
 
 public class Track {
-    private String id;
+    private String trackId;
     private ControlPoint startPoint;
     private ControlPoint endPoint;
     private ControlPoint checkpoint;
@@ -9,12 +9,12 @@ public class Track {
     private String difficulty;
     private String location;
 
-    public String getId() {
-        return id;
+    public String getTrackId() {
+        return trackId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setId(String trackId) {
+        this.trackId = trackId;
     }
 
     public ControlPoint getStartPoint() {

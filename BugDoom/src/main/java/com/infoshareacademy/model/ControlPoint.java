@@ -1,17 +1,17 @@
 package com.infoshareacademy.model;
 
 public class ControlPoint {
-    private String id;
+    private String controlPointID;
     private int x;
     private int y;
     private int [][] coordinates;
 
-    public String getId() {
-        return id;
+    public String getControlPointID() {
+        return controlPointID;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setControlPointID(String controlPointID) {
+        this.controlPointID = controlPointID;
     }
 
     public int getX() {

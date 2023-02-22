@@ -4,5 +4,5 @@ import com.infoshareacademy.model.User;
 
 public interface UserRepository {
     // tutaj będą wszystkie metody do klas serwisowych (logiki biznesowej)
-    User findUser (int id);
+    User findUserById (String id);
 }
