@@ -12,8 +12,8 @@ import java.util.List;
 
 
 public class DataHandler<T> {
-    public static <T> void saveToFile(T listToSave, String file) throws IOException {
-        Gson gson = new Gson();
+    Gson gson = new Gson();
+    public <T> void saveToFile(T listToSave, String file) throws IOException {
         String json = gson.toJson(listToSave);
         FileWriter writer = new FileWriter(file);
         writer.write(json);
@@ -21,7 +21,6 @@ public class DataHandler<T> {
     }
 
     public List<T> readFromFile(String file, Class<T[]> classToRead) throws IOException {
-        Gson gson = new Gson();
         Path path = Paths.get(file);
         String usersFromFile = Files.readString(path);
         T[] arr = gson.fromJson(usersFromFile, classToRead);
