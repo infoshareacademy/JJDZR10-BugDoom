@@ -1,5 +1,7 @@
 package com.infoshareacademy;
 
+import com.infoshareacademy.model.User;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
