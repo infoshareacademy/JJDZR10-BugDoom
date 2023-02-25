@@ -57,7 +57,6 @@ public class Map {
 
     public void drawMap() {
         System.out.println("| --->Y\nV X");
-        getTablica();
         for (int i = 0; i < tablica.length; i++) { // wiersze
             for (int j = 0; j < tablica.length; j++) { // kolumny
                 System.out.print(tablica[i][j] + " ");
@@ -66,91 +65,92 @@ public class Map {
         }
     }
 
-    public int getCoordinateX() {
-        return coordinateX;
-    }
-
-    public int getCoordinateY() {
-        return coordinateY;
-    }
-
-    public int setCoordinateX() {
+    public void setCoordinateXY() {
         boolean placeholder = true;
         do {
             try {
                 Scanner scanner = new Scanner(System.in);
                 System.out.println("podaj współrzedną X");
                 coordinateX = scanner.nextInt();
-                if (coordinateX >= 0 && coordinateX <= 5) {
-                    placeholder = false;
-                } else {
-                    System.out.println("zakres <0;5>");
-                }
-            } catch (Exception e) {
-                System.out.println("musisz wprowadzić liczbę");
-            }
-        } while (placeholder);
-        System.out.println("współrzędna X = " + coordinateX);
-        return coordinateX;
-    }
-
-    public int setCoordinateY() {
-        boolean placeholder = true;
-        do {
-            try {
-                Scanner scanner = new Scanner(System.in);
                 System.out.println("podaj współrzedną Y");
                 coordinateY = scanner.nextInt();
-                if (coordinateY >= 0 && coordinateY <= 5) {
+                if (coordinateX >= 0 && coordinateX <= 5 && coordinateY >= 0 && coordinateY <= 5) {
                     placeholder = false;
-
                 } else {
-                    System.out.println("zakres <0;5>");
+                    System.out.println("zakres współrzędnych <0;5>");
                 }
             } catch (Exception e) {
                 System.out.println("musisz wprowadzić liczbę");
             }
         } while (placeholder);
-        System.out.println("współrzędna Y = " + coordinateY);
-        return coordinateY;
+        return;
     }
-
 
     public int getNumberOfCheckpoints() {
         return numberOfCheckpoints;
     }
 
-
-  /*  public void createCheckpoints() {
-        getTablica();
+    public int setNumberOfCheckpoints() {
+        boolean placeholder = true;
+        do {
+            try {
+                Scanner scanner = new Scanner(System.in);
+                System.out.println("podaj ilość checkpointów");
+                numberOfCheckpoints = scanner.nextInt();
+                if (numberOfCheckpoints > 0 && numberOfCheckpoints <= 3) { //3 checkpointy dla sprawdzenia programu
+                    placeholder = false;
+                } else {
+                    System.out.println("maksymalna ilość checkpointów wynosi 3");
+                }
+            } catch (Exception e) {
+                System.out.println("musisz wprowadzić liczbę");
+            }
+        } while (placeholder);
+        return numberOfCheckpoints;
+    }
+    public void createCheckpoints() {
         setNumberOfCheckpoints();
-        for (int k = 1; k <= numberOfCheckpoints; k++) {
-            System.out.println("zdefiniuj checkpoint nr " + k);
-            setCoordinateX();
-            setCoordinateY();
+        boolean notEqualStartAndEndAndCheckpoints = true;
 
-            tablica[coordinateX][coordinateY] = "CH" + k;
+        for (int k = 1; k <= numberOfCheckpoints; k++) {
+            do {
+
+                try {
+                    System.out.println("zdefiniuj checkpoint nr " + k);
+                    setCoordinateXY();
+                    if ((tablica[coordinateX][coordinateY] != "STR") && (tablica[coordinateX][coordinateY] != "END") && (tablica[coordinateX][coordinateY] != "CHP")) {
+                        tablica[coordinateX][coordinateY] = "CHP";
+                        notEqualStartAndEndAndCheckpoints = false;
+                        drawMap();
+                    } else {
+                        System.out.println("Punkt musi mieć inne współrzędne od wcześniejszej zdefiniowanych");
+                    }
+                } catch (Exception e) {
+                    System.out.println("musisz wprowadzić liczbę");
+                }
+            } while (notEqualStartAndEndAndCheckpoints);
         }
     }
 
-   */
 
-    public void createMap() {
+
+    public void createStart() {
         getTablica();
         System.out.println("zdefiniuj punkt startowy");
-        setCoordinateX();
-        setCoordinateY();
+        setCoordinateXY();
         tablica[coordinateX][coordinateY] = "STR";
+        drawMap();
+        }
 
+    public void createEnd() {
         System.out.println("zdefiniuj punkt końcowy");
         boolean notEqualStart = true;
         do {
             try {
-                setCoordinateX();
-                setCoordinateY();
-        if (tablica[coordinateX][coordinateY] != "STR"){
-        tablica[coordinateX][coordinateY] = "END";
-        notEqualStart = false;
+                setCoordinateXY();
+                if (tablica[coordinateX][coordinateY] != "STR") {
+                    tablica[coordinateX][coordinateY] = "END";
+                    notEqualStart = false;
                 } else {
                     System.out.println("Meta musi mieć inne współrzędne niż start");
                 }
@@ -158,64 +158,6 @@ public class Map {
                 System.out.println("musisz wprowadzić liczbę");
             }
         } while (notEqualStart);
-
-        System.out.println("zdefiniuj checkpoint nr 1");
-        boolean placeholder1 = true;
-        do{
-            try{
-            setCoordinateX();
-            setCoordinateY();
-            if ((tablica[coordinateX][coordinateY] != "STR") && (tablica[coordinateX][coordinateY] != "END")) {
-                    tablica[coordinateX][coordinateY] = "CH1";
-                    placeholder1 = false;
-                }else{
-                    System.out.println("Punkt kontrolny musi mieć inne współrzędne niż start i meta");
-                }
-        }catch (Exception e) {
-                System.out.println("musisz wprowadzić liczbę");
-            }
-        } while (placeholder1);
-
-        System.out.println("zdefiniuj checkpoint nr 2");
-        boolean placeholder2 = true;
-        do{
-            try{
-                setCoordinateX();
-                setCoordinateY();
-                if ((tablica[coordinateX][coordinateY] != "STR") && (tablica[coordinateX][coordinateY] != "END") && (tablica[coordinateX][coordinateY] != "CH1")) {
-                    tablica[coordinateX][coordinateY] = "CH2";
-                    placeholder2 = false;
-                }else{
-                    System.out.println("Punkt kontrolny musi mieć inne współrzędne od wcześniej zdefiniowanych");
-                }
-            }catch (Exception e) {
-                System.out.println("musisz wprowadzić liczbę");
-            }
-        } while (placeholder2);
-
-        System.out.println("zdefiniuj checkpoint nr 3");
-        boolean placeholder3 = true;
-        do{
-            try{
-                setCoordinateX();
-                setCoordinateY();
-                if ((tablica[coordinateX][coordinateY] != "STR") && (tablica[coordinateX][coordinateY] != "END") && (tablica[coordinateX][coordinateY] != "CH1")&& (tablica[coordinateX][coordinateY] != "CH2")) {
-                    tablica[coordinateX][coordinateY] = "CH3";
-                    placeholder3 = false;
-                }else{
-                    System.out.println("Punkt kontrolny musi mieć inne współrzędne od wcześniej zdefiniowanych");
-                }
-            }catch (Exception e) {
-                System.out.println("musisz wprowadzić liczbę");
-            }
-        } while (placeholder3);
-
-
-                for (int i = 0; i < tablica.length; i++) { // wiersze
-            for (int j = 0; j < tablica.length; j++) { // kolumny
-                System.out.print(tablica[i][j] + " ");
-            }
-            System.out.println("");
-        }
+        drawMap();
     }
 }
