@@ -1,39 +1,48 @@
 package com.infoshareacademy;
-import java.util.Scanner;
-public class App 
-{
-    public static void main( String[] args ) {
-        //Create a scanner object to read from input.
-        Scanner scanner = new Scanner(System.in);
-        //Create an object of class.
-        UserHandler userHandler = new UserHandler();
-        //Infinite loop that displays a menu to the user and allows to perform actions.
-        while (true) {
-            //Print options.
-            System.out.println("1. Create user");
-            System.out.println("2. Log in");
-            System.out.println("3. Exit");
-            System.out.println("Enter your choice: ");
-            //Read the choice.
-            int choice = scanner.nextInt();
-            //Switch statement performs an action based on user's choice.
-            switch (choice) {
-                case 1:
-                    //Call createUser method from UserHandler class.
-                    UserHandler.createUser();
-                    break;
-                case 2:
-                    //Call the logIn method from the UserHandler class.
-                    UserHandler.logIn();
-                    break;
-                case 3:
-                    //Exits the program.
-                    System.exit(0);
-                default:
-                    //If the user inputs an invalid choice, print error message.
-                    System.out.println("Invalid choice. Try again.");
-            }
 
+import com.infoshareacademy.model.User;
+import com.infoshareacademy.service.Menu;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
+
+public class App {
+    public static void appendToFile (String filename, String data) {
+        try {
+            FileWriter fileWriter = new FileWriter(filename, true);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            bufferedWriter.write(data);
+            bufferedWriter.newLine();
+            bufferedWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+    }
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        boolean loggedIn = false;
+        while (!loggedIn) {
+            System.out.println("1. Nowe konto\n2. Log in\n3. Wyjście");
+            String choice = scanner.nextLine();
+            switch (choice) {
+                case "1":
+                    User user = UserHandler.getNewUserDetails();
+                    UserHandler.appendToFile("user.json", user.toString());
+                    break;
+                case "2":
+                    UserHandler.logIn();
+                    loggedIn = true;
+                    break;
+                case "3":
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("Nie prawidłowy wybór. Spróbuj ponownie.");
+            }
+        }
+        Menu menu = new Menu();
+        Menu.displayMainMenu();
     }
 }

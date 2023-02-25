@@ -4,7 +4,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Menu {
-    public static void mainMenu() {
+    public static void displayMainMenu() {
         System.out.println("Witaj w aplikacji!\n" +
                 "Wybierz sekcję\n" +
                 "1-->Trasa\n" +
@@ -18,7 +18,8 @@ public class Menu {
                 switch (menu) {
                     case 0:
                         placeholder = false;
-                        mainMenu();
+                        displayMainMenu();
+                        break;
                     case 1:
                         placeholder = false;
                         menuTrasa();
@@ -35,6 +36,7 @@ public class Menu {
             }
         } while (placeholder);
     }
+
     private static void menuTrasa() {
         System.out.println("Trasa: \n" +
                 "Co chcesz robić?\n" +
@@ -51,7 +53,8 @@ public class Menu {
                 menu = scanner.nextInt();
                 switch (menu) {
                     case 0:
-                        mainMenu();
+                        displayMainMenu();
+                        break;
                     case 1:
                         placeholder = false;
                         System.out.println("tworzenie nowej trasy");
@@ -67,14 +70,17 @@ public class Menu {
                     case 4:
                         placeholder = false;
                         System.out.println("usuwanie trasy");
+                        break;
                     default:
                         System.out.println("wybierz ponownie");
+                        break;
                 }
-            } catch (InputMismatchException e){
+            } catch (InputMismatchException e) {
                 System.out.println("Zła opcja!");
             }
         } while (placeholder);
     }
+
     private static void menuControlPoint() {
         System.out.println("Punkt kontrolny: \n" +
                 "Co chcesz robić?\n" +
@@ -91,7 +97,8 @@ public class Menu {
                 menu = scanner.nextInt();
                 switch (menu) {
                     case 0:
-                        mainMenu();
+                        displayMainMenu();
+                        break;
                     case 1:
                         placeholder = false;
                         System.out.println("tworzenie nowego punktu");
@@ -107,10 +114,12 @@ public class Menu {
                     case 4:
                         placeholder = false;
                         System.out.println("usuwanie punktu");
+                        break;
                     default:
                         System.out.println("wybierz ponownie");
+                        break;
                 }
-            } catch (InputMismatchException e){
+            } catch (InputMismatchException e) {
                 System.out.println("Zła opcja!");
             }
         } while (placeholder);
