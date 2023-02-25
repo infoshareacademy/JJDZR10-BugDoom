@@ -94,7 +94,7 @@ public class Map {
                 try {
                     System.out.println("zdefiniuj checkpoint");
                     setCoordinateXY();
-                    if ((tablica[coordinateX][coordinateY] != "STR") && (tablica[coordinateX][coordinateY] != "END") && (tablica[coordinateX][coordinateY] != "CHP")) {
+                    if (!(tablica[coordinateX][coordinateY].equals("STR")) && !(tablica[coordinateX][coordinateY].equals("END")) && !(tablica[coordinateX][coordinateY].equals("CHP"))) {
                         tablica[coordinateX][coordinateY] = "CHP";
                         notEqualStartAndEndAndCheckpoints = false;
                         drawMap();
@@ -122,7 +122,7 @@ public class Map {
         do {
             try {
                 setCoordinateXY();
-                if (tablica[coordinateX][coordinateY] != "STR") {
+                if (!(tablica[coordinateX][coordinateY].equals("STR"))) {
                     tablica[coordinateX][coordinateY] = "END";
                     notEqualStart = false;
                 } else {
