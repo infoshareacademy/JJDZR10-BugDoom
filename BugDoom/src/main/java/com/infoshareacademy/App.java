@@ -8,9 +8,9 @@ import java.util.List;
  */
 public class App {
     public static void main(String[] args) {
-        Map map = new Map();
-        map.createStart();
-map.createEnd();
-map.createCheckpoints();
+                Map map = new Map();
+                map.createMap();
+                map.createCheckpoints();
+                map.createCheckpoints();
     }
 }

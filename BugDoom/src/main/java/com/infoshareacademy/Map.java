@@ -6,7 +6,6 @@ import java.util.Scanner;
 public class Map {
     private int coordinateX;
     private int coordinateY;
-    private int numberOfCheckpoints;
     private String[][] tablica;
 
     public String[][] getTablica() {
@@ -86,37 +85,14 @@ public class Map {
         return;
     }
 
-    public int getNumberOfCheckpoints() {
-        return numberOfCheckpoints;
-    }
 
-    public int setNumberOfCheckpoints() {
-        boolean placeholder = true;
-        do {
-            try {
-                Scanner scanner = new Scanner(System.in);
-                System.out.println("podaj ilość checkpointów");
-                numberOfCheckpoints = scanner.nextInt();
-                if (numberOfCheckpoints > 0 && numberOfCheckpoints <= 3) { //3 checkpointy dla sprawdzenia programu
-                    placeholder = false;
-                } else {
-                    System.out.println("maksymalna ilość checkpointów wynosi 3");
-                }
-            } catch (Exception e) {
-                System.out.println("musisz wprowadzić liczbę");
-            }
-        } while (placeholder);
-        return numberOfCheckpoints;
-    }
     public void createCheckpoints() {
-        setNumberOfCheckpoints();
         boolean notEqualStartAndEndAndCheckpoints = true;
 
-        for (int k = 1; k <= numberOfCheckpoints; k++) {
             do {
 
                 try {
-                    System.out.println("zdefiniuj checkpoint nr " + k);
+                    System.out.println("zdefiniuj checkpoint");
                     setCoordinateXY();
                     if ((tablica[coordinateX][coordinateY] != "STR") && (tablica[coordinateX][coordinateY] != "END") && (tablica[coordinateX][coordinateY] != "CHP")) {
                         tablica[coordinateX][coordinateY] = "CHP";
@@ -129,13 +105,11 @@ public class Map {
                     System.out.println("musisz wprowadzić liczbę");
                 }
             } while (notEqualStartAndEndAndCheckpoints);
-        }
     }
 
 
 
     public void createStart() {
-        getTablica();
         System.out.println("zdefiniuj punkt startowy");
         setCoordinateXY();
         tablica[coordinateX][coordinateY] = "STR";
@@ -159,5 +133,11 @@ public class Map {
             }
         } while (notEqualStart);
         drawMap();
+    }
+    public void createMap(){
+        getTablica();
+        drawMap();
+        createStart();
+        createEnd();
     }
 }
