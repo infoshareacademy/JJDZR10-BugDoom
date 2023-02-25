@@ -5,28 +5,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="024b8c9c-5b8f-45ee-95d3-0ba9b059278d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/BugDoom/BugDoom.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/JJDZR10-BugDoom.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/JJDZR10-BugDoom.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BugDoom/src/main/java/com/infoshareacademy/model/Admin.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BugDoom/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/BugDoom/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BugDoom/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BugDoom/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BugDoom/src/main/java/com/infoshareacademy/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/BugDoom/src/main/java/com/infoshareacademy/App.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BugDoom/src/main/java/com/infoshareacademy/UserHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/BugDoom/src/main/java/com/infoshareacademy/UserHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BugDoom/src/main/java/com/infoshareacademy/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/BugDoom/src/main/java/com/infoshareacademy/model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BugDoom/src/main/java/com/infoshareacademy/service/DataHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/BugDoom/src/main/java/com/infoshareacademy/service/DataHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BugDoom/src/main/java/com/infoshareacademy/service/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/BugDoom/src/main/java/com/infoshareacademy/service/Menu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BugDoom/users.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/users.json" beforeDir="false" afterPath="$PROJECT_DIR$/users.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="Develop" />
+        <entry key="$PROJECT_DIR$" value="JJDZR10BD-14" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -62,6 +64,11 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.infoshareacademy.service" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.infoshareacademy.App" />
@@ -104,7 +111,7 @@
       <option name="presentableId" value="Default" />
       <updated>1676143676647</updated>
       <workItem from="1676143677773" duration="186000" />
-      <workItem from="1677330658986" duration="7693000" />
+      <workItem from="1677330658986" duration="14219000" />
     </task>
     <servers />
   </component>
