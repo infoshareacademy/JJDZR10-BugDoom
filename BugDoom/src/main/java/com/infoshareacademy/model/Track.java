@@ -64,4 +64,17 @@ public class Track {
     public void setLocation(String location) {
         this.location = location;
     }
+
+    @Override
+    public String toString() {
+        return "Track{" +
+                "trackId='" + trackId + '\'' +
+                ", startPoint=" + startPoint +
+                ", endPoint=" + endPoint +
+                ", checkpoint=" + checkpoint +
+                ", length=" + length +
+                ", difficulty='" + difficulty + '\'' +
+                ", location='" + location + '\'' +
+                '}';
+    }
 }
