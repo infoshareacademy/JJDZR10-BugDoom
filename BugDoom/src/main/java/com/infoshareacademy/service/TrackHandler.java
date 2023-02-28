@@ -12,7 +12,7 @@ public class TrackHandler {
         allTracks.forEach(System.out::println);
     }
 
-    public static List<Track> getAllTracks() throws IOException {
+    private static List<Track> getAllTracks() throws IOException {
         DataHandler<Track> dataHandler = new DataHandler<>();
         List <Track> allTracks = new ArrayList<>(dataHandler.readFromFile("Track.json", Track[].class));
         return allTracks;
