@@ -1,35 +1,29 @@
 package com.infoshareacademy.service;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.infoshareacademy.model.User;
 
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.List;
 
-public class DataHandler {
-    private static final String USERS_FILE_PATH = "users.json";
 
-    public User[] readUsers() {
-        try (FileReader reader = new FileReader(USERS_FILE_PATH)) {
-            Gson gson = new Gson();
-            User[] users = gson.fromJson(reader, User[].class);
-            if (users == null) {
-                users = new User[0];
-            }
-            return users;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return new User[0];
-        }
+public class DataHandler<T> {
+    Gson gson = new Gson();
+    public <T> void saveToFile(T listToSave, String file) throws IOException {
+        String json = gson.toJson(listToSave);
+        FileWriter writer = new FileWriter(file);
+        writer.write(json);
+        writer.close();
     }
-    public void writeUsers(User[] users) {
-        try (FileWriter writer = new FileWriter(USERS_FILE_PATH)) {
-            Gson gson = new Gson();
-            gson.toJson(users, writer);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+    public List<T> readFromFile(String file, Class<T[]> classToRead) throws IOException {
+        Path path = Paths.get(file);
+        String usersFromFile = Files.readString(path);
+        T[] arr = gson.fromJson(usersFromFile, classToRead);
+        return Arrays.asList(arr);
     }
 }
