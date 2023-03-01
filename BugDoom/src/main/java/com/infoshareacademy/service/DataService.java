@@ -15,12 +15,12 @@ import java.util.List;
 import java.util.Objects;
 
 
-public class DataHandler<T> {
+public class DataService<T> {
 
     private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
     private final Path filePath;
 
-    public DataHandler(String fileName) throws IOException, URISyntaxException {
+    public DataService(String fileName) throws IOException, URISyntaxException {
         ClassLoader classLoader = getClass().getClassLoader();
         Path inputStream = Paths.get(Objects.requireNonNull(classLoader.getResource(fileName)).toURI());
         if (!Files.exists(inputStream)) {

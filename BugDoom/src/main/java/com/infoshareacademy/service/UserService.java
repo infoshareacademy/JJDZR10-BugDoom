@@ -8,16 +8,16 @@ import java.util.List;
 import java.util.Scanner;
 
 
-public class UserHandler {
+public class UserService {
     private static final Scanner scanner = new Scanner(System.in);
 
     private static final String USERS_FILE_PATH = "User.json";
-    private static final DataHandler<User> dataHandler;
+    private static final DataService<User> dataHandler;
 
     static {
         try {
             String usersFilePath = "User.json";
-            dataHandler = new DataHandler<>(usersFilePath);
+            dataHandler = new DataService<>(usersFilePath);
         } catch (IOException | URISyntaxException ex) {
             throw new RuntimeException(ex);
         }

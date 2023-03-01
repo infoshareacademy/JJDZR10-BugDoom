@@ -28,12 +28,12 @@ public class Menu {
                 switch (option) {
                     case 0 -> placeholder = false;
                     case 1 -> {
-                        if (UserHandler.logIn()) {
-                            loggedInUser = UserHandler.getCurrentUser();
+                        if (UserService.logIn()) {
+                            loggedInUser = UserService.getCurrentUser();
                             placeholder = false;
                         }
                     }
-                    case 2 -> UserHandler.getNewUserDetails();
+                    case 2 -> UserService.getNewUserDetails();
                     default -> System.out.println("Wybierz ponownie.");
                 }
             } catch (InputMismatchException e) {
