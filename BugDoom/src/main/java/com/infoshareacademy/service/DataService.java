@@ -16,33 +16,19 @@ import java.util.Objects;
 
 
 public class DataService<T> {
+    Gson gson = new Gson();
 
-    private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
-    private final Path filePath;
-
-    public DataService(String fileName) throws IOException, URISyntaxException {
-        ClassLoader classLoader = getClass().getClassLoader();
-        Path inputStream = Paths.get(Objects.requireNonNull(classLoader.getResource(fileName)).toURI());
-        if (!Files.exists(inputStream)) {
-            throw new FileNotFoundException("File not found: " + fileName);
-        }
-        filePath = Paths.get(".").toAbsolutePath().resolve(fileName);
-        Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
-        File file = new File(filePath.toUri());
+    public <T> void saveToFile(T listToSave, String file) throws IOException {
+        String json = gson.toJson(listToSave);
+        FileWriter writer = new FileWriter(file);
+        writer.write(json);
+        writer.close();
     }
 
-    public void saveToFile(List<T> data) throws IOException {
-        try (Writer writer = Files.newBufferedWriter(Path.of(filePath.toUri()))) {
-            gson.toJson(data, writer);
-        }
-    }
-
-    public List<T> readFromFile(Class<T[]> clazz) throws IOException {
-        String json = Files.readString(Path.of(String.valueOf(filePath)));
-        T[] elements = gson.fromJson(json, clazz);
-        if (elements == null) {
-            return new ArrayList<>();
-        }
-        return new ArrayList<>(Arrays.asList(elements));
+    public List<T> readFromFile(String file, Class<T[]> classToRead) throws IOException {
+        Path path = Paths.get(file);
+        String usersFromFile = Files.readString(path);
+        T[] arr = gson.fromJson(usersFromFile, classToRead);
+        return Arrays.asList(arr);
     }
 }

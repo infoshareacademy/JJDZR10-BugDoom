@@ -3,13 +3,8 @@ package com.infoshareacademy.service;
 import com.infoshareacademy.model.User;
 
 import java.io.IOException;
-import com.infoshareacademy.model.*;
-import java.io.IOException;
-import java.util.*;
-import com.infoshareacademy.model.Track;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-
 
 public class Menu {
     public static User loggedInUser;
@@ -81,10 +76,10 @@ public class Menu {
         System.out.println("""
                 Trasa:\s
                 Co chcesz robić?
-                1-->uwórz nową trasę
-                2-->edytuj trasę
-                3-->pokaż trasę
-                4-->usuń trasę
+                1-->Uwórz nową trasę
+                2-->Edytuj trasę
+                3-->Pokaż wszystkie trasy
+                4-->Usuń trasę
                 0-->Wróć do poprzedniego menu""");
         int menu;
         boolean placeholder = true;
@@ -104,7 +99,7 @@ public class Menu {
                     }
                     case 3 -> {
                         placeholder = false;
-                        System.out.println("pokazanie tras");
+                        TrackService.printAllTracks();
                     }
                     case 4 -> {
                         placeholder = false;
@@ -124,10 +119,10 @@ public class Menu {
         System.out.println("""
                 Punkt kontrolny:\s
                 Co chcesz robić?
-                1-->uwórz nową trasę
-                2-->edytuj trasę
-                3-->pokaż trasę
-                4-->usuń trasę
+                1-->Uwórz nowy punkt kontrolny
+                2-->Edytuj punkt kontrolny
+                3-->Pokaż wszystkie punkty kontrolne
+                4-->Usuń punkt kontrolny
                 0-->Wróć do poprzedniego menu""");
         int menu;
         boolean placeholder = true;

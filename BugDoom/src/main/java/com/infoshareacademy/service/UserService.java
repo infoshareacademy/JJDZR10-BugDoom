@@ -4,25 +4,14 @@ import com.infoshareacademy.model.User;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 
 public class UserService {
     private static final Scanner scanner = new Scanner(System.in);
-
-    private static final String USERS_FILE_PATH = "User.json";
-    private static final DataService<User> dataHandler;
-
-    static {
-        try {
-            String usersFilePath = "User.json";
-            dataHandler = new DataService<>(usersFilePath);
-        } catch (IOException | URISyntaxException ex) {
-            throw new RuntimeException(ex);
-        }
-    }
-
+    private static final String USERS_FILE_PATH = FilePathConstants.USERS_FILE_PATH;
     private static User currentUser;
 
     public static void getNewUserDetails() throws IOException {
@@ -35,12 +24,13 @@ public class UserService {
     }
 
     public static void appendToFile(User user) throws IOException {
-        List<User> users = dataHandler.readFromFile(User[].class);
+        DataService<User> dataService = new DataService<>();
+        List<User> users = new ArrayList<>(dataService.readFromFile(USERS_FILE_PATH, User[].class));
         if (users.isEmpty()) {
             users.add(new User("default", "password"));
         }
         users.add(user);
-        dataHandler.saveToFile(users);
+        dataService.saveToFile(users, USERS_FILE_PATH);
     }
 
     public static User getCurrentUser() {
@@ -52,10 +42,11 @@ public class UserService {
         String name = scanner.nextLine();
         System.out.println("Wprowadź hasło: ");
         String password = scanner.nextLine();
-        List<User> users = dataHandler.readFromFile(User[].class);
+        DataService<User> dataService = new DataService<>();
+        List<User> users = dataService.readFromFile(USERS_FILE_PATH, User[].class);
         for (User user : users) {
             if (user.getName() != null && !user.getName().isEmpty() && user.getName().equals(name) && user.getPassword().equals(password)) {
-                System.out.println("Login pomyślny.");
+                System.out.println("Login i hasło poprawne");
                 currentUser = user;
                 return true;
             }
