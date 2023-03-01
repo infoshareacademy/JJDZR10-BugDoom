@@ -3,6 +3,10 @@ package com.infoshareacademy.service;
 import com.infoshareacademy.model.*;
 import java.io.IOException;
 import java.util.*;
+import com.infoshareacademy.model.Track;
+
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
 public class Menu {
     public static void mainMenu() {
@@ -56,6 +60,9 @@ public class Menu {
                     case 1:
                         placeholder = false;
                         System.out.println("tworzenie nowej trasy");
+                        Track track = new Track();
+                        track.createMap();
+
                         break;
                     case 2:
                         placeholder = false;
