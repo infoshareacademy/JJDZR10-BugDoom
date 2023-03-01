@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 
 
-public class DataHandler<T> {
+public class DataService<T> {
     Gson gson = new Gson();
     public <T> void saveToFile(T listToSave, String file) throws IOException {
         String json = gson.toJson(listToSave);

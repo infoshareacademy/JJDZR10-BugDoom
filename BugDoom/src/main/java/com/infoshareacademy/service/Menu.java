@@ -1,8 +1,7 @@
 package com.infoshareacademy.service;
 
-import com.infoshareacademy.model.*;
 import java.io.IOException;
-import java.util.*;
+
 import com.infoshareacademy.model.Track;
 
 import java.util.InputMismatchException;
@@ -62,7 +61,6 @@ public class Menu {
                         System.out.println("tworzenie nowej trasy");
                         Track track = new Track();
                         track.createMap();
-
                         break;
                     case 2:
                         placeholder = false;
@@ -70,11 +68,14 @@ public class Menu {
                         break;
                     case 3:
                         placeholder = false;
-                        TrackHandler.printAllTracks();
+                        TrackService.printAllTracks();
                         break;
                     case 4:
                         placeholder = false;
-                        System.out.println("usuwanie trasy");
+                        TrackService.printAllTracks();
+                        TrackService.deleteTrack();
+                        menuTrasa();
+                        break;
                     default:
                         System.out.println("wybierz ponownie");
                 }
