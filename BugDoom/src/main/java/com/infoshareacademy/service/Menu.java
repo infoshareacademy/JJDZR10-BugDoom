@@ -1,5 +1,8 @@
 package com.infoshareacademy.service;
 
+import com.infoshareacademy.model.*;
+import java.io.IOException;
+import java.util.*;
 import com.infoshareacademy.model.Track;
 
 import java.util.InputMismatchException;
@@ -42,7 +45,7 @@ public class Menu {
                 "Co chcesz robić?\n" +
                 "1-->uwórz nową trasę\n" +
                 "2-->edytuj trasę\n" +
-                "3-->pokaż trasę\n" +
+                "3-->Pokaż wszystkie trasy\n" +
                 "4-->usuń trasę\n" +
                 "0-->Wróć do poprzedniego menu");
         int menu;
@@ -67,7 +70,7 @@ public class Menu {
                         break;
                     case 3:
                         placeholder = false;
-                        System.out.println("pokazanie tras");
+                        TrackHandler.printAllTracks();
                         break;
                     case 4:
                         placeholder = false;
@@ -77,6 +80,8 @@ public class Menu {
                 }
             } catch (InputMismatchException e){
                 System.out.println("Zła opcja!");
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         } while (placeholder);
     }

@@ -65,6 +65,18 @@ public class Track extends ControlPoint{
         this.location = location;
     }
 
+    @Override
+    public String toString() {
+        return "Track{" +
+                "trackId='" + trackId + '\'' +
+                ", startPoint=" + startPoint +
+                ", endPoint=" + endPoint +
+                ", checkpoint=" + checkpoint +
+                ", length=" + length +
+                ", difficulty='" + difficulty + '\'' +
+                ", location='" + location + '\'' +
+                '}';
+                
     public void drawMap() {
         System.out.println("| --->Y\nV X");
         for (int i = 0; i < tablica.length; i++) { // wiersze
