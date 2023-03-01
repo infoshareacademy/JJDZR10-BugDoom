@@ -5,23 +5,39 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="024b8c9c-5b8f-45ee-95d3-0ba9b059278d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/BugDoom/BugDoom.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BugDoom/src/main/java/com/infoshareacademy/service/FilePathConstants.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BugDoom/src/main/resources/Track.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BugDoom/src/main/resources/User.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/JJDZR10-BugDoom.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/JJDZR10-BugDoom.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BugDoom/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/BugDoom/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BugDoom/BugDoom.iml" beforeDir="false" afterPath="$PROJECT_DIR$/BugDoom/BugDoom.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BugDoom/Track.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BugDoom/User.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/BugDoom/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BugDoom/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BugDoom/src/main/java/com/infoshareacademy/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/BugDoom/src/main/java/com/infoshareacademy/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BugDoom/src/main/java/com/infoshareacademy/UserHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/BugDoom/src/main/java/com/infoshareacademy/UserHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BugDoom/src/main/java/com/infoshareacademy/UserHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/BugDoom/src/main/java/com/infoshareacademy/service/UserHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BugDoom/src/main/java/com/infoshareacademy/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/BugDoom/src/main/java/com/infoshareacademy/model/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BugDoom/src/main/java/com/infoshareacademy/service/DataHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/BugDoom/src/main/java/com/infoshareacademy/service/DataHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BugDoom/src/main/java/com/infoshareacademy/service/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/BugDoom/src/main/java/com/infoshareacademy/service/Menu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BugDoom/users.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BugDoom/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/BugDoom/target/maven-archiver/pom.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BugDoom/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/BugDoom/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BugDoom/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/BugDoom/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BugDoom/target/surefire-reports/TEST-com.infoshareacademy.AppTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BugDoom/target/surefire-reports/TEST-com.infoshareacademy.AppTest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BugDoom/target/surefire-reports/com.infoshareacademy.AppTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/BugDoom/target/surefire-reports/com.infoshareacademy.AppTest.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BugDoom/target/users.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/users.json" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -41,6 +57,9 @@
       </MavenGeneralSettings>
     </option>
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectId" id="2LbdNZR7v5JvIqVdpPWW914Fv7D" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -58,33 +77,33 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "last_opened_file_path": "/home/filip/Desktop/JJDZR10-BugDoom",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/BugDoom/src/main/resources" />
+      <recent name="$PROJECT_DIR$/BugDoom/src/main/java/com/infoshareacademy/resources" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.infoshareacademy.App" />
       <module name="BugDoom" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.infoshareacademy.*" />
+          <option name="PATTERN" value="com.infoshareacademy.service.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="JJDZR10-BugDoom" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="JJDZR10-BugDoom" />
-      <option name="filePath" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -124,5 +143,17 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.nio.file.NoSuchFileException" package="java.nio.file">
+            <option name="NOTIFY_CAUGHT" value="false" />
+          </properties>
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
