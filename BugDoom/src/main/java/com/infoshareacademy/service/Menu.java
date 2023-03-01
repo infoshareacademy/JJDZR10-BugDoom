@@ -3,6 +3,10 @@ package com.infoshareacademy.service;
 import com.infoshareacademy.model.User;
 
 import java.io.IOException;
+import com.infoshareacademy.model.*;
+import java.io.IOException;
+import java.util.*;
+import com.infoshareacademy.model.Track;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -110,6 +114,8 @@ public class Menu {
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Zła opcja!");
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         } while (placeholder);
     }
