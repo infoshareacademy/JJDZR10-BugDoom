@@ -76,7 +76,8 @@ public class Track extends ControlPoint{
                 ", difficulty='" + difficulty + '\'' +
                 ", location='" + location + '\'' +
                 '}';
-                
+    }
+
     public void drawMap() {
         System.out.println("| --->Y\nV X");
         for (int i = 0; i < tablica.length; i++) { // wiersze
