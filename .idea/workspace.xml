@@ -6,16 +6,17 @@
   <component name="ChangeListManager">
     <list default="true" id="024b8c9c-5b8f-45ee-95d3-0ba9b059278d" name="Changes" comment="">
       <change afterPath="$PROJECT_DIR$/BugDoom/src/main/java/com/infoshareacademy/service/FilePathConstants.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BugDoom/src/main/resources/Track.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BugDoom/src/main/java/com/infoshareacademy/service/UserHandler.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/BugDoom/src/main/resources/User.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/User.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/JJDZR10-BugDoom.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/JJDZR10-BugDoom.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BugDoom/BugDoom.iml" beforeDir="false" afterPath="$PROJECT_DIR$/BugDoom/BugDoom.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BugDoom/Track.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BugDoom/Track.json" beforeDir="false" afterPath="$PROJECT_DIR$/BugDoom/src/main/resources/Track.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BugDoom/User.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/BugDoom/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BugDoom/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BugDoom/src/main/java/com/infoshareacademy/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/BugDoom/src/main/java/com/infoshareacademy/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BugDoom/src/main/java/com/infoshareacademy/UserHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/BugDoom/src/main/java/com/infoshareacademy/service/UserHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BugDoom/src/main/java/com/infoshareacademy/UserHandler.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/BugDoom/src/main/java/com/infoshareacademy/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/BugDoom/src/main/java/com/infoshareacademy/model/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BugDoom/src/main/java/com/infoshareacademy/service/DataHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/BugDoom/src/main/java/com/infoshareacademy/service/DataHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BugDoom/src/main/java/com/infoshareacademy/service/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/BugDoom/src/main/java/com/infoshareacademy/service/Menu.java" afterDir="false" />
