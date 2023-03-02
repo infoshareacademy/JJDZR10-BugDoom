@@ -22,8 +22,8 @@ public class DataService<T> {
 
     public List<T> readFromFile(String file, Class<T[]> classToRead) throws IOException {
         Path path = Paths.get(file);
-        String usersFromFile = Files.readString(path);
-        T[] arr = gson.fromJson(usersFromFile, classToRead);
+        String objectsFromFile = Files.readString(path);
+        T[] arr = gson.fromJson(objectsFromFile, classToRead);
         return Arrays.asList(arr);
     }
 }
