@@ -5,6 +5,7 @@ import com.infoshareacademy.model.Track;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 import java.util.stream.Stream;
 
@@ -19,8 +20,12 @@ public class TrackService {
         System.out.println("Wprowadź id trasy, którą chcesz usunąć: ");
         String trackId = getUserChoice();
         List<Track> allTracks = getAllTracks();
-        if (allTracks.stream().filter(t -> t.getTrackId().equals(trackId)).findFirst().isPresent()){
-            Track trackToDelete = allTracks.stream().filter(t -> t.getTrackId().equals(trackId)).findFirst().get();
+        Optional<Track> optionalTrack = allTracks.stream()
+                .filter(t -> t.getTrackId().equals(trackId))
+                .findFirst();
+
+        if (optionalTrack.isPresent()){
+            Track trackToDelete = optionalTrack.get();
             allTracks.remove(trackToDelete);
             saveTracksToFile(allTracks);
             System.out.println("Trasa o numerze id " + trackId + " została usunięta");
