@@ -42,6 +42,9 @@ public class UserService {
         String name = scanner.nextLine();
         System.out.println("Wprowadź hasło: ");
         String password = scanner.nextLine();
+        return loginDetailsAreCorrect(name, password);
+    }
+    private static boolean loginDetailsAreCorrect (String name, String password) throws IOException {
         DataService<User> dataService = new DataService<>();
         List<User> users = dataService.readFromFile(USERS_FILE_PATH, User[].class);
         for (User user : users) {
