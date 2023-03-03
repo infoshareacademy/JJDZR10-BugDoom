@@ -1,3 +1,9 @@
-/home/filip/Desktop/JJDZR10-BugDoom/BugDoom/src/main/java/com/infoshareacademy/User.java
+/home/filip/Desktop/JJDZR10-BugDoom/BugDoom/src/main/java/com/infoshareacademy/service/DataHandler.java
+/home/filip/Desktop/JJDZR10-BugDoom/BugDoom/src/main/java/com/infoshareacademy/model/Track.java
 /home/filip/Desktop/JJDZR10-BugDoom/BugDoom/src/main/java/com/infoshareacademy/App.java
-/home/filip/Desktop/JJDZR10-BugDoom/BugDoom/src/main/java/com/infoshareacademy/UserHandler.java
+/home/filip/Desktop/JJDZR10-BugDoom/BugDoom/src/main/java/com/infoshareacademy/model/ControlPoint.java
+/home/filip/Desktop/JJDZR10-BugDoom/BugDoom/src/main/java/com/infoshareacademy/service/FilePathConstants.java
+/home/filip/Desktop/JJDZR10-BugDoom/BugDoom/src/main/java/com/infoshareacademy/repository/UserRepository.java
+/home/filip/Desktop/JJDZR10-BugDoom/BugDoom/src/main/java/com/infoshareacademy/service/Menu.java
+/home/filip/Desktop/JJDZR10-BugDoom/BugDoom/src/main/java/com/infoshareacademy/model/User.java
+/home/filip/Desktop/JJDZR10-BugDoom/BugDoom/src/main/java/com/infoshareacademy/service/UserHandler.java
