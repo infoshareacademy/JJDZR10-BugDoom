@@ -1,10 +1,13 @@
 package com.infoshareacademy.model;
 
+import java.util.List;
+
 public class Track extends ControlPoint{
     private String trackId;
+    private String competitionName;
     private ControlPoint startPoint;
     private ControlPoint endPoint;
-    private ControlPoint checkpoint;
+    private List<ControlPoint> checkpoints;
     private int length;
     private String difficulty;
     private String location;
@@ -32,15 +35,6 @@ public class Track extends ControlPoint{
     public void setEndPoint(ControlPoint endPoint) {
         this.endPoint = endPoint;
     }
-
-    public ControlPoint getCheckpoint() {
-        return checkpoint;
-    }
-
-    public void setCheckpoint(ControlPoint checkpoint) {
-        this.checkpoint = checkpoint;
-    }
-
     public int getLength() {
         return length;
     }
@@ -65,13 +59,30 @@ public class Track extends ControlPoint{
         this.location = location;
     }
 
+    public String getCompetitionName() {
+        return competitionName;
+    }
+
+    public void setCompetitionName(String competitionName) {
+        this.competitionName = competitionName;
+    }
+
+    public List<ControlPoint> getCheckpoints() {
+        return checkpoints;
+    }
+
+    public void setCheckpoints(List<ControlPoint> checkpoints) {
+        this.checkpoints = checkpoints;
+    }
+
     @Override
     public String toString() {
         return "Track{" +
                 "trackId='" + trackId + '\'' +
+                ", competitionName='" + competitionName + '\'' +
                 ", startPoint=" + startPoint +
                 ", endPoint=" + endPoint +
-                ", checkpoint=" + checkpoint +
+                ", checkpoint=" + checkpoints +
                 ", length=" + length +
                 ", difficulty='" + difficulty + '\'' +
                 ", location='" + location + '\'' +

@@ -1,24 +1,30 @@
 package RouteApplicationForm;
 
+import com.infoshareacademy.model.ControlPoint;
 import com.infoshareacademy.model.Track;
 
+import javax.naming.ldap.Control;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 public class Main {
-    public static Track createTrack(String[] args) {
+    public static void createTrack() {
         Track newTrack = new Track();
 
         newTrack.setCompetitionName(setCompetitionName());
         newTrack.setLength(setCompetitionLength());
         newTrack.setDifficulty(setCompetitionDifficulty(newTrack.getLength()));
         newTrack.setLocation(setCompetitionLocation());
+        newTrack.setStartPoint(setCompetitionStartPoint());
+        // meta
+        // punkty kontrolne
 
-        ApplicationForm diffType = new ApplicationForm();
-        diffType.ApplicationForm();
-        // tu wołane metody Grzesia
+        System.out.println(newTrack);
+//        ApplicationForm diffType = new ApplicationForm();
+//        diffType.ApplicationForm();
+//        newTrack.createMap();
         System.out.println("Dziękujemy za wypełnienie formularza! :) ");
-        return newTrack;
     }
     private static String setCompetitionName () {
         System.out.println("Witaj w formularzu zgłoszeniowym do Twojej nowej trasy :) ");
@@ -99,5 +105,32 @@ public class Main {
                 System.out.println("Musisz wybrać liczbę od 1 do 3");
             }
         }
+    }
+    private static ControlPoint setCompetitionStartPoint () {
+        ControlPoint controlPoint = new ControlPoint();
+        boolean coordinatesNotGiven = true;
+        while (coordinatesNotGiven) {
+            try {
+                Scanner scanner = new Scanner(System.in);
+                System.out.println("Podaj współrzędne startu (od 0 do 5)");
+                System.out.println("Podaj współrzędną x:");
+                int x = scanner.nextInt();
+                scanner = new Scanner(System.in);
+                System.out.println("Podaj współrzędną y:");
+                int y = scanner.nextInt();
+                controlPoint.x = x;
+                controlPoint.y = y;
+                if (controlPoint.x < 0 || controlPoint.x > 5 || controlPoint.y < 0 || controlPoint.y > 5)
+                {
+                    System.out.println("Współrzędne muszą być w przedziale od 0 do 5!");
+                } else {
+                    coordinatesNotGiven = false;
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Podaj liczbę całkowitą");
+            }
+        }
+        controlPoint.setControlPointID("001");
+        return controlPoint;
     }
 }

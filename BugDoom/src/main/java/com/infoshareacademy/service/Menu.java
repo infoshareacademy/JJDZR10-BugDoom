@@ -1,5 +1,6 @@
 package com.infoshareacademy.service;
 
+import RouteApplicationForm.Main;
 import com.infoshareacademy.model.User;
 
 import java.io.IOException;
@@ -91,7 +92,7 @@ public class Menu {
                     case 0 -> displayMainMenu();
                     case 1 -> {
                         placeholder = false;
-                        System.out.println("tworzenie nowej trasy");
+                        Main.createTrack();
                     }
                     case 2 -> {
                         placeholder = false;

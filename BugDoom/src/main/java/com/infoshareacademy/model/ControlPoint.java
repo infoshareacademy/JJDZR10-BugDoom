@@ -1,5 +1,6 @@
 package com.infoshareacademy.model;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class ControlPoint {
@@ -13,6 +14,16 @@ public class ControlPoint {
 
     public void setControlPointID(String controlPointID) {
         this.controlPointID = controlPointID;
+    }
+
+    @Override
+    public String toString() {
+        return "ControlPoint{" +
+                "controlPointID='" + controlPointID + '\'' +
+                ", x=" + x +
+                ", y=" + y +
+                ", tablica=" + Arrays.toString(tablica) +
+                '}';
     }
 
     public String[][] tablica;
