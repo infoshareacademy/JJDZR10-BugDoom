@@ -1,3 +1,9 @@
-com/infoshareacademy/UserHandler.class
-com/infoshareacademy/User.class
+com/infoshareacademy/model/Track.class
+com/infoshareacademy/service/UserHandler.class
 com/infoshareacademy/App.class
+com/infoshareacademy/service/FilePathConstants.class
+com/infoshareacademy/repository/UserRepository.class
+com/infoshareacademy/service/Menu.class
+com/infoshareacademy/model/User.class
+com/infoshareacademy/service/DataHandler.class
+com/infoshareacademy/model/ControlPoint.class
