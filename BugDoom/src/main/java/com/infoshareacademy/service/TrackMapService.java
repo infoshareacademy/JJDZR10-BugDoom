@@ -1,6 +1,6 @@
 package com.infoshareacademy.service;
 
-public class TrackService extends ControlPointService {
+public class TrackMapService extends ControlPointService {
     private String trackId;
     private ControlPointService startPoint;
     private ControlPointService endPoint;
