@@ -1,5 +1,7 @@
 package com.infoshareacademy.model;
 
+import java.util.Objects;
+
 public class Track extends ControlPoint{
     private String trackId;
     private ControlPoint startPoint;
@@ -76,6 +78,19 @@ public class Track extends ControlPoint{
                 ", difficulty='" + difficulty + '\'' +
                 ", location='" + location + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Track track = (Track) o;
+        return length == track.length && Objects.equals(trackId, track.trackId) && Objects.equals(startPoint, track.startPoint) && Objects.equals(endPoint, track.endPoint) && Objects.equals(checkpoint, track.checkpoint) && Objects.equals(difficulty, track.difficulty) && Objects.equals(location, track.location);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(trackId, startPoint, endPoint, checkpoint, length, difficulty, location);
     }
 
     public void drawMap() {

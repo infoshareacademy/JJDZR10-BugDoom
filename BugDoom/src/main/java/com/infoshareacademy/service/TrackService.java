@@ -16,37 +16,32 @@ public class TrackService {
         List<Track> allTracks = getAllTracks();
         allTracks.forEach(System.out::println);
     }
-    public static void deleteTrack() throws IOException {
-        System.out.println("Wprowadź id trasy, którą chcesz usunąć: ");
-        String trackId = getUserChoice();
+
+    public static void deleteTrack(Track trackToDelete) throws IOException {
+        List<Track> allTracks = getAllTracks();
+        System.out.println(allTracks.contains(trackToDelete));
+        allTracks.remove(trackToDelete);
+        saveTracksToFile(allTracks);
+        System.out.println("Trasa o numerze id " + trackToDelete.getTrackId() + " została usunięta");
+        System.out.println();
+    }
+
+    private static List<Track> getAllTracks() throws IOException {
+        DataService<Track> dataService = new DataService<>();
+        List<Track> allTracks = new ArrayList<>(dataService.readFromFile(TRACK_FILE_PATH, Track[].class));
+        return allTracks;
+    }
+
+    private static void saveTracksToFile(List<Track> tracksToSave) throws IOException {
+        DataService<Track> dataService = new DataService<>();
+        dataService.saveToFile(tracksToSave, TRACK_FILE_PATH);
+    }
+
+    public static Optional<Track> findTrackById(String trackId) throws IOException {
         List<Track> allTracks = getAllTracks();
         Optional<Track> optionalTrack = allTracks.stream()
                 .filter(t -> t.getTrackId().equals(trackId))
                 .findFirst();
-
-        if (optionalTrack.isPresent()){
-            Track trackToDelete = optionalTrack.get();
-            allTracks.remove(trackToDelete);
-            saveTracksToFile(allTracks);
-            System.out.println("Trasa o numerze id " + trackId + " została usunięta");
-            System.out.println();
-        } else {
-            System.out.println("Żadna z tras nie ma takiego id!");
-            System.out.println();
-        }
-    }
-
-    private static List<Track> getAllTracks() throws IOException {
-        DataService<Track> dataService= new DataService<>();
-        List <Track> allTracks = new ArrayList<>(dataService.readFromFile(TRACK_FILE_PATH, Track[].class));
-        return allTracks;
-    }
-    private static void saveTracksToFile(List<Track> tracksToSave) throws IOException{
-        DataService<Track> dataService = new DataService<>();
-        dataService.saveToFile(tracksToSave, TRACK_FILE_PATH);
-    }
-    private static String getUserChoice() {
-        Scanner scanner = new Scanner(System.in);
-        return scanner.next();
+        return optionalTrack;
     }
 }
