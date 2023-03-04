@@ -2,7 +2,7 @@ package com.infoshareacademy.model;
 
 import java.util.List;
 
-public class Track extends ControlPoint{
+public class Track extends ControlPoint {
     private String trackId;
     private String competitionName;
     private ControlPoint startPoint;
@@ -35,6 +35,7 @@ public class Track extends ControlPoint{
     public void setEndPoint(ControlPoint endPoint) {
         this.endPoint = endPoint;
     }
+
     public int getLength() {
         return length;
     }
@@ -88,7 +89,8 @@ public class Track extends ControlPoint{
                 ", location='" + location + '\'' +
                 '}';
     }
-
+}
+/*
     public void drawMap() {
         System.out.println("| --->Y\nV X");
         for (int i = 0; i < tablica.length; i++) { // wiersze
@@ -153,3 +155,5 @@ public class Track extends ControlPoint{
         createEnd();
     }
 }
+
+ */
