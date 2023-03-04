@@ -3,12 +3,13 @@ package RouteApplicationForm;
 import com.infoshareacademy.model.ControlPoint;
 import com.infoshareacademy.model.Track;
 
-import javax.naming.ldap.Control;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 public class Main {
+
+
     public static void createTrack() {
         Track newTrack = new Track();
 
@@ -17,8 +18,8 @@ public class Main {
         newTrack.setDifficulty(setCompetitionDifficulty(newTrack.getLength()));
         newTrack.setLocation(setCompetitionLocation());
         newTrack.setStartPoint(setCompetitionStartPoint());
-        // meta
-        // punkty kontrolne
+        newTrack.setEndPoint(setCompetitionEndPoint());
+        newTrack.setCheckpoints(setCheckpoint());
 
         System.out.println(newTrack);
 //        ApplicationForm diffType = new ApplicationForm();
@@ -72,6 +73,8 @@ public class Main {
                 scanner2.nextLine();
             }
         } while (!validChoice);
+
+
         return switch (choice) {
             case 1 -> 5;
             case 2 -> 10;
@@ -169,8 +172,8 @@ public class Main {
             System.out.println("Wybierz współrzędne startu:");
             String start = scanner.nextLine();
             if (points.contains(start)) {
-            placeholder=false;
-            points.set(points.indexOf(start), "STR")
+                placeholder = false;
+                points.set(points.indexOf(start), "STR");
             } else {
                 System.out.println("należy wybrać współrzęne z podanego zakresu");
             }
@@ -179,6 +182,164 @@ public class Main {
             controlPoint.setCoordinateXY(start);
 
 
-        }return controlPoint;
+        }
+        return controlPoint;
+    }
+
+    private static ControlPoint setCompetitionEndPoint() {
+        List<String> points = new ArrayList<>();
+        points.add(0, "0.0");
+        points.add(1, "0.1");
+        points.add(2, "0.2");
+        points.add(3, "0.3");
+        points.add(4, "0.4");
+        points.add(5, "0.5");
+
+        points.add(6, "1.0");
+        points.add(7, "1.1");
+        points.add(8, "1.2");
+        points.add(9, "1.3");
+        points.add(10, "1.4");
+        points.add(11, "1.5");
+
+        points.add(12, "2.0");
+        points.add(13, "2.1");
+        points.add(14, "2.2");
+        points.add(15, "2.3");
+        points.add(16, "2.4");
+        points.add(17, "2.5");
+
+        points.add(18, "3.0");
+        points.add(19, "3.1");
+        points.add(20, "3.2");
+        points.add(21, "3.3");
+        points.add(22, "3.4");
+        points.add(23, "3.5");
+
+        points.add(24, "4.0");
+        points.add(25, "4.1");
+        points.add(26, "4.2");
+        points.add(27, "4.3");
+        points.add(28, "4.4");
+        points.add(29, "4.5");
+
+        points.add(30, "5.0");
+        points.add(31, "5.1");
+        points.add(32, "5.2");
+        points.add(33, "5.3");
+        points.add(34, "5.4");
+        points.add(35, "5.5");
+
+        System.out.println(points.subList(0, 6));
+        System.out.println(points.subList(6, 12));
+        System.out.println(points.subList(12, 18));
+        System.out.println(points.subList(18, 24));
+        System.out.println(points.subList(24, 30));
+        System.out.println(points.subList(30, 36));
+
+        ControlPoint controlPoint = new ControlPoint();
+        boolean placeholder = true;
+        while (placeholder) {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Wybierz współrzędne mety:");
+            String end = scanner.nextLine();
+            if (points.contains(end)) {
+                placeholder = false;
+                points.set(points.indexOf(end), "END");
+            } else {
+                System.out.println("należy wybrać współrzęne z podanego zakresu");
+            }
+
+            controlPoint.setControlPointID("002");
+            controlPoint.setCoordinateXY(end);
+
+
+        }
+        return controlPoint;
+    }
+
+    private static List<ControlPoint> setCheckpoint() {
+        List<String> points = new ArrayList<>();
+        points.add(0, "0.0");
+        points.add(1, "0.1");
+        points.add(2, "0.2");
+        points.add(3, "0.3");
+        points.add(4, "0.4");
+        points.add(5, "0.5");
+
+        points.add(6, "1.0");
+        points.add(7, "1.1");
+        points.add(8, "1.2");
+        points.add(9, "1.3");
+        points.add(10, "1.4");
+        points.add(11, "1.5");
+
+        points.add(12, "2.0");
+        points.add(13, "2.1");
+        points.add(14, "2.2");
+        points.add(15, "2.3");
+        points.add(16, "2.4");
+        points.add(17, "2.5");
+
+        points.add(18, "3.0");
+        points.add(19, "3.1");
+        points.add(20, "3.2");
+        points.add(21, "3.3");
+        points.add(22, "3.4");
+        points.add(23, "3.5");
+
+        points.add(24, "4.0");
+        points.add(25, "4.1");
+        points.add(26, "4.2");
+        points.add(27, "4.3");
+        points.add(28, "4.4");
+        points.add(29, "4.5");
+
+        points.add(30, "5.0");
+        points.add(31, "5.1");
+        points.add(32, "5.2");
+        points.add(33, "5.3");
+        points.add(34, "5.4");
+        points.add(35, "5.5");
+
+        System.out.println(points.subList(0, 6));
+        System.out.println(points.subList(6, 12));
+        System.out.println(points.subList(12, 18));
+        System.out.println(points.subList(18, 24));
+        System.out.println(points.subList(24, 30));
+        System.out.println(points.subList(30, 36));
+
+        List<ControlPoint> controlPoints = new ArrayList<>();
+        Scanner scanner = new Scanner(System.in);
+
+        int checkpointCount = 0;
+        int input;
+        do {
+            System.out.println("Ile chcesz stworzyć punktów orientacyjnych (maksymalnie 8):");
+            input = scanner.nextInt();
+            if (input > 8) {
+                System.out.println("Wprowadź poprawną wartość mniejszą niż 8.");
+            }
+        } while (input > 8);
+
+        scanner.nextLine();
+
+        while (checkpointCount < input) {
+            System.out.println("Wybierz współrzędne checkpointu " + (checkpointCount + 1) + ":");
+            String checkpoint = scanner.nextLine();
+            if (points.contains(checkpoint)) {
+                points.set(points.indexOf(checkpoint), "CHECKPOINT " + (checkpointCount + 1));
+                ControlPoint controlPoint = new ControlPoint();
+                controlPoint.setControlPointID("00" + (checkpointCount + 1));
+                controlPoint.setCoordinateXY(checkpoint);
+                controlPoints.add(controlPoint);
+                checkpointCount++;
+            } else {
+                System.out.println("należy wybrać współrzęne z podanego zakresu");
+            }
+        }
+        return controlPoints;
+
     }
 }
+
