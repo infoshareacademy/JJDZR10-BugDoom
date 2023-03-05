@@ -115,48 +115,13 @@ public class Main {
     }
 
     private static ControlPoint setCompetitionStartPoint() {
-        List<String> points = new ArrayList<>();
-        points.add(0, "0.0");
-        points.add(1, "0.1");
-        points.add(2, "0.2");
-        points.add(3, "0.3");
-        points.add(4, "0.4");
-        points.add(5, "0.5");
-
-        points.add(6, "1.0");
-        points.add(7, "1.1");
-        points.add(8, "1.2");
-        points.add(9, "1.3");
-        points.add(10, "1.4");
-        points.add(11, "1.5");
-
-        points.add(12, "2.0");
-        points.add(13, "2.1");
-        points.add(14, "2.2");
-        points.add(15, "2.3");
-        points.add(16, "2.4");
-        points.add(17, "2.5");
-
-        points.add(18, "3.0");
-        points.add(19, "3.1");
-        points.add(20, "3.2");
-        points.add(21, "3.3");
-        points.add(22, "3.4");
-        points.add(23, "3.5");
-
-        points.add(24, "4.0");
-        points.add(25, "4.1");
-        points.add(26, "4.2");
-        points.add(27, "4.3");
-        points.add(28, "4.4");
-        points.add(29, "4.5");
-
-        points.add(30, "5.0");
-        points.add(31, "5.1");
-        points.add(32, "5.2");
-        points.add(33, "5.3");
-        points.add(34, "5.4");
-        points.add(35, "5.5");
+        List<String> points = new ArrayList<>(List.of(
+                "0.0","0.1","0.2", "0.3", "0,4", "0,5",
+                "1.0","1.1","1.2","1.3", "1.4", "1.5",
+                "2.0","2.1","2.2", "2.3", "2.4", "2.5",
+                "3.0","3.1","3.2","3.3", "3.4", "3.5",
+                "4.0","4.1","4.2", "4.3", "4.4", "4.5",
+                "5.0","5.1","5.2", "5.3", "5.4", "5.5"));
 
         System.out.println(points.subList(0, 6));
         System.out.println(points.subList(6, 12));
@@ -187,48 +152,13 @@ public class Main {
     }
 
     private static ControlPoint setCompetitionEndPoint() {
-        List<String> points = new ArrayList<>();
-        points.add(0, "0.0");
-        points.add(1, "0.1");
-        points.add(2, "0.2");
-        points.add(3, "0.3");
-        points.add(4, "0.4");
-        points.add(5, "0.5");
-
-        points.add(6, "1.0");
-        points.add(7, "1.1");
-        points.add(8, "1.2");
-        points.add(9, "1.3");
-        points.add(10, "1.4");
-        points.add(11, "1.5");
-
-        points.add(12, "2.0");
-        points.add(13, "2.1");
-        points.add(14, "2.2");
-        points.add(15, "2.3");
-        points.add(16, "2.4");
-        points.add(17, "2.5");
-
-        points.add(18, "3.0");
-        points.add(19, "3.1");
-        points.add(20, "3.2");
-        points.add(21, "3.3");
-        points.add(22, "3.4");
-        points.add(23, "3.5");
-
-        points.add(24, "4.0");
-        points.add(25, "4.1");
-        points.add(26, "4.2");
-        points.add(27, "4.3");
-        points.add(28, "4.4");
-        points.add(29, "4.5");
-
-        points.add(30, "5.0");
-        points.add(31, "5.1");
-        points.add(32, "5.2");
-        points.add(33, "5.3");
-        points.add(34, "5.4");
-        points.add(35, "5.5");
+        List<String> points = new ArrayList<>(List.of(
+                "0.0","0.1","0.2", "0.3", "0,4", "0,5",
+                "1.0","1.1","1.2","1.3", "1.4", "1.5",
+                "2.0","2.1","2.2", "2.3", "2.4", "2.5",
+                "3.0","3.1","3.2","3.3", "3.4", "3.5",
+                "4.0","4.1","4.2", "4.3", "4.4", "4.5",
+                "5.0","5.1","5.2", "5.3", "5.4", "5.5"));
 
         System.out.println(points.subList(0, 6));
         System.out.println(points.subList(6, 12));
@@ -259,48 +189,13 @@ public class Main {
     }
 
     private static List<ControlPoint> setCheckpoint() {
-        List<String> points = new ArrayList<>();
-        points.add(0, "0.0");
-        points.add(1, "0.1");
-        points.add(2, "0.2");
-        points.add(3, "0.3");
-        points.add(4, "0.4");
-        points.add(5, "0.5");
-
-        points.add(6, "1.0");
-        points.add(7, "1.1");
-        points.add(8, "1.2");
-        points.add(9, "1.3");
-        points.add(10, "1.4");
-        points.add(11, "1.5");
-
-        points.add(12, "2.0");
-        points.add(13, "2.1");
-        points.add(14, "2.2");
-        points.add(15, "2.3");
-        points.add(16, "2.4");
-        points.add(17, "2.5");
-
-        points.add(18, "3.0");
-        points.add(19, "3.1");
-        points.add(20, "3.2");
-        points.add(21, "3.3");
-        points.add(22, "3.4");
-        points.add(23, "3.5");
-
-        points.add(24, "4.0");
-        points.add(25, "4.1");
-        points.add(26, "4.2");
-        points.add(27, "4.3");
-        points.add(28, "4.4");
-        points.add(29, "4.5");
-
-        points.add(30, "5.0");
-        points.add(31, "5.1");
-        points.add(32, "5.2");
-        points.add(33, "5.3");
-        points.add(34, "5.4");
-        points.add(35, "5.5");
+        List<String> points = new ArrayList<>(List.of(
+                "0.0","0.1","0.2", "0.3", "0,4", "0,5",
+                "1.0","1.1","1.2","1.3", "1.4", "1.5",
+                "2.0","2.1","2.2", "2.3", "2.4", "2.5",
+                "3.0","3.1","3.2","3.3", "3.4", "3.5",
+                "4.0","4.1","4.2", "4.3", "4.4", "4.5",
+                "5.0","5.1","5.2", "5.3", "5.4", "5.5"));
 
         System.out.println(points.subList(0, 6));
         System.out.println(points.subList(6, 12));
@@ -328,9 +223,9 @@ public class Main {
             System.out.println("Wybierz współrzędne checkpointu " + (checkpointCount + 1) + ":");
             String checkpoint = scanner.nextLine();
             if (points.contains(checkpoint)) {
-                points.set(points.indexOf(checkpoint), "CHECKPOINT " + (checkpointCount + 1));
+                points.set(points.indexOf(checkpoint), "CH " + (checkpointCount + 1));
                 ControlPoint controlPoint = new ControlPoint();
-                controlPoint.setControlPointID("00" + (checkpointCount + 1));
+                controlPoint.setControlPointID("00" + (checkpointCount + 3));
                 controlPoint.setCoordinateXY(checkpoint);
                 controlPoints.add(controlPoint);
                 checkpointCount++;
