@@ -17,8 +17,8 @@ public class Main {
         newTrack.setLength(setCompetitionLength());
         newTrack.setDifficulty(setCompetitionDifficulty(newTrack.getLength()));
         newTrack.setLocation(setCompetitionLocation());
-        newTrack.setStartPoint(setCompetitionStartPoint());
-        newTrack.setEndPoint(setCompetitionEndPoint());
+//        newTrack.setStartPoint(setCompetitionStartPoint());
+//        newTrack.setEndPoint(setCompetitionEndPoint());
         newTrack.setCheckpoints(setCheckpoint());
 
         System.out.println(newTrack);
@@ -190,12 +190,12 @@ public class Main {
 
     private static List<ControlPoint> setCheckpoint() {
         List<String> points = new ArrayList<>(List.of(
-                "0.0","0.1","0.2", "0.3", "0,4", "0,5",
-                "1.0","1.1","1.2","1.3", "1.4", "1.5",
-                "2.0","2.1","2.2", "2.3", "2.4", "2.5",
-                "3.0","3.1","3.2","3.3", "3.4", "3.5",
-                "4.0","4.1","4.2", "4.3", "4.4", "4.5",
-                "5.0","5.1","5.2", "5.3", "5.4", "5.5"));
+                "0.0", "0.1", "0.2", "0.3", "0,4", "0,5",
+                "1.0", "1.1", "1.2", "1.3", "1.4", "1.5",
+                "2.0", "2.1", "2.2", "2.3", "2.4", "2.5",
+                "3.0", "3.1", "3.2", "3.3", "3.4", "3.5",
+                "4.0", "4.1", "4.2", "4.3", "4.4", "4.5",
+                "5.0", "5.1", "5.2", "5.3", "5.4", "5.5"));
 
         System.out.println(points.subList(0, 6));
         System.out.println(points.subList(6, 12));
@@ -207,34 +207,75 @@ public class Main {
         List<ControlPoint> controlPoints = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
 
-        int checkpointCount = 0;
-        int input;
-        do {
-            System.out.println("Ile chcesz stworzyć punktów orientacyjnych (maksymalnie 8):");
-            input = scanner.nextInt();
-            if (input > 8) {
-                System.out.println("Wprowadź poprawną wartość mniejszą niż 8.");
-            }
-        } while (input > 8);
+        ControlPoint controlPoint = new ControlPoint();
+        boolean placeholder = true;
+        while (placeholder) {
 
-        scanner.nextLine();
-
-        while (checkpointCount < input) {
-            System.out.println("Wybierz współrzędne checkpointu " + (checkpointCount + 1) + ":");
-            String checkpoint = scanner.nextLine();
-            if (points.contains(checkpoint)) {
-                points.set(points.indexOf(checkpoint), "CH " + (checkpointCount + 1));
-                ControlPoint controlPoint = new ControlPoint();
-                controlPoint.setControlPointID("00" + (checkpointCount + 3));
-                controlPoint.setCoordinateXY(checkpoint);
-                controlPoints.add(controlPoint);
-                checkpointCount++;
+            System.out.println("Wybierz współrzędne startu:");
+            String start = scanner.nextLine();
+            if (points.contains(start)) {
+                placeholder = false;
+                points.set(points.indexOf(start), "STR");
             } else {
                 System.out.println("należy wybrać współrzęne z podanego zakresu");
             }
-        }
-        return controlPoints;
 
-    }
-}
+            controlPoint.setControlPointID("001");
+            controlPoint.setCoordinateXY(start);
+        }
+
+
+            boolean placeholder1 = true;
+            while (placeholder1) {
+
+                System.out.println("Wybierz współrzędne mety:");
+                String end = scanner.nextLine();
+                if (points.contains(end)) {
+                    placeholder1 = false;
+                    points.set(points.indexOf(end), "END");
+                } else {
+                    System.out.println("należy wybrać współrzęne z podanego zakresu");
+                }
+
+                controlPoint.setControlPointID("002");
+                controlPoint.setCoordinateXY(end);
+            }
+
+                int checkpointCount = 0;
+                int input;
+                do {
+                    System.out.println("Ile chcesz stworzyć punktów orientacyjnych (maksymalnie 8):");
+                    input = scanner.nextInt();
+                    if (input > 8) {
+                        System.out.println("Wprowadź poprawną wartość mniejszą niż 8.");
+                    }
+                } while (input > 8);
+
+                scanner.nextLine();
+
+                while (checkpointCount < input) {
+                    System.out.println("Wybierz współrzędne checkpointu " + (checkpointCount + 1) + ":");
+                    String checkpoint = scanner.nextLine();
+                    if (points.contains(checkpoint)) {
+                        points.set(points.indexOf(checkpoint), "CH" + (checkpointCount + 1));
+
+                        controlPoint.setControlPointID("00" + (checkpointCount + 3));
+                        controlPoint.setCoordinateXY(checkpoint);
+                        controlPoints.add(controlPoint);
+                        checkpointCount++;
+                    } else {
+                        System.out.println("należy wybrać współrzęne z podanego zakresu z pominięciem wcześniej zdefiniwanych");
+                    }
+
+
+                }
+        System.out.println(points.subList(0, 6));
+        System.out.println(points.subList(6, 12));
+        System.out.println(points.subList(12, 18));
+        System.out.println(points.subList(18, 24));
+        System.out.println(points.subList(24, 30));
+        System.out.println(points.subList(30, 36));
+        return controlPoints;
+            }
+        }
 
