@@ -91,7 +91,8 @@ public class Menu {
                     case 0 -> displayMainMenu();
                     case 1 -> {
                         placeholder = false;
-                        System.out.println("tworzenie nowej trasy");
+                        TrackService.createTrack();
+                        menuTrasa();
                     }
                     case 2 -> {
                         placeholder = false;
@@ -100,6 +101,7 @@ public class Menu {
                     case 3 -> {
                         placeholder = false;
                         TrackService.printAllTracks();
+                        menuTrasa();
                     }
                     case 4 -> {
                         placeholder = false;
@@ -117,7 +119,7 @@ public class Menu {
 
     private static void menuControlPoint() {
         System.out.println("""
-                Punkt kontrolny:\s
+                Punkt kontrolny:
                 Co chcesz robić?
                 1-->Uwórz nowy punkt kontrolny
                 2-->Edytuj punkt kontrolny

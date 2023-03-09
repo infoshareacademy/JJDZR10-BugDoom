@@ -1,10 +1,14 @@
 package com.infoshareacademy.model;
 
-public class Track extends ControlPoint{
+import java.util.List;
+import java.util.Objects;
+
+public class Track extends ControlPoint {
     private String trackId;
+    private String competitionName;
     private ControlPoint startPoint;
     private ControlPoint endPoint;
-    private ControlPoint checkpoint;
+    private List<ControlPoint> checkpoints;
     private int length;
     private String difficulty;
     private String location;
@@ -33,14 +37,6 @@ public class Track extends ControlPoint{
         this.endPoint = endPoint;
     }
 
-    public ControlPoint getCheckpoint() {
-        return checkpoint;
-    }
-
-    public void setCheckpoint(ControlPoint checkpoint) {
-        this.checkpoint = checkpoint;
-    }
-
     public int getLength() {
         return length;
     }
@@ -65,80 +61,46 @@ public class Track extends ControlPoint{
         this.location = location;
     }
 
+    public String getCompetitionName() {
+        return competitionName;
+    }
+
+    public void setCompetitionName(String competitionName) {
+        this.competitionName = competitionName;
+    }
+
+    public List<ControlPoint> getCheckpoints() {
+        return checkpoints;
+    }
+
+    public void setCheckpoints(List<ControlPoint> checkpoints) {
+        this.checkpoints = checkpoints;
+    }
+
     @Override
     public String toString() {
         return "Track{" +
                 "trackId='" + trackId + '\'' +
+                ", competitionName='" + competitionName + '\'' +
+                ", difficulty='" + difficulty + '\'' +
+                ", length=" + length +
+                ", location='" + location + '\'' +
                 ", startPoint=" + startPoint +
                 ", endPoint=" + endPoint +
-                ", checkpoint=" + checkpoint +
-                ", length=" + length +
-                ", difficulty='" + difficulty + '\'' +
-                ", location='" + location + '\'' +
+                ", checkpoint=" + checkpoints +
                 '}';
     }
 
-    public void drawMap() {
-        System.out.println("| --->Y\nV X");
-        for (int i = 0; i < tablica.length; i++) { // wiersze
-            for (int j = 0; j < tablica.length; j++) { // kolumny
-                System.out.print(tablica[i][j] + " ");
-            }
-            System.out.println("");
-        }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Track track = (Track) o;
+        return length == track.length && Objects.equals(trackId, track.trackId) && Objects.equals(competitionName, track.competitionName) && Objects.equals(startPoint, track.startPoint) && Objects.equals(endPoint, track.endPoint) && Objects.equals(checkpoints, track.checkpoints) && Objects.equals(difficulty, track.difficulty) && Objects.equals(location, track.location);
     }
 
-    public void createCheckpoints() {
-        boolean notEqualStartAndEndAndCheckpoints = true;
-
-        do {
-
-            try {
-                System.out.println("zdefiniuj checkpoint");
-                setCoordinateXY();
-                if (!(tablica[x][y].equals("STR")) && !(tablica[x][y].equals("END"))
-                        && !(tablica[x][y].equals("CHP"))) {
-                    tablica[x][y] = "CHP";
-                    notEqualStartAndEndAndCheckpoints = false;
-                    drawMap();
-                } else {
-                    System.out.println("Punkt musi mieć inne współrzędne od wcześniej zdefiniowanych");
-                }
-            } catch (Exception e) {
-                System.out.println("musisz wprowadzić liczbę");
-            }
-        } while (notEqualStartAndEndAndCheckpoints);
-    }
-
-    public void createStart() {
-        System.out.println("zdefiniuj punkt startowy");
-        setCoordinateXY();
-        tablica[x][y] = "STR";
-        drawMap();
-    }
-
-    public void createEnd() {
-        System.out.println("zdefiniuj punkt końcowy");
-        boolean notEqualStart = true;
-        do {
-            try {
-                setCoordinateXY();
-                if (!(tablica[x][y].equals("STR"))) {
-                    tablica[x][y] = "END";
-                    notEqualStart = false;
-                } else {
-                    System.out.println("Meta musi mieć inne współrzędne niż start");
-                }
-            } catch (Exception e) {
-                System.out.println("musisz wprowadzić liczbę");
-            }
-        } while (notEqualStart);
-        drawMap();
-    }
-    public void createMap(){
-        getTablica();
-        drawMap();
-        createStart();
-        createEnd();
+    @Override
+    public int hashCode() {
+        return Objects.hash(trackId, competitionName, startPoint, endPoint, checkpoints, length, difficulty, location);
     }
 }
