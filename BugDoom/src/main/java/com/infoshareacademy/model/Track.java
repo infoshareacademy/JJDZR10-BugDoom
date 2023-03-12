@@ -3,7 +3,7 @@ package com.infoshareacademy.model;
 import java.util.List;
 import java.util.Objects;
 
-public class Track extends ControlPoint {
+public class Track {
     private String trackId;
     private String competitionName;
     private ControlPoint startPoint;

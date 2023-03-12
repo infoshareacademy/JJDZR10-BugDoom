@@ -3,11 +3,16 @@ package com.infoshareacademy.service;
 import com.infoshareacademy.model.User;
 
 import java.io.IOException;
+
+import com.infoshareacademy.model.Track;
+
 import java.util.InputMismatchException;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class Menu {
     public static User loggedInUser;
+
     public static void mainMenu() throws IOException {
         login();
         if (loggedInUser == null) {
@@ -16,7 +21,8 @@ public class Menu {
         }
         displayMainMenu();
     }
-    private static void login() throws IOException{
+
+    private static void login() throws IOException {
         boolean placeholder = true;
         do {
             System.out.println("1-->Zaloguj się\n2-->Zarejestruj się\n0-->Wyjdź z programu");
@@ -40,6 +46,7 @@ public class Menu {
             }
         } while (placeholder);
     }
+
     public static void displayMainMenu() {
         System.out.println("Witaj " + loggedInUser.getName() + "!\n" +
                 "Wybierz sekcję\n" +
@@ -52,19 +59,21 @@ public class Menu {
                 Scanner scanner = new Scanner(System.in);
                 menu = scanner.nextInt();
                 switch (menu) {
-                    case 0 -> {
+                    case 0:
                         placeholder = false;
-                        displayMainMenu();
-                    }
-                    case 1 -> {
+                        trackMenu();
+                    case 1:
                         placeholder = false;
-                        menuTrasa();
-                    }
-                    case 2 -> {
+                        trackMenu();
+                        break;
+
+                    case 2:
                         placeholder = false;
                         menuControlPoint();
-                    }
-                    default -> System.out.println("wybierz ponownie");
+                        break;
+                    default:
+                        System.out.println("wybierz ponownie");
+
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Zła opcja!");
@@ -72,14 +81,12 @@ public class Menu {
         } while (placeholder);
     }
 
-    private static void menuTrasa() {
+    private static void trackMenu() {
         System.out.println("""
-                Trasa:\s
+                Trasa:
                 Co chcesz robić?
                 1-->Uwórz nową trasę
-                2-->Edytuj trasę
-                3-->Pokaż wszystkie trasy
-                4-->Usuń trasę
+                2-->Pokaż wszystkie trasy
                 0-->Wróć do poprzedniego menu""");
         int menu;
         boolean placeholder = true;
@@ -92,16 +99,16 @@ public class Menu {
                     case 1 -> {
                         placeholder = false;
                         TrackService.createTrack();
-                        menuTrasa();
+                        trackMenu();
                     }
                     case 2 -> {
                         placeholder = false;
-                        System.out.println("edytowanie trasy");
+                        allTrackMenu();
                     }
                     case 3 -> {
                         placeholder = false;
                         TrackService.printAllTracks();
-                        menuTrasa();
+                        trackMenu();
                     }
                     case 4 -> {
                         placeholder = false;
@@ -117,14 +124,82 @@ public class Menu {
         } while (placeholder);
     }
 
+    private static void allTrackMenu() throws IOException {
+        TrackService.printAllTracks();
+        System.out.println("""
+                Co chcesz robić?
+                1-->Pokaż detale jednej z tras
+                0-->Wróć do poprzedniego menu""");
+        boolean stillInMenu = true;
+        while (stillInMenu) {
+            try {
+                Scanner scanner = new Scanner(System.in);
+                int userChoice = scanner.nextInt();
+                switch (userChoice) {
+                    case 0 -> trackMenu();
+                    case 1 -> {
+                        System.out.println("Wybierz id trasy:");
+                        scanner = new Scanner(System.in);
+                        String trackId = scanner.nextLine();
+                        Optional<Track> optionalTrack = TrackService.findTrackById(trackId);
+                        if (optionalTrack.isPresent()) {
+                            stillInMenu = false;
+                            oneTrackMenu(optionalTrack.get());
+                            trackMenu();
+                        } else {
+                            System.out.println("Nie znaleziono trasy o takim id");
+                        }
+                    }
+                    default -> System.out.println("Wybierz ponownie");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Zła opcja!");
+            }
+        }
+    }
+
+    private static void oneTrackMenu(Track track) throws IOException {
+        boolean stillInMenu = true;
+        System.out.println(track);
+        System.out.println("""
+                Co chcesz zrobić?
+                1-->Edytuj trasę
+                2-->Usuń trasę
+                0-->Wróć do poprzedniego menu""");
+        while (stillInMenu) {
+            try {
+                Scanner scanner = new Scanner(System.in);
+                int userChoice = scanner.nextInt();
+                switch (userChoice) {
+                    case 0 -> {
+                        stillInMenu = false;
+                        allTrackMenu();
+                    }
+                    case 1 -> {
+                        stillInMenu = false;
+                        System.out.println("Edytowanie trasy");
+                        allTrackMenu();
+                    }
+                    case 2 -> {
+                        stillInMenu = false;
+                        TrackService.deleteTrack(track);
+                        allTrackMenu();
+                    }
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Zła opcja!");
+            }
+        }
+    }
+
     private static void menuControlPoint() {
         System.out.println("""
                 Punkt kontrolny:
                 Co chcesz robić?
-                1-->Uwórz nowy punkt kontrolny
-                2-->Edytuj punkt kontrolny
-                3-->Pokaż wszystkie punkty kontrolne
-                4-->Usuń punkt kontrolny
+                1-->uwórz nową trasę
+                2-->edytuj trasę
+                3-->pokaż trasę
+                4-->usuń trasę
                 0-->Wróć do poprzedniego menu""");
         int menu;
         boolean placeholder = true;
@@ -133,24 +208,24 @@ public class Menu {
                 Scanner scanner = new Scanner(System.in);
                 menu = scanner.nextInt();
                 switch (menu) {
-                    case 0 -> displayMainMenu();
-                    case 1 -> {
-                        placeholder = false;
-                        System.out.println("tworzenie nowego punktu");
-                    }
-                    case 2 -> {
-                        placeholder = false;
-                        System.out.println("edytowanie punktu");
-                    }
-                    case 3 -> {
-                        placeholder = false;
-                        System.out.println("pokazanie puntku");
-                    }
-                    case 4 -> {
-                        placeholder = false;
-                        System.out.println("usuwanie punktu");
-                    }
-                    default -> System.out.println("wybierz ponownie");
+                        case 0 -> displayMainMenu();
+                        case 1 -> {
+                            placeholder = false;
+                            System.out.println("tworzenie nowego punktu");
+                        }
+                        case 2 -> {
+                            placeholder = false;
+                            System.out.println("edytowanie punktu");
+                        }
+                        case 3 -> {
+                            placeholder = false;
+                            System.out.println("pokazanie puntku");
+                        }
+                        case 4 -> {
+                            placeholder = false;
+                            System.out.println("usuwanie punktu");
+                        }
+                        default -> System.out.println("wybierz ponownie");
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Zła opcja!");
