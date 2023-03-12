@@ -1,4 +1,4 @@
-package com.infoshareacademy.demo;
+package com.infoshareacademy.pl;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

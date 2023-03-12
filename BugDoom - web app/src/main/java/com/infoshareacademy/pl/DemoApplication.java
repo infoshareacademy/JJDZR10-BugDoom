@@ -1,4 +1,4 @@
-package com.infoshareacademy.demo;
+package com.infoshareacademy.pl;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
