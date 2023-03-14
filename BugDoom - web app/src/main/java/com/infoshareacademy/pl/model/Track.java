@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Objects;
-
+@Component
 public class Track {
     private long trackId;
     private String competitionName;
@@ -13,7 +13,7 @@ public class Track {
     private List<Location> checkpoints;
     private int length;
     private String difficulty;
-    private String location;
+    private String terrain;
 
     public long getTrackId() {
         return trackId;
@@ -55,12 +55,12 @@ public class Track {
         this.difficulty = difficulty;
     }
 
-    public String getLocation() {
-        return location;
+    public String getTerrain() {
+        return terrain;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setTerrain(String terrain) {
+        this.terrain = terrain;
     }
 
     public String getCompetitionName() {
@@ -86,7 +86,7 @@ public class Track {
                 ", competitionName='" + competitionName + '\'' +
                 ", difficulty='" + difficulty + '\'' +
                 ", length=" + length +
-                ", location='" + location + '\'' +
+                ", terrain='" + terrain + '\'' +
                 ", start=" + start +
                 ", finish=" + finish +
                 ", checkpoint=" + checkpoints +
@@ -98,11 +98,11 @@ public class Track {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Track track = (Track) o;
-        return length == track.length && Objects.equals(trackId, track.trackId) && Objects.equals(competitionName, track.competitionName) && Objects.equals(start, track.start) && Objects.equals(finish, track.finish) && Objects.equals(checkpoints, track.checkpoints) && Objects.equals(difficulty, track.difficulty) && Objects.equals(location, track.location);
+        return length == track.length && Objects.equals(trackId, track.trackId) && Objects.equals(competitionName, track.competitionName) && Objects.equals(start, track.start) && Objects.equals(finish, track.finish) && Objects.equals(checkpoints, track.checkpoints) && Objects.equals(difficulty, track.difficulty) && Objects.equals(terrain, track.terrain);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(trackId, competitionName, start, finish, checkpoints, length, difficulty, location);
+        return Objects.hash(trackId, competitionName, start, finish, checkpoints, length, difficulty, terrain);
     }
 }

@@ -1,14 +1,11 @@
 package com.infoshareacademy.pl.model;
 
-import org.springframework.stereotype.Component;
-
 public class User {
     private long userId;
     private String userEmailAddress;
     private String name;
     private String password;
 
-    //Constructor for the User class.
     public User(String userEmailAddress, String password) {
         this.userEmailAddress = userEmailAddress;
         this.password = password;

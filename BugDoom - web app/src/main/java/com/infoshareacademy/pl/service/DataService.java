@@ -1,9 +1,8 @@
 package com.infoshareacademy.pl.service;
 
 import com.google.gson.Gson;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -11,9 +10,9 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 
-@Component
+@Service
 public class DataService<T> {
-    private Gson gson = new Gson();
+    private final Gson gson = new Gson();
 
     public <T> void saveToFile(T listToSave, String file) throws IOException {
         Path path = Paths.get(file);
