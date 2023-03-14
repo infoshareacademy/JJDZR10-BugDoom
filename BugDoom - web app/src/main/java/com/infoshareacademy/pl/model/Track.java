@@ -1,0 +1,108 @@
+package com.infoshareacademy.pl.model;
+
+import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.Objects;
+
+public class Track {
+    private long trackId;
+    private String competitionName;
+    private Location start;
+    private Location finish;
+    private List<Location> checkpoints;
+    private int length;
+    private String difficulty;
+    private String location;
+
+    public long getTrackId() {
+        return trackId;
+    }
+
+    public void setId(long trackId) {
+        this.trackId = trackId;
+    }
+
+    public Location getStart() {
+        return start;
+    }
+
+    public void setStart(Location start) {
+        this.start = start;
+    }
+
+    public Location getFinish() {
+        return finish;
+    }
+
+    public void setFinish(Location finish) {
+        this.finish = finish;
+    }
+
+    public int getLength() {
+        return length;
+    }
+
+    public void setLength(int length) {
+        this.length = length;
+    }
+
+    public String getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(String difficulty) {
+        this.difficulty = difficulty;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getCompetitionName() {
+        return competitionName;
+    }
+
+    public void setCompetitionName(String competitionName) {
+        this.competitionName = competitionName;
+    }
+
+    public List<Location> getCheckpoints() {
+        return checkpoints;
+    }
+
+    public void setCheckpoints(List<Location> checkpoints) {
+        this.checkpoints = checkpoints;
+    }
+
+    @Override
+    public String toString() {
+        return "Track{" +
+                "trackId='" + trackId + '\'' +
+                ", competitionName='" + competitionName + '\'' +
+                ", difficulty='" + difficulty + '\'' +
+                ", length=" + length +
+                ", location='" + location + '\'' +
+                ", start=" + start +
+                ", finish=" + finish +
+                ", checkpoint=" + checkpoints +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Track track = (Track) o;
+        return length == track.length && Objects.equals(trackId, track.trackId) && Objects.equals(competitionName, track.competitionName) && Objects.equals(start, track.start) && Objects.equals(finish, track.finish) && Objects.equals(checkpoints, track.checkpoints) && Objects.equals(difficulty, track.difficulty) && Objects.equals(location, track.location);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(trackId, competitionName, start, finish, checkpoints, length, difficulty, location);
+    }
+}
