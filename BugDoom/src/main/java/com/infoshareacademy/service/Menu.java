@@ -23,19 +23,21 @@ public class Menu {
     }
 
     private static void login() throws IOException {
-        boolean placeholder = true;
+        boolean loginMenu = true;
         do {
             System.out.println("1-->Zaloguj się\n2-->Zarejestruj się\n0-->Wyjdź z programu");
-            int option;
             try {
                 Scanner scanner = new Scanner(System.in);
-                option = scanner.nextInt();
+                int option = scanner.nextInt();
                 switch (option) {
-                    case 0 -> placeholder = false;
+                    case 0 -> {
+                        System.out.println("Koniec programu. Do zobaczenia!");
+                        loginMenu = false;
+                    }
                     case 1 -> {
                         if (UserService.logIn()) {
                             loggedInUser = UserService.getCurrentUser();
-                            placeholder = false;
+                            loginMenu = false;
                         }
                     }
                     case 2 -> UserService.getNewUserDetails();
@@ -44,7 +46,7 @@ public class Menu {
             } catch (InputMismatchException e) {
                 System.out.println("Zła opcja!");
             }
-        } while (placeholder);
+        }while (loginMenu);
     }
 
     public static void displayMainMenu() {
@@ -52,33 +54,21 @@ public class Menu {
                 "Wybierz sekcję\n" +
                 "1-->Trasa\n" +
                 "2-->Punkt kontrolny");
-        boolean placeholder = true;
-        int menu;
-        do {
+        while (true) {
             try {
                 Scanner scanner = new Scanner(System.in);
-                menu = scanner.nextInt();
+                int menu = scanner.nextInt();
                 switch (menu) {
-                    case 0:
-                        placeholder = false;
-                        trackMenu();
-                    case 1:
-                        placeholder = false;
-                        trackMenu();
-                        break;
-
-                    case 2:
-                        placeholder = false;
-                        menuControlPoint();
-                        break;
-                    default:
-                        System.out.println("wybierz ponownie");
-
+                    case 0 -> trackMenu();
+//                    do czego to powinno wracać?
+                    case 1 -> trackMenu();
+                    case 2 -> menuControlPoint();
+                    default -> System.out.println("wybierz ponownie");
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Zła opcja!");
             }
-        } while (placeholder);
+        }
     }
 
     private static void trackMenu() {
@@ -86,32 +76,28 @@ public class Menu {
                 Trasa:
                 Co chcesz robić?
                 1-->Uwórz nową trasę
-                2-->Pokaż wszystkie trasy
+                2-->Wyświetl istniejącą trasę
+                3-->Pokaż wszystkie trasy
                 0-->Wróć do poprzedniego menu""");
-        int menu;
-        boolean placeholder = true;
-        do {
+
+        while (true) {
             try {
                 Scanner scanner = new Scanner(System.in);
-                menu = scanner.nextInt();
+                int menu = scanner.nextInt();
                 switch (menu) {
                     case 0 -> displayMainMenu();
                     case 1 -> {
-                        placeholder = false;
                         TrackService.createTrack();
                         trackMenu();
                     }
                     case 2 -> {
-                        placeholder = false;
                         allTrackMenu();
                     }
                     case 3 -> {
-                        placeholder = false;
                         TrackService.printAllTracks();
                         trackMenu();
                     }
                     case 4 -> {
-                        placeholder = false;
                         System.out.println("usuwanie trasy");
                     }
                     default -> System.out.println("wybierz ponownie");
@@ -121,11 +107,10 @@ public class Menu {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } while (placeholder);
+        }
     }
 
     private static void allTrackMenu() throws IOException {
-        TrackService.printAllTracks();
         System.out.println("""
                 Co chcesz robić?
                 1-->Pokaż detale jednej z tras
