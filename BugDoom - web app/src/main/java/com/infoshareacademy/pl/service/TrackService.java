@@ -13,8 +13,7 @@ public class TrackService {
     private static final DataService<Track> dataService = new DataService<>();
 
     public static List<Track> getAllTracks() throws IOException {
-        List<Track> allTracks = new ArrayList<>(dataService.readFromFile(TRACK_FILE_PATH, Track[].class));
-        return allTracks;
+        return new ArrayList<>(dataService.readFromFile(TRACK_FILE_PATH, Track[].class));
     }
 
     public static void addTrackToFile(Track trackToAdd) throws IOException {
