@@ -17,16 +17,15 @@ public class UserService {
         users.add(user);
         dataService.saveToFile(users, USERS_FILE_PATH);
     }
-    public static boolean loginValidation (String username, String userPassword) throws IOException {
+    public static boolean loginValidation (String name, String password) throws IOException {
         List<User> users = dataService.readFromFile(USERS_FILE_PATH, User[].class);
-        Optional<String> optionalUsername = users.stream()
-                .map(User::getName)
-                .filter(name -> name.equals(username))
-                .findFirst();
-        Optional<String> optionalPassword = users.stream()
-                .map(User::getPassword)
-                .filter(password -> password.equals(userPassword))
-                .findFirst();
-        return optionalUsername.isPresent() && optionalPassword.isPresent();
+        for (User user : users) {
+            if (user.getName() != null && !user.getName().isEmpty() && user.getName().equals(name) && user.getPassword().equals(password)) {
+                System.out.println("Login i hasło poprawne");
+                return true;
+            }
+        }
+        System.out.println("Nieprawidłowe imię lub hasło.");
+        return false;
     }
 }
