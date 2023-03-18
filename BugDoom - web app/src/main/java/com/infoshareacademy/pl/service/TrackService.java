@@ -1,11 +1,13 @@
 package com.infoshareacademy.pl.service;
 
 import com.infoshareacademy.pl.model.Track;
+import com.infoshareacademy.pl.repository.TrackRepository;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 @Service
 public class TrackService {
@@ -31,11 +33,11 @@ public class TrackService {
         dataService.saveToFile(tracksToSave, TRACK_FILE_PATH);
     }
 
-    private static Optional<Track> findTrackById(long trackId) throws IOException {
+    private static Track findTrackById(long trackId) throws NoSuchElementException, IOException {
         List<Track> allTracks = getAllTracks();
-        Optional<Track> optionalTrack = allTracks.stream()
+        return allTracks.stream()
                 .filter(t -> t.getTrackId() == (trackId))
-                .findFirst();
-        return optionalTrack;
+                .findFirst()
+                .orElseThrow();
     }
 }
