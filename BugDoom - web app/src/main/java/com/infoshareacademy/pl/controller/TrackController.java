@@ -16,7 +16,7 @@ public class TrackController {
     public TrackController(TrackService trackService) {
         this.trackService = trackService;
     }
-    @GetMapping("/AllTracks")
+    @GetMapping("/tracks")
     public static List<Track> getTrackList() throws IOException {
             return TrackService.getAllTracks();
     }
