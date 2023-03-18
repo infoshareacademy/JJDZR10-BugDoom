@@ -76,7 +76,7 @@ public class Menu {
                 Trasa:
                 Co chcesz robić?
                 1-->Uwórz nową trasę
-                2-->Wyświetl istniejącą trasę
+                2-->Wyświetl pojedynczą trasę
                 3-->Pokaż wszystkie trasy
                 0-->Wróć do poprzedniego menu""");
 
