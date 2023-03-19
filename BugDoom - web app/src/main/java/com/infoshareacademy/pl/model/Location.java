@@ -1,11 +1,8 @@
 package com.infoshareacademy.pl.model;
 
-import org.springframework.stereotype.Component;
-
 import java.math.BigDecimal;
 import java.util.Objects;
 
-@Component
 public class Location {
     private long controlPointID;
     private BigDecimal coordinateX;
