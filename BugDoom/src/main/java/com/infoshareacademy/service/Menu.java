@@ -59,8 +59,7 @@ public class Menu {
                 Scanner scanner = new Scanner(System.in);
                 int menu = scanner.nextInt();
                 switch (menu) {
-                    case 0 -> trackMenu();
-//                    do czego to powinno wracać?
+                    case 0 -> displayMainMenu();
                     case 1 -> trackMenu();
                     case 2 -> menuControlPoint();
                     default -> System.out.println("wybierz ponownie");
@@ -78,6 +77,8 @@ public class Menu {
                 1-->Uwórz nową trasę
                 2-->Wyświetl pojedynczą trasę
                 3-->Pokaż wszystkie trasy
+                4-->Edytuj trasę
+                5-->Usuń trasę
                 0-->Wróć do poprzedniego menu""");
 
         while (true) {
@@ -123,6 +124,7 @@ public class Menu {
                 switch (userChoice) {
                     case 0 -> trackMenu();
                     case 1 -> {
+                        TrackService.printAllTracks();
                         System.out.println("Wybierz id trasy:");
                         scanner = new Scanner(System.in);
                         String trackId = scanner.nextLine();
@@ -181,40 +183,41 @@ public class Menu {
         System.out.println("""
                 Punkt kontrolny:
                 Co chcesz robić?
-                1-->uwórz nową trasę
-                2-->edytuj trasę
-                3-->pokaż trasę
-                4-->usuń trasę
-                0-->Wróć do poprzedniego menu""");
+                1-->pokaż punkty kontrolne
+                2-->dodaj punkt kontrolny
+                0-->Wróć do głównego menu""");
         int menu;
-        boolean placeholder = true;
-        do {
+        boolean stillInMenu = true;
+        while (stillInMenu) {
             try {
                 Scanner scanner = new Scanner(System.in);
                 menu = scanner.nextInt();
                 switch (menu) {
                         case 0 -> displayMainMenu();
                         case 1 -> {
-                            placeholder = false;
-                            System.out.println("tworzenie nowego punktu");
+                            TrackService.printAllTracks();
+                            stillInMenu = false;
+                            System.out.println("Wybierz id trasy:");
+                            scanner = new Scanner(System.in);
+                            String trackId = scanner.nextLine();
+                            Optional<Track> optionalTrack = TrackService.findTrackById(trackId);
+                            if (optionalTrack.isPresent()) {
+                                stillInMenu = false;
+                                oneTrackMenu(optionalTrack.get());
+                                trackMenu();
+                            } else {
+                                System.out.println("Nie znaleziono trasy o takim id");
+                            }
                         }
                         case 2 -> {
-                            placeholder = false;
+                            stillInMenu = false;
                             System.out.println("edytowanie punktu");
-                        }
-                        case 3 -> {
-                            placeholder = false;
-                            System.out.println("pokazanie puntku");
-                        }
-                        case 4 -> {
-                            placeholder = false;
-                            System.out.println("usuwanie punktu");
                         }
                         default -> System.out.println("wybierz ponownie");
                 }
-            } catch (InputMismatchException e) {
+            } catch (InputMismatchException | IOException e) {
                 System.out.println("Zła opcja!");
             }
-        } while (placeholder);
+        }
     }
 }

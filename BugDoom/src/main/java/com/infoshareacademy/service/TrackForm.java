@@ -2,10 +2,7 @@ package com.infoshareacademy.service;
 
 import com.infoshareacademy.model.ControlPoint;
 
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class TrackForm {
     private static List<String> points = new ArrayList<>();
@@ -27,6 +24,11 @@ public class TrackForm {
                 "4.0", "4.1", "4.2", "4.3", "4.4", "4.5",
                 "5.0", "5.1", "5.2", "5.3", "5.4", "5.5"));
     }
+
+    public static int setId(){
+        int TrackId = new Random().nextInt(1000);
+        return TrackId;
+            }
 
     public static String setCompetitionName() {
         System.out.println("Witaj w formularzu zgłoszeniowym do Twojej nowej trasy :) ");

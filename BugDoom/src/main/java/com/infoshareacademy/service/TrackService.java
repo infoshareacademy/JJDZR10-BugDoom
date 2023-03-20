@@ -1,5 +1,6 @@
 package com.infoshareacademy.service;
 
+import com.infoshareacademy.model.ControlPoint;
 import com.infoshareacademy.model.Track;
 import com.infoshareacademy.model.User;
 
@@ -7,6 +8,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import static com.infoshareacademy.service.FilePathConstants.CONTROL_POINT_FILE_PATH;
 
 public class TrackService {
     private static final String TRACK_FILE_PATH = FilePathConstants.TRACK_FILE_PATH;
@@ -18,7 +21,7 @@ public class TrackService {
 
     public static void createTrack() throws IOException {
         Track newTrack = new Track();
-
+        newTrack.setId(String.valueOf(TrackForm.setId()));
         newTrack.setCompetitionName(TrackForm.setCompetitionName());
         newTrack.setLength(TrackForm.setCompetitionLength());
         newTrack.setDifficulty(TrackForm.setCompetitionDifficulty(newTrack.getLength()));
