@@ -171,7 +171,6 @@ public class TrackForm {
         List<ControlPoint> controlPoints = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
 
-        ControlPoint controlPoint = new ControlPoint();
 
         int checkpointCount = 0;
         int numberOfCheckpoints;
@@ -183,17 +182,17 @@ public class TrackForm {
             }
         } while (numberOfCheckpoints > 8);
 
-        while (checkpointCount < numberOfCheckpoints) {
+        for (checkpointCount=0; checkpointCount < numberOfCheckpoints; checkpointCount++) {
             System.out.println("Wybierz współrzędne checkpointu " + (checkpointCount + 1) + ":");
             scanner = new Scanner(System.in);
             String checkpoint = scanner.nextLine();
             if (points.contains(checkpoint)) {
                 points.set(points.indexOf(checkpoint), "CH" + (checkpointCount + 1));
-
+                ControlPoint controlPoint = new ControlPoint();
                 controlPoint.setControlPointID("00" + (checkpointCount + 3));
                 controlPoint.setCoordinateXY(checkpoint);
                 controlPoints.add(controlPoint);
-                checkpointCount++;
+                ;
             } else {
                 System.out.println("należy wybrać współrzęne z podanego zakresu z pominięciem wcześniej zdefiniwanych");
             }
