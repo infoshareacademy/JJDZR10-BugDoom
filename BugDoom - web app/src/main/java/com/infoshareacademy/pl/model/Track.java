@@ -2,8 +2,11 @@ package com.infoshareacademy.pl.model;
 
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
+
+import static java.math.BigDecimal.*;
 
 public class Track {
     private long trackId;
@@ -14,6 +17,14 @@ public class Track {
     private int length;
     private String difficulty;
     private String terrain;
+    public Track(){
+        competitionName= "bug doom runners";
+        start = new Location(1, valueOf(54.40332401279688), valueOf(54.40332401279688));
+        finish = new Location(2, valueOf(54.414917663548685), valueOf(18.625340640820358));
+        difficulty = "bardzo trudny";
+        length = 15;
+        terrain = "miejska dżungla";
+    }
 
     public long getTrackId() {
         return trackId;

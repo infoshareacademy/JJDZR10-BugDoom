@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Tracks</title>
@@ -8,21 +8,26 @@
 <table>
   <thead>
   <tr>
-    <th>#</th>
-    <th>nazwa biegu</th>
-    <th>start</th>
-    <th>meta</th>
-    <th>dystans</th>
-    <th>trudność</th>
-    <th>teren</th>
+
+    <th>Id</th>
+    <th>Nazwa biegu</th>
+    <th>Start</th>
+    <th>Meta</th>
+    <th>Stopień trudności</th>
+    <th>Dystans</th>
+    <th>Lokalizacja</th>
 
   </tr>
   </thead>
   <tbody>
-  <tr>
-    <td th:text="${track.trackId}"></td>
-    <td th:text="${track.start}"></td>
-    <td th:text="${track.difficulty}"></td>
+  <tr th:each="track, iterStat: ${track}">
+    <td th:text="${iterStat.count}"></td>
+    <td th:text="${track.getCompetitionName}"></td>
+    <td th:text="${track.getStart}"></td>
+    <td th:text="${track.getFinish}"></td>
+    <td th:text="${track.getDifficulty}"></td>
+    <td th:text="${track.getLength}"></td>
+    <td th:text="${track.getTerrain}"></td>
 
   </tr>
   </tbody>

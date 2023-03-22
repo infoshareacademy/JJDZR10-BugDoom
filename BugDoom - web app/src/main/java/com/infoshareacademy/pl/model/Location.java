@@ -10,6 +10,12 @@ public class Location {
     private BigDecimal coordinateX;
     private BigDecimal coordinateY;
 
+    public Location(long controlPointID, BigDecimal coordinateX, BigDecimal coordinateY) {
+        this.controlPointID = controlPointID;
+        this.coordinateX = coordinateX;
+        this.coordinateY = coordinateY;
+    }
+
     public long getControlPointID() {
         return controlPointID;
     }
@@ -45,5 +51,14 @@ public class Location {
     @Override
     public int hashCode() {
         return Objects.hash(controlPointID, coordinateX, coordinateY);
+    }
+
+    @Override
+    public String toString() {
+        return "Location{" +
+                "controlPointID=" + controlPointID +
+                ", coordinateX=" + coordinateX +
+                ", coordinateY=" + coordinateY +
+                '}';
     }
 }

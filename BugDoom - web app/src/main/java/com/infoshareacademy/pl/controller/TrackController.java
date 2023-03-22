@@ -13,6 +13,6 @@ public class TrackController {
     public String getTracks(Model model){
         Track track = new Track();
         model.addAttribute("track", track);
-            return "tracks/track";
+            return "track";
     }
 }
