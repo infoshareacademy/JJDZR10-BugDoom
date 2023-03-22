@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tracks</title>
+</head>
+<body>
+<table>
+  <thead>
+  <tr>
+    <th>#</th>
+    <th>nazwa biegu</th>
+    <th>start</th>
+    <th>meta</th>
+    <th>dystans</th>
+    <th>trudność</th>
+    <th>teren</th>
+
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td th:text="${track.trackId}"></td>
+    <td th:text="${track.start}"></td>
+    <td th:text="${track.difficulty}"></td>
+
+  </tr>
+  </tbody>
+</table>
+
+</body>
+</html>
