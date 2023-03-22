@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class TrackController {
-
     @GetMapping("/tracks")
     public String getTracks(Model model){
         Track track = new Track();
