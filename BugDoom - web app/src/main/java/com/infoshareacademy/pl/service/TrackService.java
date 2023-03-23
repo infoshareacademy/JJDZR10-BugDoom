@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Random;
+
 @Service
 public class TrackService {
     private static final String TRACK_FILE_PATH = FilePathConstants.TRACK_FILE_PATH;
@@ -37,5 +39,16 @@ public class TrackService {
                 .filter(t -> t.getTrackId() == (trackId))
                 .findFirst()
                 .orElseThrow();
+    }
+    private List<Track>tracks = new ArrayList<>();
+    public List<Track> getAll(){return tracks;}
+    public void removeTrackById(Long id){
+        Track foundTrack = tracks.stream().filter(track -> track.getTrackId() ==id)
+                .findFirst().orElseThrow(IllegalArgumentException::new);
+        tracks.remove(foundTrack);
+    }
+    public void addTrack(Track track){
+        track.setId(new Random().nextLong(1000));
+        tracks.add(track);
     }
 }

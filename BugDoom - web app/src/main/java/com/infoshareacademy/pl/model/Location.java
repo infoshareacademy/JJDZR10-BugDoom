@@ -53,12 +53,5 @@ public class Location {
         return Objects.hash(controlPointID, coordinateX, coordinateY);
     }
 
-    @Override
-    public String toString() {
-        return "Location{" +
-                "controlPointID=" + controlPointID +
-                ", coordinateX=" + coordinateX +
-                ", coordinateY=" + coordinateY +
-                '}';
-    }
+
 }
