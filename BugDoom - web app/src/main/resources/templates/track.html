@@ -8,7 +8,6 @@
 <table>
   <thead>
   <tr>
-    <th>#</th>
     <th>Id</th>
     <th>Nazwa biegu</th>
     <th>współrzędna startu X</th>
@@ -18,12 +17,11 @@
     <th>Stopień trudności</th>
     <th>Dystans</th>
     <th>Lokalizacja</th>
-    <th th:text="#{gui.actions}">Actions</th>
-
+    <th>Czynności</th>
   </tr>
   </thead>
   <tbody>
-    <tr th:each="track,iterStat: ${track}">
+    <tr th:each="track,iterStat: ${tracks}">
       <td th:text="${iterStat.count}"></td>
       <td th:text="${track.getCompetitionName}"></td>
       <td th:text="${track.getStart.coordinateX}"></td>
@@ -35,11 +33,11 @@
       <td th:text="${track.getTerrain}"></td>
 
       <td>
-        <a th:href="@{/delete-track/{id}(id=${track.getTrackId()})}">
-          DELETE
+        <a th:href="@{/tracks/delete-track/{id}(id=${track.id})}">
+          USUŃ
         </a>
         <a>
-          EDIT
+          EDYTUJ
         </a>
       </td>
 
@@ -49,7 +47,6 @@
 
 <div>
   <form action="#" th:action="@{/tracks}" th:object="${track}" method="post">
-    <p>Id: <input type="text" th:field="*{trackId}"/></p>
     <p>Nazwa biegu: <input type="text" th:field="*{competitionName}"/></p>
     <p>Start X: <input type="text" th:field="*{start.coordinateX}"/></p>
     <p>Start Y: <input type="text" th:field="*{start.coordinateY}"/></p>
@@ -58,8 +55,11 @@
     <p>Poziom trudności: <input type="text" th:field="*{difficulty}"/></p>
     <p>Dystans: <input type="text" th:field="*{length}"/></p>
     <p>Lokalizacja: <input type="text" th:field="*{terrain}"/></p>
+    <ul th:if="${#fields.hasErrors('*')}">
+      <li th:each="err : ${#fields.errors('*')}" th:text="${err}"/>
+    </ul>
     <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
+  </form>
 </div>
-
 </body>
 </html>
