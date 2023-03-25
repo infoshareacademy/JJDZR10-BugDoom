@@ -106,44 +106,9 @@ public class Menu {
         }
     }
 
-//    private static void allTrackMenu() throws IOException {
-//        System.out.println("""
-//                Co chcesz robić?
-//                1-->Pokaż detale jednej z tras
-//                0-->Wróć do poprzedniego menu""");
-//        boolean stillInMenu = true;
-//        while (stillInMenu) {
-//            try {
-//                Scanner scanner = new Scanner(System.in);
-//                int userChoice = scanner.nextInt();
-//                switch (userChoice) {
-//                    case 0 -> trackMenu();
-//                    case 1 ->
-//                    {
-//                        TrackService.printAllTracks();
-//                        System.out.println("Wybierz id trasy:");
-//                        scanner = new Scanner(System.in);
-//                        String trackId = scanner.nextLine();
-//                        Optional<Track> optionalTrack = TrackService.findTrackById(trackId);
-//                        if (optionalTrack.isPresent()) {
-////                            stillInMenu = false;
-//                            oneTrackMenu(optionalTrack.get());
-//                            trackMenu();
-//                        } else {
-//                            System.out.println("Nie znaleziono trasy o takim id");
-//                        }
-//                    }
-//                    default -> System.out.println("Wybierz ponownie");
-////                }
-//            } catch (InputMismatchException e) {
-//                System.out.println("Zła opcja!");
-//            }
-//        }
-//    }
 
     private static void oneTrackMenu() throws IOException {
         boolean stillInMenu = true;
-//        System.out.println(track);
         System.out.println("""
                 Co chcesz zrobić?
                 1-->Zmień nazwę trasy
