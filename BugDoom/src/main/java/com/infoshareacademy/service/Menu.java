@@ -75,10 +75,8 @@ public class Menu {
                 Trasa:
                 Co chcesz robić?
                 1-->Uwórz nową trasę
-                2-->Wyświetl pojedynczą trasę
+                2-->Edytuj/usuń trasę
                 3-->Pokaż wszystkie trasy
-                4-->Edytuj trasę
-                5-->Usuń trasę
                 0-->Wróć do poprzedniego menu""");
 
         while (true) {
@@ -92,14 +90,11 @@ public class Menu {
                         trackMenu();
                     }
                     case 2 -> {
-                        allTrackMenu();
+                        oneTrackMenu();
                     }
                     case 3 -> {
                         TrackService.printAllTracks();
                         trackMenu();
-                    }
-                    case 4 -> {
-                        System.out.println("usuwanie trasy");
                     }
                     default -> System.out.println("wybierz ponownie");
                 }
@@ -111,46 +106,47 @@ public class Menu {
         }
     }
 
-    private static void allTrackMenu() throws IOException {
-        System.out.println("""
-                Co chcesz robić?
-                1-->Pokaż detale jednej z tras
-                0-->Wróć do poprzedniego menu""");
-        boolean stillInMenu = true;
-        while (stillInMenu) {
-            try {
-                Scanner scanner = new Scanner(System.in);
-                int userChoice = scanner.nextInt();
-                switch (userChoice) {
-                    case 0 -> trackMenu();
-                    case 1 -> {
-                        TrackService.printAllTracks();
-                        System.out.println("Wybierz id trasy:");
-                        scanner = new Scanner(System.in);
-                        String trackId = scanner.nextLine();
-                        Optional<Track> optionalTrack = TrackService.findTrackById(trackId);
-                        if (optionalTrack.isPresent()) {
-                            stillInMenu = false;
-                            oneTrackMenu(optionalTrack.get());
-                            trackMenu();
-                        } else {
-                            System.out.println("Nie znaleziono trasy o takim id");
-                        }
-                    }
-                    default -> System.out.println("Wybierz ponownie");
-                }
-            } catch (InputMismatchException e) {
-                System.out.println("Zła opcja!");
-            }
-        }
-    }
+//    private static void allTrackMenu() throws IOException {
+//        System.out.println("""
+//                Co chcesz robić?
+//                1-->Pokaż detale jednej z tras
+//                0-->Wróć do poprzedniego menu""");
+//        boolean stillInMenu = true;
+//        while (stillInMenu) {
+//            try {
+//                Scanner scanner = new Scanner(System.in);
+//                int userChoice = scanner.nextInt();
+//                switch (userChoice) {
+//                    case 0 -> trackMenu();
+//                    case 1 ->
+//                    {
+//                        TrackService.printAllTracks();
+//                        System.out.println("Wybierz id trasy:");
+//                        scanner = new Scanner(System.in);
+//                        String trackId = scanner.nextLine();
+//                        Optional<Track> optionalTrack = TrackService.findTrackById(trackId);
+//                        if (optionalTrack.isPresent()) {
+////                            stillInMenu = false;
+//                            oneTrackMenu(optionalTrack.get());
+//                            trackMenu();
+//                        } else {
+//                            System.out.println("Nie znaleziono trasy o takim id");
+//                        }
+//                    }
+//                    default -> System.out.println("Wybierz ponownie");
+////                }
+//            } catch (InputMismatchException e) {
+//                System.out.println("Zła opcja!");
+//            }
+//        }
+//    }
 
-    private static void oneTrackMenu(Track track) throws IOException {
+    private static void oneTrackMenu() throws IOException {
         boolean stillInMenu = true;
-        System.out.println(track);
+//        System.out.println(track);
         System.out.println("""
                 Co chcesz zrobić?
-                1-->Edytuj trasę
+                1-->Zmień nazwę trasy
                 2-->Usuń trasę
                 0-->Wróć do poprzedniego menu""");
         while (stillInMenu) {
@@ -160,17 +156,29 @@ public class Menu {
                 switch (userChoice) {
                     case 0 -> {
                         stillInMenu = false;
-                        allTrackMenu();
+                        trackMenu();
                     }
                     case 1 -> {
-                        stillInMenu = false;
-                        System.out.println("Edytowanie trasy");
-                        allTrackMenu();
-                    }
+                            stillInMenu = false;
+                            System.out.println("Wybierz id trasy:");
+                            scanner = new Scanner(System.in);
+                            String trackId = scanner.nextLine();
+                            Optional<Track> optionalTrack = TrackService.findTrackById(trackId);
+                            if (optionalTrack.isPresent()) {
+                                stillInMenu = false;
+                                optionalTrack.get().setCompetitionName(TrackForm.setCompetitionName());
+                                TrackService.addTrackToFile(optionalTrack.get());
+                                trackMenu();
+                            } else {
+                                System.out.println("Nie znaleziono trasy o takim id");
+                            }
+                        }
+                        default -> System.out.println("wybierz ponownie");
                     case 2 -> {
                         stillInMenu = false;
+                        Track track = new Track();
                         TrackService.deleteTrack(track);
-                        allTrackMenu();
+                        trackMenu();
                     }
                 }
             } catch (InputMismatchException e) {
@@ -184,7 +192,6 @@ public class Menu {
                 Punkt kontrolny:
                 Co chcesz robić?
                 1-->pokaż punkty kontrolne
-                2-->dodaj punkt kontrolny
                 0-->Wróć do głównego menu""");
         int menu;
         boolean stillInMenu = true;
@@ -203,15 +210,13 @@ public class Menu {
                             Optional<Track> optionalTrack = TrackService.findTrackById(trackId);
                             if (optionalTrack.isPresent()) {
                                 stillInMenu = false;
-                                oneTrackMenu(optionalTrack.get());
+                                System.out.println(optionalTrack.get().getStartPoint());
+                                System.out.println(optionalTrack.get().getEndPoint());
+                                System.out.println(optionalTrack.get().getCheckpoints());
                                 trackMenu();
                             } else {
                                 System.out.println("Nie znaleziono trasy o takim id");
                             }
-                        }
-                        case 2 -> {
-                            stillInMenu = false;
-                            System.out.println("edytowanie punktu");
                         }
                         default -> System.out.println("wybierz ponownie");
                 }

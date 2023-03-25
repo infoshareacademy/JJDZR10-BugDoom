@@ -31,7 +31,6 @@ public class TrackForm {
             }
 
     public static String setCompetitionName() {
-        System.out.println("Witaj w formularzu zgłoszeniowym do Twojej nowej trasy :) ");
         boolean nameFormatIncorrect = true;
         while (nameFormatIncorrect) {
             System.out.println("Podaj nazwę Twojego biegu:");

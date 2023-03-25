@@ -2,14 +2,11 @@ package com.infoshareacademy.service;
 
 import com.infoshareacademy.model.ControlPoint;
 import com.infoshareacademy.model.Track;
-import com.infoshareacademy.model.User;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
-import static com.infoshareacademy.service.FilePathConstants.CONTROL_POINT_FILE_PATH;
 
 public class TrackService {
     private static final String TRACK_FILE_PATH = FilePathConstants.TRACK_FILE_PATH;
@@ -20,6 +17,7 @@ public class TrackService {
     }
 
     public static void createTrack() throws IOException {
+        System.out.println("Witaj w formularzu zgłoszeniowym do Twojej nowej trasy :) ");
         Track newTrack = new Track();
         newTrack.setId(String.valueOf(TrackForm.setId()));
         newTrack.setCompetitionName(TrackForm.setCompetitionName());
@@ -69,4 +67,8 @@ public class TrackService {
                 .findFirst();
         return optionalTrack;
     }
+//    public static List<ControlPoint> void showControlPoints(Optional<Track> optionalTrack) throws IOException {
+//        findTrackById(optionalTrack.get().getTrackId());
+//        System.out.println(optionalTrack.get().getLocation());
+//    }
 }
