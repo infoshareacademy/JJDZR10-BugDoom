@@ -6,6 +6,7 @@ import java.util.List;
 public class Event {
     private long eventId;
     private String eventName;
+    private String description;
     private List<Track> tracks;
     private List<User> participants;
     private int eventPrice;
@@ -26,6 +27,14 @@ public class Event {
 
     public void setEventName(String eventName) {
         this.eventName = eventName;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public List<Track> getTracks() {
