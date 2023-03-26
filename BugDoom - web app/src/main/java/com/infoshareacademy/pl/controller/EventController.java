@@ -3,6 +3,7 @@ package com.infoshareacademy.pl.controller;
 import com.infoshareacademy.pl.model.Event;
 import com.infoshareacademy.pl.repository.EventRepository;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.io.IOException;
@@ -17,7 +18,9 @@ public class EventController {
     }
 
     @GetMapping("/events")
-    public List<Event> getEventList() throws IOException {
-        return eventRepository.getAllEvents();
+    public String getEvents(Model model) throws IOException{
+        List<Event> events = eventRepository.getAllEvents();
+        model.addAttribute("events", events);
+        return "events/event";
     }
 }

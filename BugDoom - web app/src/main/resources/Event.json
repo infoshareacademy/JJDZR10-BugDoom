@@ -1,0 +1,7 @@
+[
+  {"eventId" : "1",
+    "eventName" : "random event",
+    "eventPrice" : "1000",
+    "eventType" : "DEFAULT"
+  }
+]

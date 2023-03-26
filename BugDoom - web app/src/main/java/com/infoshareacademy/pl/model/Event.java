@@ -5,10 +5,11 @@ import java.util.List;
 
 public class Event {
     private long eventId;
+    private String eventName;
     private List<Track> tracks;
-    private List<User> users;
+    private List<User> participants;
     private int eventPrice;
-    private LocalDate eventDate;
+//    private LocalDate eventDate;
     private EventType eventType;
 
     public long getEventId() {
@@ -19,6 +20,14 @@ public class Event {
         this.eventId = eventId;
     }
 
+    public String getEventName() {
+        return eventName;
+    }
+
+    public void setEventName(String eventName) {
+        this.eventName = eventName;
+    }
+
     public List<Track> getTracks() {
         return tracks;
     }
@@ -27,14 +36,13 @@ public class Event {
         this.tracks = tracks;
     }
 
-    public List<User> getUsers() {
-        return users;
+    public List<User> getParticipants() {
+        return participants;
     }
 
-    public void setUsers(List<User> users) {
-        this.users = users;
+    public void setParticipants(List<User> participants) {
+        this.participants = participants;
     }
-
     public int getEventPrice() {
         return eventPrice;
     }
@@ -43,13 +51,13 @@ public class Event {
         this.eventPrice = eventPrice;
     }
 
-    public LocalDate getEventDate() {
-        return eventDate;
-    }
-
-    public void setEventDate(LocalDate eventDate) {
-        this.eventDate = eventDate;
-    }
+//    public LocalDate getEventDate() {
+//        return eventDate;
+//    }
+//
+//    public void setEventDate(LocalDate eventDate) {
+//        this.eventDate = eventDate;
+//    }
 
     public EventType getEventType() {
         return eventType;
