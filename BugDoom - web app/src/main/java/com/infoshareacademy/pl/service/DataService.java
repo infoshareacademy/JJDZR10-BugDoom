@@ -17,7 +17,7 @@ public class DataService<T> {
 
     public <T> void saveToFile(T listToSave, String file) throws IOException {
         Path path = Paths.get(file);
-        if (listToSave instanceof Event[]) gson = addLocalDateSerializer();
+        if (file.equals(FilePathConstants.EVENT_FILE_PATH)) gson = addLocalDateSerializer();
         String json = gson.toJson(listToSave);
         Files.write(path, json.getBytes());
     }
