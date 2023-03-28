@@ -18,7 +18,7 @@ public class EventService implements EventRepository {
             return new ArrayList<>(dataService.readFromFile(EVENT_FILE_PATH, Event[].class));
         }
 
-        public void addEventToFile(Event eventToAdd) throws IOException {
+        public void addEvent(Event eventToAdd) throws IOException {
             List<Event> allEvents= getAllEvents();
             allEvents.add(eventToAdd);
             saveEventsToFile(allEvents);

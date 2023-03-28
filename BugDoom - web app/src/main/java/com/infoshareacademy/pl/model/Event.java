@@ -6,10 +6,10 @@ import java.util.List;
 public class Event {
     private long eventId;
     private String eventName;
-    private String description;
+    private String eventDescription;
     private List<Track> tracks;
     private List<User> participants;
-    private int eventPrice;
+    private int eventPrize;
     private LocalDate eventDate;
     private EventType eventType;
 
@@ -29,12 +29,12 @@ public class Event {
         this.eventName = eventName;
     }
 
-    public String getDescription() {
-        return description;
+    public String getEventDescription() {
+        return eventDescription;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setEventDescription(String eventDescription) {
+        this.eventDescription = eventDescription;
     }
 
     public List<Track> getTracks() {
@@ -52,12 +52,12 @@ public class Event {
     public void setParticipants(List<User> participants) {
         this.participants = participants;
     }
-    public int getEventPrice() {
-        return eventPrice;
+    public int getEventPrize() {
+        return eventPrize;
     }
 
-    public void setEventPrice(int eventPrice) {
-        this.eventPrice = eventPrice;
+    public void setEventPrize(int eventPrize) {
+        this.eventPrize = eventPrize;
     }
 
     public LocalDate getEventDate() {

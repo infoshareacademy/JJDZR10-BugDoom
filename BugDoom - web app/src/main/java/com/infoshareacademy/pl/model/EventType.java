@@ -1,5 +1,7 @@
 package com.infoshareacademy.pl.model;
 
 public enum EventType {
-    DEFAULT
+    DEFAULT,
+    PROFESSIONAL,
+    CASUAL
 }

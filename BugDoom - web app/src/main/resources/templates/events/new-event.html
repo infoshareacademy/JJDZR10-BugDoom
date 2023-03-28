@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>New event</title>
+</head>
+<body>
+<div>
+  <form action="#" th:action="@{/events}" th:object="${event}" method="post">
+    <p>Nazwa wydarzenia: <input type="text" th:field="*{eventName}"/></p>
+    <p>Opis wydarzenia: <input type="textarea" th:field="*{eventDescription}"/></p>
+    <p>Rodzaj wydarzenia: <select th:field="*{eventType}">
+      <option value="0" th:text="#{event.select-eventType}"/>
+      <option th:each="eventType : ${T(com.infoshareacademy.pl.model.EventType).values()}" th:value="${eventType}" th:text="${eventType}"/>
+    </select></p>
+    <p>Nagroda (PLN): <input type="text" th:fiels="*{eventPrize}"/></p>
+    <p>Data wydarzenia: <input type="date" th:value="*{eventDate}"/></p>
+    <p><input type="submit" value="Utwórz wydarzenie"/> <input type="reset" value="Zresetuj"/></p>
+  </form>
+</div>
+</body>
+</html>
