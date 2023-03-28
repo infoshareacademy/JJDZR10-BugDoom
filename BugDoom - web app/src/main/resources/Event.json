@@ -2,6 +2,7 @@
   {"eventId" : "1",
     "eventName" : "random event",
     "eventPrice" : "1000",
-    "eventType" : "DEFAULT"
+    "eventType" : "DEFAULT",
+    "eventDate" : "20-Dec-2022"
   }
 ]

@@ -10,7 +10,7 @@ public class Event {
     private List<Track> tracks;
     private List<User> participants;
     private int eventPrice;
-//    private LocalDate eventDate;
+    private LocalDate eventDate;
     private EventType eventType;
 
     public long getEventId() {
@@ -60,13 +60,13 @@ public class Event {
         this.eventPrice = eventPrice;
     }
 
-//    public LocalDate getEventDate() {
-//        return eventDate;
-//    }
-//
-//    public void setEventDate(LocalDate eventDate) {
-//        this.eventDate = eventDate;
-//    }
+    public LocalDate getEventDate() {
+        return eventDate;
+    }
+
+    public void setEventDate(LocalDate eventDate) {
+        this.eventDate = eventDate;
+    }
 
     public EventType getEventType() {
         return eventType;

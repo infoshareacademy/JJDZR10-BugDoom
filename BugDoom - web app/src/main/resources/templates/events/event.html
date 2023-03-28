@@ -13,17 +13,19 @@
     <thead>
     <tr>
         <th scope="col">ID</th>
-        <th scope="col">Nazwa eventu</th>
-        <th scope="col">Rodzaj eventu</th>
+        <th scope="col">Nazwa wydarzenia</th>
+        <th scope="col">Rodzaj wydarzenia</th>
+        <th scopre="col">Data wydarzenia</th>
         <th scope="col">Nagroda</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="event,iterStat: ${events}">
         <td th:text="${event.eventId}"></td>
-        <td th:text="${event.eventName}"></td>
-        <td th:text="${event.eventType}"></td>
-        <td th:text="${event.eventPrice}"></td>
+        <td th:text="${event.eventName}">eventName</td>
+        <td th:text="${event.eventType}">eventType</td>
+        <td th:text="${event.eventDate}">eventDate</td>
+        <td th:text="${event.eventPrice}">eventPrice</td>
     </tbody>
 </table>
 </body>
