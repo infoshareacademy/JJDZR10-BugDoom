@@ -12,8 +12,8 @@ public class Event {
     private String eventDescription;
     private List<Track> tracks;
     private List<User> participants;
-    private long eventPrize;
-    @DateTimeFormat(pattern = "dd/mm/yyyy")
+    private int eventPrize;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate eventDate;
     private EventType eventType;
 
@@ -56,11 +56,12 @@ public class Event {
     public void setParticipants(List<User> participants) {
         this.participants = participants;
     }
-    public long getEventPrize() {
+
+    public int getEventPrize() {
         return eventPrize;
     }
 
-    public void setEventPrize(long eventPrize) {
+    public void setEventPrize(int eventPrize) {
         this.eventPrize = eventPrize;
     }
 

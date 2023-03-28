@@ -22,6 +22,9 @@ public class EventController {
 
     @GetMapping("/events")
     public String getEvents(Model model) throws IOException {
+        Event emptyEvent = new Event();
+        model.addAttribute("event", emptyEvent);
+
         List<Event> events = eventRepository.getAllEvents();
         model.addAttribute("events", events);
         return "events/event";
@@ -34,16 +37,18 @@ public class EventController {
     }
 
     @PostMapping("/events")
-    public String createEmployee(@ModelAttribute Event event) throws IOException {
+    public String createEvent(@ModelAttribute Event event) throws IOException {
+        event.setEventId(eventRepository.createRandomId());
         eventRepository.addEvent(event);
         return "redirect:/events/";
     }
 
     @GetMapping("events/delete/{eventId}")
-    public String deleteEmployee(@PathVariable long eventId) throws IOException {
+    public String deleteEvent(@PathVariable long eventId) throws IOException {
         eventRepository.removeEventById(eventId);
         return "redirect:/events/";
     }
+
     @GetMapping("/events/{eventId}")
     public String getEventById(@PathVariable("eventId") Long eventId, Model model) throws IOException{
         Event event = eventRepository.findEventById(eventId);
@@ -51,8 +56,8 @@ public class EventController {
         return "events/current-event";
     }
 
-    @PostMapping("/events/{eventId}/edit")
-    public String editEvent(@PathVariable("eventId") Long eventId, @ModelAttribute Event event, Model model) throws IOException{
+    @PostMapping("/events/{eventId}/edition")
+    public String editEvent(@PathVariable("eventId") Long eventId, @ModelAttribute Event event) throws IOException{
         eventRepository.editEventById(eventId, event);
         return "redirect:/events";
     }

@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Random;
 
 @Service
 public class EventService implements EventRepository {
@@ -55,5 +56,8 @@ public class EventService implements EventRepository {
                 .filter(t -> t.getEventId() == (eventId))
                 .findFirst()
                 .orElseThrow();
+    }
+    public long createRandomId() {
+        return new Random().nextLong(1001);
     }
 }
