@@ -4,7 +4,6 @@ import com.infoshareacademy.pl.model.Event;
 import com.infoshareacademy.pl.repository.EventRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,7 +34,7 @@ public class EventController {
     }
 
     @PostMapping("/events")
-    public String createEmployee(@ModelAttribute Event event, BindingResult bindingResult) throws IOException {
+    public String createEmployee(@ModelAttribute Event event) throws IOException {
         eventRepository.addEvent(event);
         return "redirect:/events/";
     }
@@ -44,5 +43,17 @@ public class EventController {
     public String deleteEmployee(@PathVariable long eventId) throws IOException {
         eventRepository.removeEventById(eventId);
         return "redirect:/events/";
+    }
+    @GetMapping("/events/{eventId}")
+    public String getEventById(@PathVariable("eventId") Long eventId, Model model) throws IOException{
+        Event event = eventRepository.findEventById(eventId);
+        model.addAttribute("event", event);
+        return "events/current-event";
+    }
+
+    @PostMapping("/events/{eventId}/edit")
+    public String editEvent(@PathVariable("eventId") Long eventId, @ModelAttribute Event event, Model model) throws IOException{
+        eventRepository.editEventById(eventId, event);
+        return "redirect:/events";
     }
 }
