@@ -9,4 +9,5 @@ public interface EventRepository {
     public Event findEventById(long EventId) throws IOException;
     public List<Event> getAllEvents () throws IOException;
     public void addEvent(Event eventToAdd) throws IOException;
+    public void removeEventById (long eventId) throws IOException;
 }

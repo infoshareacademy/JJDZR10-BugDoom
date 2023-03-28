@@ -24,8 +24,9 @@ public class EventService implements EventRepository {
             saveEventsToFile(allEvents);
         }
 
-        public void deleteEvent(Event eventToDelete) throws IOException {
+        public void removeEventById(long eventId) throws IOException {
             List<Event> allEvents = getAllEvents();
+            Event eventToDelete = findEventById(eventId);
             allEvents.remove(eventToDelete);
             saveEventsToFile(allEvents);
         }

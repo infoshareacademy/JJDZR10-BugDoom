@@ -17,6 +17,7 @@
         <th scope="col">Rodzaj wydarzenia</th>
         <th scopre="col">Data wydarzenia</th>
         <th scope="col">Nagroda</th>
+        <th scope="col">Działania</th>
     </tr>
     </thead>
     <tbody>
@@ -26,7 +27,20 @@
         <td th:text="${event.eventType}">eventType</td>
         <td th:text="${event.eventDate}">eventDate</td>
         <td th:text="${event.eventPrize}">eventPrice</td>
+        <td>
+            <a th:href="@{/events/delete/{id}(id=${event.eventId})}" class="btn btn-danger">
+                USUŃ
+            </a>
+            <a th:href="@{/events/{id}(id=${event.eventId})}" class="btn btn-primary">
+                EDYTUJ
+            </a>
+        </td>
     </tbody>
 </table>
+<div style="text-align:center" class="container">
+    <div class="row-flex"><a th:href="@{/events/new-event}" class="btn btn-info">
+        DODAJ NOWE WYDARZENIE
+    </a></div>
+</div>
 </body>
 </html>
