@@ -1,5 +1,6 @@
 package com.infoshareacademy.pl.service;
 
+import com.infoshareacademy.pl.exception.EventNotFoundException;
 import com.infoshareacademy.pl.model.Event;
 import com.infoshareacademy.pl.repository.EventRepository;
 import org.springframework.stereotype.Service;
@@ -50,12 +51,12 @@ public class EventService implements EventRepository {
     }
 
     @Override
-    public Event findEventById(long eventId) throws NoSuchElementException, IOException {
+    public Event findEventById(long eventId) throws IOException {
         List<Event> allEvents = getAllEvents();
         return allEvents.stream()
                 .filter(t -> t.getEventId() == (eventId))
                 .findFirst()
-                .orElseThrow();
+                .orElseThrow(() -> new EventNotFoundException("Event with the following id has not been found: %x".formatted(eventId)));
     }
     public long createRandomId() {
         return new Random().nextLong(1001);
