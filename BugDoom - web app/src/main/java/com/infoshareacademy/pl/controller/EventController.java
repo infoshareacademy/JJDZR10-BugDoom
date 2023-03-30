@@ -4,11 +4,13 @@ import com.infoshareacademy.pl.model.Event;
 import com.infoshareacademy.pl.repository.EventRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.validation.Valid;
 import java.io.IOException;
 import java.util.List;
 
@@ -37,7 +39,10 @@ public class EventController {
     }
 
     @PostMapping("/events")
-    public String createEvent(@ModelAttribute Event event) throws IOException {
+    public String createEvent(@Valid @ModelAttribute Event event, BindingResult bindingResult) throws IOException {
+        if (bindingResult.hasErrors()) {
+            return "events/new-event";
+        }
         event.setEventId(eventRepository.createRandomId());
         eventRepository.addEvent(event);
         return "redirect:/events/";
@@ -57,7 +62,10 @@ public class EventController {
     }
 
     @PostMapping("/events/{eventId}/edit")
-    public String editEvent(@PathVariable("eventId") Long eventId, @ModelAttribute Event event) throws IOException{
+    public String editEvent(@PathVariable("eventId") Long eventId, @Valid @ModelAttribute Event event, BindingResult bindingResult) throws IOException{
+        if (bindingResult.hasErrors()) {
+            return "events/event-edition";
+        }
         eventRepository.editEventById(eventId, event);
         return "redirect:/events";
     }

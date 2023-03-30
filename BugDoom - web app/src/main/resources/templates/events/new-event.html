@@ -35,6 +35,9 @@
                         th:text="${eventType}"></option>
             </select>
         </div>
+        <ul style="font-weight: bold; color: red" th:if="${#fields.hasErrors('*')}">
+            <li th:each="err : ${#fields.errors('*')}" th:text="${err}"/>
+        </ul>
         <button type="submit" class="btn btn-success">Utwórz wydarzenie</button>
         <button type="reset" class="btn btn-secondary">Zresetuj</button>
     </form>
