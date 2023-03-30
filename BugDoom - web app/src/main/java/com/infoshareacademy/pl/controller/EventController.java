@@ -46,17 +46,17 @@ public class EventController {
     @GetMapping("events/delete/{eventId}")
     public String deleteEvent(@PathVariable long eventId) throws IOException {
         eventRepository.removeEventById(eventId);
-        return "redirect:/events/";
+        return "redirect:/events";
     }
 
     @GetMapping("/events/{eventId}")
     public String getEventById(@PathVariable("eventId") Long eventId, Model model) throws IOException{
         Event event = eventRepository.findEventById(eventId);
         model.addAttribute("event", event);
-        return "events/current-event";
+        return "events/event-edition";
     }
 
-    @PostMapping("/events/{eventId}/edition")
+    @PostMapping("/events/{eventId}/edit")
     public String editEvent(@PathVariable("eventId") Long eventId, @ModelAttribute Event event) throws IOException{
         eventRepository.editEventById(eventId, event);
         return "redirect:/events";

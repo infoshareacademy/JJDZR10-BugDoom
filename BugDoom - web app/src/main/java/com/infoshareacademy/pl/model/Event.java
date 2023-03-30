@@ -12,7 +12,7 @@ public class Event {
     private String eventDescription;
     private List<Track> tracks;
     private List<User> participants;
-    private int eventPrize;
+    private Integer eventPrize;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate eventDate;
     private EventType eventType;
@@ -57,11 +57,11 @@ public class Event {
         this.participants = participants;
     }
 
-    public int getEventPrize() {
+    public Integer getEventPrize() {
         return eventPrize;
     }
 
-    public void setEventPrize(int eventPrize) {
+    public void setEventPrize(Integer eventPrize) {
         this.eventPrize = eventPrize;
     }
 
@@ -85,13 +85,31 @@ public class Event {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         Event event = (Event) o;
-        return eventId == event.eventId && eventPrize == event.eventPrize && Objects.equals(eventName, event.eventName) && Objects.equals(eventDescription, event.eventDescription) && Objects.equals(tracks, event.tracks) && Objects.equals(participants, event.participants) && Objects.equals(eventDate, event.eventDate) && eventType == event.eventType;
+
+        if (eventId != event.eventId) return false;
+        if (!Objects.equals(eventName, event.eventName)) return false;
+        if (!Objects.equals(eventDescription, event.eventDescription))
+            return false;
+        if (!Objects.equals(tracks, event.tracks)) return false;
+        if (!Objects.equals(participants, event.participants)) return false;
+        if (!Objects.equals(eventPrize, event.eventPrize)) return false;
+        if (!Objects.equals(eventDate, event.eventDate)) return false;
+        return eventType == event.eventType;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(eventId, eventName, eventDescription, tracks, participants, eventPrize, eventDate, eventType);
+        int result = (int) (eventId ^ (eventId >>> 32));
+        result = 31 * result + (eventName != null ? eventName.hashCode() : 0);
+        result = 31 * result + (eventDescription != null ? eventDescription.hashCode() : 0);
+        result = 31 * result + (tracks != null ? tracks.hashCode() : 0);
+        result = 31 * result + (participants != null ? participants.hashCode() : 0);
+        result = 31 * result + (eventPrize != null ? eventPrize.hashCode() : 0);
+        result = 31 * result + (eventDate != null ? eventDate.hashCode() : 0);
+        result = 31 * result + (eventType != null ? eventType.hashCode() : 0);
+        return result;
     }
 
     @Override

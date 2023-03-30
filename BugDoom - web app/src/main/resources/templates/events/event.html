@@ -28,7 +28,7 @@
         <td th:text="${event.eventDescription}">eventDescription</td>
         <td th:text="${event.eventType}">eventType</td>
         <td th:text="${event.eventDate}">eventDate</td>
-        <td th:text="${event.eventPrize}">eventPrice</td>
+        <td th:text="${event.eventPrize}">eventPrize</td>
         <td>
             <a th:href="@{/events/delete/{id}(id=${event.eventId})}" class="btn btn-danger">
                 USUŃ
@@ -37,6 +37,7 @@
                 EDYTUJ
             </a>
         </td>
+    </tr>
     </tbody>
 </table>
 <div style="text-align:center" class="container">
