@@ -3,7 +3,6 @@ package com.infoshareacademy.pl.service;
 import com.infoshareacademy.pl.exception.TrackNotFoundException;
 import com.infoshareacademy.pl.model.Track;
 import com.infoshareacademy.pl.repository.TrackRepository;
-import com.infoshareacademy.pl.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 
@@ -15,7 +14,7 @@ import java.util.Random;
 @Service
 public class TrackService implements TrackRepository {
 
-    private final String TRACK_FILE_PATH = FilePathConstants.TRACK_FILE_PATH;
+    private static final String TRACK_FILE_PATH = FilePathConstants.TRACK_FILE_PATH;
     private final DataService<Track> dataService = new DataService<>();
 
     public List<Track> getAllTracks() throws IOException {
@@ -38,7 +37,7 @@ public class TrackService implements TrackRepository {
     private void saveTracksToFile(List<Track> tracksToSave) throws IOException {
         dataService.saveToFile(tracksToSave, TRACK_FILE_PATH);
     }
-
+@Override
     public Track findTrackById(long trackId) throws IOException{
         List<Track>allTracks = getAllTracks();
         return allTracks.stream().filter(track -> track.getTrackId() == trackId)

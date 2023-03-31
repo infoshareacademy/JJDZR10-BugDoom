@@ -36,12 +36,13 @@
     <td th:text="${track.getTerrain}"></td>
     <td>
       <a th:href="@{/tracks/delete-track/{trackId}(trackId=${track.trackId})}" class="btn btn-danger">
-        DELETE
+        Usuń
       </a>
-      <a>
-        EDIT
 
+      <a th:href="@{/map}" class="btn btn-success">
+        Pokaż trasę
       </a>
+
     </td>
   </tr>
 
@@ -51,4 +52,17 @@
   Utwórz nową trasę
 </a>
 </body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
+</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $("#locales").change(function () {
+      var selectedOption = $('#locales').val();
+      if (selectedOption != ''){
+        window.location.replace('?lang=' + selectedOption);
+      }
+    });
+  });
+</script>
 </html>
