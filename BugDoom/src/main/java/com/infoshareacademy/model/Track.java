@@ -1,5 +1,6 @@
 package com.infoshareacademy.model;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
@@ -12,12 +13,13 @@ public class Track {
     private int length;
     private String difficulty;
     private String location;
+    private LocalDate trackDate;
 
     public String getTrackId() {
         return trackId;
     }
 
-    public void setId(String trackId) {
+    public void setTrackId(String trackId) {
         this.trackId = trackId;
     }
 
@@ -91,16 +93,44 @@ public class Track {
                 '}';
     }
 
+    public LocalDate getTrackDate() {
+        return trackDate;
+    }
+
+    public void setTrackDate(LocalDate trackDate) {
+        this.trackDate = trackDate;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         Track track = (Track) o;
-        return length == track.length && Objects.equals(trackId, track.trackId) && Objects.equals(competitionName, track.competitionName) && Objects.equals(startPoint, track.startPoint) && Objects.equals(endPoint, track.endPoint) && Objects.equals(checkpoints, track.checkpoints) && Objects.equals(difficulty, track.difficulty) && Objects.equals(location, track.location);
+
+        if (length != track.length) return false;
+        if (!Objects.equals(trackId, track.trackId)) return false;
+        if (!Objects.equals(competitionName, track.competitionName))
+            return false;
+        if (!Objects.equals(startPoint, track.startPoint)) return false;
+        if (!Objects.equals(endPoint, track.endPoint)) return false;
+        if (!Objects.equals(checkpoints, track.checkpoints)) return false;
+        if (!Objects.equals(difficulty, track.difficulty)) return false;
+        if (!Objects.equals(location, track.location)) return false;
+        return Objects.equals(trackDate, track.trackDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(trackId, competitionName, startPoint, endPoint, checkpoints, length, difficulty, location);
+        int result = trackId != null ? trackId.hashCode() : 0;
+        result = 31 * result + (competitionName != null ? competitionName.hashCode() : 0);
+        result = 31 * result + (startPoint != null ? startPoint.hashCode() : 0);
+        result = 31 * result + (endPoint != null ? endPoint.hashCode() : 0);
+        result = 31 * result + (checkpoints != null ? checkpoints.hashCode() : 0);
+        result = 31 * result + length;
+        result = 31 * result + (difficulty != null ? difficulty.hashCode() : 0);
+        result = 31 * result + (location != null ? location.hashCode() : 0);
+        result = 31 * result + (trackDate != null ? trackDate.hashCode() : 0);
+        return result;
     }
 }
