@@ -29,6 +29,11 @@ public class TrackController {
     @GetMapping("/tracks/{id}")
     public String getTrackDetails(@PathVariable("id") Long id, Model model) throws IOException {
         Track track = trackService.findTrackById(id);
+
+        if (track == null) {
+            model.addAttribute("errorMessage", "Track not found!");
+            return "tracks/track-error";
+        }
         model.addAttribute("track", track);
         return "tracks/track-details";
     }
