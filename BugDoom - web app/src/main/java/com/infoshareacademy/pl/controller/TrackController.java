@@ -54,5 +54,4 @@ public class TrackController {
         model.addAttribute("track", new Track());
         return "tracks/add-track";
     }
-
 }

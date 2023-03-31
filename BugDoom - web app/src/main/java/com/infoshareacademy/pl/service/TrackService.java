@@ -10,12 +10,10 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Random;
 
 @Service
 public class TrackService implements TrackRepository {
-    private List<Track>tracks = new ArrayList<>();
 
     private final String TRACK_FILE_PATH = FilePathConstants.TRACK_FILE_PATH;
     private final DataService<Track> dataService = new DataService<>();
@@ -41,20 +39,9 @@ public class TrackService implements TrackRepository {
         dataService.saveToFile(tracksToSave, TRACK_FILE_PATH);
     }
 
-    public Track findTrackById(long trackId) throws NoSuchElementException, IOException {
-        List<Track> allTracks = getAllTracks();
-        return allTracks.stream()
-                .filter(t -> t.getTrackId() == (trackId))
-                .findFirst()
-                .orElseThrow();
-    }
-    public void removeTrackById(Long id){
-        Track foundTrack = findById(id);
-        tracks.remove(foundTrack);
-    }
-
-    public Track findById(long trackId){
-        return tracks.stream().filter(track -> track.getTrackId() == trackId)
+    public Track findTrackById(long trackId) throws IOException{
+        List<Track>allTracks = getAllTracks();
+        return allTracks.stream().filter(track -> track.getTrackId() == trackId)
                 .findFirst().orElseThrow(() -> new TrackNotFoundException("Nie ma trasy o takim ID: %s".formatted(trackId)));
     }
     public long createRandomId() {

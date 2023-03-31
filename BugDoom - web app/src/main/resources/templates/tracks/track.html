@@ -25,6 +25,7 @@
     <th scope="col">Nazwa biegu</th>
     <th scope="col">Poziom trudności</th>
     <th scope="col">Teren</th>
+    <th scope="col">Działania</th>
   </tr>
   </thead>
   <tbody>
@@ -33,6 +34,17 @@
     <td th:text="${track.getCompetitionName}"></td>
     <td th:text="${track.getDifficulty}"></td>
     <td th:text="${track.getTerrain}"></td>
+    <td>
+      <a th:href="@{/tracks/delete-track/{trackId}(trackId=${track.trackId})}" class="btn btn-danger">
+        DELETE
+      </a>
+      <a>
+        EDIT
+
+      </a>
+    </td>
+  </tr>
+
   </tbody>
 </table>
 <a th:href="@{/tracks/create}" class="btn btn-success">
