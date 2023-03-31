@@ -2,21 +2,36 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet"
+        type="text/css"/>
   <title>New track</title>
 
 </head>
 <body>
-<div>
+
   <form th:action="@{/templates/tracks}" th:object="${track}" method="post">
-    <p>Nazwa biegu: <input type="text" th:field="*{competitionName}"/></p>
-    <p>Start X: <input type="text" th:field="*{start.x}"/></p>
-    <p>Start Y: <input type="text" th:field="*{start.y}"/></p>
-    <p>Meta X: <input type="text" th:field="*{finish.x}"/></p>
-    <p>Meta Y: <input type="text" th:field="*{finish.y}"/></p>
+    <div class="mb-3">
+    <p>Nazwa biegu: <input type="text" placeholder="nazwa nowego biegu" th:field="*{competitionName}"/></p>
+    </div>
+    <p>Start X: <input type="number" min="49" max="54.5" placeholder="54.35" step="0.001" th:field="*{start.x}"/></p>
+    <p>Start Y: <input type="number" min="14.07" max="24.09" placeholder="18.65" step="0.001" th:field="*{start.y}"/></p>
+    <p>Meta X: <input type="number" min="49" max="54.5" placeholder="54.35" step="0.001" th:field="*{finish.x}"/></p>
+    <p>Meta Y: <input type="number" min="14.07" max="24.09" placeholder="18.65" step="0.001" th:field="*{finish.y}"/></p>
     <p>Poziom trudności: <input type="text" th:field="*{difficulty}"/></p>
-    <p>Dystans: <input type="text" th:field="*{length}"/></p>
-    <p>Lokalizacja: <input type="text" th:field="*{terrain}"/></p>
-    <p>Rozpoczęcie biegu: <input type="text" th:field="*{startOfCompetition}"/></p>
+    <p>Dystans (km): <input type="range" min="5" max="20" th:field="*{length}"/></p>
+    <div> Lokalizacja: <input type="radio" id="terrainChoice1" name="terrain" value="miasto"/>
+      <label for="terrainChoice1">Miasto</label>
+      <input type="radio" id="terrainChoice2" name="terrain" value="miasto"/>
+      <label for="terrainChoice2">Las</label>
+      <input type="radio" id="terrainChoice3" name="terrain" value="miasto" th:field="*{terrain}"/>
+      <label for="terrainChoice3">Góry</label>
+
+
+
+    </div>
+    <p>Rozpoczęcie biegu: <input type="datetime-local" th:field="*{startOfCompetition}"/></p>
     <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
   </form>
   </form>
