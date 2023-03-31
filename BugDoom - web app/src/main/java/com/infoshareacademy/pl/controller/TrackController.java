@@ -5,9 +5,9 @@ import com.infoshareacademy.pl.service.TrackService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.io.IOException;
-import java.util.List;
 
 @Controller
 public class TrackController {
@@ -25,6 +25,12 @@ public class TrackController {
 
         model.addAttribute("tracks", trackService.getAllTracks());
         return "tracks/track";
+    }
+    @GetMapping("/tracks/{id}")
+    public String getTrackDetails(@PathVariable("id") Long id, Model model) throws IOException {
+        Track track = trackService.findTrackById(id);
+        model.addAttribute("track", track);
+        return "tracks/track-details";
     }
 }
 
