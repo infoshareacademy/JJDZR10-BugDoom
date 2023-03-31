@@ -2,6 +2,8 @@ package com.infoshareacademy.pl.model;
 
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 @Component
@@ -14,12 +16,13 @@ public class Track {
     private int length;
     private String difficulty;
     private String terrain;
+    private LocalDateTime startOfCompetition;
 
     public long getTrackId() {
         return trackId;
     }
 
-    public void setId(long trackId) {
+    public void setTrackId(long trackId) {
         this.trackId = trackId;
     }
 
@@ -79,17 +82,26 @@ public class Track {
         this.checkpoints = checkpoints;
     }
 
+    public LocalDateTime getStartOfCompetition() {
+        return startOfCompetition;
+    }
+
+    public void setStartOfCompetition(LocalDateTime startOfCompetition) {
+        this.startOfCompetition = startOfCompetition;
+    }
+
     @Override
     public String toString() {
         return "Track{" +
-                "trackId='" + trackId + '\'' +
+                "trackId=" + trackId +
                 ", competitionName='" + competitionName + '\'' +
-                ", difficulty='" + difficulty + '\'' +
-                ", length=" + length +
-                ", terrain='" + terrain + '\'' +
                 ", start=" + start +
                 ", finish=" + finish +
-                ", checkpoint=" + checkpoints +
+                ", checkpoints=" + checkpoints +
+                ", length=" + length +
+                ", difficulty='" + difficulty + '\'' +
+                ", terrain='" + terrain + '\'' +
+                ", startOfCompetition=" + startOfCompetition +
                 '}';
     }
 
@@ -97,12 +109,32 @@ public class Track {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         Track track = (Track) o;
-        return length == track.length && Objects.equals(trackId, track.trackId) && Objects.equals(competitionName, track.competitionName) && Objects.equals(start, track.start) && Objects.equals(finish, track.finish) && Objects.equals(checkpoints, track.checkpoints) && Objects.equals(difficulty, track.difficulty) && Objects.equals(terrain, track.terrain);
+
+        if (trackId != track.trackId) return false;
+        if (length != track.length) return false;
+        if (!Objects.equals(competitionName, track.competitionName))
+            return false;
+        if (!Objects.equals(start, track.start)) return false;
+        if (!Objects.equals(finish, track.finish)) return false;
+        if (!Objects.equals(checkpoints, track.checkpoints)) return false;
+        if (!Objects.equals(difficulty, track.difficulty)) return false;
+        if (!Objects.equals(terrain, track.terrain)) return false;
+        return Objects.equals(startOfCompetition, track.startOfCompetition);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(trackId, competitionName, start, finish, checkpoints, length, difficulty, terrain);
+        int result = (int) (trackId ^ (trackId >>> 32));
+        result = 31 * result + (competitionName != null ? competitionName.hashCode() : 0);
+        result = 31 * result + (start != null ? start.hashCode() : 0);
+        result = 31 * result + (finish != null ? finish.hashCode() : 0);
+        result = 31 * result + (checkpoints != null ? checkpoints.hashCode() : 0);
+        result = 31 * result + length;
+        result = 31 * result + (difficulty != null ? difficulty.hashCode() : 0);
+        result = 31 * result + (terrain != null ? terrain.hashCode() : 0);
+        result = 31 * result + (startOfCompetition != null ? startOfCompetition.hashCode() : 0);
+        return result;
     }
 }

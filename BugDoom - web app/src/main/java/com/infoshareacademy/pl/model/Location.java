@@ -4,52 +4,43 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 public class Location {
-    private long controlPointID;
-    private BigDecimal coordinateX;
-    private BigDecimal coordinateY;
+    private double x;
+    private double y;
+    private String text;
 
-    public Location(long controlPointID, BigDecimal coordinateX, BigDecimal coordinateY) {
-        this.controlPointID = controlPointID;
-        this.coordinateX = coordinateX;
-        this.coordinateY = coordinateY;
+
+    public Location() {
     }
 
-    public long getControlPointID() {
-        return controlPointID;
+    public Location(double x, double y, String text) {
+        this.x = x;
+        this.y = y;
+        this.text = text;
     }
 
-    public void setControlPointID(long controlPointID) {
-        this.controlPointID = controlPointID;
+    public double getX() {
+        return x;
     }
 
-    public BigDecimal getCoordinateX() {
-        return coordinateX;
+    public void setX(double x) {
+        this.x = x;
     }
 
-    public void setCoordinateX(BigDecimal coordinateX) {
-        this.coordinateX = coordinateX;
+    public double getY() {
+        return y;
     }
 
-    public BigDecimal getCoordinateY() {
-        return coordinateY;
+    public void setY(double y) {
+        this.y = y;
     }
 
-    public void setCoordinateY(BigDecimal coordinateY) {
-        this.coordinateY = coordinateY;
+    public String getText() {
+        return text;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Location location = (Location) o;
-        return controlPointID == location.controlPointID && Objects.equals(coordinateX, location.coordinateX) && Objects.equals(coordinateY, location.coordinateY);
+    public void setText(String text) {
+        this.text = text;
     }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(controlPointID, coordinateX, coordinateY);
-    }
-
-
 }
+
+

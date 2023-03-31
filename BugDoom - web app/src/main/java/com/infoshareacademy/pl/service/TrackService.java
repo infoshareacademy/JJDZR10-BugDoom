@@ -7,6 +7,7 @@ import com.infoshareacademy.pl.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
