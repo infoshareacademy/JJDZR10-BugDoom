@@ -6,12 +6,12 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet"
         type="text/css"/>
-  <title>New track</title>
+  <title>Nowa trasa</title>
 
 </head>
 <body>
 
-  <form th:action="@{/templates/tracks}" th:object="${track}" method="post">
+  <form th:action="@{/tracks}" th:object="${track}" method="post">
     <div class="mb-3">
     <p>Nazwa biegu: <input type="text" placeholder="Nazwa nowego biegu" th:field="*{competitionName}"/></p>
     </div>
@@ -24,7 +24,7 @@
       <input type="radio" id="difficultyChoice2" name="difficulty" value="średni"/>
       <label for="terrainChoice2">Średni</label>
       <input type="radio" id="difficultyChoice3" name="difficulty" value="trudny" th:field="*{difficulty}"/>
-      <label for="terrainChoice3">Góry</label>
+      <label for="terrainChoice3">Trudny</label>
     </div>
 
     <p>Dystans (km): <input type="range" min="5" max="20" th:field="*{length}"/></p>
@@ -35,11 +35,11 @@
       <input type="radio" id="terrainChoice3" name="terrain" value="miasto" th:field="*{terrain}"/>
       <label for="terrainChoice3">Góry</label>
     </div>
-    <p>Rozpoczęcie biegu: <input type="datetime-local" th:field="*{startOfCompetition}"/></p>
+<!--    <p>Rozpoczęcie biegu: <input type="datetime-local" th:field="*{startOfCompetition}"/></p>-->
     <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
   </form>
 
-  <a th:href="@{/map.html}" class="btn btn-success">
+  <a th:href="@{/map}" class="btn btn-success">
     Pokaż trasę
   </a>
 
