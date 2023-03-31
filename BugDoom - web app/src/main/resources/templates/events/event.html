@@ -12,7 +12,7 @@
 <table class="table">
     <thead>
     <tr>
-        <th scope="col">ID</th>
+        <th scope="col">#</th>
         <th scope="col">Nazwa wydarzenia</th>
         <th scope="col">Opis wydarzenia</th>
         <th scope="col">Rodzaj wydarzenia</th>
@@ -23,18 +23,15 @@
     </thead>
     <tbody>
     <tr th:each="event,iterStat: ${events}">
-        <td th:text="${event.eventId}"></td>
+        <td th:text="${iterStat.count}"></td>
         <td th:text="${event.eventName}">eventName</td>
         <td th:text="${event.eventDescription}">eventDescription</td>
         <td th:text="${event.eventType}">eventType</td>
         <td th:text="${event.eventDate}">eventDate</td>
         <td th:text="${event.eventPrize}">eventPrize</td>
         <td>
-            <a th:href="@{/events/delete/{id}(id=${event.eventId})}" class="btn btn-danger">
-                USUŃ
-            </a>
-            <a th:href="@{/events/{id}(id=${event.eventId})}" class="btn btn-primary">
-                EDYTUJ
+            <a style="border: outset black" th:href="@{/events/{id}(id=${event.eventId})}" class="btn btn-light">
+                Pokaż szczegóły wydarzenia
             </a>
         </td>
     </tr>

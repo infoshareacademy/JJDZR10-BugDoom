@@ -38,11 +38,11 @@
         <ul style="font-weight: bold; color: red" th:if="${#fields.hasErrors('*')}">
             <li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
         </ul>
-        <button type="submit" class="btn btn-success">Edytuj wydarzenie</button>
+        <button type="submit" class="btn btn-success">Zatwierdź</button>
         <button type="reset" class="btn btn-secondary">Zresetuj</button>
     </form>
 </div>
-<div style="margin-top: 15px" class="row-flex text-center"><a th:href="@{/events}" class="btn btn-primary">
+<div style="margin-top: 15px" class="row-flex text-center"><a th:href="@{/events/{id}(id=${event.eventId})}" class="btn btn-primary">
     POWRÓT
 </a></div>
 </body>

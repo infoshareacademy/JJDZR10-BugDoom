@@ -58,6 +58,13 @@ public class EventController {
     public String getEventById(@PathVariable("eventId") Long eventId, Model model) throws IOException{
         Event event = eventRepository.findEventById(eventId);
         model.addAttribute("event", event);
+        return "events/single-event";
+    }
+
+    @GetMapping("/events/edition-form/{eventId}")
+    public String getEventEditForm(@PathVariable("eventId") Long eventId, Model model) throws IOException{
+        Event event = eventRepository.findEventById(eventId);
+        model.addAttribute("event", event);
         return "events/event-edition";
     }
 
