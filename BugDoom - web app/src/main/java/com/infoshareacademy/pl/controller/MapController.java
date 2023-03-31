@@ -27,4 +27,16 @@ public class MapController {
         return "map";
     }
 
+//        @GetMapping("/map")
+//   public String getMap(Model model, Location start ){
+//            Location start = new Location();
+//            Location finish = new Location();
+//        List<Location> controlPointList = new ArrayList<>();
+//        controlPointList.add(start.getX(), start.getY(), "start");
+//        controlPointList.add(finish);
+//        model.addAttribute("controlPointList", controlPointList);
+//        return "map";
+//    }
+
+
 }
