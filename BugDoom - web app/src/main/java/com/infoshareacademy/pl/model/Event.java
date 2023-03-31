@@ -2,7 +2,9 @@ package com.infoshareacademy.pl.model;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.Constraint;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 import java.time.LocalDate;
 import java.util.List;
@@ -19,6 +21,7 @@ public class Event {
     @PositiveOrZero (message = "Wartość nagrody nie może być ujemna")
     private int eventPrize;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotNull (message="Podaj datę wydarzenia")
     private LocalDate eventDate;
     private EventType eventType;
 
