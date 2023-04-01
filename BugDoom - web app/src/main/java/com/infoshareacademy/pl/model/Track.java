@@ -2,6 +2,8 @@ package com.infoshareacademy.pl.model;
 
 import org.springframework.stereotype.Component;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Positive;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -9,12 +11,16 @@ import java.util.Objects;
 @Component
 public class Track {
     private long trackId;
+    @NotEmpty
     private String competitionName;
     private Location start;
     private Location finish;
     private List<Location> checkpoints;
+    @Positive
     private int length;
+    @NotEmpty
     private String difficulty;
+    @NotEmpty
     private String terrain;
 
     public long getTrackId() {
