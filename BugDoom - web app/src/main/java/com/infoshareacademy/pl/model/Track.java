@@ -16,7 +16,6 @@ public class Track {
     private int length;
     private String difficulty;
     private String terrain;
-//    private LocalDateTime startOfCompetition;
 
     public long getTrackId() {
         return trackId;
@@ -82,14 +81,6 @@ public class Track {
         this.checkpoints = checkpoints;
     }
 
-//    public LocalDateTime getStartOfCompetition() {
-//        return startOfCompetition;
-//    }
-//
-//    public void setStartOfCompetition(LocalDateTime startOfCompetition) {
-//        this.startOfCompetition = startOfCompetition;
-//    }
-
     @Override
     public String toString() {
         return "Track{" +
@@ -101,8 +92,37 @@ public class Track {
                 ", length=" + length +
                 ", difficulty='" + difficulty + '\'' +
                 ", terrain='" + terrain + '\'' +
-//                ", startOfCompetition=" + startOfCompetition +
                 '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Track track = (Track) o;
+
+        if (trackId != track.trackId) return false;
+        if (length != track.length) return false;
+        if (!Objects.equals(competitionName, track.competitionName))
+            return false;
+        if (!Objects.equals(start, track.start)) return false;
+        if (!Objects.equals(finish, track.finish)) return false;
+        if (!Objects.equals(checkpoints, track.checkpoints)) return false;
+        if (!Objects.equals(difficulty, track.difficulty)) return false;
+        return Objects.equals(terrain, track.terrain);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (int) (trackId ^ (trackId >>> 32));
+        result = 31 * result + (competitionName != null ? competitionName.hashCode() : 0);
+        result = 31 * result + (start != null ? start.hashCode() : 0);
+        result = 31 * result + (finish != null ? finish.hashCode() : 0);
+        result = 31 * result + (checkpoints != null ? checkpoints.hashCode() : 0);
+        result = 31 * result + length;
+        result = 31 * result + (difficulty != null ? difficulty.hashCode() : 0);
+        result = 31 * result + (terrain != null ? terrain.hashCode() : 0);
+        return result;
+    }
 }

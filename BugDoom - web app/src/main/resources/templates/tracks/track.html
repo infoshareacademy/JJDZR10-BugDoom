@@ -30,16 +30,14 @@
   </thead>
   <tbody>
   <tr th:each="track,iterStat: ${tracks}">
+
     <td th:text="${iterStat.count}"></td>
     <td th:text="${track.getCompetitionName}"></td>
     <td th:text="${track.getDifficulty}"></td>
     <td th:text="${track.getTerrain}"></td>
     <td>
-      <a th:href="@{/tracks/delete-track/{id}(id=${track.trackId})}" class="btn btn-danger">
+      <a th:href="@{/tracks/delete/{id}(id=${track.getTrackId})}" class="btn btn-danger">
         Usuń
-      </a>
-      <a th:href="@{/tracks/{id}(id=${track.trackId})}" class="btn btn-primary">
-        Edytuj
       </a>
 
       <a th:href="@{/map}" class="btn btn-success">
@@ -51,21 +49,9 @@
 
   </tbody>
 </table>
-<a th:href="@{/tracks/create}" class="btn btn-success">
+<a th:href="@{/tracks/create}" class="btn btn-info">
   Utwórz nową trasę
 </a>
 </body>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
-</script>
-<script type="text/javascript">
-  $(document).ready(function() {
-    $("#locales").change(function () {
-      var selectedOption = $('#locales').val();
-      if (selectedOption != ''){
-        window.location.replace('?lang=' + selectedOption);
-      }
-    });
-  });
-</script>
 </html>

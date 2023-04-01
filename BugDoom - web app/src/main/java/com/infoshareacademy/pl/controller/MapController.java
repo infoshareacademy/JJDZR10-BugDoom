@@ -1,6 +1,7 @@
 package com.infoshareacademy.pl.controller;
 
 import com.infoshareacademy.pl.model.Location;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,24 +20,12 @@ public class MapController {
 
 
     @GetMapping("/map")
-   public String getMap(Model model){
+   public String getMap(Location start, Location finish, Model model){
         List<Location> controlPointList = new ArrayList<>();
         controlPointList.add(new Location(54.35, 18.65, "start"));
         controlPointList.add(new Location(54.35, 18.59, "meta"));
         model.addAttribute("controlPointList", controlPointList);
         return "map";
     }
-
-//        @GetMapping("/map")
-//   public String getMap(Model model, Location start ){
-//            Location start = new Location();
-//            Location finish = new Location();
-//        List<Location> controlPointList = new ArrayList<>();
-//        controlPointList.add(start.getX(), start.getY(), "start");
-//        controlPointList.add(finish);
-//        model.addAttribute("controlPointList", controlPointList);
-//        return "map";
-//    }
-
 
 }

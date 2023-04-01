@@ -33,7 +33,7 @@ public class TrackController {
         model.addAttribute("tracks",tracks);
         return "tracks/track";
     }
-    @GetMapping("/tracks/delete-track/{trackId}")
+    @GetMapping("tracks/delete/{trackId}")
     public String deleteTrack(@PathVariable long trackId) throws IOException{
         trackRepository.removeTrackById(trackId);
         return "redirect:/tracks";
@@ -43,6 +43,7 @@ public class TrackController {
         if (bindingResult.hasErrors()){
             return "tracks/track";
         }
+        track.setTrackId(trackRepository.createRandomId());
         trackRepository.addTrack(track);
         return "redirect:/tracks";
     }
@@ -55,10 +56,4 @@ public class TrackController {
         return "tracks/add-track";
     }
 
-    @GetMapping("/tracks/edit-track/{trackId}")
-    public String getTrackEditForm(@PathVariable("trackId") Long trackId, Model model) throws IOException{
-        Track track = trackRepository.findTrackById(trackId);
-        model.addAttribute("track", track);
-        return "tracks/edit-track";
-    }
 }

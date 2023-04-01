@@ -14,8 +14,7 @@ public interface TrackRepository {
     public void addTrack(Track trackToAdd) throws IOException;
 
     public void removeTrackById(long trackId) throws IOException;
-
-    public void editTrackById(long trackId, Track track) throws IOException;
+    
 
     long createRandomId();
 }

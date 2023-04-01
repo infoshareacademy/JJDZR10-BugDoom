@@ -10,7 +10,7 @@
 
 </head>
 <body>
-
+<div>
   <form th:action="@{/tracks}" th:object="${track}" method="post">
     <div class="mb-3">
     <p>Nazwa biegu: <input type="text" placeholder="Nazwa nowego biegu" th:field="*{competitionName}"/></p>
@@ -28,18 +28,18 @@
     </div>
 
     <p>Dystans (km): <input type="range" min="5" max="20" th:field="*{length}"/></p>
-    <div> Lokalizacja: <input type="radio" id="terrainChoice1" name="terrain" value="miasto"/>
-      <label for="terrainChoice1">Miasto</label>
-      <input type="radio" id="terrainChoice2" name="terrain" value="las"/>
-      <label for="terrainChoice2">Las</label>
-      <input type="radio" id="terrainChoice3" name="terrain" value="góry" th:field="*{terrain}"/>
-      <label for="terrainChoice3">Góry</label>
+    <div> Lokalizacja: <input type="radio" id="terrainChoice1" name="terrain" value="miejski"/>
+      <label for="terrainChoice1">miejski</label>
+      <input type="radio" id="terrainChoice2" name="terrain" value="leśny"/>
+      <label for="terrainChoice2">leśny</label>
+      <input type="radio" id="terrainChoice3" name="terrain" value="górzysty" th:field="*{terrain}"/>
+      <label for="terrainChoice3">górzysty</label>
     </div>
-<!--    <p>Rozpoczęcie biegu: <input type="datetime-local" th:field="*{startOfCompetition}"/></p>-->
+
     <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
   </form>
 
 
-
+</div>
 </body>
 </html>
