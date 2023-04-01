@@ -44,6 +44,6 @@ public class TrackService implements TrackRepository {
                 .findFirst().orElseThrow(() -> new TrackNotFoundException("Nie ma trasy o takim ID: %s".formatted(trackId)));
     }
     public long createRandomId() {
-        return new Random().nextLong(1001);
+        return new Random().nextLong(1000);
     }
 }

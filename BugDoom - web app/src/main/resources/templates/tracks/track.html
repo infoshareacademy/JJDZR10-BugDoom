@@ -35,8 +35,11 @@
     <td th:text="${track.getDifficulty}"></td>
     <td th:text="${track.getTerrain}"></td>
     <td>
-      <a th:href="@{/tracks/delete-track/{trackId}(trackId=${track.trackId})}" class="btn btn-danger">
+      <a th:href="@{/tracks/delete-track/{id}(id=${track.trackId})}" class="btn btn-danger">
         Usuń
+      </a>
+      <a th:href="@{/tracks/{id}(id=${track.trackId})}" class="btn btn-primary">
+        Edytuj
       </a>
 
       <a th:href="@{/map}" class="btn btn-success">

@@ -54,4 +54,11 @@ public class TrackController {
         model.addAttribute("track", new Track());
         return "tracks/add-track";
     }
+
+    @GetMapping("/tracks/edit-track/{trackId}")
+    public String getTrackEditForm(@PathVariable("trackId") Long trackId, Model model) throws IOException{
+        Track track = trackRepository.findTrackById(trackId);
+        model.addAttribute("track", track);
+        return "tracks/edit-track";
+    }
 }
