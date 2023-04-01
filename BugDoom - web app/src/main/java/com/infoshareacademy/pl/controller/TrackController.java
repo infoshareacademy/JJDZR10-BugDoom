@@ -1,7 +1,9 @@
 package com.infoshareacademy.pl.controller;
 
+import com.infoshareacademy.pl.model.Location;
 import com.infoshareacademy.pl.model.Track;
 import com.infoshareacademy.pl.repository.TrackRepository;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -56,4 +59,12 @@ public class TrackController {
         return "tracks/add-track";
     }
 
+    @GetMapping("/map")
+    public String getMap(Location start, Location finish, Model model){
+        List<Location> controlPointList = new ArrayList<>();
+        controlPointList.add(new Location(54.35, 18.65, "start"));
+        controlPointList.add(new Location(54.35, 18.59, "meta"));
+        model.addAttribute("controlPointList", controlPointList);
+        return "map";
+    }
 }
