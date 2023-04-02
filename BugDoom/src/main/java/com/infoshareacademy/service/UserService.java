@@ -1,9 +1,9 @@
 package com.infoshareacademy.service;
 
 import com.infoshareacademy.model.User;
+import com.infoshareacademy.pl.service.DataService;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
