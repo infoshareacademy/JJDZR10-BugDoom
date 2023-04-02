@@ -67,4 +67,15 @@ public class TrackController {
         model.addAttribute("controlPointList", controlPointList);
         return "map";
     }
+    @GetMapping("/tracks/{id}")
+    public String getTrackDetails(@PathVariable("id") Long id, Model model) throws IOException {
+        Track track = trackRepository.findTrackById(id);
+
+        if (track == null) {
+            model.addAttribute("errorMessage", "Track not found!");
+            return "tracks/track-error";
+        }
+        model.addAttribute("track", track);
+        return "tracks/track-details";
+    }
 }
