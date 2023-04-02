@@ -18,13 +18,21 @@ public class UserController {
     public UserController(UserService userService) {
         this.userService = userService;
     }
+
+    @GetMapping("/login")
+    public String login(){
+        return "UserLogin";
+    }
+
+    @GetMapping("/register")
+    public String register(){
+        return "NewUserForm";
+    }
+
     @GetMapping("/users")
     public String getUsers(Model model) throws IOException {
         List<User> users = userService.getAllUsers();
         model.addAttribute("users", users);
-        return "users/user";
+        return "users";
     }
-
-
-
 }
