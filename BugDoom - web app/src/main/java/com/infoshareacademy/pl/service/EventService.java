@@ -14,7 +14,11 @@ import java.util.Random;
 @Service
 public class EventService implements EventRepository {
     private static final String EVENT_FILE_PATH = FilePathConstants.EVENT_FILE_PATH;
-    private final DataService<Event> dataService = new DataService<>();
+    private final DataService<Event> dataService;
+
+    public EventService(DataService<Event> dataService) {
+        this.dataService = dataService;
+    }
 
     public List<Event> getAllEvents() throws IOException {
         return new ArrayList<>(dataService.readFromFile(EVENT_FILE_PATH, Event[].class));

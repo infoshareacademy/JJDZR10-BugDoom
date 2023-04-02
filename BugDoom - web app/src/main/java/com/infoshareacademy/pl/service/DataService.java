@@ -3,6 +3,8 @@ package com.infoshareacademy.pl.service;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.infoshareacademy.pl.model.Event;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -12,6 +14,7 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
+@Service
 public class DataService<T> {
     private Gson gson = new Gson();
 
