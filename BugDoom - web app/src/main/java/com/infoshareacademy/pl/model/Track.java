@@ -43,9 +43,6 @@ public class Track {
         return finish;
     }
 
-    public void setFinish(Location finish) {
-        this.finish = finish;
-    }
 
     public int getLength() {
         return length;
@@ -59,33 +56,21 @@ public class Track {
         return difficulty;
     }
 
-    public void setDifficulty(String difficulty) {
-        this.difficulty = difficulty;
-    }
 
     public String getTerrain() {
         return terrain;
     }
 
-    public void setTerrain(String terrain) {
-        this.terrain = terrain;
-    }
 
     public String getCompetitionName() {
         return competitionName;
     }
 
-    public void setCompetitionName(String competitionName) {
-        this.competitionName = competitionName;
-    }
 
     public List<Location> getCheckpoints() {
         return checkpoints;
     }
 
-    public void setCheckpoints(List<Location> checkpoints) {
-        this.checkpoints = checkpoints;
-    }
 
     @Override
     public String toString() {
