@@ -18,9 +18,9 @@ public class Track {
     private List<Location> checkpoints;
     @Positive
     private int length;
-    @NotEmpty
+    @NotEmpty (message = "musisz wybrać poziom trudności")
     private String difficulty;
-    @NotEmpty
+    @NotEmpty (message = "musisz wybrać lokalizację)")
     private String terrain;
 
     public long getTrackId() {
