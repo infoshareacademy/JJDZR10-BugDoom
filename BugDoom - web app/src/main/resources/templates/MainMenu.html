@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Page</title>
+    <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+            crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid text-light">
+        <a class="navbar=brand" href="#">
+            <img src="Logo.png" width="50" height="50"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#"><i class="bi bi-house"></i> Home </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="#">O nas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="#">Wyniki Biegów</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown"
+                       aria-expanded="false">
+                        Blog
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Poradnik Dla Organizatora</a></li>
+                        <li><a class="dropdown-item" href="#">Poradnik Dla Biegacza</a></li>
+                        <li><a class="dropdown-item" href="#">Galeria</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <form class="d-flex d-none d-md-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button type="button" class="btn btn-outline-light">Szukaj</button>
+            </form>
+            <div class="d-grid gap-2 d-md-block">
+                <button class="btn btn-light module-label-in-package-5 ms-2" type="button">Zaloguj się <i
+                        class="bi bi-person"></i></button>
+            </div>
+            </ul>
+            </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container-md">
+    <div class="p-2"></div>
+    <div class="p-2"></div>
+    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="false">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+                    aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="Photo1.png" class="d-block w-100" alt="my image">
+                <div class="carousel-caption top-50 d-none d-md-block">
+                    <h1 class="display-3 fw-bolder">Witaj w GeoRunners !</h1>
+                    <h5 class="fs-3">Miło Cię tu widzieć</h5>
+                    <div class="d-grid gap-2 col-3 mx-auto">
+                        <button class="btn btn-outline-light">Zaloguj się</button>
+                        <button class="btn btn-outline-light">Zarejestruj się</button>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="Photo2.png" class="d-block w-100" alt="my image 2">
+                <div class="carousel-caption top-50 d-none d-md-block">
+                    <h3 class="display-3 fw-bolder">Zaplanuj swój bieg <i class="bi bi-list-check"></i></h3>
+                    <h5 class="fs-3">Jesteś Organizatorem? </h5>
+                    <div class="d-grid gap-2 col-3 mx-auto">
+                        <button class="btn btn-outline-light">Zaloguj się</button>
+                        <button class="btn btn-outline-light">Zarejestruj się</button>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="Photo3.png" class="d-block w-100" alt="...">
+                <div class="carousel-caption top-50 d-none d-md-block">
+                    <h3 class="display-3 fw-bolder">Po prostu biegaj <i class="bi bi-geo"></i></h3>
+                    <h5 class="fs-3">Weź udział w biegu na orientacje</h5>
+                    <div class="d-grid gap-2 col-3 mx-auto">
+                        <button class="btn btn-outline-light">Zaloguj się</button>
+                        <button class="btn btn-outline-light">Zarejestruj się</button>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+                    data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+                    data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+    <div class="container text-center my-5">
+        <table class="table table-dark table-hover">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nazwa Biegu</th>
+                <th scope="col">Miejscowość</th>
+                <th scope="col">Ocena <i class="bi bi-star"></i><i class="bi bi-star"></i><i class="bi bi-star"></i><i
+                        class="bi bi-star"></i><i class="bi bi-star"></i></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Bieg po Malborku</td>
+                <td>Malbork</td>
+                <td>4/5</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Wiosenny Bieg</td>
+                <td>Gdańsk</td>
+                <td>5/5</td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>Leśny Poranek</td>
+                <td>Gdynia</td>
+                <td>4,5/5</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="container my-5 text-center">
+            <div class="row g-2 g-sm-3 g-md-5">
+                <div class="col-6 col-sm-4">
+                    <div class="card">
+                        <img src="Photo4.png" class="card-img-top" alt="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Wydarzenia</h5>
+                            <p class="card-text">Jeśli chcesz spróbować tradycyjnych biegów - koniecznie zajrzyj.</p>
+                            <a href="#" class="btn btn-info">Sprawdź <i class="bi bi-heart"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-sm-4">
+                    <div class="card">
+                        <img src="Photo5.png" class="card-img-top" alt="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Biegaj całą rodziną</h5>
+                            <p class="card-text">Nie ograniczaj się! Sprawdź porady dla biegania całą rodziną.
+                                Wspomnienia gwarantowane. </p>
+                            <a href="#" class="btn btn-info">Sprawdź <i class="bi bi-heart"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-sm-4">
+                    <div class="card">
+                        <img src="Photo6.png" class="card-img-top" alt="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Obuwie Biegowe</h5>
+                            <p class="card-text">Nigdy nie zapominaj o dobraniu odpowiedniego obuwia do danego
+                                podłoża.</p>
+                            <a href="#" class="btn btn-info">Sprawdź <i class="bi bi-heart"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous">
+</script>
+
+</body>
+</html>
+</body>
