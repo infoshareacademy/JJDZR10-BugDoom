@@ -44,7 +44,7 @@ public class TrackController {
     @PostMapping("/tracks")
     public String createTrack(@Valid @ModelAttribute Track track, BindingResult bindingResult) throws IOException{
         if (bindingResult.hasErrors()){
-            return "tracks/track";
+            return "tracks/add-track";
         }
         track.setTrackId(trackRepository.createRandomId());
         trackRepository.addTrack(track);
@@ -59,14 +59,6 @@ public class TrackController {
         return "tracks/add-track";
     }
 
-    @GetMapping("/map")
-    public String getMap(Location start, Location finish, Model model){
-        List<Location> controlPointList = new ArrayList<>();
-        controlPointList.add(new Location(54.35, 18.65, "start"));
-        controlPointList.add(new Location(54.35, 18.59, "meta"));
-        model.addAttribute("controlPointList", controlPointList);
-        return "map";
-    }
     @GetMapping("/tracks/{id}")
     public String getTrackDetails(@PathVariable("id") Long id, Model model) throws IOException {
         Track track = trackRepository.findTrackById(id);

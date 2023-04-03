@@ -8,10 +8,10 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
-@Component
+
 public class Track {
     private long trackId;
-    @NotEmpty
+    @NotEmpty (message ="nazwa biegu nie może być pusta")
     private String competitionName;
     private Location start;
     private Location finish;
@@ -20,7 +20,7 @@ public class Track {
     private int length;
     @NotEmpty (message = "musisz wybrać poziom trudności")
     private String difficulty;
-    @NotEmpty (message = "musisz wybrać lokalizację)")
+    @NotEmpty (message = "musisz wybrać lokalizację")
     private String terrain;
 
     public long getTrackId() {
@@ -29,6 +29,14 @@ public class Track {
 
     public void setTrackId(long trackId) {
         this.trackId = trackId;
+    }
+
+    public String getCompetitionName() {
+        return competitionName;
+    }
+
+    public void setCompetitionName(String competitionName) {
+        this.competitionName = competitionName;
     }
 
     public Location getStart() {
@@ -43,6 +51,17 @@ public class Track {
         return finish;
     }
 
+    public void setFinish(Location finish) {
+        this.finish = finish;
+    }
+
+    public List<Location> getCheckpoints() {
+        return checkpoints;
+    }
+
+    public void setCheckpoints(List<Location> checkpoints) {
+        this.checkpoints = checkpoints;
+    }
 
     public int getLength() {
         return length;
@@ -56,21 +75,17 @@ public class Track {
         return difficulty;
     }
 
+    public void setDifficulty(String difficulty) {
+        this.difficulty = difficulty;
+    }
 
     public String getTerrain() {
         return terrain;
     }
 
-
-    public String getCompetitionName() {
-        return competitionName;
+    public void setTerrain(String terrain) {
+        this.terrain = terrain;
     }
-
-
-    public List<Location> getCheckpoints() {
-        return checkpoints;
-    }
-
 
     @Override
     public String toString() {
