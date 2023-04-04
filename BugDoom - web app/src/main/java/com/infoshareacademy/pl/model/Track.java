@@ -1,11 +1,7 @@
 package com.infoshareacademy.pl.model;
 
-import org.springframework.stereotype.Component;
-
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Positive;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 

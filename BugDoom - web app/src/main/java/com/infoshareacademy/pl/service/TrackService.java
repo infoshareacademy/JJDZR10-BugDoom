@@ -22,12 +22,14 @@ public class TrackService implements TrackRepository {
         return new ArrayList<>(dataService.readFromFile(TRACK_FILE_PATH, Track[].class));
     }
 
+    @Override
     public void addTrack(Track trackToAdd) throws IOException {
         List<Track> allTracks = getAllTracks();
         allTracks.add(trackToAdd);
         saveTracksToFile(allTracks);
     }
 
+    @Override
     public void removeTrackById(long trackId) throws IOException {
         List<Track> allTracks = getAllTracks();
         Track trackToDelete = findTrackById(trackId);
@@ -35,15 +37,20 @@ public class TrackService implements TrackRepository {
         saveTracksToFile(allTracks);
     }
 
-    private void saveTracksToFile(List<Track> tracksToSave) throws IOException {
+    @Override
+    public void saveTracksToFile(List<Track> tracksToSave) throws IOException {
         dataService.saveToFile(tracksToSave, TRACK_FILE_PATH);
     }
-@Override
-    public Track findTrackById(long trackId) throws IOException{
-        List<Track>allTracks = getAllTracks();
-        return allTracks.stream().filter(track -> track.getTrackId() == trackId)
-                .findFirst().orElseThrow(() -> new TrackNotFoundException("Nie ma trasy o takim ID: %s".formatted(trackId)));
+
+    @Override
+    public Track findTrackById(long trackId) throws IOException {
+        List<Track> allTracks = getAllTracks();
+        return allTracks.stream().
+                filter(track -> track.getTrackId() == trackId)
+                .findFirst()
+                .orElseThrow(() -> new TrackNotFoundException("Track with given id: '%s' not found", trackId));
     }
+
     public long createRandomId() {
         return new Random().nextLong(1000);
     }

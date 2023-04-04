@@ -1,9 +1,8 @@
 package com.infoshareacademy.pl.controller;
 
-import com.infoshareacademy.pl.model.Location;
+
 import com.infoshareacademy.pl.model.Track;
-import com.infoshareacademy.pl.repository.TrackRepository;
-import org.springframework.beans.factory.annotation.Value;
+import com.infoshareacademy.pl.service.TrackService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,16 +13,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 
 @Controller
 public class TrackController {
-    private final TrackRepository trackRepository;
+    private final TrackService trackService;
 
-    public TrackController(TrackRepository trackRepository) {
-        this.trackRepository = trackRepository;
+    public TrackController(TrackService trackService) {
+        this.trackService = trackService;
     }
 
 
@@ -32,13 +30,13 @@ public class TrackController {
         Track emptyTrack = new Track();
         model.addAttribute("track", emptyTrack);
 
-        List<Track> tracks = trackRepository.getAllTracks();
+        List<Track> tracks = trackService.getAllTracks();
         model.addAttribute("tracks",tracks);
         return "tracks/track";
     }
     @GetMapping("tracks/delete/{trackId}")
     public String deleteTrack(@PathVariable long trackId) throws IOException{
-        trackRepository.removeTrackById(trackId);
+        trackService.removeTrackById(trackId);
         return "redirect:/tracks";
     }
     @PostMapping("/tracks")
@@ -46,8 +44,8 @@ public class TrackController {
         if (bindingResult.hasErrors()){
             return "tracks/add-track";
         }
-        track.setTrackId(trackRepository.createRandomId());
-        trackRepository.addTrack(track);
+        track.setTrackId(trackService.createRandomId());
+        trackService.addTrack(track);
         return "redirect:/tracks";
     }
 
@@ -61,7 +59,7 @@ public class TrackController {
 
     @GetMapping("/tracks/{id}")
     public String getTrackDetails(@PathVariable("id") Long id, Model model) throws IOException {
-        Track track = trackRepository.findTrackById(id);
+        Track track = trackService.findTrackById(id);
 
         if (track == null) {
             model.addAttribute("errorMessage", "Track not found!");

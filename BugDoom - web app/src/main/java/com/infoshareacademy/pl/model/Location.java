@@ -1,21 +1,20 @@
 package com.infoshareacademy.pl.model;
 
-import java.math.BigDecimal;
 import java.util.Objects;
 
 public class Location {
     private double x;
     private double y;
-    private String text;
+    private String pointName;
 
 
     public Location() {
     }
 
-    public Location(double x, double y, String text) {
+    public Location(double x, double y, String pointName) {
         this.x = x;
         this.y = y;
-        this.text = text;
+        this.pointName = pointName;
     }
 
     public double getX() {
@@ -34,21 +33,12 @@ public class Location {
         this.y = y;
     }
 
-    public String getText() {
-        return text;
+    public String getPointName() {
+        return pointName;
     }
 
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    @Override
-    public String toString() {
-        return "Location{" +
-                "x=" + x +
-                ", y=" + y +
-                ", text='" + text + '\'' +
-                '}';
+    public void setPointName(String pointName) {
+        this.pointName = pointName;
     }
 
     @Override
@@ -60,7 +50,7 @@ public class Location {
 
         if (Double.compare(location.x, x) != 0) return false;
         if (Double.compare(location.y, y) != 0) return false;
-        return Objects.equals(text, location.text);
+        return Objects.equals(pointName, location.pointName);
     }
 
     @Override
@@ -71,7 +61,7 @@ public class Location {
         result = (int) (temp ^ (temp >>> 32));
         temp = Double.doubleToLongBits(y);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
-        result = 31 * result + (text != null ? text.hashCode() : 0);
+        result = 31 * result + (pointName != null ? pointName.hashCode() : 0);
         return result;
     }
 }

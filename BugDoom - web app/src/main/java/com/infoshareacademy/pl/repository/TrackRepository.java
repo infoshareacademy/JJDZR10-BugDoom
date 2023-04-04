@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.util.List;
 
 public interface TrackRepository {
+    void saveTracksToFile(List<Track> tracksToSave) throws IOException;
+
     Track findTrackById(long trackId) throws IOException;
 
     List<Track> getAllTracks() throws IOException;
