@@ -1,7 +1,7 @@
 package com.infoshareacademy.pl.controller;
 
 import com.infoshareacademy.pl.model.Event;
-import com.infoshareacademy.pl.repository.EventRepository;
+import com.infoshareacademy.pl.service.EventService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,10 +16,10 @@ import java.util.List;
 
 @Controller
 public class EventController {
-    private final EventRepository eventRepository;
+    private final EventService eventService;
 
-    public EventController(EventRepository eventRepository) {
-        this.eventRepository = eventRepository;
+    public EventController(EventService eventService) {
+        this.eventService = eventService;
     }
 
     @GetMapping("/events")
@@ -27,7 +27,7 @@ public class EventController {
         Event emptyEvent = new Event();
         model.addAttribute("event", emptyEvent);
 
-        List<Event> events = eventRepository.getAllEvents();
+        List<Event> events = eventService.getAllEvents();
         model.addAttribute("events", events);
         return "events/event";
     }
@@ -43,27 +43,27 @@ public class EventController {
         if (bindingResult.hasErrors()) {
             return "events/new-event";
         }
-        event.setEventId(eventRepository.createRandomId());
-        eventRepository.addEvent(event);
+        event.setEventId(eventService.createRandomId());
+        eventService.addEvent(event);
         return "redirect:/events/";
     }
 
     @GetMapping("events/delete/{eventId}")
     public String deleteEvent(@PathVariable long eventId) throws IOException {
-        eventRepository.removeEventById(eventId);
+        eventService.removeEventById(eventId);
         return "redirect:/events";
     }
 
     @GetMapping("/events/{eventId}")
     public String getEventById(@PathVariable("eventId") Long eventId, Model model) throws IOException{
-        Event event = eventRepository.findEventById(eventId);
+        Event event = eventService.findEventById(eventId);
         model.addAttribute("event", event);
         return "events/single-event";
     }
 
     @GetMapping("/events/edition-form/{eventId}")
     public String getEventEditForm(@PathVariable("eventId") Long eventId, Model model) throws IOException{
-        Event event = eventRepository.findEventById(eventId);
+        Event event = eventService.findEventById(eventId);
         model.addAttribute("event", event);
         return "events/event-edition";
     }
@@ -73,7 +73,7 @@ public class EventController {
         if (bindingResult.hasErrors()) {
             return "events/event-edition";
         }
-        eventRepository.editEventById(eventId, event);
+        eventService.editEventById(eventId, event);
         return "redirect:/events";
     }
 }
