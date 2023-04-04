@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Wydarzenie</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        .container {
+            justify-content: center;
+            font-size: 22px;
+        }
+
+        .row {
+            border: solid cadetblue 2px;
+            margin: 2px;
+            border-radius: 10px;
+        }
+
+        .col-3 {
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        .col-9 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+<div style="font-family: Georgia, serif; width: 500px" class="container"
+     th:action="@{/events/{eventId}(eventId=${event.eventId})}" th:object="${event}">
+    <div class="row">
+        <div class="col-3">
+            Nazwa wydarzenia
+        </div>
+        <div class="col-9">
+            <p th:text="${event.eventName}">eventName</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3">
+            Opis wydarzenia
+        </div>
+        <div class="col-9">
+            <p th:text="${event.eventDescription}">eventDescription</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3">
+            Rodzaj wydarzenia
+        </div>
+        <div class="col-9">
+            <p th:text="${event.eventType}">eventType</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3">
+            Data wydarzenia
+        </div>
+        <div class="col-9">
+            <p th:text="${event.eventDate}">eventDate</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3">
+            Nagroda
+        </div>
+        <div class="col-9">
+            <p th:text="${event.eventPrize}">eventPrize</p>
+        </div>
+    </div>
+</div>
+<div style="margin-top: 5px" class="row-flex text-center">
+    <a style="padding: 20px; width: 250px;" class="btn btn-warning">
+        Zarządzaj trasami
+    </a>
+</div>
+<div style="margin-top: 5px" class="row-flex text-center">
+    <a style="padding: 20px; width: 250px;" class="btn btn-info">
+        Zarządzaj użytkownikami
+    </a>
+</div>
+<div style="margin-top: 15px" class="row-flex text-center">
+    <a th:href="@{/events/delete/{id}(id=${event.eventId})}" class="btn btn-danger">
+        USUŃ
+    </a>
+    <a th:href="@{/events/edition-form/{id}/(id=${event.eventId})}" class="btn btn-primary">
+        EDYTUJ
+    </a>
+</div>
+<div style="margin-top: 15px" class="row-flex text-center"><a style="border: outset black" th:href="@{/events}"
+                                                              class="btn btn-light">
+    POWRÓT
+</a></div>
+</body>
+</html>
