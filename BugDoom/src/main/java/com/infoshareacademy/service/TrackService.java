@@ -1,7 +1,7 @@
 package com.infoshareacademy.service;
 
+import com.infoshareacademy.model.ControlPoint;
 import com.infoshareacademy.model.Track;
-import com.infoshareacademy.model.User;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,8 +17,9 @@ public class TrackService {
     }
 
     public static void createTrack() throws IOException {
+        System.out.println("Witaj w formularzu zgłoszeniowym do Twojej nowej trasy :) ");
         Track newTrack = new Track();
-
+        newTrack.setId(String.valueOf(TrackForm.setId()));
         newTrack.setCompetitionName(TrackForm.setCompetitionName());
         newTrack.setLength(TrackForm.setCompetitionLength());
         newTrack.setDifficulty(TrackForm.setCompetitionDifficulty(newTrack.getLength()));
@@ -66,4 +67,8 @@ public class TrackService {
                 .findFirst();
         return optionalTrack;
     }
+//    public static List<ControlPoint> void showControlPoints(Optional<Track> optionalTrack) throws IOException {
+//        findTrackById(optionalTrack.get().getTrackId());
+//        System.out.println(optionalTrack.get().getLocation());
+//    }
 }
