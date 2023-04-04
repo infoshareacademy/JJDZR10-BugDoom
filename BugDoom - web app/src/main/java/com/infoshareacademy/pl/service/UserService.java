@@ -56,7 +56,7 @@ public class UserService implements UserRepository {
         return currentUser;
     }
 
-    private List<User> getAllUsers() throws IOException{
+    public List<User> getAllUsers() throws IOException{
         return new ArrayList<>(dataService.readFromFile(USERS_FILE_PATH, User[].class));
     }
 }
