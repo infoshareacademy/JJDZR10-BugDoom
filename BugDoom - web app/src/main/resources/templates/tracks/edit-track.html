@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edition of track</title>
+</head>
+<body>
+<div >
+  <form action="#" th:action="@{/tracks/{trackId}/edit(trackId=${track.trackId})}" th:object="${track}" method="post">
+      <div class="mb-3">
+          <p>Nazwa biegu: <input type="text" placeholder="Nazwa nowego biegu" th:field="*{competitionName}"/></p>
+      </div>
+      <p>Start X: <input type="number" min="49" max="54.5" placeholder="54.35" step="0.001" th:field="*{start.x}"/></p>
+      <p>Start Y: <input type="number" min="14.07" max="24.09" placeholder="18.65" step="0.001" th:field="*{start.y}"/></p>
+      <p>Meta X: <input type="number" min="49" max="54.5" placeholder="54.35" step="0.001" th:field="*{finish.x}"/></p>
+      <p>Meta Y: <input type="number" min="14.07" max="24.09" placeholder="18.65" step="0.001" th:field="*{finish.y}"/></p>
+      <div>Poziom trudności: <input type="radio" id="difficultyChoice1" name="difficulty" value="łatwy"/>
+          <label for="terrainChoice1">łatwy</label>
+          <input type="radio" id="difficultyChoice2" name="difficulty" value="średni"/>
+          <label for="terrainChoice2">średni</label>
+          <input type="radio" id="difficultyChoice3" name="difficulty" value="trudny" th:field="*{difficulty}"/>
+          <label for="terrainChoice3">trudny</label>
+      </div>
+
+      <p>Dystans (km): <input type="range" min="5" max="20" th:field="*{length}"/></p>
+      <div> Lokalizacja: <input type="radio" id="terrainChoice1" name="terrain" value="miejski"/>
+          <label for="terrainChoice1">miejski</label>
+          <input type="radio" id="terrainChoice2" name="terrain" value="leśny"/>
+          <label for="terrainChoice2">leśny</label>
+          <input type="radio" id="terrainChoice3" name="terrain" value="górzysty" th:field="*{terrain}"/>
+          <label for="terrainChoice3">górzysty</label>
+      </div>
+    <ul th:if="${#fields.hasErrors('*')}">
+      <li th:each="err : ${#fields.errors('*')}" th:text="${err}"/>
+    </ul>
+    <p><input type="submit" value="Zatwierdź"/> <input type="reset" value="Zresetuj"/></p>
+  </form>
+</div>
+</body>
+</html>

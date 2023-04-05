@@ -46,7 +46,9 @@
       <a th:href="@{/tracks/delete/{id}(id=${track.getTrackId})}" class="btn btn-danger">
         Usuń
       </a>
-
+      <a th:href="@{/tracks/{trackId}/edit(trackId=${track.trackId})}" class="btn btn-danger">
+        Edytuj
+      </a>
 
     </td>
   </tr>

@@ -76,7 +76,7 @@ public class TrackController {
     }
 
     @PostMapping("/tracks/{trackId}/edit")
-    public String editTrack(@PathVariable("eventId") Long trackId, @Valid @ModelAttribute Track track, BindingResult bindingResult) throws IOException{
+    public String editTrack(@PathVariable("trackId") Long trackId, @Valid @ModelAttribute Track track, BindingResult bindingResult) throws IOException{
         if (bindingResult.hasErrors()) {
             return "tracks/edit-track";
         }

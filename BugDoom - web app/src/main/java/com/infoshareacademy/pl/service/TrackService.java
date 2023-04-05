@@ -59,7 +59,12 @@ public class TrackService implements TrackRepository {
         Track trackToEdit = findTrackById(trackId);
         removeTrackById(trackId);
 
-        trackToEdit.setCompetitionName((track.getCompetitionName()));
+        trackToEdit.setCompetitionName(track.getCompetitionName());
+        trackToEdit.setLength(track.getLength());
+        trackToEdit.setTerrain(track.getTerrain());
+        trackToEdit.setDifficulty(track.getDifficulty());
+        trackToEdit.setStart(track.getStart());
+        trackToEdit.setFinish(track.getFinish());
 
         addTrack(trackToEdit);
     }
