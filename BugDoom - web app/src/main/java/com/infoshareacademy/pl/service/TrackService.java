@@ -17,7 +17,9 @@ public class TrackService implements TrackRepository {
     private static final String TRACK_FILE_PATH = FilePathConstants.TRACK_FILE_PATH;
     private final DataService<Track> dataService = new DataService<>();
 
-
+    public long createRandomId() {
+        return new Random().nextLong(1000);
+    }
     @Override
     public List<Track> getAllTracks() throws IOException {
         return new ArrayList<>(dataService.readFromFile(TRACK_FILE_PATH, Track[].class));
@@ -52,7 +54,13 @@ public class TrackService implements TrackRepository {
                 .orElseThrow(() -> new TrackNotFoundException("Track with given id: '%s' not found".formatted(trackId)));
     }
 
-    public long createRandomId() {
-        return new Random().nextLong(1000);
+    @Override
+    public void editTrackById(long trackId, Track track) throws IOException{
+        Track trackToEdit = findTrackById(trackId);
+        removeTrackById(trackId);
+
+        trackToEdit.setCompetitionName((track.getCompetitionName()));
+
+        addTrack(trackToEdit);
     }
 }

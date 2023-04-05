@@ -19,4 +19,6 @@ public interface TrackRepository {
 
 
     long createRandomId();
+
+    void editTrackById(long trackId, Track track) throws IOException;
 }
