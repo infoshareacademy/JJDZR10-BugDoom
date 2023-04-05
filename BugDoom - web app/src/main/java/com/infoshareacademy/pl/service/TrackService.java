@@ -48,7 +48,7 @@ public class TrackService implements TrackRepository {
         return allTracks.stream().
                 filter(track -> track.getTrackId() == trackId)
                 .findFirst()
-                .orElseThrow(() -> new TrackNotFoundException("Track with given id: '%s' not found", trackId));
+                .orElseThrow(() -> new TrackNotFoundException("Track with given id: '%s' not found".formatted(trackId)));
     }
 
     public long createRandomId() {
