@@ -17,6 +17,7 @@ public class TrackService implements TrackRepository {
     private static final String TRACK_FILE_PATH = FilePathConstants.TRACK_FILE_PATH;
     private final DataService<Track> dataService = new DataService<>();
 
+
     @Override
     public List<Track> getAllTracks() throws IOException {
         return new ArrayList<>(dataService.readFromFile(TRACK_FILE_PATH, Track[].class));

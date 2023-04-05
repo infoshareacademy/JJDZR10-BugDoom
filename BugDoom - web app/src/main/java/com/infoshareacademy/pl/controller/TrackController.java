@@ -35,6 +35,7 @@ public class TrackController {
         model.addAttribute("tracks",tracks);
         return "tracks/track";
     }
+    
     @GetMapping("tracks/delete/{trackId}")
     public String deleteTrack(@PathVariable long trackId) throws IOException{
         trackService.removeTrackById(trackId);
@@ -49,8 +50,6 @@ public class TrackController {
         trackService.addTrack(track);
         return "redirect:/tracks";
     }
-
-
 
     @GetMapping("/tracks/create")
     public String showCreateForm(Model model){
@@ -70,3 +69,4 @@ public class TrackController {
         return "tracks/track-details";
     }
 }
+

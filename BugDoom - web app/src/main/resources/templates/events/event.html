@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet"
+          type="text/css"/>
+    <title>Events</title>
+</head>
+<body>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nazwa wydarzenia</th>
+        <th scope="col">Opis wydarzenia</th>
+        <th scope="col">Rodzaj wydarzenia</th>
+        <th scope="col">Data wydarzenia</th>
+        <th scope="col">Nagroda</th>
+        <th scope="col">Działania</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="event,iterStat: ${events}">
+        <td th:text="${iterStat.count}"></td>
+        <td th:text="${event.eventName}">eventName</td>
+        <td th:text="${event.eventDescription}">eventDescription</td>
+        <td th:text="${event.eventType}">eventType</td>
+        <td th:text="${event.eventDate}">eventDate</td>
+        <td th:text="${event.eventPrize}">eventPrize</td>
+        <td>
+            <a style="border: outset black" th:href="@{/events/{id}(id=${event.eventId})}" class="btn btn-light">
+                Pokaż szczegóły wydarzenia
+            </a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<div style="text-align:center" class="container">
+    <div class="row-flex"><a th:href="@{/events/new-event}" class="btn btn-info">
+        DODAJ NOWE WYDARZENIE
+    </a></div>
+</div>
+</body>
+</html>
