@@ -12,8 +12,12 @@ import java.util.NoSuchElementException;
 @Service
 public class UserService implements UserRepository {
     private final String USERS_FILE_PATH = FilePathConstants.USERS_FILE_PATH;
-    private final DataService <User> dataService = new DataService<>();
+    private final DataService <User> dataService;
     private User currentUser;
+
+    public UserService(DataService<User> dataService) {
+        this.dataService = dataService;
+    }
 
     public void addNewUser(User user) throws IOException {
         List<User> users = getAllUsers();
@@ -52,7 +56,7 @@ public class UserService implements UserRepository {
         return currentUser;
     }
 
-    private List<User> getAllUsers() throws IOException{
+    public List<User> getAllUsers() throws IOException{
         return new ArrayList<>(dataService.readFromFile(USERS_FILE_PATH, User[].class));
     }
 }

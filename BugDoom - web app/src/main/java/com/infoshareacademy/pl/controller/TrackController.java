@@ -38,4 +38,3 @@ public class TrackController {
         return "tracks/track-details";
     }
 }
-
