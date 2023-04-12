@@ -1,50 +1,58 @@
 package com.infoshareacademy.pl.service;
 
+import com.infoshareacademy.pl.exception.TrackNotFoundException;
 import com.infoshareacademy.pl.model.Track;
 import com.infoshareacademy.pl.repository.TrackRepository;
-import com.infoshareacademy.pl.repository.UserRepository;
 import org.springframework.stereotype.Service;
+
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.Random;
 
 @Service
 public class TrackService implements TrackRepository {
-    private final String TRACK_FILE_PATH = FilePathConstants.TRACK_FILE_PATH;
-    private final DataService<Track> dataService;
 
-    public TrackService(DataService<Track> dataService) {
-        this.dataService = dataService;
-    }
+    private static final String TRACK_FILE_PATH = FilePathConstants.TRACK_FILE_PATH;
+    private final DataService<Track> dataService = new DataService<>();
 
+
+    @Override
     public List<Track> getAllTracks() throws IOException {
         return new ArrayList<>(dataService.readFromFile(TRACK_FILE_PATH, Track[].class));
     }
 
-    public void addTrackToFile(Track trackToAdd) throws IOException {
+    @Override
+    public void addTrack(Track trackToAdd) throws IOException {
         List<Track> allTracks = getAllTracks();
         allTracks.add(trackToAdd);
         saveTracksToFile(allTracks);
     }
 
-    public void deleteTrack(Track trackToDelete) throws IOException {
+    @Override
+    public void removeTrackById(long trackId) throws IOException {
         List<Track> allTracks = getAllTracks();
+        Track trackToDelete = findTrackById(trackId);
         allTracks.remove(trackToDelete);
         saveTracksToFile(allTracks);
     }
 
-    private void saveTracksToFile(List<Track> tracksToSave) throws IOException {
+    @Override
+    public void saveTracksToFile(List<Track> tracksToSave) throws IOException {
         dataService.saveToFile(tracksToSave, TRACK_FILE_PATH);
     }
 
     @Override
-    public Track findTrackById(long trackId) throws NoSuchElementException, IOException {
+    public Track findTrackById(long trackId) throws IOException {
         List<Track> allTracks = getAllTracks();
-        return allTracks.stream()
-                .filter(t -> t.getTrackId() == (trackId))
+        return allTracks.stream().
+                filter(track -> track.getTrackId() == trackId)
                 .findFirst()
-                .orElseThrow();
+                .orElseThrow(() -> new TrackNotFoundException("Track with given id: '%s' not found".formatted(trackId)));
+    }
+
+    public long createRandomId() {
+        return new Random().nextLong(1000);
     }
 }

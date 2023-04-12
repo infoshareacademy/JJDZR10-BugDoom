@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet"
+        type="text/css"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet"
+        type="text/css"/>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+        integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+        crossorigin=""/>
+
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+  integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+  crossorigin=""></script>
+  <title>Track details</title>
+
+  <style>#map { height: 300px; }</style>
+
+</head>
+<body>
+
+<div class="container">
+  <h1>Detale trasy</h1>
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Nazwa biegu</th>
+      <th scope="col">Poziom trudności</th>
+      <th scope="col">Lokalizacja</th>
+      <th scope="col">Start X</th>
+      <th scope="col">Start Y</th>
+      <th scope="col">Meta X</th>
+      <th scope="col">Meta Y</th>
+
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr>
+      <td th:text="${track.trackId}"></td>
+      <td th:text="${track.competitionName}"></td>
+      <td th:text="${track.difficulty}"></td>
+      <td th:text="${track.terrain}"></td>
+      <td th:text="${track.start.x}"></td>
+      <td th:text="${track.start.y}"></td>
+      <td th:text="${track.finish.x}"></td>
+      <td th:text="${track.finish.y}"></td>
+    </tr>
+  </table>
+    <div id="map"></div>
+    <script th:inline="javascript">
+      var startX = [[${track.start.x}]];
+      var startY = [[${track.start.y}]];
+      var finishX = [[${track.finish.x}]];
+      var finishY = [[${track.finish.y}]];
+
+      var map = L.map('map').setView([54.351, 18.65], 12);
+
+      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+      }).addTo(map);
+
+      L.marker([startX, startY]).addTo(map).bindPopup("start").openPopup();
+      L.marker([finishX, finishY]).addTo(map).bindPopup("meta").openPopup();
+    </script>
+
+    </tbody>
+
+  <a href="/tracks" class="btn btn-primary"><i class="fas fa-angle-double-left"></i> Powrót do listy tras</a>
+</div>
+</body>
+</html>

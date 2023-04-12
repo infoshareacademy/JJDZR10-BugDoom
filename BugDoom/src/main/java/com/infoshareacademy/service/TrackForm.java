@@ -2,10 +2,7 @@ package com.infoshareacademy.service;
 
 import com.infoshareacademy.model.ControlPoint;
 
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class TrackForm {
     private static List<String> points = new ArrayList<>();
@@ -28,8 +25,12 @@ public class TrackForm {
                 "5.0", "5.1", "5.2", "5.3", "5.4", "5.5"));
     }
 
+    public static int setId(){
+        int TrackId = new Random().nextInt(1000);
+        return TrackId;
+            }
+
     public static String setCompetitionName() {
-        System.out.println("Witaj w formularzu zgłoszeniowym do Twojej nowej trasy :) ");
         boolean nameFormatIncorrect = true;
         while (nameFormatIncorrect) {
             System.out.println("Podaj nazwę Twojego biegu:");
@@ -169,7 +170,6 @@ public class TrackForm {
         List<ControlPoint> controlPoints = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
 
-        ControlPoint controlPoint = new ControlPoint();
 
         int checkpointCount = 0;
         int numberOfCheckpoints;
@@ -181,17 +181,17 @@ public class TrackForm {
             }
         } while (numberOfCheckpoints > 8);
 
-        while (checkpointCount < numberOfCheckpoints) {
+        for (checkpointCount=0; checkpointCount < numberOfCheckpoints; checkpointCount++) {
             System.out.println("Wybierz współrzędne checkpointu " + (checkpointCount + 1) + ":");
             scanner = new Scanner(System.in);
             String checkpoint = scanner.nextLine();
             if (points.contains(checkpoint)) {
                 points.set(points.indexOf(checkpoint), "CH" + (checkpointCount + 1));
-
+                ControlPoint controlPoint = new ControlPoint();
                 controlPoint.setControlPointID("00" + (checkpointCount + 3));
                 controlPoint.setCoordinateXY(checkpoint);
                 controlPoints.add(controlPoint);
-                checkpointCount++;
+                ;
             } else {
                 System.out.println("należy wybrać współrzęne z podanego zakresu z pominięciem wcześniej zdefiniwanych");
             }
