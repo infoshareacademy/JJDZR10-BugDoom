@@ -20,10 +20,10 @@
 <form style="margin: 5px" action="/tracks" method="get">
     <label for="txtSearch">Wyszukaj trasę:</label>
     <input id="txtSearch" type="text" name="keyword">
-    <button class="btn btn-primary" type="submit">Wyszukaj</button>
-    <h4 style="margin-top: 5px" th:if="${keyword} != null">Wyszukiwanie po słowie kluczowym:
-    <span class="badge bg-success" th:text="${keyword}"></span>
-        <a th:if="${keyword} != null" class="btn btn-secondary" href="/tracks">Resetuj</a></h4>
+    <button class="btn btn-primary btn-sm" type="submit">Wyszukaj</button>
+    <h5 style="margin-top: 5px" th:if="${keyword} != null">Wyszukiwanie po słowie kluczowym:
+    <span class="badge bg-light" th:text="${keyword}"></span>
+        <a th:if="${keyword} != null" class="btn btn-outline-dark btn-sm" href="/tracks">Resetuj</a></h5>
 </form>
 
 <table class="table table-striped">
