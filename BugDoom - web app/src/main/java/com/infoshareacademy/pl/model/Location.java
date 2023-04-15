@@ -1,47 +1,69 @@
 package com.infoshareacademy.pl.model;
 
-import java.math.BigDecimal;
 import java.util.Objects;
 
 public class Location {
-    private long controlPointID;
-    private BigDecimal coordinateX;
-    private BigDecimal coordinateY;
+    private double x;
+    private double y;
+    private String pointName;
 
-    public long getControlPointID() {
-        return controlPointID;
+
+    public Location() {
     }
 
-    public void setControlPointID(long controlPointID) {
-        this.controlPointID = controlPointID;
+    public Location(double x, double y, String pointName) {
+        this.x = x;
+        this.y = y;
+        this.pointName = pointName;
     }
 
-    public BigDecimal getCoordinateX() {
-        return coordinateX;
+    public double getX() {
+        return x;
     }
 
-    public void setCoordinateX(BigDecimal coordinateX) {
-        this.coordinateX = coordinateX;
+    public void setX(double x) {
+        this.x = x;
     }
 
-    public BigDecimal getCoordinateY() {
-        return coordinateY;
+    public double getY() {
+        return y;
     }
 
-    public void setCoordinateY(BigDecimal coordinateY) {
-        this.coordinateY = coordinateY;
+    public void setY(double y) {
+        this.y = y;
+    }
+
+    public String getPointName() {
+        return pointName;
+    }
+
+    public void setPointName(String pointName) {
+        this.pointName = pointName;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         Location location = (Location) o;
-        return controlPointID == location.controlPointID && Objects.equals(coordinateX, location.coordinateX) && Objects.equals(coordinateY, location.coordinateY);
+
+        if (Double.compare(location.x, x) != 0) return false;
+        if (Double.compare(location.y, y) != 0) return false;
+        return Objects.equals(pointName, location.pointName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(controlPointID, coordinateX, coordinateY);
+        int result;
+        long temp;
+        temp = Double.doubleToLongBits(x);
+        result = (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(y);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + (pointName != null ? pointName.hashCode() : 0);
+        return result;
     }
 }
+
+

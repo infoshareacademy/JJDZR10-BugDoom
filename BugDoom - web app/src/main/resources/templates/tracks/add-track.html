@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet"
+        type="text/css"/>
+  <title>Nowa trasa</title>
+
+</head>
+<body>
+<div>
+  <form th:action="@{/tracks}" th:object="${track}" method="post">
+    <div class="mb-3">
+    <p>Nazwa biegu: <input type="text" placeholder="Nazwa nowego biegu" th:field="*{competitionName}"/></p>
+    </div>
+    <p>Start X: <input type="number" min="49" max="54.5" placeholder="54.35" step="0.001" th:field="*{start.x}"/></p>
+    <p>Start Y: <input type="number" min="14.07" max="24.09" placeholder="18.65" step="0.001" th:field="*{start.y}"/></p>
+    <p>Meta X: <input type="number" min="49" max="54.5" placeholder="54.35" step="0.001" th:field="*{finish.x}"/></p>
+    <p>Meta Y: <input type="number" min="14.07" max="24.09" placeholder="18.65" step="0.001" th:field="*{finish.y}"/></p>
+    <div>Poziom trudności: <input type="radio" id="difficultyChoice1" name="difficulty" value="łatwy"/>
+      <label for="terrainChoice1">łatwy</label>
+      <input type="radio" id="difficultyChoice2" name="difficulty" value="średni"/>
+      <label for="terrainChoice2">średni</label>
+      <input type="radio" id="difficultyChoice3" name="difficulty" value="trudny" th:field="*{difficulty}"/>
+      <label for="terrainChoice3">trudny</label>
+    </div>
+
+    <p>Dystans (km): <input type="range" min="5" max="20" th:field="*{length}"/></p>
+    <div> Lokalizacja: <input type="radio" id="terrainChoice1" name="terrain" value="miejski"/>
+      <label for="terrainChoice1">miejski</label>
+      <input type="radio" id="terrainChoice2" name="terrain" value="leśny"/>
+      <label for="terrainChoice2">leśny</label>
+      <input type="radio" id="terrainChoice3" name="terrain" value="górzysty" th:field="*{terrain}"/>
+      <label for="terrainChoice3">górzysty</label>
+    </div>
+    <ul th:if="${#fields.hasErrors('*')}">
+      <li th:each="err : ${#fields.errors('*')}" th:text="${err}"/>
+    </ul>
+    <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
+  </form>
+
+
+</div>
+</body>
+</html>
