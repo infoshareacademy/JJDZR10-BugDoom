@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{fragments/main_view}">
 <head>
     <meta charset="UTF-8">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
@@ -10,7 +12,7 @@
 
 </head>
 <body>
-<div>
+<div layout:fragment ="content">
   <form th:action="@{/tracks}" th:object="${track}" method="post">
     <div class="mb-3">
     <p>Nazwa biegu: <input type="text" placeholder="Nazwa nowego biegu" th:field="*{competitionName}"/></p>
