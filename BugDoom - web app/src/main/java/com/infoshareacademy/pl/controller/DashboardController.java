@@ -12,9 +12,5 @@ public class DashboardController {
         return "MainMenu";
     }
 
-    @GetMapping("/login")
-    public String getMainPage() {
-        return "UserLogin";
-    }
 
 }
