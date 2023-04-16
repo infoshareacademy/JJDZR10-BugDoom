@@ -32,7 +32,7 @@ public class TrackController {
         Track emptyTrack = new Track();
         model.addAttribute("track", emptyTrack);
 
-        if (keyword != null) {
+        if (keyword != null && !keyword.isBlank()) {
             model.addAttribute("tracks", trackService.findTracksByKeyword(keyword));
             model.addAttribute("keyword", keyword);
         } else {
