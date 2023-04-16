@@ -18,18 +18,10 @@
                         <a class="nav-link text-light" href="#">O nas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-light" href="#">Wyniki Biegów</a>
+                        <a class="nav-link text-light" th:href="@{/tracks}">Dostępne trasy</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown"
-                           aria-expanded="false">
-                            Blog
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Poradnik Dla Organizatora</a></li>
-                            <li><a class="dropdown-item" href="#">Poradnik Dla Biegacza</a></li>
-                            <li><a class="dropdown-item" href="#">Galeria</a></li>
-                        </ul>
+                        <a class="nav-link text-light" th:href="@{/events}">Wydarzenia</a>
                     </li>
                 </ul>
                 <form class="d-flex d-none d-md-flex" role="search">
