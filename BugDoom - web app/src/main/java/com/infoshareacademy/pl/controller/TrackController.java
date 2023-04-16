@@ -25,12 +25,14 @@ public class TrackController {
 
 
     @GetMapping("/tracks")
-    public String getTracks(Model model) throws IOException {
+    public String getTracks(Model model, String difficulty) throws IOException {
         Track emptyTrack = new Track();
         model.addAttribute("track", emptyTrack);
 
         List<Track> tracks = trackService.getAllTracks();
         model.addAttribute("tracks",tracks);
+
+        model.addAttribute("tracks", trackService.sortTracksByDifficulty(difficulty));
         return "tracks/track";
     }
 

@@ -7,9 +7,8 @@ import org.springframework.stereotype.Service;
 
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class TrackService implements TrackRepository {
@@ -54,5 +53,15 @@ public class TrackService implements TrackRepository {
 
     public long createRandomId() {
         return new Random().nextLong(1000);
+    }
+
+
+    @Override
+    public List<Track> sortTracksByDifficulty(String difficulty) throws IOException{
+        List<Track> allTracks = getAllTracks();
+        return allTracks.stream()
+                .sorted(Comparator.comparing(Track::getDifficulty))
+                .collect(Collectors.toList());
+
     }
 }
