@@ -19,10 +19,17 @@
 <body>
 <form style="margin: 5px" action="/tracks" method="get">
     <label for="txtSearch">Wyszukaj trasę:</label>
-    <input id="txtSearch" type="text" name="keyword" th:value="${keyword}">
+    <input id="txtSearch" type="text" name="name" th:value="${name}">
     <button class="btn btn-primary btn-sm" type="submit">Wyszukaj</button>
-    <a th:if="${keyword} != null" class="btn btn-outline-dark btn-sm" href="/tracks">Resetuj</a>
+    <a th:if="${name} != null" class="btn btn-outline-dark btn-sm" href="/tracks">Resetuj</a>
 </form>
+
+<div th:if="${tracks.size() == 0}" class="alert alert-danger" role="alert">
+    <div>
+        Nie znaleziono trasy, która zawiera w swojej nazwie podaną frazę!
+    </div>
+</div>
+
 
 <table class="table table-striped">
     <thead>
@@ -52,8 +59,6 @@
             <a th:href="@{/tracks/delete/{id}(id=${track.getTrackId})}" class="btn btn-danger">
                 Usuń
             </a>
-
-
         </td>
     </tr>
 

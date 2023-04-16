@@ -26,13 +26,13 @@ public class TrackController {
 
 
     @GetMapping("/tracks")
-    public String getTracks(Model model, String keyword) throws IOException {
+    public String getTracks(Model model, String name) throws IOException {
         Track emptyTrack = new Track();
         model.addAttribute("track", emptyTrack);
 
-        if (keyword != null && !keyword.isBlank()) {
-            model.addAttribute("tracks", trackService.findTracksByKeyword(keyword));
-            model.addAttribute("keyword", keyword);
+        if (name != null && !name.isBlank()) {
+            model.addAttribute("tracks", trackService.findTracksByKeyword(name));
+            model.addAttribute("name", name);
         } else {
             model.addAttribute("tracks", trackService.getAllTracks());
         }
