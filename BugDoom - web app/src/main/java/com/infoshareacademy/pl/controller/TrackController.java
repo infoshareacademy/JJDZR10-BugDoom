@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -25,16 +26,19 @@ public class TrackController {
 
 
     @GetMapping("/tracks")
-    public String getTracks(Model model, String difficulty) throws IOException {
+    public String getTracks(Model model) throws IOException {
         Track emptyTrack = new Track();
         model.addAttribute("track", emptyTrack);
 
         List<Track> tracks = trackService.getAllTracks();
         model.addAttribute("tracks",tracks);
 
-        model.addAttribute("tracks", trackService.sortTracksByDifficulty(difficulty));
+        model.addAttribute("byName", Comparator.comparing(Track::getCompetitionName));
+        model.addAttribute("byLength", Comparator.comparing(Track::getLength));
+        model.addAttribute("byDifficulty", Comparator.comparing(Track::getDifficulty));
         return "tracks/track";
     }
+
 
     @GetMapping("tracks/delete/{trackId}")
     public String deleteTrack(@PathVariable long trackId) throws IOException{
