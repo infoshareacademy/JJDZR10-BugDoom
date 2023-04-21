@@ -1,8 +1,6 @@
 package com.infoshareacademy.pl.controller;
 
-
 import com.infoshareacademy.pl.model.Track;
-import com.infoshareacademy.pl.repository.TrackRepository;
 import com.infoshareacademy.pl.service.TrackService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -27,15 +26,19 @@ public class TrackController {
 
 
     @GetMapping("/tracks")
-    public String getTracks(Model model) throws IOException {
+    public String getTracks(Model model, String name) throws IOException {
         Track emptyTrack = new Track();
         model.addAttribute("track", emptyTrack);
 
-        List<Track> tracks = trackService.getAllTracks();
-        model.addAttribute("tracks",tracks);
+        if (name != null && !name.isBlank()) {
+            model.addAttribute("tracks", trackService.findTracksByKeyword(name));
+            model.addAttribute("name", name);
+        } else {
+            model.addAttribute("tracks", trackService.getAllTracks());
+        }
         return "tracks/track";
     }
-    
+
     @GetMapping("tracks/delete/{trackId}")
     public String deleteTrack(@PathVariable long trackId) throws IOException{
         trackService.removeTrackById(trackId);
