@@ -19,7 +19,7 @@ public class TrackService {
     public static void createTrack() throws IOException {
         System.out.println("Witaj w formularzu zgłoszeniowym do Twojej nowej trasy :) ");
         Track newTrack = new Track();
-        newTrack.setId(String.valueOf(TrackForm.setId()));
+        newTrack.setTrackId(String.valueOf(TrackForm.setTrackId()));
         newTrack.setCompetitionName(TrackForm.setCompetitionName());
         newTrack.setLength(TrackForm.setCompetitionLength());
         newTrack.setDifficulty(TrackForm.setCompetitionDifficulty(newTrack.getLength()));
