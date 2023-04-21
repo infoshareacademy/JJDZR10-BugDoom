@@ -29,14 +29,14 @@
         <div class="mb-3">
             <label for="EventType">Rodzaj wydarzenia: </label>
             <select id="EventType" class="form-control" th:field="*{eventType}">
-                <option value="0" th:text="#{event.select-eventType}"></option>
+                <option value="" th:text="#{event.select-eventType}"></option>
                 <option th:each="eventType : ${T(com.infoshareacademy.pl.model.EventType).values()}"
                         th:value="${eventType}"
                         th:text="${eventType}"></option>
             </select>
         </div>
         <ul style="font-weight: bold; color: red" th:if="${#fields.hasErrors('*')}">
-            <li th:each="err : ${#fields.errors('*')}" th:text="${err}"/>
+            <li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
         </ul>
         <button type="submit" class="btn btn-success">Utwórz wydarzenie</button>
         <button type="reset" class="btn btn-secondary">Zresetuj</button>
