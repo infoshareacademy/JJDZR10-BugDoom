@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 @Service
 public class TrackService implements TrackRepository {
@@ -41,6 +42,14 @@ public class TrackService implements TrackRepository {
     @Override
     public void saveTracksToFile(List<Track> tracksToSave) throws IOException {
         dataService.saveToFile(tracksToSave, TRACK_FILE_PATH);
+    }
+
+    @Override
+    public List<Track> findTracksByKeyword(String keyword) throws IOException{
+        List<Track> allTracks = getAllTracks();
+        return allTracks.stream()
+                .filter(track -> track.getCompetitionName().toLowerCase().contains(keyword.toLowerCase()))
+                .toList();
     }
 
     @Override

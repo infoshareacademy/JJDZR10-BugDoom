@@ -13,10 +13,11 @@ public interface TrackRepository {
 
     List<Track> getAllTracks() throws IOException;
 
+    List<Track> findTracksByKeyword(String keyword) throws IOException;
+
     void addTrack(Track trackToAdd) throws IOException;
 
     void removeTrackById(long trackId) throws IOException;
-
 
     long createRandomId();
 }

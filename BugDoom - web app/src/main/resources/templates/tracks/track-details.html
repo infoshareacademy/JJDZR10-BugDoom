@@ -13,7 +13,9 @@
   crossorigin=""></script>
   <title>Track details</title>
 
-  <style>#map { height: 500px; }</style>
+
+  <style>#map { height: 600px; }</style>
+
 
 </head>
 <body>
@@ -65,8 +67,6 @@
       L.marker([startX, startY]).addTo(map).bindPopup("start").openPopup();
       L.marker([finishX, finishY]).addTo(map).bindPopup("meta").openPopup();
     </script>
-
-
 
   <a href="/tracks" class="btn btn-primary"><i class="fas fa-angle-double-left"></i> Powrót do listy tras</a>
 </div>

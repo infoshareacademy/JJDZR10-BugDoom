@@ -3,58 +3,68 @@
       xmlns:layout="http://www.w3.org/1999/xhtml"
       layout:decorate="~{fragments/main_view}">
 <head>
+
   <meta charset="UTF-8">
   <style>
     tbody tr:hover {
       background-color: #f5f5f5;
     }
   </style>
-
-  <title>Tracks</title>
+   
+    <title>Tracks</title>
 
 </head>
 <body>
+
 <div layout:fragment ="content">
+<form style="margin: 5px" action="/tracks" method="get">
+    <label for="txtSearch">Wyszukaj trasę:</label>
+    <input id="txtSearch" type="text" name="name" th:value="${name}">
+    <button class="btn btn-primary btn-sm" type="submit">Wyszukaj</button>
+    <a th:if="${name} != null" class="btn btn-outline-dark btn-sm" href="/tracks">Resetuj</a>
+</form>
+<div th:if="${tracks.size() == 0}" class="alert alert-danger" role="alert">
+    <div>
+        Nie znaleziono trasy, która zawiera w swojej nazwie podaną frazę!
+    </div>
+</div>
+
 <table class="table table-striped">
-  <thead>
-  <tr>
-    <th>#</th>
-    <th>Wyścigi GeoRunners</th>
-    <th></th>
-  </tr>
-  </thead>
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Wyścigi GeoRunners</th>
+    </tr>
+    </thead>
 </table>
 <table class="table">
-  <thead>
-  <tr>
-    <th scope="col">ID</th>
-    <th scope="col">Nazwa biegu</th>
-    <th scope="col">Poziom trudności</th>
-    <th scope="col">Teren</th>
-    <th scope="col">Działania</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr th:each="track, iterStat: ${tracks}" th:onclick="|window.location.href='/tracks/' + ${track.trackId}|">
-    <td th:text="${iterStat.count}"></td>
-    <td th:text="${track.getCompetitionName}"></td>
-    <td th:text="${track.getDifficulty}"></td>
-    <td th:text="${track.getTerrain}"></td>
-    <td>
-      <a th:href="@{/tracks/delete/{id}(id=${track.getTrackId})}" class="btn btn-danger">
-        Usuń
-      </a>
+    <thead>
+    <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Nazwa biegu</th>
+        <th scope="col">Poziom trudności</th>
+        <th scope="col">Teren</th>
+        <th scope="col">Działania</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="track, iterStat: ${tracks}" th:onclick="|window.location.href='/tracks/' + ${track.trackId}|">
+        <td th:text="${iterStat.count}"></td>
+        <td th:text="${track.getCompetitionName}"></td>
+        <td th:text="${track.getDifficulty}"></td>
+        <td th:text="${track.getTerrain}"></td>
+        <td>
+            <a th:href="@{/tracks/delete/{id}(id=${track.getTrackId})}" class="btn btn-danger">
+                Usuń
+            </a>
+        </td>
+    </tr>
 
-
-    </td>
-  </tr>
-
-  </tbody>
+    </tbody>
 </table>
 <a th:href="@{/tracks/create}" class="btn btn-info">
-  Utwórz nową trasę
+    Utwórz nową trasę
 </a>
 </div>
 </body>
-
 </html>
