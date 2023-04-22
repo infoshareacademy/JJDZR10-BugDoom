@@ -71,5 +71,20 @@ public class TrackController {
         model.addAttribute("track", track);
         return "tracks/track-details";
     }
+    @GetMapping("/tracks/edit-track/{trackId}")
+    public String getTrackEditForm(@PathVariable("trackId") Long trackId, Model model) throws IOException{
+        Track track = trackService.findTrackById(trackId);
+        model.addAttribute("track", track);
+        return "tracks/edit-track";
+    }
+
+    @PostMapping("/tracks/{trackId}/edit")
+    public String editTrack(@PathVariable("trackId") Long trackId, @Valid @ModelAttribute Track track, BindingResult bindingResult) throws IOException{
+        if (bindingResult.hasErrors()) {
+            return "tracks/edit-track";
+        }
+        trackService.editTrackById(trackId, track);
+        return "redirect:/tracks";
+    }
 }
 

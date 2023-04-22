@@ -6,7 +6,7 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet"
         type="text/css"/>
-  <title>Nowa trasa</title>
+  <title>New track</title>
 
 </head>
 <body>
@@ -38,10 +38,10 @@
     <ul th:if="${#fields.hasErrors('*')}">
       <li th:each="err : ${#fields.errors('*')}" th:text="${err}"/>
     </ul>
-    <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
+    <p><input type="submit" value="Zatwierdź"/> <input type="reset" value="Zresetuj"/></p>
   </form>
 
-
 </div>
+<a href="/tracks" class="btn btn-primary"><i class="fas fa-angle-double-left"></i> Powrót do listy tras</a>
 </body>
 </html>
