@@ -36,8 +36,10 @@
                     <h1 class="display-3 fw-bolder">Witaj w GeoRunners !</h1>
                     <h5 class="fs-3">Miło Cię tu widzieć</h5>
                     <div class="d-grid gap-2 col-3 mx-auto">
-                        <button class="btn btn-outline-light">Zaloguj się</button>
-                        <button class="btn btn-outline-light">Zarejestruj się</button>
+                        <a th:href="@{/login}" class="btn btn-outline-light" type="button">Zaloguj się</a>
+                        <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            Zarejestruj się
+                        </button>
                     </div>
                 </div>
             </div>
@@ -47,8 +49,10 @@
                     <h3 class="display-3 fw-bolder">Zaplanuj swój bieg <i class="bi bi-list-check"></i></h3>
                     <h5 class="fs-3">Jesteś Organizatorem? </h5>
                     <div class="d-grid gap-2 col-3 mx-auto">
-                        <button class="btn btn-outline-light">Zaloguj się</button>
-                        <button class="btn btn-outline-light">Zarejestruj się</button>
+                        <a th:href="@{/login}" class="btn btn-outline-light" type="button">Zaloguj się</a>
+                        <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            Zarejestruj się
+                        </button>
                     </div>
                 </div>
             </div>
@@ -58,8 +62,10 @@
                     <h3 class="display-3 fw-bolder">Po prostu biegaj <i class="bi bi-geo"></i></h3>
                     <h5 class="fs-3">Weź udział w biegu na orientacje</h5>
                     <div class="d-grid gap-2 col-3 mx-auto">
-                        <button class="btn btn-outline-light">Zaloguj się</button>
-                        <button class="btn btn-outline-light">Zarejestruj się</button>
+                        <a th:href="@{/login}" class="btn btn-outline-light" type="button">Zaloguj się</a>
+                        <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            Zarejestruj się
+                        </button>
                     </div>
                 </div>
             </div>
@@ -141,6 +147,23 @@
                             <a href="#" class="btn btn-info">Sprawdź <i class="bi bi-heart"></i></a>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content text-bg-dark p-3">
+                <div class="modal-header">
+                    <h1 class="text-center mt-3 modal-title fs-5" id="exampleModalLabel">Utwórz konto jako</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="d-flex flex-column my-2">
+                        <a th:href="@{/register}" class="btn btn-outline-success mt-3">Organizator</a>
+                    </div>
+                    <div class="d-flex flex-column my-2">
+                        <a href="" class="btn btn-outline-success mt-3">Uczestnik</a>
                 </div>
             </div>
         </div>
