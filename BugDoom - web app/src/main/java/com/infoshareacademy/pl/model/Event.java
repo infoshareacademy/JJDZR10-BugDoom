@@ -19,7 +19,7 @@ public class Event {
     private int eventPrize;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotNull(message = "Podaj datę wydarzenia")
-    @FutureOrPresent(message = "Data wydarzenia nie może być w przeszłości")
+    @FutureOrPresent(message = "Wybierz poprawną datę wydarzenia")
     private LocalDate eventDate;
     @NotNull(message = "Podaj rodzaj wydarzenia")
     private EventType eventType;
