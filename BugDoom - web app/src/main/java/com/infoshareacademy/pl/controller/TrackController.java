@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -25,12 +26,16 @@ public class TrackController {
 
 
     @GetMapping("/tracks")
-    public String getTracks(Model model) throws IOException {
+    public String getTracks(Model model, String name) throws IOException {
         Track emptyTrack = new Track();
         model.addAttribute("track", emptyTrack);
 
-        List<Track> tracks = trackService.getAllTracks();
-        model.addAttribute("tracks",tracks);
+        if (name != null && !name.isBlank()) {
+            model.addAttribute("tracks", trackService.findTracksByKeyword(name));
+            model.addAttribute("name", name);
+        } else {
+            model.addAttribute("tracks", trackService.getAllTracks());
+        }
         return "tracks/track";
     }
 
@@ -65,6 +70,21 @@ public class TrackController {
         }
         model.addAttribute("track", track);
         return "tracks/track-details";
+    }
+    @GetMapping("/tracks/edit-track/{trackId}")
+    public String getTrackEditForm(@PathVariable("trackId") Long trackId, Model model) throws IOException{
+        Track track = trackService.findTrackById(trackId);
+        model.addAttribute("track", track);
+        return "tracks/edit-track";
+    }
+
+    @PostMapping("/tracks/{trackId}/edit")
+    public String editTrack(@PathVariable("trackId") Long trackId, @Valid @ModelAttribute Track track, BindingResult bindingResult) throws IOException{
+        if (bindingResult.hasErrors()) {
+            return "tracks/edit-track";
+        }
+        trackService.editTrackById(trackId, track);
+        return "redirect:/tracks";
     }
 }
 
