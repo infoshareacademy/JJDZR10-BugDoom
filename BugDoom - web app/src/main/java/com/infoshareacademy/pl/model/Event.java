@@ -2,27 +2,26 @@ package com.infoshareacademy.pl.model;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.validation.Constraint;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.PositiveOrZero;
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
 public class Event {
     private long eventId;
-    @NotEmpty (message = "Podaj nazwę wydarzenia")
+    @NotEmpty(message = "Podaj nazwę wydarzenia")
     private String eventName;
-    @NotEmpty (message = "Podaj opis wydarzenia")
+    @NotEmpty(message = "Podaj opis wydarzenia")
     private String eventDescription;
     private List<Track> tracks;
     private List<User> participants;
-    @PositiveOrZero (message = "Wartość nagrody nie może być ujemna")
+    @PositiveOrZero(message = "Wartość nagrody nie może być ujemna")
     private int eventPrize;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @NotNull (message="Podaj datę wydarzenia")
+    @NotNull(message = "Podaj datę wydarzenia")
+    @FutureOrPresent(message = "Wybierz poprawną datę wydarzenia")
     private LocalDate eventDate;
+    @NotNull(message = "Podaj rodzaj wydarzenia")
     private EventType eventType;
 
     public long getEventId() {

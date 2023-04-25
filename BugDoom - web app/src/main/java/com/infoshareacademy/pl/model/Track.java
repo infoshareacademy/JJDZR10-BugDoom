@@ -1,22 +1,25 @@
 package com.infoshareacademy.pl.model;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.util.List;
 import java.util.Objects;
 
 public class Track {
     private long trackId;
-    @NotEmpty (message ="nazwa biegu nie może być pusta")
+    @NotEmpty(message ="Podaj nazwę biegu")
     private String competitionName;
+    @NotNull(message = "Podaj współrzędne startu")
     private Location start;
+    @NotNull(message = "Podaj współrzędne mety")
     private Location finish;
     private List<Location> checkpoints;
-    @Positive
+    @Positive (message = "Długość biegu musi być większa od 0")
     private int length;
-    @NotEmpty (message = "musisz wybrać poziom trudności")
+    @NotEmpty (message = "Wybierz trudność trasy")
     private String difficulty;
-    @NotEmpty (message = "musisz wybrać lokalizację")
+    @NotEmpty (message = "Wybierz lokalizację")
     private String terrain;
 
     public long getTrackId() {

@@ -35,8 +35,8 @@
       <input type="radio" id="terrainChoice3" name="terrain" value="górzysty" th:field="*{terrain}"/>
       <label for="terrainChoice3">górzysty</label>
     </div>
-    <ul th:if="${#fields.hasErrors('*')}">
-      <li th:each="err : ${#fields.errors('*')}" th:text="${err}"/>
+    <ul style="font-weight: bold; color: red" th:if="${#fields.hasErrors('*')}">
+      <li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
     </ul>
     <p><input type="submit" value="Zatwierdź"/> <input type="reset" value="Zresetuj"/></p>
   </form>
