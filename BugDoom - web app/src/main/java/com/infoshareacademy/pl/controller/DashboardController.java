@@ -7,8 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class DashboardController {
 
     @GetMapping("/")
-    public String dashboard(){
+    public String dashboard() {
         return "MainMenu";
     }
-
 }

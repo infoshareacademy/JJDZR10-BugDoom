@@ -55,21 +55,21 @@ public class EventController {
     }
 
     @GetMapping("/events/{eventId}")
-    public String getEventById(@PathVariable("eventId") Long eventId, Model model) throws IOException{
+    public String getEventById(@PathVariable("eventId") Long eventId, Model model) throws IOException {
         Event event = eventService.findEventById(eventId);
         model.addAttribute("event", event);
         return "events/single-event";
     }
 
     @GetMapping("/events/edition-form/{eventId}")
-    public String getEventEditForm(@PathVariable("eventId") Long eventId, Model model) throws IOException{
+    public String getEventEditForm(@PathVariable("eventId") Long eventId, Model model) throws IOException {
         Event event = eventService.findEventById(eventId);
         model.addAttribute("event", event);
         return "events/event-edition";
     }
 
     @PostMapping("/events/{eventId}/edit")
-    public String editEvent(@PathVariable("eventId") Long eventId, @Valid @ModelAttribute Event event, BindingResult bindingResult) throws IOException{
+    public String editEvent(@PathVariable("eventId") Long eventId, @Valid @ModelAttribute Event event, BindingResult bindingResult) throws IOException {
         if (bindingResult.hasErrors()) {
             return "events/event-edition";
         }
