@@ -19,20 +19,119 @@
 
 <div layout:fragment ="content" class="container-md">
 
-    <div class="position-absolute top-0 start-50 translate-middle-x">
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <p class="p-1"></p>
+                <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="/Photo8.png" class="d-block w-100" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="/Photo9.png" class="d-block w-100" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="/Photo10.png" class="d-block w-100" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="/Photo11.png" class="d-block w-100" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="/Photo12.png" class="d-block w-100" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="/Photo13.png" class="d-block w-100" alt="...">
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+            <div class = "col-6">
+                <p class="p-1"></p>
+                <h1 class="font-weight-lighs-light">Witaj !</h1>
+                <h3 class="fw-normal">Jest nam miło, że dołączyłeś do naszej grupy organizatorów <i class="bi bi-house-heart-fill"></i></h3>
+                <p class="p-1"></p>
+                <p class="fw-normal"> Zasady biegów na orientacje :</p>
+                <p style="text-align:justify">
+                    Biegi na orientacje mogą wydawać się mało skomplikowane, idea jest prosta - tworzysz punkty kontrolne, a do nich muszą dotrzeć zawodnicy.
+                    Uczestnik, któremu uda się odhaczyć wszystkie punkty, w jak najszybszym czasie - WYGRYWA ! <i class="bi bi-trophy"></i>
+                    Jednakże, uczestnik nie wie gdzie postanowisz te punkty umiejscowić, do tej gry niezbędne będa zawodnikowi mapa i kompas. <i class="bi bi-map-fill"></i> <i class="bi bi-compass"></i></p>
+                <p class="p-1"></p>
+                <p class="fw-normal"> W naszym kreatorze utworzysz swój bieg na orientacje. Jeśteśmy tu po to, by ułatwić cały proces organizowania Twoich biegów.
+                <p class="p-1"></p>
+                <p class="fw-normal"> Zorganizuj swój bieg po:
+                    <i class="bi bi-geo-alt-fill"></i> Lesie
+                    <i class="bi bi-geo-alt-fill"></i> Górach
+                    <i class="bi bi-geo-alt-fill"></i> Mieście</p>
+            </div>
         </div>
-            <img src="/Photo7.png" class="mx-auto d-block" alt="...">
-    <div class="card text-center">
-        <div class="card-body">
-        <h3 class="card-title">Witaj! <i class="bi bi-emoji-wink"></i></h3>
-        <p class="card-text">Co chcesz zrobić?</p>
-        <a href="#" class="btn btn-success">Utwórz Trasę</a>
-            <a href="#" class="btn btn-dark">Wyszukaj Trasę</a>
-            <a href="#" class="btn btn-success">Utwórz Event</a>
-         </div>
-    <div class="card-footer text-body-secondary">
+        <div class="grid gap-0 row-gap-3">
+        <div class="p-2 g-col-6"></div>
+        <div class="p-2 g-col-6"></div>
     </div>
-</div>
+    </div>
+    <div class="container text-center">
+        <div class="row justify-content-md-center">
+            <div class="col col-lg-2">
+                <div class="card text-bg-success mb-3" style="max-width: 18rem;">
+                    <div class="card-body">
+                        <h5 class=""><i class="bi bi-plus-square"></i></h5>
+                        <a th:href="@{/tracks/create}" class="btn btn-lg">Utwórz Bieg</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-lg-2">
+                <div class="card text-bg-success mb-3" style="max-width: 18rem;">
+                    <div class="card-body">
+                        <h5 class=""><i class="bi bi-list-ol"></i></h5>
+                        <a th:href="@{/tracks}" class="btn btn-lg">Lista Biegów</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-lg-2">
+                <div class="card text-bg-success mb-3" style="max-width: 18rem;">
+                    <div class="card-body">
+                        <h5 class=""><i class="bi bi-file-earmark-text"></i></h5>
+                        <button type="button" class="btn btn-lg">Formularze           </button>
+                    </div>
+                </div>
+            </div>
+    </div>
+        <div class="row justify-content-md-center">
+            <div class="col col-lg-2">
+                <div class="card text-bg-success mb-3" style="max-width: 18rem;">
+                    <div class="card-body">
+                        <h5 class=""><i class="bi bi-plus-square"></i></h5>
+                        <a th:href="@{/events/new-event}" class="btn btn-lg">Utwórz Wydarzenie</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-lg-2">
+                <div class="card text-bg-success mb-3" style="max-width: 18rem;">
+                    <div class="card-body">
+                        <h5 class=""><i class="bi bi-calendar-event"></i></i></h5>
+                        <a th:href="@{/events}" class="btn btn-lg">Lista Wydarzenień</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-lg-2">
+                <div class="card text-bg-success mb-3" style="max-width: 18rem;">
+                    <div class="card-body">
+                        <h5 class=""><i class="bi bi-star"></i><i class="bi bi-star"></i><i class="bi bi-star"></i></h5>
+                        <button type="button" class="btn btn-lg">Oceny Biegów</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
@@ -41,4 +140,3 @@
 </script>
 </body>
 </html>
-</body>

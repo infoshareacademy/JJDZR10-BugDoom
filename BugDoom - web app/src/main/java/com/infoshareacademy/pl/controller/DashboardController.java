@@ -11,6 +11,10 @@ public class DashboardController {
         model.addAttribute("Dashboard", "dashboard");
         return "MainMenu";
     }
+    @GetMapping("/about")
+    public String getabout() {
 
+        return "AboutUs";
 
+    }
 }
