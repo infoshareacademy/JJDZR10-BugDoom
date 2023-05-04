@@ -38,29 +38,33 @@
     </thead>
 </table>
 <table class="table">
-    <thead>
-    <tr>
-        <th scope="col">ID</th>
-        <th scope="col">Nazwa biegu</th>
-        <th scope="col">Poziom trudności</th>
-        <th scope="col">Teren</th>
-        <th scope="col">Działania</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="track, iterStat: ${tracks}" th:onclick="|window.location.href='/tracks/' + ${track.trackId}|">
-        <td th:text="${iterStat.count}"></td>
-        <td th:text="${track.getCompetitionName}"></td>
-        <td th:text="${track.getDifficulty}"></td>
-        <td th:text="${track.getTerrain}"></td>
-        <td>
-            <a th:href="@{/tracks/delete/{id}(id=${track.getTrackId})}" class="btn btn-danger">
-                Usuń
-            </a>
-        </td>
-    </tr>
 
-    </tbody>
+  <thead>
+  <tr>
+    <th scope="col">ID</th>
+    <th scope="col">Nazwa biegu</th>
+    <th scope="col">Poziom trudności</th>
+    <th scope="col">Teren</th>
+    <th scope="col">Działania</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="track, iterStat: ${tracks}" th:onclick="|window.location.href='/tracks/' + ${track.trackId}|">
+    <td th:text="${iterStat.count}"></td>
+    <td th:text="${track.getCompetitionName}"></td>
+    <td th:text="${track.getDifficulty}"></td>
+    <td th:text="${track.getTerrain}"></td>
+    <td>
+      <a th:href="@{/tracks/delete/{id}(id=${track.getTrackId})}" class="btn btn-danger">
+        Usuń
+      </a>
+      <a th:href="@{/tracks/edit-track/{trackId}/(trackId=${track.trackId})}" class="btn btn-info">
+        Edytuj
+      </a>
+
+    </td>
+  </tr>
+  </tbody>
 </table>
 <a th:href="@{/tracks/create}" class="btn btn-info">
     Utwórz nową trasę
