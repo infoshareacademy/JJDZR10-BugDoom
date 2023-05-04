@@ -10,17 +10,21 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.stream.Collectors;
 
 @Service
 public class TrackService implements TrackRepository {
 
     private static final String TRACK_FILE_PATH = FilePathConstants.TRACK_FILE_PATH;
-    private final DataService<Track> dataService = new DataService<>();
+    private final DataService<Track> dataService;
+
+    public TrackService(DataService<Track> dataService) {
+        this.dataService = dataService;
+    }
 
     public long createRandomId() {
         return new Random().nextLong(1000);
     }
+
     @Override
     public List<Track> getAllTracks() throws IOException {
         return new ArrayList<>(dataService.readFromFile(TRACK_FILE_PATH, Track[].class));
@@ -47,7 +51,7 @@ public class TrackService implements TrackRepository {
     }
 
     @Override
-    public List<Track> findTracksByKeyword(String keyword) throws IOException{
+    public List<Track> findTracksByKeyword(String keyword) throws IOException {
         List<Track> allTracks = getAllTracks();
         return allTracks.stream()
                 .filter(track -> track.getCompetitionName().toLowerCase().contains(keyword.toLowerCase()))
@@ -57,14 +61,14 @@ public class TrackService implements TrackRepository {
     @Override
     public Track findTrackById(long trackId) throws IOException {
         List<Track> allTracks = getAllTracks();
-        return allTracks.stream().
-                filter(track -> track.getTrackId() == trackId)
+        return allTracks.stream()
+                .filter(track -> track.getTrackId() == trackId)
                 .findFirst()
                 .orElseThrow(() -> new TrackNotFoundException("Track with given id: '%s' not found".formatted(trackId)));
     }
 
     @Override
-    public void editTrackById(long trackId, Track track) throws IOException{
+    public void editTrackById(long trackId, Track track) throws IOException {
         Track trackToEdit = findTrackById(trackId);
         removeTrackById(trackId);
 

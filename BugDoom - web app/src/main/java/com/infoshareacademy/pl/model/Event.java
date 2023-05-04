@@ -48,22 +48,6 @@ public class Event {
         this.eventDescription = eventDescription;
     }
 
-    public List<Track> getTracks() {
-        return tracks;
-    }
-
-    public void setTracks(List<Track> tracks) {
-        this.tracks = tracks;
-    }
-
-    public List<User> getParticipants() {
-        return participants;
-    }
-
-    public void setParticipants(List<User> participants) {
-        this.participants = participants;
-    }
-
     public int getEventPrize() {
         return eventPrize;
     }
