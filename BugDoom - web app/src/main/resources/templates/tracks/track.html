@@ -17,6 +17,18 @@
 
 </head>
 <body>
+
+<form style="margin: 5px" action="/tracks" method="get">
+  <label for="txtSearch">Poziom trudności:</label>
+  <select id="txtSearch" type="text" name="difficulty" th:value="${difficulty}">
+    <option th:value="łatwy">łatwy</option>
+    <option th:value="średni">średni</option>
+    <option th:value="trudny">trudny</option>
+  </select>
+  <button class="btn btn-outline-success btn-sm" type="submit">Filtruj</button>
+  <a th:if="${difficulty} != null" class="btn btn-outline-info btn-sm" href="/tracks">Powrót</a>
+</form>
+
 <table class="table table-striped">
   <thead>
   <tr>

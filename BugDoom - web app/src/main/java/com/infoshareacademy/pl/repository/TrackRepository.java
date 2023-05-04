@@ -20,5 +20,5 @@ public interface TrackRepository {
 
     long createRandomId();
 
-    public List<Track> sortTracksByDifficulty(String difficulty) throws IOException;
+    List<Track> filterTracksByDifficulty(String difficulty) throws IOException;
 }

@@ -26,16 +26,16 @@ public class TrackController {
 
 
     @GetMapping("/tracks")
-    public String getTracks(Model model) throws IOException {
+    public String getTracks(Model model, String difficulty) throws IOException {
         Track emptyTrack = new Track();
         model.addAttribute("track", emptyTrack);
 
-        List<Track> tracks = trackService.getAllTracks();
-        model.addAttribute("tracks",tracks);
-
-        model.addAttribute("byName", Comparator.comparing(Track::getCompetitionName));
-        model.addAttribute("byLength", Comparator.comparing(Track::getLength));
-        model.addAttribute("byDifficulty", Comparator.comparing(Track::getDifficulty));
+        if (difficulty != null) {
+            model.addAttribute("tracks", trackService.filterTracksByDifficulty(difficulty));
+            model.addAttribute("difficulty", difficulty);
+        } else {
+            model.addAttribute("tracks", trackService.getAllTracks());
+        }
         return "tracks/track";
     }
 

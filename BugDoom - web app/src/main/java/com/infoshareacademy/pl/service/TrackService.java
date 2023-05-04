@@ -55,13 +55,11 @@ public class TrackService implements TrackRepository {
         return new Random().nextLong(1000);
     }
 
-
     @Override
-    public List<Track> sortTracksByDifficulty(String difficulty) throws IOException{
-        List<Track> allTracks = getAllTracks();
+    public List<Track> filterTracksByDifficulty(String difficulty) throws IOException{
+        List<Track>allTracks = getAllTracks();
         return allTracks.stream()
-                .sorted(Comparator.comparing(Track::getDifficulty))
-                .collect(Collectors.toList());
-
+                .filter(track-> track.getDifficulty().contains(difficulty))
+                .toList();
     }
 }
