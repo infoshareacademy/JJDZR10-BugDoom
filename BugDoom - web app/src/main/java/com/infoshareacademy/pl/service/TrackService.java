@@ -15,7 +15,11 @@ import java.util.Random;
 public class TrackService implements TrackRepository {
 
     private static final String TRACK_FILE_PATH = FilePathConstants.TRACK_FILE_PATH;
-    private final DataService<Track> dataService = new DataService<>();
+    private final DataService<Track> dataService;
+
+    public TrackService(DataService<Track> dataService) {
+        this.dataService = dataService;
+    }
 
     public long createRandomId() {
         return new Random().nextLong(1000);
