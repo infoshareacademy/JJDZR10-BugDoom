@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 public class TrackService implements TrackRepository {
@@ -59,7 +58,7 @@ public class TrackService implements TrackRepository {
     public List<Track> filterTracksByDifficulty(String difficulty) throws IOException{
         List<Track>allTracks = getAllTracks();
         return allTracks.stream()
-                .filter(track-> track.getDifficulty().contains(difficulty))
+                .filter(track-> track.getDifficulty().equals(difficulty))
                 .toList();
     }
 }
