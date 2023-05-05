@@ -10,23 +10,23 @@
 <div layout:fragment="content" style="width: 500px" class="container text-center">
     <h1 style="font-family: 'Times New Roman', Times, serif">Nowe wydarzenie</h1>
     <form th:action="@{/events}" th:object="${event}" method="post">
-        <div class="mb-3">
+        <div class="form-group">
             <label for="eventName">Nazwa wydarzenia:</label>
             <input type="text" class="form-control" id="eventName" th:field="*{eventName}"/>
         </div>
-        <div class="form-floating mb-3">
+        <div class="form-group">
             <label for="eventDescription">Opis wydarzenia:</label>
             <textarea class="form-control" placeholder="Opis wydarzenia" id="eventDescription" style="height: 200px" th:field="*{eventDescription}"></textarea>
         </div>
-        <div class="mb-3">
+        <div class="form-group">
             <label for="eventPrize">Nagroda (PLN):</label>
             <input type="text" class="form-control" id="eventPrize" th:field="*{eventPrize}"/>
         </div>
-        <div class="mb-3">
+        <div class="form-group">
             <label for="eventDate">Data wydarzenia: </label>
             <input type="date" class="form-control" id="eventDate" th:field="*{eventDate}"/>
         </div>
-        <div class="mb-3">
+        <div class="form-group">
             <label for="EventType">Rodzaj wydarzenia: </label>
             <select id="EventType" class="form-control" th:field="*{eventType}">
                 <option value="" th:text="#{event.select-eventType}"></option>
