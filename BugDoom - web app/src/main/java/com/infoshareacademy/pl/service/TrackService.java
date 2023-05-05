@@ -42,6 +42,14 @@ public class TrackService implements TrackRepository {
     }
 
     @Override
+    public List<Track> findTracksByKeyword(String keyword) throws IOException{
+        List<Track> allTracks = getAllTracks();
+        return allTracks.stream()
+                .filter(track -> track.getCompetitionName().toLowerCase().contains(keyword.toLowerCase()))
+                .toList();
+    }
+
+    @Override
     public Track findTrackById(long trackId) throws IOException {
         List<Track> allTracks = getAllTracks();
         return allTracks.stream().

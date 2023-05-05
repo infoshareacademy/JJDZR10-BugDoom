@@ -9,6 +9,8 @@ import java.util.List;
 public interface TrackRepository {
     void saveTracksToFile(List<Track> tracksToSave) throws IOException;
 
+    List<Track> findTracksByKeyword(String keyword) throws IOException;
+
     Track findTrackById(long trackId) throws IOException;
 
     List<Track> getAllTracks() throws IOException;

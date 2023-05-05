@@ -17,18 +17,6 @@
 
 </head>
 <body>
-
-<form style="margin: 5px" action="/tracks" method="get">
-  <label for="txtSearch">Poziom trudności:</label>
-  <select id="txtSearch" type="text" name="difficulty" th:value="${difficulty}">
-    <option th:value="łatwy">łatwy</option>
-    <option th:value="średni">średni</option>
-    <option th:value="trudny">trudny</option>
-  </select>
-  <button class="btn btn-outline-success btn-sm" type="submit">Filtruj</button>
-  <a th:if="${difficulty} != null" class="btn btn-outline-info btn-sm" href="/tracks">Powrót</a>
-</form>
-
 <table class="table table-striped">
   <thead>
   <tr>
@@ -43,7 +31,19 @@
   <tr>
     <th scope="col">ID</th>
     <th scope="col">Nazwa biegu</th>
-    <th scope="col">Poziom trudności</th>
+    <th scope="col">
+    <form action="/tracks" method="get">
+      <label for="txtSearch">Poziom trudności:</label>
+      <select id="txtSearch" type="text" name="difficulty" th:value="${difficulty}">
+        <option selected>---</option>
+        <option th:value="łatwy">łatwy</option>
+        <option th:value="średni">średni</option>
+        <option th:value="trudny">trudny</option>
+      </select>
+      <button class="btn btn-outline-success btn-sm" type="submit">Filtruj</button>
+      <a th:if="${difficulty} != null" class="btn btn-outline-info btn-sm" href="/tracks">Powrót</a>
+    </form>
+    </th>
     <th scope="col">Teren</th>
     <th scope="col">Działania</th>
   </tr>
@@ -58,11 +58,8 @@
       <a th:href="@{/tracks/delete/{id}(id=${track.getTrackId})}" class="btn btn-danger">
         Usuń
       </a>
-
-
     </td>
   </tr>
-
   </tbody>
 </table>
 <a th:href="@{/tracks/create}" class="btn btn-info">
