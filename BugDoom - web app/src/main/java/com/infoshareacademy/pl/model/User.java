@@ -1,11 +1,17 @@
 package com.infoshareacademy.pl.model;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import java.util.Objects;
 
 public class User {
     private long userId;
+    @NotEmpty(message = "Podaj adres email")
+    @Email(message = "Niepoprawny adres email")
     private String userEmailAddress;
+    @NotEmpty(message = "Podaj imię i nazwisko")
     private String name;
+    @NotEmpty(message = "Podaj hasło")
     private String password;
 
     public User(String userEmailAddress, String password) {
@@ -17,21 +23,6 @@ public class User {
         return userId;
     }
 
-    public void setUserId(long userId) {
-        this.userId = userId;
-    }
-
-    public void setUserEmailAddress(String userEmailAddress) {
-        this.userEmailAddress = userEmailAddress;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
     public String getUserEmailAddress() {
         return userEmailAddress;
     }
