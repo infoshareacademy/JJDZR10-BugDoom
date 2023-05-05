@@ -2,8 +2,6 @@ package com.infoshareacademy.pl.service;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.infoshareacademy.pl.model.Event;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -20,7 +18,9 @@ public class DataService<T> {
 
     public <T> void saveToFile(T listToSave, String file) throws IOException {
         Path path = Paths.get(file);
-        if (file.equals(FilePathConstants.EVENT_FILE_PATH)) gson = addLocalDateSerializer();
+        if (file.equals(FilePathConstants.EVENT_FILE_PATH)) {
+            gson = addLocalDateSerializer();
+        }
         String json = gson.toJson(listToSave);
         Files.write(path, json.getBytes());
     }
@@ -28,7 +28,9 @@ public class DataService<T> {
     public List<T> readFromFile(String file, Class<T[]> classToRead) throws IOException {
         Path path = Paths.get(file);
         String objectsFromFile = Files.readString(path);
-        if (file.equals(FilePathConstants.EVENT_FILE_PATH)) gson = addLocalDateDeserializer();
+        if (file.equals(FilePathConstants.EVENT_FILE_PATH)) {
+            gson = addLocalDateDeserializer();
+        }
         T[] arr = gson.fromJson(objectsFromFile, classToRead);
         return Arrays.asList(arr);
     }

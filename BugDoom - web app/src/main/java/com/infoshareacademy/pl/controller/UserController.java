@@ -1,13 +1,10 @@
 package com.infoshareacademy.pl.controller;
 
-import com.infoshareacademy.pl.model.Event;
 import com.infoshareacademy.pl.model.User;
 import com.infoshareacademy.pl.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.io.IOException;
 import java.util.List;
@@ -22,12 +19,12 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public String login(){
+    public String login() {
         return "UserLogin";
     }
 
     @GetMapping("/register")
-    public String register(){
+    public String register() {
         return "NewUserForm";
     }
 
@@ -37,5 +34,4 @@ public class UserController {
         model.addAttribute("users", users);
         return "users";
     }
-
 }

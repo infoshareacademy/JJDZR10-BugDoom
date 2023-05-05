@@ -6,8 +6,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Page</title>
-
-
 </head>
 <body>
 <div layout:fragment="content" class="container position-absolute top-50 start-50 translate-middle">
@@ -17,7 +15,7 @@
         <form method="post" th:action="@{/user}" th:object="${user}">
           <thead class="mb-3">
           <label for="userEmailAddress" class="form-label">Email</label>
-          <input> type="text" class="form-control" id="userEmailAddress" placeholder="Email" aria-describedby="loginHelp">
+          <input type="text" class="form-control" id="userEmailAddress" placeholder="Email" aria-describedby="loginHelp">
           <div id="loginHelp" class="form-text">Podaj swój adres mailowy</div>
           <div class="mb-3">
             <label for="password" class="form-label">Hasło</label>
@@ -37,7 +35,6 @@
     </div>
   </div>
 </div>
-
 </body>
 </html>
 </body>

@@ -54,14 +54,6 @@ public class Track {
         this.finish = finish;
     }
 
-    public List<Location> getCheckpoints() {
-        return checkpoints;
-    }
-
-    public void setCheckpoints(List<Location> checkpoints) {
-        this.checkpoints = checkpoints;
-    }
-
     public int getLength() {
         return length;
     }
