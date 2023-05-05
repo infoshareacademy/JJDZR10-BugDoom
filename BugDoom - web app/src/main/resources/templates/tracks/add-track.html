@@ -9,38 +9,50 @@
 
 </head>
 <body>
-<div layout:fragment ="content">
+<div layout:fragment ="content" class="container text-left">
+  <h1 >Nowa trasa</h1>
   <form th:action="@{/tracks}" th:object="${track}" method="post">
-    <div class="mb-3">
+    <div style="margin-top: 5px">
     <p>Nazwa biegu: <input type="text" placeholder="Nazwa nowego biegu" th:field="*{competitionName}"/></p>
     </div>
-    <p>Start X: <input type="number" min="49" max="54.5" placeholder="54.35" step="0.001" th:field="*{start.x}"/></p>
-    <p>Start Y: <input type="number" min="14.07" max="24.09" placeholder="18.65" step="0.001" th:field="*{start.y}"/></p>
-    <p>Meta X: <input type="number" min="49" max="54.5" placeholder="54.35" step="0.001" th:field="*{finish.x}"/></p>
-    <p>Meta Y: <input type="number" min="14.07" max="24.09" placeholder="18.65" step="0.001" th:field="*{finish.y}"/></p>
-    <div>Poziom trudności: <input type="radio" id="difficultyChoice1" name="difficulty" value="łatwy"/>
+    <p>Szerokość geograficzna startu: <input type="number" min="49" max="54.5" placeholder="54.35" step="0.001" th:field="*{start.x}"/></p>
+    <p>Długość geograficzna startu: <input type="number" min="14.07" max="24.09" placeholder="18.65" step="0.001" th:field="*{start.y}"/></p>
+    <p>Szerokość geograficzna mety: <input type="number" min="49" max="54.5" placeholder="54.35" step="0.001" th:field="*{finish.x}"/></p>
+    <p>Długość geograficzna mety: <input type="number" min="14.07" max="24.09" placeholder="18.65" step="0.001" th:field="*{finish.y}"/></p>
+    <div style="margin-top: 5px" >Poziom trudności:
+      <input type="radio" id="difficultyChoice1" name="difficulty" value="łatwy"/>
       <label for="terrainChoice1">łatwy</label>
       <input type="radio" id="difficultyChoice2" name="difficulty" value="średni"/>
       <label for="terrainChoice2">średni</label>
       <input type="radio" id="difficultyChoice3" name="difficulty" value="trudny" th:field="*{difficulty}"/>
       <label for="terrainChoice3">trudny</label>
     </div>
-
-    <p>Dystans (km): <input type="range" min="5" max="20" th:field="*{length}"/></p>
-    <div> Lokalizacja: <input type="radio" id="terrainChoice1" name="terrain" value="miejski"/>
+    <p>Dystans (km): <input id="length_input" type="range" min="2" max="20" step="0.1" th:field="*{length}"/>
+      <output id="value"></output>
+    </p>
+    <div style="margin-top: 5px"> Lokalizacja: <input type="radio" id="terrainChoice1" name="terrain" value="miejski"/>
       <label for="terrainChoice1">miejski</label>
       <input type="radio" id="terrainChoice2" name="terrain" value="leśny"/>
       <label for="terrainChoice2">leśny</label>
       <input type="radio" id="terrainChoice3" name="terrain" value="górzysty" th:field="*{terrain}"/>
       <label for="terrainChoice3">górzysty</label>
     </div>
-    <ul style="font-weight: bold; color: red" th:if="${#fields.hasErrors('*')}">
+    <ul th:if="${#fields.hasErrors('*')}">
       <li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
     </ul>
-    <p><input type="submit" value="Zatwierdź"/> <input type="reset" value="Zresetuj"/></p>
+    <p><input class="btn btn-success" type="submit" value="Zatwierdź"/>
+      <input class="btn btn-secondary" type="reset" value="Zresetuj"/></p>
   </form>
-
+  <script>
+    const value = document.querySelector("#value")
+    const input = document.querySelector("#length_input")
+    value.textContent = input.value
+    input.addEventListener("input", (event) => {
+      value.textContent = event.target.value
+    })
+  </script>
+  <a href="/tracks" class="btn btn-primary"><i class="fas fa-angle-double-left"></i> Powrót do listy tras</a>
 </div>
-<a href="/tracks" class="btn btn-primary"><i class="fas fa-angle-double-left"></i> Powrót do listy tras</a>
+
 </body>
 </html>
