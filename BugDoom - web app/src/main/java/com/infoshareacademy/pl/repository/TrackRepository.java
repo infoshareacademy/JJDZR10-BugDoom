@@ -9,11 +9,11 @@ import java.util.List;
 public interface TrackRepository {
     void saveTracksToFile(List<Track> tracksToSave) throws IOException;
 
-    List<Track> findTracksByKeyword(String keyword) throws IOException;
-
     Track findTrackById(long trackId) throws IOException;
 
     List<Track> getAllTracks() throws IOException;
+
+    List<Track> findTracksByKeyword(String keyword) throws IOException;
 
     void addTrack(Track trackToAdd) throws IOException;
 
@@ -21,6 +21,8 @@ public interface TrackRepository {
 
 
     long createRandomId();
+
+    void editTrackById(long trackId, Track track) throws IOException;
 
     List<Track> filterTracksByDifficulty(String difficulty) throws IOException;
 }

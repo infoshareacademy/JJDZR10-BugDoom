@@ -21,24 +21,8 @@ public class Location {
         return x;
     }
 
-    public void setX(double x) {
-        this.x = x;
-    }
-
     public double getY() {
         return y;
-    }
-
-    public void setY(double y) {
-        this.y = y;
-    }
-
-    public String getPointName() {
-        return pointName;
-    }
-
-    public void setPointName(String pointName) {
-        this.pointName = pointName;
     }
 
     @Override

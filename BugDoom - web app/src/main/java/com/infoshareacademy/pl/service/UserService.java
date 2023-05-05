@@ -12,7 +12,7 @@ import java.util.NoSuchElementException;
 @Service
 public class UserService implements UserRepository {
     private final String USERS_FILE_PATH = FilePathConstants.USERS_FILE_PATH;
-    private final DataService <User> dataService;
+    private final DataService<User> dataService;
     private User currentUser;
 
     public UserService(DataService<User> dataService) {
@@ -25,7 +25,7 @@ public class UserService implements UserRepository {
         dataService.saveToFile(users, USERS_FILE_PATH);
     }
 
-    public void deleteUser (User userToDelete) throws IOException{
+    public void deleteUser(User userToDelete) throws IOException {
         List<User> users = getAllUsers();
         users.remove(userToDelete);
         dataService.saveToFile(users, USERS_FILE_PATH);
@@ -38,7 +38,8 @@ public class UserService implements UserRepository {
                 .findFirst()
                 .orElseThrow();
     }
-    public boolean loginValidation (String emailAddress, String password) throws IOException {
+
+    public boolean loginValidation(String emailAddress, String password) throws IOException {
         List<User> users = dataService.readFromFile(USERS_FILE_PATH, User[].class);
         for (User user : users) {
             if (user.getUserEmailAddress() != null
@@ -56,7 +57,7 @@ public class UserService implements UserRepository {
         return currentUser;
     }
 
-    public List<User> getAllUsers() throws IOException{
+    public List<User> getAllUsers() throws IOException {
         return new ArrayList<>(dataService.readFromFile(USERS_FILE_PATH, User[].class));
     }
 }
