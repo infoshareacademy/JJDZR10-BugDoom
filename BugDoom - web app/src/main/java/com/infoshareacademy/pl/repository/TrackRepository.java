@@ -19,7 +19,10 @@ public interface TrackRepository {
 
     void removeTrackById(long trackId) throws IOException;
 
+
     long createRandomId();
 
     void editTrackById(long trackId, Track track) throws IOException;
+
+    List<Track> filterTracksByDifficulty(String difficulty) throws IOException;
 }

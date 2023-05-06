@@ -25,7 +25,7 @@ public class TrackForm {
                 "5.0", "5.1", "5.2", "5.3", "5.4", "5.5"));
     }
 
-    public static int setId(){
+    public static int setTrackId(){
         int TrackId = new Random().nextInt(1000);
         return TrackId;
             }

@@ -10,11 +10,22 @@
       background-color: #f5f5f5;
     }
   </style>
-   
+
     <title>Tracks</title>
 
 </head>
 <body>
+<form style="margin: 5px" action="/tracks" method="get">
+  <label for="txtSearch1">Wyszukaj trasę:</label>
+  <input id="txtSearch1" type="text" name="name" th:value="${name}">
+  <button class="btn btn-primary btn-sm" type="submit">Wyszukaj</button>
+  <a th:if="${name} != null" class="btn btn-outline-dark btn-sm" href="/tracks">Resetuj</a>
+</form>
+<div th:if="${tracks.size() == 0}" class="alert alert-danger" role="alert">
+  <div>
+    Nie znaleziono trasy
+  </div>
+</div>
 
 <div layout:fragment ="content" class="container text-left">
 <form style="margin: 5px" action="/tracks" method="get">
@@ -37,16 +48,29 @@
     </tr>
     </thead>
 </table>
-<table class="table">
-
+<table class="table table-bordered">
   <thead>
+  <div class="container">
   <tr>
-    <th scope="col">ID</th>
-    <th scope="col">Nazwa biegu</th>
-    <th scope="col">Poziom trudności</th>
-    <th scope="col">Teren</th>
-    <th scope="col">Działania</th>
+    <th class="col-1">ID</th>
+    <th class="col-3">Nazwa biegu</th>
+    <th class="col-4">
+    <form action="/tracks" method="get">
+      <label for="txtSearch2">Poziom trudności:</label>
+      <select id="txtSearch2" type="text" name="difficulty" th:value="${difficulty}">
+        <option selected>---</option>
+        <option th:value="łatwy">łatwy</option>
+        <option th:value="średni">średni</option>
+        <option th:value="trudny">trudny</option>
+      </select>
+      <button class="btn btn-outline-success btn-sm" type="submit">Filtruj</button>
+      <a th:if="${difficulty} != null" class="btn btn-outline-info btn-sm" href="/tracks">Powrót</a>
+    </form>
+    </th>
+    <th class="col-2">Teren</th>
+    <th class="col-2">Działania</th>
   </tr>
+  </div>
   </thead>
   <tbody>
   <tr th:each="track, iterStat: ${tracks}" th:onclick="|window.location.href='/tracks/' + ${track.trackId}|">
