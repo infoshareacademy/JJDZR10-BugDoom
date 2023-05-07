@@ -7,26 +7,27 @@
     <title>Edycja wydarzenia</title>
 </head>
 <body>
-<div layout:fargment="content" style="width: 500px" class="container text-center">
+<div layout:fragment="content" style="width: 500px" class="container text-center">
     <form th:action="@{/events/{eventId}/edit(eventId=${event.eventId})}" th:object="${event}" method="post">
         <h1 style="font-family: 'Times New Roman', Times, serif">Edytowanie wydarzenia</h1>
-        <div class="mb-3">
+        <div class="form-group">
             <label for="eventName">Nazwa wydarzenia:</label>
             <input type="text" class="form-control" id="eventName" th:field="*{eventName}"/>
         </div>
-        <div class="form-floating mb-3">
+        <div class="form-group">
             <label for="eventDescription">Opis wydarzenia:</label>
-            <textarea class="form-control" placeholder="Opis wydarzenia" id="eventDescription" style="height: 200px" th:field="*{eventDescription}"></textarea>
+            <textarea class="form-control" placeholder="Opis wydarzenia" id="eventDescription" style="height: 200px"
+                      th:field="*{eventDescription}"></textarea>
         </div>
-        <div class="mb-3">
+        <div class="form-group">
             <label for="eventPrize">Nagroda (PLN):</label>
             <input type="text" class="form-control" id="eventPrize" th:field="*{eventPrize}"/>
         </div>
-        <div class="mb-3">
+        <div class="form-group">
             <label for="eventDate">Data wydarzenia: </label>
             <input type="date" class="form-control" id="eventDate" th:field="*{eventDate}"/>
         </div>
-        <div class="mb-3">
+        <div class="form-group">
             <label for="EventType">Rodzaj wydarzenia: </label>
             <select id="EventType" class="form-control" th:field="*{eventType}">
                 <option value="" th:text="#{event.select-eventType}"></option>
@@ -41,9 +42,11 @@
         <button type="submit" class="btn btn-success">Zatwierdź</button>
         <button type="reset" class="btn btn-secondary">Zresetuj</button>
     </form>
+    <div style="margin-top: 15px" class="row-flex text-center">
+        <a th:href="@{/events/{id}(id=${event.eventId})}" class="btn btn-primary">
+            POWRÓT
+        </a>
+    </div>
 </div>
-<div style="margin-top: 15px" class="row-flex text-center"><a th:href="@{/events/{id}(id=${event.eventId})}" class="btn btn-primary">
-    POWRÓT
-</a></div>
 </body>
 </html>
