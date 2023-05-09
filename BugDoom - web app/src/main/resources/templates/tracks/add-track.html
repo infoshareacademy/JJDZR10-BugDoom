@@ -4,9 +4,16 @@
       layout:decorate="~{fragments/main_view}">
 <head>
     <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+        integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+        crossorigin=""/>
+
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+          integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+          crossorigin=""></script>
 
   <title>New track</title>
-
+  <style>#map { height: 600px; }</style>
 </head>
 <body>
 <div layout:fragment ="content" class="container text-left">
@@ -15,7 +22,7 @@
     <div style="margin-top: 5px">
     <p>Nazwa biegu: <input type="text" placeholder="Nazwa nowego biegu" th:field="*{competitionName}"/></p>
     </div>
-    <p>Szerokość geograficzna startu: <input type="number" min="49" max="54.5" placeholder="54.35" step="0.001" th:field="*{start.x}"/></p>
+    <p>Szerokość geograficzna startu: th:field=lat" </p>
     <p>Długość geograficzna startu: <input type="number" min="14.07" max="24.09" placeholder="18.65" step="0.001" th:field="*{start.y}"/></p>
     <p>Szerokość geograficzna mety: <input type="number" min="49" max="54.5" placeholder="54.35" step="0.001" th:field="*{finish.x}"/></p>
     <p>Długość geograficzna mety: <input type="number" min="14.07" max="24.09" placeholder="18.65" step="0.001" th:field="*{finish.y}"/></p>
@@ -43,6 +50,43 @@
     <p><input class="btn btn-success" type="submit" value="Zatwierdź"/>
       <input class="btn btn-secondary" type="reset" value="Zresetuj"/></p>
   </form>
+  <div id="map"></div>
+  <script th:inline="javascript">
+    var options = {
+      center: [54.21, 18.38],
+      zoom: 12
+    }
+
+    var map = L.map('map', options);
+
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 20,
+      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+    // L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {attribution: 'CARTO'})
+    //         .addTo(map);
+    //
+    // var customMarker = L.icon({
+    //   iconUrl: 'logo_carto.png',
+    //   iconSize:     [232, 92],
+    //   iconAnchor:   [54.21, 18.38]
+    // });
+
+    // L.marker([54.21, 18.38], {icon: customMarker}).addTo(map);
+
+
+
+    map.on('click', function(e){
+  var lat = e.latlng.lat;
+  var lng = e.latlng.lng;
+  var marker = L.marker([lat,lng])
+  marker.addTo(map)
+console.log(e)
+})
+
+  </script>
+
+
   <script>
     const value = document.querySelector("#value")
     const input = document.querySelector("#length_input")
