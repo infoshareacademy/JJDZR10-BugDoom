@@ -1,7 +1,9 @@
 package com.infoshareacademy.pl.controller;
 
 import com.infoshareacademy.pl.model.Event;
+import com.infoshareacademy.pl.model.Track;
 import com.infoshareacademy.pl.service.EventService;
+import com.infoshareacademy.pl.service.TrackService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,9 +19,11 @@ import java.util.List;
 @Controller
 public class EventController {
     private final EventService eventService;
+    private final TrackService trackService;
 
-    public EventController(EventService eventService) {
+    public EventController(EventService eventService, TrackService trackService) {
         this.eventService = eventService;
+        this.trackService = trackService;
     }
 
     @GetMapping("/events")
@@ -57,7 +61,9 @@ public class EventController {
     @GetMapping("/events/{eventId}")
     public String getEventById(@PathVariable("eventId") Long eventId, Model model) throws IOException {
         Event event = eventService.findEventById(eventId);
+        List<Track> tracks = trackService.findTracksByEvent(event);
         model.addAttribute("event", event);
+        model.addAttribute("track", tracks);
         return "events/single-event";
     }
 
