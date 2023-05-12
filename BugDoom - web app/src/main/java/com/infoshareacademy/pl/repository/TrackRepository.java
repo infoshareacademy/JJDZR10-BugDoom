@@ -27,7 +27,7 @@ public interface TrackRepository {
 
     List<Track> filterTracksByDifficulty(String difficulty);
 
-    List<Track> findTracksByEvent(Event event);
+    List<Track> findTracksByEventId(long eventId);
 
-    void assignTrackToEvent(Track track, Event event);
+    void assignTrackToEvent(Track track, long eventId);
 }

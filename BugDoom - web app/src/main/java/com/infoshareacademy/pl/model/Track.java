@@ -21,7 +21,7 @@ public class Track {
     private String difficulty;
     @NotEmpty (message = "Wybierz lokalizację")
     private String terrain;
-    private Event event;
+    private long eventId;
 
     public long getTrackId() {
         return trackId;
@@ -79,12 +79,12 @@ public class Track {
         this.terrain = terrain;
     }
 
-    public Event getEvent() {
-        return event;
+    public long getEventId() {
+        return eventId;
     }
 
-    public void setEvent(Event event) {
-        this.event = event;
+    public void setEventId(long eventId) {
+        this.eventId = eventId;
     }
 
     @Override
@@ -98,6 +98,7 @@ public class Track {
                 ", length=" + length +
                 ", difficulty='" + difficulty + '\'' +
                 ", terrain='" + terrain + '\'' +
+                ", eventId=" + eventId +
                 '}';
     }
 
@@ -106,11 +107,11 @@ public class Track {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Track track = (Track) o;
-        return trackId == track.trackId && length == track.length && Objects.equals(competitionName, track.competitionName) && Objects.equals(start, track.start) && Objects.equals(finish, track.finish) && Objects.equals(checkpoints, track.checkpoints) && Objects.equals(difficulty, track.difficulty) && Objects.equals(terrain, track.terrain) && Objects.equals(event, track.event);
+        return trackId == track.trackId && length == track.length && eventId == track.eventId && Objects.equals(competitionName, track.competitionName) && Objects.equals(start, track.start) && Objects.equals(finish, track.finish) && Objects.equals(checkpoints, track.checkpoints) && Objects.equals(difficulty, track.difficulty) && Objects.equals(terrain, track.terrain);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(trackId, competitionName, start, finish, checkpoints, length, difficulty, terrain, event);
+        return Objects.hash(trackId, competitionName, start, finish, checkpoints, length, difficulty, terrain, eventId);
     }
 }

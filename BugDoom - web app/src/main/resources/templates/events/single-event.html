@@ -76,9 +76,17 @@
     </div>
 
 <div style="margin-top: 5px" class="row-flex text-center">
-    <a style="padding: 20px; width: 250px;" class="btn btn-warning">
-        Zarządzaj trasami
-    </a>
+    <table>
+        <thead>
+        <tr>
+            <th>Biegi:</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="track: ${event.tracks}">
+            <td th:text="${track.getCompetitionName()}"></td>
+        </tbody>
+    </table>
 </div>
 <div style="margin-top: 5px" class="row-flex text-center">
     <a style="padding: 20px; width: 250px;" class="btn btn-info">

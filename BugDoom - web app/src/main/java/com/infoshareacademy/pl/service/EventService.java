@@ -45,6 +45,7 @@ public class EventService implements EventRepository {
         eventToEdit.setEventPrize(event.getEventPrize());
         eventToEdit.setEventType(event.getEventType());
         eventToEdit.setEventDate(event.getEventDate());
+        eventToEdit.setTracks(event.getTracks());
         addEvent(eventToEdit);
     }
 

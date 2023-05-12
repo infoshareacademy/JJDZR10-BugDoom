@@ -90,19 +90,20 @@ public class TrackService implements TrackRepository {
     }
 
     @Override
-    public List<Track> findTracksByEvent(Event event) {
+    public List<Track> findTracksByEventId(long eventId) {
         List<Track> allTracks = getAllTracks();
         return allTracks.stream()
-                .filter(track -> track.getEvent().equals(event))
+                .filter(track -> track.getEventId() == eventId)
                 .toList();
     }
 
     @Override
-    public void assignTrackToEvent(Track track, Event event) {
-        Optional<List<Track>> tracksOptional = Optional.ofNullable(event.getTracks());
+    public void assignTrackToEvent(Track track, long eventId) {
+        Event eventToUpdate = eventService.findEventById(eventId);
+        Optional<List<Track>> tracksOptional = Optional.ofNullable(eventToUpdate.getTracks());
         List<Track> tracks = tracksOptional.orElse(new ArrayList<>());
         tracks.add(track);
-        event.setTracks(tracks);
-        eventService.editEventById(event.getEventId(), event);
+        eventToUpdate.setTracks(tracks);
+        eventService.editEventById(eventId, eventToUpdate);
     }
 }
