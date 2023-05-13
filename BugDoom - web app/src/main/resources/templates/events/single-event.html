@@ -75,16 +75,18 @@
         </div>
     </div>
 
-<div style="margin-top: 5px" class="row-flex text-center">
-    <table>
-        <thead>
-        <tr>
-            <th>Biegi:</th>
-        </tr>
+<div style="margin-top: 5px" class="row">
+    <table style="text-align: center">
+        <thead style="text-align: center">
+            Biegi:
         </thead>
         <tbody>
         <tr th:each="track: ${event.tracks}">
             <td th:text="${track.getCompetitionName()}"></td>
+            <td>
+                <a th:href="@{/tracks/{trackId}/(trackId=${track.trackId})}" class="btn btn-light">Pokaż trasę</a>
+            </td>
+        </tr>
         </tbody>
     </table>
 </div>

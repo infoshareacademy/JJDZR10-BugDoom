@@ -77,6 +77,7 @@ public class TrackService implements TrackRepository {
         trackToEdit.setDifficulty(track.getDifficulty());
         trackToEdit.setStart(track.getStart());
         trackToEdit.setFinish(track.getFinish());
+        trackToEdit.setEventId(track.getEventId());
 
         addTrack(trackToEdit);
     }
@@ -99,6 +100,12 @@ public class TrackService implements TrackRepository {
 
     @Override
     public void assignTrackToEvent(Track track, long eventId) {
+        Optional<Event> currentEventOptional = Optional.ofNullable(eventService.findEventById(track.getEventId()));
+        currentEventOptional.ifPresent(event -> {
+            event.getTracks().remove(track);
+            eventService.editEventById(event.getEventId(), event);
+        });
+
         Event eventToUpdate = eventService.findEventById(eventId);
         Optional<List<Track>> tracksOptional = Optional.ofNullable(eventToUpdate.getTracks());
         List<Track> tracks = tracksOptional.orElse(new ArrayList<>());

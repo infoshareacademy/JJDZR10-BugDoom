@@ -98,7 +98,9 @@ public class TrackController {
         }
         if (track.getEventId() != eventId) {
             trackService.assignTrackToEvent(track, eventId);
+
         }
+        track.setEventId(eventId);
         trackService.editTrackById(trackId, track);
         return "redirect:/tracks";
     }
