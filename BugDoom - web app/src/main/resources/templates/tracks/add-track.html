@@ -12,6 +12,7 @@
           integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
           crossorigin=""></script>
 
+
   <title>New track</title>
   <style>#map { height: 600px; }</style>
 </head>
@@ -52,37 +53,69 @@
   </form>
   <div id="map"></div>
   <script th:inline="javascript">
-    var options = {
-      center: [54.21, 18.38],
-      zoom: 12
-    }
-
+    var options = {center: [54.21, 18.38],zoom: 12}
     var map = L.map('map', options);
 
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 20,
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
-    // L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {attribution: 'CARTO'})
-    //         .addTo(map);
+
+    var popup = L.popup();
+
+    function onMapClick(e) {
+      popup
+              .setLatLng(e.latlng)
+              .setContent("Wybrano punkt o współrzędnych " + e.latlng.toString())
+              .openOn(map);
+    }
+
+    map.on('click', onMapClick);
+
+
+  //   map.on('click', function(event){
+  // var lat = event.latlng.lat;
+  // var lng = event.latlng.lng;
+  // var popup = <form action="{%url 'note'%}" method="POST">
+  //   // {% csrf_token %}
+  //   <div class="form=group">
+  //     <label for="note-heading">Note heading</label>
+  //     <input type="text" name="note-heading" class="form-control" placeholder="Enter note heading"></input>
+  //     </div>
+  //   <input type="hidden" name="lat" value="${lat}"></input>
+  //   <input type="hidden" name="lng" value="${lng}"></input>
+  //            <div class="form-group">
+  //                    <label for="note">Note</label>
+  //              <textarea class="form-control" name="note">Enter note here</textarea>
+  //            </div>
+  //      <button type="submit" class="btn btn-primary">Submit</button>
+  // </form>
+  //
+  // var marker = L.marker([lat,lng]).bindPopup(popup);
+  //     marker.addTo(map);
+  //
+  //       console.log("user right-clicked on map coordinates: " + event.latlng.toString());
+  //       L.marker(event.latlng).addTo(map);
+  //   });
+
+
+
+
+
+
+
+
+
+    // var map = L.map("map").setView([48.85, 2.35], 12);
     //
-    // var customMarker = L.icon({
-    //   iconUrl: 'logo_carto.png',
-    //   iconSize:     [232, 92],
-    //   iconAnchor:   [54.21, 18.38]
+    // L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+    //   attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+    // }).addTo(map);
+    //
+    // map.on("contextmenu", function (event) {
+    //   console.log("user right-clicked on map coordinates: " + event.latlng.toString());
+    //   L.marker(event.latlng).addTo(map);
     // });
-
-    // L.marker([54.21, 18.38], {icon: customMarker}).addTo(map);
-
-
-
-    map.on('click', function(e){
-  var lat = e.latlng.lat;
-  var lng = e.latlng.lng;
-  var marker = L.marker([lat,lng])
-  marker.addTo(map)
-console.log(e)
-})
 
   </script>
 
