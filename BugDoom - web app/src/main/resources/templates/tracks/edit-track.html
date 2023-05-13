@@ -41,7 +41,7 @@
         <div>
             <label for="event">Wydarzenie: </label>
             <select id="event" class="form-control" name="track.eventId">
-                <option value="" th:text="${currentEvent.eventName}"></option>
+                <option th:value="*{eventId}" th:text="${currentEvent.eventName}"></option>
                 <option th:each="event : ${allEvents}"
                         th:value="${event.eventId}"
                         th:text="${event.eventName}"></option>

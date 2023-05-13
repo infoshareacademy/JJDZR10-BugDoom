@@ -1,6 +1,5 @@
 package com.infoshareacademy.pl.controller;
 
-import com.infoshareacademy.pl.model.Event;
 import com.infoshareacademy.pl.model.Track;
 import com.infoshareacademy.pl.service.EventService;
 import com.infoshareacademy.pl.service.TrackService;
@@ -10,9 +9,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 
 
 @Controller
@@ -79,6 +75,7 @@ public class TrackController {
             return "tracks/track-error";
         }
         model.addAttribute("track", track);
+        model.addAttribute("event", eventService.findEventById(track.getEventId()));
         return "tracks/track-details";
     }
 
