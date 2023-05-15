@@ -52,8 +52,9 @@
       <input class="btn btn-secondary" type="reset" value="Zresetuj"/></p>
   </form>
   <div id="map"></div>
+
   <script th:inline="javascript">
-    var options = {center: [54.21, 18.38],zoom: 12}
+    var options = {center: [54.349, 18.651],zoom: 12}
     var map = L.map('map', options);
 
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -67,60 +68,24 @@
       var coord = e.latlng;
       var lat = coord.lat;
       var lng = coord.lng;
+      var customPopup = ("szerokość " +lat +" długość " + lng) +
+              "<button class=\"btn btn-outline-success btn-sm\" type=\"submit\">Dodaj checkpoint</button>";
+      var customOptions =
+              {
+                'maxWidth': '400',
+                'width': '200',
+                'className' : 'popupCustom'
+              }
 
-      popup
-              .setLatLng(e.latlng)
-              .setContent("Szerokość geograficzna: " +lat + "\nDługość geograficzna: " + lng)
-              .openOn(map);
+      var marker = L.marker([lat,lng]).bindPopup(customPopup,customOptions);
+          marker.addTo(map);
 
+      popup.setLatLng(e.latlng)
+              .setContent("Szerokość geograficzna: " +lat + "\nDługość geograficzna: " + lng);
+              // .openOn(map);
     }
 
     map.on('click', onMapClick);
-
-
-  //   map.on('click', function(event){
-  // var lat = event.latlng.lat;
-  // var lng = event.latlng.lng;
-  // var popup = <form action="{%url 'note'%}" method="POST">
-  //   // {% csrf_token %}
-  //   <div class="form=group">
-  //     <label for="note-heading">Note heading</label>
-  //     <input type="text" name="note-heading" class="form-control" placeholder="Enter note heading"></input>
-  //     </div>
-  //   <input type="hidden" name="lat" value="${lat}"></input>
-  //   <input type="hidden" name="lng" value="${lng}"></input>
-  //            <div class="form-group">
-  //                    <label for="note">Note</label>
-  //              <textarea class="form-control" name="note">Enter note here</textarea>
-  //            </div>
-  //      <button type="submit" class="btn btn-primary">Submit</button>
-  // </form>
-  //
-  // var marker = L.marker([lat,lng]).bindPopup(popup);
-  //     marker.addTo(map);
-  //
-  //       console.log("user right-clicked on map coordinates: " + event.latlng.toString());
-  //       L.marker(event.latlng).addTo(map);
-  //   });
-
-
-
-
-
-
-
-
-
-    // var map = L.map("map").setView([48.85, 2.35], 12);
-    //
-    // L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-    //   attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-    // }).addTo(map);
-    //
-    // map.on("contextmenu", function (event) {
-    //   console.log("user right-clicked on map coordinates: " + event.latlng.toString());
-    //   L.marker(event.latlng).addTo(map);
-    // });
 
   </script>
 
