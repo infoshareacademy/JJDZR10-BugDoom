@@ -5,21 +5,22 @@ import com.infoshareacademy.pl.model.Event;
 import com.infoshareacademy.pl.repository.EventRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 @Service
-public class EventService implements EventRepository {
+public class EventService {
     private static final String EVENT_FILE_PATH = FilePathConstants.EVENT_FILE_PATH;
     private final DataService<Event> dataService;
+    private final EventRepository eventRepository;
 
-    public EventService(DataService<Event> dataService) {
+    public EventService(DataService<Event> dataService, EventRepository eventRepository) {
         this.dataService = dataService;
+        this.eventRepository = eventRepository;
     }
 
     public List<Event> getAllEvents() {
-        return new ArrayList<>(dataService.readFromFile(EVENT_FILE_PATH, Event[].class));
+        return eventRepository.findAll();
     }
 
     public void addEvent(Event eventToAdd) {
@@ -36,7 +37,7 @@ public class EventService implements EventRepository {
     }
 
     @Override
-    public void editEventById(long eventId, Event event){
+    public void editEventById(long eventId, Event event) throws IOException{
         Event eventToEdit = findEventById(eventId);
         removeEventById(eventId);
 
@@ -45,16 +46,15 @@ public class EventService implements EventRepository {
         eventToEdit.setEventPrize(event.getEventPrize());
         eventToEdit.setEventType(event.getEventType());
         eventToEdit.setEventDate(event.getEventDate());
-        eventToEdit.setTracks(event.getTracks());
         addEvent(eventToEdit);
     }
 
-    private void saveEventsToFile(List<Event> eventsToSave){
+    private void saveEventsToFile(List<Event> eventsToSave) throws IOException {
         dataService.saveToFile(eventsToSave, EVENT_FILE_PATH);
     }
 
     @Override
-    public Event findEventById(long eventId){
+    public Event findEventById(long eventId) throws IOException {
         List<Event> allEvents = getAllEvents();
         return allEvents.stream()
                 .filter(t -> t.getEventId() == (eventId))

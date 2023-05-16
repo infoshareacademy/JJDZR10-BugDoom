@@ -2,27 +2,49 @@ package com.infoshareacademy.pl.model;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
+@Entity
 public class Event {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long eventId;
+
     @NotEmpty(message = "Podaj nazwę wydarzenia")
+    @Column(name = "event_name", nullable = false)
     private String eventName;
+
     @NotEmpty(message = "Podaj opis wydarzenia")
+    @Column(name = "event_description", nullable = false)
     private String eventDescription;
+
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Track> tracks;
+
     private List<User> participants;
+
     @PositiveOrZero(message = "Wartość nagrody nie może być ujemna")
+    @Column(name = "event_prize")
     private int eventPrize;
+
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotNull(message = "Podaj datę wydarzenia")
     @FutureOrPresent(message = "Wybierz poprawną datę wydarzenia")
+    @Column(name = "event_date", nullable = false)
     private LocalDate eventDate;
+
     @NotNull(message = "Podaj rodzaj wydarzenia")
+    @Enumerated(EnumType.STRING)
+    @Column(name = "event_type", nullable = false)
     private EventType eventType;
+
+    public Event() {
+    }
 
     public long getEventId() {
         return eventId;

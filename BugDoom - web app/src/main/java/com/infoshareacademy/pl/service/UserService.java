@@ -9,13 +9,15 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
-public class UserService implements UserRepository {
+public class UserService {
     private final String USERS_FILE_PATH = FilePathConstants.USERS_FILE_PATH;
     private final DataService<User> dataService;
+    private final UserRepository userRepository;
     private User currentUser;
 
-    public UserService(DataService<User> dataService) {
+    public UserService(DataService<User> dataService, UserRepository userRepository) {
         this.dataService = dataService;
+        this.userRepository = userRepository;
     }
 
     public void addNewUser(User user) {

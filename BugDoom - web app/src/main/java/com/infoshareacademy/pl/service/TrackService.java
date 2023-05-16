@@ -1,7 +1,6 @@
 package com.infoshareacademy.pl.service;
 
 import com.infoshareacademy.pl.exception.TrackNotFoundException;
-import com.infoshareacademy.pl.model.Event;
 import com.infoshareacademy.pl.model.Track;
 import com.infoshareacademy.pl.repository.TrackRepository;
 import org.springframework.stereotype.Service;
@@ -9,15 +8,15 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 
 @Service
-public class TrackService implements TrackRepository {
+public class TrackService {
 
     private static final String TRACK_FILE_PATH = FilePathConstants.TRACK_FILE_PATH;
     private final DataService<Track> dataService;
-    private final EventService eventService;
+    private final TrackRepository trackRepository;
 
-    public TrackService(DataService<Track> dataService, EventService eventService) {
+    public TrackService(DataService<Track> dataService, TrackRepository trackRepository) {
         this.dataService = dataService;
-        this.eventService = eventService;
+        this.trackRepository = trackRepository;
     }
 
     public long createRandomId() {
@@ -25,19 +24,19 @@ public class TrackService implements TrackRepository {
     }
 
     @Override
-    public List<Track> getAllTracks() {
+    public List<Track> getAllTracks() throws IOException {
         return new ArrayList<>(dataService.readFromFile(TRACK_FILE_PATH, Track[].class));
     }
 
     @Override
-    public void addTrack(Track trackToAdd) {
+    public void addTrack(Track trackToAdd) throws IOException {
         List<Track> allTracks = getAllTracks();
         allTracks.add(trackToAdd);
         saveTracksToFile(allTracks);
     }
 
     @Override
-    public void removeTrackById(long trackId) {
+    public void removeTrackById(long trackId) throws IOException {
         List<Track> allTracks = getAllTracks();
         Track trackToDelete = findTrackById(trackId);
         allTracks.remove(trackToDelete);
@@ -45,12 +44,12 @@ public class TrackService implements TrackRepository {
     }
 
     @Override
-    public void saveTracksToFile(List<Track> tracksToSave) {
+    public void saveTracksToFile(List<Track> tracksToSave) throws IOException {
         dataService.saveToFile(tracksToSave, TRACK_FILE_PATH);
     }
 
     @Override
-    public List<Track> findTracksByKeyword(String keyword) {
+    public List<Track> findTracksByKeyword(String keyword) throws IOException {
         List<Track> allTracks = getAllTracks();
         return allTracks.stream()
                 .filter(track -> track.getCompetitionName().toLowerCase().contains(keyword.toLowerCase()))
@@ -58,7 +57,7 @@ public class TrackService implements TrackRepository {
     }
 
     @Override
-    public Track findTrackById(long trackId) {
+    public Track findTrackById(long trackId) throws IOException {
         List<Track> allTracks = getAllTracks();
         return allTracks.stream()
                 .filter(track -> track.getTrackId() == trackId)
@@ -67,7 +66,7 @@ public class TrackService implements TrackRepository {
     }
 
     @Override
-    public void editTrackById(long trackId, Track track) {
+    public void editTrackById(long trackId, Track track) throws IOException {
         Track trackToEdit = findTrackById(trackId);
         removeTrackById(trackId);
 
@@ -77,40 +76,15 @@ public class TrackService implements TrackRepository {
         trackToEdit.setDifficulty(track.getDifficulty());
         trackToEdit.setStart(track.getStart());
         trackToEdit.setFinish(track.getFinish());
-        trackToEdit.setEventId(track.getEventId());
 
         addTrack(trackToEdit);
     }
 
     @Override
-    public List<Track> filterTracksByDifficulty(String difficulty) {
-        List<Track> allTracks = getAllTracks();
+    public List<Track> filterTracksByDifficulty(String difficulty) throws IOException{
+        List<Track>allTracks = getAllTracks();
         return allTracks.stream()
                 .filter(track-> track.getDifficulty().equals(difficulty))
                 .toList();
-    }
-
-    @Override
-    public List<Track> findTracksByEventId(long eventId) {
-        List<Track> allTracks = getAllTracks();
-        return allTracks.stream()
-                .filter(track -> track.getEventId() == eventId)
-                .toList();
-    }
-
-    @Override
-    public void assignTrackToEvent(Track track, long eventId) {
-        Optional<Event> currentEventOptional = Optional.ofNullable(eventService.findEventById(track.getEventId()));
-        currentEventOptional.ifPresent(event -> {
-            event.getTracks().remove(track);
-            eventService.editEventById(event.getEventId(), event);
-        });
-
-        Event eventToUpdate = eventService.findEventById(eventId);
-        Optional<List<Track>> tracksOptional = Optional.ofNullable(eventToUpdate.getTracks());
-        List<Track> tracks = tracksOptional.orElse(new ArrayList<>());
-        tracks.add(track);
-        eventToUpdate.setTracks(tracks);
-        eventService.editEventById(eventId, eventToUpdate);
     }
 }
