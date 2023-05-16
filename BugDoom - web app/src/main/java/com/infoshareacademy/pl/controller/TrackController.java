@@ -1,30 +1,29 @@
 package com.infoshareacademy.pl.controller;
 
 import com.infoshareacademy.pl.model.Track;
+import com.infoshareacademy.pl.service.EventService;
 import com.infoshareacademy.pl.service.TrackService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.io.IOException;
 
 
 @Controller
 public class TrackController {
     private final TrackService trackService;
+    private final EventService eventService;
 
-    public TrackController(TrackService trackService) {
+    public TrackController(TrackService trackService, EventService eventService) {
         this.trackService = trackService;
+        this.eventService = eventService;
     }
 
 
     @GetMapping("/tracks")
-    public String getTracks(Model model, String name, String difficulty) throws IOException {
+    public String getTracks(Model model, String name, String difficulty) {
         Track emptyTrack = new Track();
         model.addAttribute("track", emptyTrack);
 
@@ -41,29 +40,34 @@ public class TrackController {
     }
 
     @GetMapping("tracks/delete/{trackId}")
-    public String deleteTrack(@PathVariable long trackId) throws IOException {
+    public String deleteTrack(@PathVariable long trackId) {
         trackService.removeTrackById(trackId);
         return "redirect:/tracks";
     }
 
     @PostMapping("/tracks")
-    public String createTrack(@Valid @ModelAttribute Track track, BindingResult bindingResult) throws IOException {
+    public String createTrack(@Valid @ModelAttribute Track newTrack,
+                              BindingResult bindingResult,
+                              @RequestParam("event.eventId") long eventId) {
         if (bindingResult.hasErrors()) {
             return "tracks/add-track";
         }
-        track.setTrackId(trackService.createRandomId());
-        trackService.addTrack(track);
+        newTrack.setTrackId(trackService.createRandomId());
+        newTrack.setEventId(eventId);
+        trackService.assignTrackToEvent(newTrack, eventId);
+        trackService.addTrack(newTrack);
         return "redirect:/tracks";
     }
 
     @GetMapping("/tracks/create")
     public String showCreateForm(Model model) {
         model.addAttribute("track", new Track());
+        model.addAttribute("allEvents", eventService.getAllEvents());
         return "tracks/add-track";
     }
 
     @GetMapping("/tracks/{id}")
-    public String getTrackDetails(@PathVariable("id") Long id, Model model) throws IOException {
+    public String getTrackDetails(@PathVariable("id") Long id, Model model) {
         Track track = trackService.findTrackById(id);
 
         if (track == null) {
@@ -71,21 +75,32 @@ public class TrackController {
             return "tracks/track-error";
         }
         model.addAttribute("track", track);
+        model.addAttribute("event", eventService.findEventById(track.getEventId()));
         return "tracks/track-details";
     }
 
     @GetMapping("/tracks/edit-track/{trackId}")
-    public String getTrackEditForm(@PathVariable("trackId") Long trackId, Model model) throws IOException {
+    public String getTrackEditForm(@PathVariable("trackId") Long trackId, Model model) {
         Track track = trackService.findTrackById(trackId);
         model.addAttribute("track", track);
+        model.addAttribute("currentEvent", eventService.findEventById(track.getEventId()));
+        model.addAttribute("allEvents", eventService.getAllEvents());
         return "tracks/edit-track";
     }
 
     @PostMapping("/tracks/{trackId}/edit")
-    public String editTrack(@PathVariable("trackId") Long trackId, @Valid @ModelAttribute Track track, BindingResult bindingResult) throws IOException {
+    public String editTrack(@PathVariable("trackId") Long trackId,
+                            @Valid @ModelAttribute Track track,
+                            BindingResult bindingResult,
+                            @RequestParam("track.eventId") long eventId) {
         if (bindingResult.hasErrors()) {
             return "tracks/edit-track";
         }
+        if (track.getEventId() != eventId) {
+            trackService.assignTrackToEvent(track, eventId);
+
+        }
+        track.setEventId(eventId);
         trackService.editTrackById(trackId, track);
         return "redirect:/tracks";
     }

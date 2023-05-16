@@ -1,28 +1,33 @@
 
 package com.infoshareacademy.pl.repository;
 
+import com.infoshareacademy.pl.model.Event;
 import com.infoshareacademy.pl.model.Track;
 
 import java.io.IOException;
 import java.util.List;
 
 public interface TrackRepository {
-    void saveTracksToFile(List<Track> tracksToSave) throws IOException;
+    void saveTracksToFile(List<Track> tracksToSave);
 
-    Track findTrackById(long trackId) throws IOException;
+    Track findTrackById(long trackId);
 
-    List<Track> getAllTracks() throws IOException;
+    List<Track> getAllTracks();
 
-    List<Track> findTracksByKeyword(String keyword) throws IOException;
+    List<Track> findTracksByKeyword(String keyword);
 
-    void addTrack(Track trackToAdd) throws IOException;
+    void addTrack(Track trackToAdd);
 
-    void removeTrackById(long trackId) throws IOException;
+    void removeTrackById(long trackId);
 
 
     long createRandomId();
 
-    void editTrackById(long trackId, Track track) throws IOException;
+    void editTrackById(long trackId, Track track);
 
-    List<Track> filterTracksByDifficulty(String difficulty) throws IOException;
+    List<Track> filterTracksByDifficulty(String difficulty);
+
+    List<Track> findTracksByEventId(long eventId);
+
+    void assignTrackToEvent(Track track, long eventId);
 }

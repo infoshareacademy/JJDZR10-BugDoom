@@ -5,7 +5,6 @@ import com.infoshareacademy.pl.model.Event;
 import com.infoshareacademy.pl.repository.EventRepository;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -19,17 +18,17 @@ public class EventService implements EventRepository {
         this.dataService = dataService;
     }
 
-    public List<Event> getAllEvents() throws IOException {
+    public List<Event> getAllEvents() {
         return new ArrayList<>(dataService.readFromFile(EVENT_FILE_PATH, Event[].class));
     }
 
-    public void addEvent(Event eventToAdd) throws IOException {
+    public void addEvent(Event eventToAdd) {
         List<Event> allEvents = getAllEvents();
         allEvents.add(eventToAdd);
         saveEventsToFile(allEvents);
     }
 
-    public void removeEventById(long eventId) throws IOException {
+    public void removeEventById(long eventId) {
         List<Event> allEvents = getAllEvents();
         Event eventToDelete = findEventById(eventId);
         allEvents.remove(eventToDelete);
@@ -37,7 +36,7 @@ public class EventService implements EventRepository {
     }
 
     @Override
-    public void editEventById(long eventId, Event event) throws IOException{
+    public void editEventById(long eventId, Event event){
         Event eventToEdit = findEventById(eventId);
         removeEventById(eventId);
 
@@ -46,15 +45,16 @@ public class EventService implements EventRepository {
         eventToEdit.setEventPrize(event.getEventPrize());
         eventToEdit.setEventType(event.getEventType());
         eventToEdit.setEventDate(event.getEventDate());
+        eventToEdit.setTracks(event.getTracks());
         addEvent(eventToEdit);
     }
 
-    private void saveEventsToFile(List<Event> eventsToSave) throws IOException {
+    private void saveEventsToFile(List<Event> eventsToSave){
         dataService.saveToFile(eventsToSave, EVENT_FILE_PATH);
     }
 
     @Override
-    public Event findEventById(long eventId) throws IOException {
+    public Event findEventById(long eventId){
         List<Event> allEvents = getAllEvents();
         return allEvents.stream()
                 .filter(t -> t.getEventId() == (eventId))

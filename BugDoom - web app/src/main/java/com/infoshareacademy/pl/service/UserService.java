@@ -4,7 +4,6 @@ import com.infoshareacademy.pl.model.User;
 import com.infoshareacademy.pl.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -19,19 +18,19 @@ public class UserService implements UserRepository {
         this.dataService = dataService;
     }
 
-    public void addNewUser(User user) throws IOException {
+    public void addNewUser(User user) {
         List<User> users = getAllUsers();
         users.add(user);
         dataService.saveToFile(users, USERS_FILE_PATH);
     }
 
-    public void deleteUser(User userToDelete) throws IOException {
+    public void deleteUser(User userToDelete) {
         List<User> users = getAllUsers();
         users.remove(userToDelete);
         dataService.saveToFile(users, USERS_FILE_PATH);
     }
 
-    public User findUserById(long id) throws NoSuchElementException, IOException {
+    public User findUserById(long id) throws NoSuchElementException {
         List<User> users = getAllUsers();
         return users.stream()
                 .filter(user -> user.getUserId() == id)
@@ -39,7 +38,7 @@ public class UserService implements UserRepository {
                 .orElseThrow();
     }
 
-    public boolean loginValidation(String emailAddress, String password) throws IOException {
+    public boolean loginValidation(String emailAddress, String password) {
         List<User> users = dataService.readFromFile(USERS_FILE_PATH, User[].class);
         for (User user : users) {
             if (user.getUserEmailAddress() != null
@@ -57,7 +56,7 @@ public class UserService implements UserRepository {
         return currentUser;
     }
 
-    public List<User> getAllUsers() throws IOException {
+    public List<User> getAllUsers() {
         return new ArrayList<>(dataService.readFromFile(USERS_FILE_PATH, User[].class));
     }
 }

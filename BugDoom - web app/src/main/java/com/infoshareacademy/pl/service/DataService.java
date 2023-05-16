@@ -16,23 +16,31 @@ import java.util.List;
 public class DataService<T> {
     private Gson gson = new Gson();
 
-    public <T> void saveToFile(T listToSave, String file) throws IOException {
-        Path path = Paths.get(file);
-        if (file.equals(FilePathConstants.EVENT_FILE_PATH)) {
-            gson = addLocalDateSerializer();
+    public <T> void saveToFile(T listToSave, String file) {
+        try {
+            Path path = Paths.get(file);
+            if (file.equals(FilePathConstants.EVENT_FILE_PATH) || file.equals(FilePathConstants.TRACK_FILE_PATH)) {
+                gson = addLocalDateSerializer();
+            }
+            String json = gson.toJson(listToSave);
+            Files.write(path, json.getBytes());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
-        String json = gson.toJson(listToSave);
-        Files.write(path, json.getBytes());
     }
 
-    public List<T> readFromFile(String file, Class<T[]> classToRead) throws IOException {
-        Path path = Paths.get(file);
-        String objectsFromFile = Files.readString(path);
-        if (file.equals(FilePathConstants.EVENT_FILE_PATH)) {
-            gson = addLocalDateDeserializer();
+    public List<T> readFromFile(String file, Class<T[]> classToRead) {
+        try {
+            Path path = Paths.get(file);
+            String objectsFromFile = Files.readString(path);
+            if (file.equals(FilePathConstants.EVENT_FILE_PATH) || file.equals(FilePathConstants.TRACK_FILE_PATH)) {
+                gson = addLocalDateDeserializer();
+            }
+            T[] arr = gson.fromJson(objectsFromFile, classToRead);
+            return Arrays.asList(arr);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
-        T[] arr = gson.fromJson(objectsFromFile, classToRead);
-        return Arrays.asList(arr);
     }
 
     private Gson addLocalDateSerializer() {
