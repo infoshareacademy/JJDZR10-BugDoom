@@ -17,7 +17,7 @@ public class Track {
     @Column(name = "competition_name", nullable = false)
     private String competitionName;
 
-    @OneToMany(mappedBy = "track", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "track")
     private List<Location> locations;
 
     @Positive(message = "Długość biegu musi być większa od 0")

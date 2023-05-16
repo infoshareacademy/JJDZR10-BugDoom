@@ -94,9 +94,7 @@ public class TrackController {
         if (bindingResult.hasErrors()) {
             return "tracks/edit-track";
         }
-        if (track.getEvent().getEventId() != eventId) {
-            track.setEvent(eventService.findEventById(eventId));
-        }
+        track.setEvent(eventService.findEventById(eventId));
         trackService.editTrack(track);
         return "redirect:/tracks";
     }
