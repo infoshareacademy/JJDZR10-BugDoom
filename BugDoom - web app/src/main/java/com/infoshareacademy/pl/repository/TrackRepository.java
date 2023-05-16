@@ -1,34 +1,23 @@
 
 package com.infoshareacademy.pl.repository;
 
-import com.infoshareacademy.pl.model.Event;
 import com.infoshareacademy.pl.model.Track;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
-import java.io.IOException;
 import java.util.List;
 
-public interface TrackRepository extends JpaRepository {
-    void saveTracksToFile(List<Track> tracksToSave);
+@Repository
+public interface TrackRepository extends JpaRepository<Track, Long> {
 
-    Track findTrackById(long trackId);
+    @Query(value = "SELECT t FROM Track t WHERE t.competitionName LIKE %:name%")
+    List<Track> findTracksByName(@Param("name") String name);
 
-    List<Track> getAllTracks();
+    @Query(value = "SELECT t FROM Track t WHERE t.difficulty = :difficulty")
+    List<Track> filterTracksByDifficulty(@Param("difficulty") String difficulty);
 
-    List<Track> findTracksByKeyword(String keyword);
-
-    void addTrack(Track trackToAdd);
-
-    void removeTrackById(long trackId);
-
-
-    long createRandomId();
-
-    void editTrackById(long trackId, Track track);
-
-    List<Track> filterTracksByDifficulty(String difficulty);
-
-    List<Track> findTracksByEventId(long eventId);
-
-    void assignTrackToEvent(Track track, long eventId);
+    @Query(value = "SELECT t FROM Track t WHERE t.event.eventId = :eventId")
+    List<Track> findTracksByEventId(@Param("eventId") long eventId);
 }

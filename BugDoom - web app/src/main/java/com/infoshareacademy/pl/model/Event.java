@@ -26,6 +26,7 @@ public class Event {
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Track> tracks;
 
+    @OneToMany(mappedBy = "event")
     private List<User> participants;
 
     @PositiveOrZero(message = "Wartość nagrody nie może być ujemna")

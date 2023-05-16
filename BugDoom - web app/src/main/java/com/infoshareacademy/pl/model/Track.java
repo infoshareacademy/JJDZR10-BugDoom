@@ -2,7 +2,6 @@ package com.infoshareacademy.pl.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.util.List;
 import java.util.Objects;
@@ -18,16 +17,8 @@ public class Track {
     @Column(name = "competition_name", nullable = false)
     private String competitionName;
 
-    @NotNull(message = "Podaj współrzędne startu")
     @OneToMany(mappedBy = "track", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Location start;
-
-    @NotNull(message = "Podaj współrzędne mety")
-    @OneToMany(mappedBy = "track", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Location finish;
-
-    @OneToMany(mappedBy = "track", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Location> checkpoints;
+    private List<Location> locations;
 
     @Positive(message = "Długość biegu musi być większa od 0")
     @Column(name = "track_length")
@@ -42,6 +33,7 @@ public class Track {
     private String terrain;
 
     @ManyToOne
+    @JoinColumn(name = "event_id")
     private Event event;
 
     public Track() {
@@ -61,22 +53,6 @@ public class Track {
 
     public void setCompetitionName(String competitionName) {
         this.competitionName = competitionName;
-    }
-
-    public Location getStart() {
-        return start;
-    }
-
-    public void setStart(Location start) {
-        this.start = start;
-    }
-
-    public Location getFinish() {
-        return finish;
-    }
-
-    public void setFinish(Location finish) {
-        this.finish = finish;
     }
 
     public int getLength() {
@@ -116,9 +92,7 @@ public class Track {
         return "Track{" +
                 "trackId=" + trackId +
                 ", competitionName='" + competitionName + '\'' +
-                ", start=" + start +
-                ", finish=" + finish +
-                ", checkpoints=" + checkpoints +
+                ", checkpoints=" + locations +
                 ", length=" + length +
                 ", difficulty='" + difficulty + '\'' +
                 ", terrain='" + terrain + '\'' +
@@ -137,9 +111,7 @@ public class Track {
         if (length != track.length) return false;
         if (!Objects.equals(competitionName, track.competitionName))
             return false;
-        if (!Objects.equals(start, track.start)) return false;
-        if (!Objects.equals(finish, track.finish)) return false;
-        if (!Objects.equals(checkpoints, track.checkpoints)) return false;
+        if (!Objects.equals(locations, track.locations)) return false;
         if (!Objects.equals(difficulty, track.difficulty)) return false;
         if (!Objects.equals(terrain, track.terrain)) return false;
         return Objects.equals(event, track.event);
@@ -149,9 +121,7 @@ public class Track {
     public int hashCode() {
         int result = (int) (trackId ^ (trackId >>> 32));
         result = 31 * result + (competitionName != null ? competitionName.hashCode() : 0);
-        result = 31 * result + (start != null ? start.hashCode() : 0);
-        result = 31 * result + (finish != null ? finish.hashCode() : 0);
-        result = 31 * result + (checkpoints != null ? checkpoints.hashCode() : 0);
+        result = 31 * result + (locations != null ? locations.hashCode() : 0);
         result = 31 * result + length;
         result = 31 * result + (difficulty != null ? difficulty.hashCode() : 0);
         result = 31 * result + (terrain != null ? terrain.hashCode() : 0);

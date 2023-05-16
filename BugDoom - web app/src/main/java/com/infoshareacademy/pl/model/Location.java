@@ -16,6 +16,15 @@ public class Location {
     @Column(name = "y_coordinate", nullable = false)
     private double y;
 
+    @Column(name = "is_finish")
+    private boolean isTrackFinish;
+
+    @Column(name = "is_start")
+    private boolean isTrackStart;
+
+    @Column(name = "is_checkpoint")
+    private boolean isCheckpoint;
+
     @ManyToOne
     private Track track;
 
@@ -46,6 +55,38 @@ public class Location {
         this.y = y;
     }
 
+    public boolean isTrackFinish() {
+        return isTrackFinish;
+    }
+
+    public void setTrackFinish(boolean trackFinish) {
+        isTrackFinish = trackFinish;
+    }
+
+    public boolean isTrackStart() {
+        return isTrackStart;
+    }
+
+    public void setTrackStart(boolean trackStart) {
+        isTrackStart = trackStart;
+    }
+
+    public boolean isCheckpoint() {
+        return isCheckpoint;
+    }
+
+    public void setCheckpoint(boolean checkpoint) {
+        isCheckpoint = checkpoint;
+    }
+
+    public Track getTrack() {
+        return track;
+    }
+
+    public void setTrack(Track track) {
+        this.track = track;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -55,7 +96,11 @@ public class Location {
 
         if (Double.compare(location.x, x) != 0) return false;
         if (Double.compare(location.y, y) != 0) return false;
-        return Objects.equals(id, location.id);
+        if (isTrackFinish != location.isTrackFinish) return false;
+        if (isTrackStart != location.isTrackStart) return false;
+        if (isCheckpoint != location.isCheckpoint) return false;
+        if (!Objects.equals(id, location.id)) return false;
+        return Objects.equals(track, location.track);
     }
 
     @Override
@@ -67,8 +112,10 @@ public class Location {
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         temp = Double.doubleToLongBits(y);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + (isTrackFinish ? 1 : 0);
+        result = 31 * result + (isTrackStart ? 1 : 0);
+        result = 31 * result + (isCheckpoint ? 1 : 0);
+        result = 31 * result + (track != null ? track.hashCode() : 0);
         return result;
     }
 }
-
-

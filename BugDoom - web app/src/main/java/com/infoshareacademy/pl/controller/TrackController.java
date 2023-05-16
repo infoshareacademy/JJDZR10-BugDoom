@@ -1,5 +1,6 @@
 package com.infoshareacademy.pl.controller;
 
+import com.infoshareacademy.pl.model.Location;
 import com.infoshareacademy.pl.model.Track;
 import com.infoshareacademy.pl.service.EventService;
 import com.infoshareacademy.pl.service.TrackService;
@@ -28,7 +29,7 @@ public class TrackController {
         model.addAttribute("track", emptyTrack);
 
         if (name != null && !name.isBlank()) {
-            model.addAttribute("tracks", trackService.findTracksByKeyword(name));
+            model.addAttribute("tracks", trackService.findTracksByName(name));
             model.addAttribute("name", name);
         } else if (difficulty != null) {
             model.addAttribute("tracks", trackService.filterTracksByDifficulty(difficulty));
@@ -36,11 +37,12 @@ public class TrackController {
         } else {
             model.addAttribute("tracks", trackService.getAllTracks());
         }
+        model.addAttribute("tracks", trackService.getAllTracks());
         return "tracks/track";
     }
 
     @GetMapping("tracks/delete/{trackId}")
-    public String deleteTrack(@PathVariable long trackId) {
+    public String deleteTrack(@PathVariable Long trackId) {
         trackService.removeTrackById(trackId);
         return "redirect:/tracks";
     }
@@ -52,9 +54,7 @@ public class TrackController {
         if (bindingResult.hasErrors()) {
             return "tracks/add-track";
         }
-        newTrack.setTrackId(trackService.createRandomId());
-        newTrack.setEventId(eventId);
-        trackService.assignTrackToEvent(newTrack, eventId);
+        newTrack.setEvent(eventService.findEventById(eventId));
         trackService.addTrack(newTrack);
         return "redirect:/tracks";
     }
@@ -62,6 +62,8 @@ public class TrackController {
     @GetMapping("/tracks/create")
     public String showCreateForm(Model model) {
         model.addAttribute("track", new Track());
+        model.addAttribute("start", new Location());
+        model.addAttribute("finish", new Location());
         model.addAttribute("allEvents", eventService.getAllEvents());
         return "tracks/add-track";
     }
@@ -75,7 +77,7 @@ public class TrackController {
             return "tracks/track-error";
         }
         model.addAttribute("track", track);
-        model.addAttribute("event", eventService.findEventById(track.getEventId()));
+        model.addAttribute("event", eventService.findEventById(track.getEvent().getEventId()));
         return "tracks/track-details";
     }
 
@@ -83,7 +85,7 @@ public class TrackController {
     public String getTrackEditForm(@PathVariable("trackId") Long trackId, Model model) {
         Track track = trackService.findTrackById(trackId);
         model.addAttribute("track", track);
-        model.addAttribute("currentEvent", eventService.findEventById(track.getEventId()));
+        model.addAttribute("currentEvent", eventService.findEventById(track.getEvent().getEventId()));
         model.addAttribute("allEvents", eventService.getAllEvents());
         return "tracks/edit-track";
     }
@@ -96,12 +98,10 @@ public class TrackController {
         if (bindingResult.hasErrors()) {
             return "tracks/edit-track";
         }
-        if (track.getEventId() != eventId) {
-            trackService.assignTrackToEvent(track, eventId);
-
+        if (track.getEvent().getEventId() != eventId) {
+            track.setEvent(eventService.findEventById(eventId));
         }
-        track.setEventId(eventId);
-        trackService.editTrackById(trackId, track);
+        trackService.editTrack(track);
         return "redirect:/tracks";
     }
 }
