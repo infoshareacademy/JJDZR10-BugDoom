@@ -87,6 +87,24 @@ public class Track {
         this.event = event;
     }
 
+    public Location getFinish() {
+        return locations.stream()
+                .filter(Location::isTrackFinish)
+                .findFirst().orElse(new Location(0.0, 0.0));
+    }
+
+    public Location getStart() {
+        return locations.stream()
+                .filter(Location::isTrackStart)
+                .findFirst().orElse(new Location(0.0, 0.0));
+    }
+
+    public List<Location> getCheckpoints() {
+        return locations.stream()
+                .filter(Location::isCheckpoint)
+                .toList();
+    }
+
     @Override
     public String toString() {
         return "Track{" +

@@ -1,6 +1,5 @@
 package com.infoshareacademy.pl.controller;
 
-import com.infoshareacademy.pl.model.Location;
 import com.infoshareacademy.pl.model.Track;
 import com.infoshareacademy.pl.service.EventService;
 import com.infoshareacademy.pl.service.TrackService;
@@ -37,7 +36,6 @@ public class TrackController {
         } else {
             model.addAttribute("tracks", trackService.getAllTracks());
         }
-        model.addAttribute("tracks", trackService.getAllTracks());
         return "tracks/track";
     }
 
@@ -62,8 +60,6 @@ public class TrackController {
     @GetMapping("/tracks/create")
     public String showCreateForm(Model model) {
         model.addAttribute("track", new Track());
-        model.addAttribute("start", new Location());
-        model.addAttribute("finish", new Location());
         model.addAttribute("allEvents", eventService.getAllEvents());
         return "tracks/add-track";
     }

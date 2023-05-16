@@ -10,10 +10,10 @@ public class Location {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "x_coordinate", nullable = false)
+    @Column(name = "x_coordinate")
     private double x;
 
-    @Column(name = "y_coordinate", nullable = false)
+    @Column(name = "y_coordinate")
     private double y;
 
     @Column(name = "is_finish")
@@ -29,6 +29,11 @@ public class Location {
     private Track track;
 
     public Location() {
+    }
+
+    public Location(double x, double y) {
+        this.x = x;
+        this.y = y;
     }
 
     public Long getId() {
