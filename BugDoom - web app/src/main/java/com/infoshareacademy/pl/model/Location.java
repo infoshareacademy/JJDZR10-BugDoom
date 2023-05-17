@@ -3,26 +3,26 @@ package com.infoshareacademy.pl.model;
 import java.util.Objects;
 
 public class Location {
-    private double x;
-    private double y;
+    private double latitude;
+    private double longitude;
     private String pointName;
 
 
     public Location() {
     }
 
-    public Location(double x, double y, String pointName) {
-        this.x = x;
-        this.y = y;
+    public Location(double latitude, double longitude, String pointName) {
+        this.latitude = latitude;
+        this.longitude = longitude;
         this.pointName = pointName;
     }
 
-    public double getX() {
-        return x;
+    public double getLatitude() {
+        return latitude;
     }
 
-    public double getY() {
-        return y;
+    public double getLongitude() {
+        return longitude;
     }
 
     @Override
@@ -32,8 +32,8 @@ public class Location {
 
         Location location = (Location) o;
 
-        if (Double.compare(location.x, x) != 0) return false;
-        if (Double.compare(location.y, y) != 0) return false;
+        if (Double.compare(location.latitude, latitude) != 0) return false;
+        if (Double.compare(location.longitude, longitude) != 0) return false;
         return Objects.equals(pointName, location.pointName);
     }
 
@@ -41,9 +41,9 @@ public class Location {
     public int hashCode() {
         int result;
         long temp;
-        temp = Double.doubleToLongBits(x);
+        temp = Double.doubleToLongBits(latitude);
         result = (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(y);
+        temp = Double.doubleToLongBits(longitude);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + (pointName != null ? pointName.hashCode() : 0);
         return result;

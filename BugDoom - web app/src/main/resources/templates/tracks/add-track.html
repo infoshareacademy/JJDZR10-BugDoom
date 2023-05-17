@@ -4,17 +4,9 @@
       layout:decorate="~{fragments/main_view}">
 <head>
     <meta charset="UTF-8">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
-        integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
-        crossorigin=""/>
-
-  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
-          integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
-          crossorigin=""></script>
-
 
   <title>New track</title>
-  <style>#map { height: 600px; }</style>
+
 </head>
 <body>
 <div layout:fragment ="content" class="container text-left">
@@ -23,10 +15,10 @@
     <div style="margin-top: 5px">
     <p>Nazwa biegu: <input type="text" placeholder="Nazwa nowego biegu" th:field="*{competitionName}"/></p>
     </div>
-    <p>Szerokość geograficzna startu: <input type="number" min="14.07" max="24.09"  step="0.001" th:field="*{start.x}"/></p>
-    <p>Długość geograficzna startu: <input type="number" min="14.07" max="24.09"  step="0.001" th:field="*{start.y}"/></p>
-    <p>Szerokość geograficzna mety: <input type="number" min="49" max="54.5"  step="0.001" th:field="*{finish.x}"/></p>
-    <p>Długość geograficzna mety: <input type="number" min="14.07" max="24.09"  step="0.001" th:field="*{finish.y}"/></p>
+    <p>Szerokość geograficzna startu: <input type="number" min="14.07" max="24.09"  step="0.001" th:field="*{start.latitude}"/></p>
+    <p>Długość geograficzna startu: <input type="number" min="14.07" max="24.09"  step="0.001" th:field="*{start.longitude}"/></p>
+    <p>Szerokość geograficzna mety: <input type="number" min="49" max="54.5"  step="0.001" th:field="*{finish.latitude}"/></p>
+    <p>Długość geograficzna mety: <input type="number" min="14.07" max="24.09"  step="0.001" th:field="*{finish.longitude}"/></p>
     <div style="margin-top: 5px" >Poziom trudności:
       <input type="radio" id="difficultyChoice1" name="difficulty" value="łatwy"/>
       <label for="terrainChoice1">łatwy</label>
@@ -51,44 +43,6 @@
     <p><input class="btn btn-success" type="submit" value="Zatwierdź"/>
       <input class="btn btn-secondary" type="reset" value="Zresetuj"/></p>
   </form>
-  <div id="map"></div>
-
-  <script th:inline="javascript">
-    var options = {center: [54.349, 18.651],zoom: 12}
-    var map = L.map('map', options);
-
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 20,
-      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    }).addTo(map);
-
-    var popup = L.popup();
-
-    function onMapClick(e) {
-      var coord = e.latlng;
-      var lat = coord.lat;
-      var lng = coord.lng;
-      var customPopup = ("szerokość " +lat +" długość " + lng) +
-              "<button class=\"btn btn-outline-success btn-sm\" type=\"submit\">Dodaj checkpoint</button>";
-      var customOptions =
-              {
-                'maxWidth': '400',
-                'width': '200',
-                'className' : 'popupCustom'
-              }
-
-      var marker = L.marker([lat,lng]).bindPopup(customPopup,customOptions);
-          marker.addTo(map);
-
-      popup.setLatLng(e.latlng)
-              .setContent("Szerokość geograficzna: " +lat + "\nDługość geograficzna: " + lng);
-              // .openOn(map);
-    }
-
-    map.on('click', onMapClick);
-
-  </script>
-
 
   <script>
     const value = document.querySelector("#value")

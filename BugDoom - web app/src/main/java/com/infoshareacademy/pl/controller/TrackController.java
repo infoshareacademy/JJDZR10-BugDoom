@@ -1,5 +1,6 @@
 package com.infoshareacademy.pl.controller;
 
+import com.infoshareacademy.pl.model.Location;
 import com.infoshareacademy.pl.model.Track;
 import com.infoshareacademy.pl.service.TrackService;
 import org.springframework.stereotype.Controller;
@@ -89,5 +90,12 @@ public class TrackController {
         trackService.editTrackById(trackId, track);
         return "redirect:/tracks";
     }
+
+    @GetMapping("/tracks/checkpoints")
+    public String createCheckpoints (Model model, Location checkpoints) {
+        model.addAttribute("checkpoints", checkpoints);
+        return "tracks/checkpoints";
+    }
+
 }
 
