@@ -67,7 +67,7 @@ public class TrackController {
     }
 
     @GetMapping("/tracks/{id}")
-    public String getTrackDetails(@PathVariable("id") Long id, Model model) {
+    public String getTrackDetails(@PathVariable("id") long id, Model model) {
         Track track = trackService.findTrackById(id);
 
         if (track == null) {
@@ -80,7 +80,7 @@ public class TrackController {
     }
 
     @GetMapping("/tracks/edit-track/{trackId}")
-    public String getTrackEditForm(@PathVariable("trackId") Long trackId, Model model) {
+    public String getTrackEditForm(@PathVariable("trackId") long trackId, Model model) {
         Track track = trackService.findTrackById(trackId);
         model.addAttribute("track", track);
         model.addAttribute("currentEvent", eventService.findEventById(track.getEventId()));
@@ -89,7 +89,7 @@ public class TrackController {
     }
 
     @PostMapping("/tracks/{trackId}/edit")
-    public String editTrack(@PathVariable("trackId") Long trackId,
+    public String editTrack(@PathVariable("trackId") long trackId,
                             @Valid @ModelAttribute Track track,
                             BindingResult bindingResult,
                             @RequestParam("track.eventId") long eventId) {
