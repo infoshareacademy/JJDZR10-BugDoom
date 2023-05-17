@@ -106,12 +106,32 @@ public class Track {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         Track track = (Track) o;
-        return trackId == track.trackId && length == track.length && eventId == track.eventId && Objects.equals(competitionName, track.competitionName) && Objects.equals(start, track.start) && Objects.equals(finish, track.finish) && Objects.equals(checkpoints, track.checkpoints) && Objects.equals(difficulty, track.difficulty) && Objects.equals(terrain, track.terrain);
+
+        if (trackId != track.trackId) return false;
+        if (length != track.length) return false;
+        if (eventId != track.eventId) return false;
+        if (!Objects.equals(competitionName, track.competitionName))
+            return false;
+        if (!Objects.equals(start, track.start)) return false;
+        if (!Objects.equals(finish, track.finish)) return false;
+        if (!Objects.equals(checkpoints, track.checkpoints)) return false;
+        if (!Objects.equals(difficulty, track.difficulty)) return false;
+        return Objects.equals(terrain, track.terrain);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(trackId, competitionName, start, finish, checkpoints, length, difficulty, terrain, eventId);
+        int result = (int) (trackId ^ (trackId >>> 32));
+        result = 31 * result + (competitionName != null ? competitionName.hashCode() : 0);
+        result = 31 * result + (start != null ? start.hashCode() : 0);
+        result = 31 * result + (finish != null ? finish.hashCode() : 0);
+        result = 31 * result + (checkpoints != null ? checkpoints.hashCode() : 0);
+        result = 31 * result + length;
+        result = 31 * result + (difficulty != null ? difficulty.hashCode() : 0);
+        result = 31 * result + (terrain != null ? terrain.hashCode() : 0);
+        result = 31 * result + (int) (eventId ^ (eventId >>> 32));
+        return result;
     }
 }
