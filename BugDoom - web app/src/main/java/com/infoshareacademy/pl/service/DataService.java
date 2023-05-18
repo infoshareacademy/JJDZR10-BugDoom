@@ -2,6 +2,7 @@ package com.infoshareacademy.pl.service;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.infoshareacademy.pl.logger.BaseLogger;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -13,7 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Service
-public class DataService<T> {
+public class DataService<T> extends BaseLogger {
     private Gson gson = new Gson();
 
     public <T> void saveToFile(T listToSave, String file) throws IOException {
@@ -23,6 +24,7 @@ public class DataService<T> {
         }
         String json = gson.toJson(listToSave);
         Files.write(path, json.getBytes());
+        logger.info("Zapisano dane do pliku: {}");
     }
 
     public List<T> readFromFile(String file, Class<T[]> classToRead) throws IOException {
@@ -32,6 +34,7 @@ public class DataService<T> {
             gson = addLocalDateDeserializer();
         }
         T[] arr = gson.fromJson(objectsFromFile, classToRead);
+        logger.info("Odczyt danych z pliku: {}");
         return Arrays.asList(arr);
     }
 

@@ -2,6 +2,8 @@ package com.infoshareacademy.pl.service;
 
 import com.infoshareacademy.pl.model.User;
 import com.infoshareacademy.pl.repository.UserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -11,6 +13,7 @@ import java.util.NoSuchElementException;
 
 @Service
 public class UserService implements UserRepository {
+    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
     private final String USERS_FILE_PATH = FilePathConstants.USERS_FILE_PATH;
     private final DataService<User> dataService;
     private User currentUser;
@@ -20,12 +23,14 @@ public class UserService implements UserRepository {
     }
 
     public void addNewUser(User user) throws IOException {
+        logger.info("Stworzenie nowego użytkownika: {}");
         List<User> users = getAllUsers();
         users.add(user);
         dataService.saveToFile(users, USERS_FILE_PATH);
     }
 
     public void deleteUser(User userToDelete) throws IOException {
+        logger.info("Usunięcie użytkownika: {}");
         List<User> users = getAllUsers();
         users.remove(userToDelete);
         dataService.saveToFile(users, USERS_FILE_PATH);

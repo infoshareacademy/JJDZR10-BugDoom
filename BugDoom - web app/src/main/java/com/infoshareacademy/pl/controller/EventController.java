@@ -1,5 +1,6 @@
 package com.infoshareacademy.pl.controller;
 
+import com.infoshareacademy.pl.logger.BaseLogger;
 import com.infoshareacademy.pl.model.Event;
 import com.infoshareacademy.pl.service.EventService;
 import org.springframework.stereotype.Controller;
@@ -15,7 +16,7 @@ import java.io.IOException;
 import java.util.List;
 
 @Controller
-public class EventController {
+public class EventController extends BaseLogger {
     private final EventService eventService;
 
     public EventController(EventService eventService) {
@@ -40,6 +41,7 @@ public class EventController {
 
     @PostMapping("/events")
     public String createEvent(@Valid @ModelAttribute Event event, BindingResult bindingResult) throws IOException {
+        logger.info("Wywołano metodę createEvent: " + event);
         if (bindingResult.hasErrors()) {
             return "events/new-event";
         }
@@ -50,6 +52,7 @@ public class EventController {
 
     @GetMapping("events/delete/{eventId}")
     public String deleteEvent(@PathVariable long eventId) throws IOException {
+        logger.info("Wywołano metodę deleteEvent()");
         eventService.removeEventById(eventId);
         return "redirect:/events";
     }

@@ -3,14 +3,18 @@ package com.infoshareacademy.pl.service;
 import com.infoshareacademy.pl.exception.TrackNotFoundException;
 import com.infoshareacademy.pl.model.Track;
 import com.infoshareacademy.pl.repository.TrackRepository;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.logging.Logger;
 
 @Service
 public class TrackService implements TrackRepository {
+    private static final Logger logger = (Logger) LoggerFactory.getLogger(TrackService.class);
 
     private static final String TRACK_FILE_PATH = FilePathConstants.TRACK_FILE_PATH;
     private final DataService<Track> dataService;
@@ -30,6 +34,7 @@ public class TrackService implements TrackRepository {
 
     @Override
     public void addTrack(Track trackToAdd) throws IOException {
+        logger.info("Dodanie trasy: {}");
         List<Track> allTracks = getAllTracks();
         allTracks.add(trackToAdd);
         saveTracksToFile(allTracks);
@@ -37,6 +42,7 @@ public class TrackService implements TrackRepository {
 
     @Override
     public void removeTrackById(long trackId) throws IOException {
+        logger.info("Usinięcie trasy: {}");
         List<Track> allTracks = getAllTracks();
         Track trackToDelete = findTrackById(trackId);
         allTracks.remove(trackToDelete);
@@ -46,6 +52,7 @@ public class TrackService implements TrackRepository {
     @Override
     public void saveTracksToFile(List<Track> tracksToSave) throws IOException {
         dataService.saveToFile(tracksToSave, TRACK_FILE_PATH);
+        logger.info("Zapisanie trasy do pliku: {}");
     }
 
     @Override
