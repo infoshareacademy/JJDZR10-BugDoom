@@ -6,7 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -29,7 +28,7 @@ public class UserController {
     }
 
     @GetMapping("/users")
-    public String getUsers(Model model) throws IOException {
+    public String getUsers(Model model) {
         List<User> users = userService.getAllUsers();
         model.addAttribute("users", users);
         return "users";

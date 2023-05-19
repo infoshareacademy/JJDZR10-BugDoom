@@ -57,20 +57,20 @@ public class EventController {
     }
 
     @GetMapping("/events/{eventId}")
-    public String getEventById(@PathVariable("eventId") Long eventId, Model model) {
+    public String getEventById(@PathVariable("eventId") long eventId, Model model) {
         model.addAttribute("event", eventService.findEventById(eventId));
         return "events/single-event";
     }
 
     @GetMapping("/events/edition-form/{eventId}")
-    public String getEventEditForm(@PathVariable("eventId") Long eventId, Model model) {
+    public String getEventEditForm(@PathVariable("eventId") long eventId, Model model) {
         Event event = eventService.findEventById(eventId);
         model.addAttribute("event", event);
         return "events/event-edition";
     }
 
     @PostMapping("/events/{eventId}/edit")
-    public String editEvent(@PathVariable("eventId") Long eventId,
+    public String editEvent(@PathVariable("eventId") long eventId,
                             @Valid @ModelAttribute Event event,
                             BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {

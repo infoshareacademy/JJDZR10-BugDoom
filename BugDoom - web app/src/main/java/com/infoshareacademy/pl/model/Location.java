@@ -11,6 +11,8 @@ public class Location {
     private Long id;
 
     @Column(name = "x_coordinate")
+
+    private String locationName;
     private double x;
 
     @Column(name = "y_coordinate")
@@ -31,7 +33,8 @@ public class Location {
     public Location() {
     }
 
-    public Location(double x, double y) {
+    public Location(String locationName, double x, double y) {
+        this.locationName = locationName;
         this.x = x;
         this.y = y;
     }
@@ -42,6 +45,14 @@ public class Location {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getLocationName() {
+        return locationName;
+    }
+
+    public void setLocationName(String locationName) {
+        this.locationName = locationName;
     }
 
     public double getX() {
@@ -96,7 +107,6 @@ public class Location {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Location location = (Location) o;
 
         if (Double.compare(location.x, x) != 0) return false;
@@ -122,5 +132,14 @@ public class Location {
         result = 31 * result + (isCheckpoint ? 1 : 0);
         result = 31 * result + (track != null ? track.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Location{" +
+                "locationName='" + locationName + '\'' +
+                ", x=" + x +
+                ", y=" + y +
+                '}';
     }
 }
