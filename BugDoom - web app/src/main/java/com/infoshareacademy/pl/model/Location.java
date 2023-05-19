@@ -33,8 +33,7 @@ public class Location {
     public Location() {
     }
 
-    public Location(String locationName, double x, double y) {
-        this.locationName = locationName;
+    public Location(double x, double y) {
         this.x = x;
         this.y = y;
     }
