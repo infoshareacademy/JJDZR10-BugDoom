@@ -72,6 +72,14 @@ public class Event {
         this.eventType = eventType;
     }
 
+    public List<Track> getTracks() {
+        return tracks;
+    }
+
+    public void setTracks(List<Track> tracks) {
+        this.tracks = tracks;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

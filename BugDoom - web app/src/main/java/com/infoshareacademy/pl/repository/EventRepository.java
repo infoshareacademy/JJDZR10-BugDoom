@@ -6,15 +6,15 @@ import java.io.IOException;
 import java.util.List;
 
 public interface EventRepository {
-    Event findEventById(long eventId) throws IOException;
+    Event findEventById(long eventId);
 
-    List<Event> getAllEvents() throws IOException;
+    List<Event> getAllEvents();
 
-    void addEvent(Event eventToAdd) throws IOException;
+    void addEvent(Event eventToAdd);
 
-    void removeEventById(long eventId) throws IOException;
+    void removeEventById(long eventId);
 
-    void editEventById(long eventId, Event event) throws IOException;
+    void editEventById(long eventId, Event event);
 
     long createRandomId();
 }

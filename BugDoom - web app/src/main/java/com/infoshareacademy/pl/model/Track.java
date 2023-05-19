@@ -21,6 +21,7 @@ public class Track {
     private String difficulty;
     @NotEmpty (message = "Wybierz lokalizację")
     private String terrain;
+    private long eventId;
 
     public long getTrackId() {
         return trackId;
@@ -78,6 +79,14 @@ public class Track {
         this.terrain = terrain;
     }
 
+    public long getEventId() {
+        return eventId;
+    }
+
+    public void setEventId(long eventId) {
+        this.eventId = eventId;
+    }
+
     @Override
     public String toString() {
         return "Track{" +
@@ -89,6 +98,7 @@ public class Track {
                 ", length=" + length +
                 ", difficulty='" + difficulty + '\'' +
                 ", terrain='" + terrain + '\'' +
+                ", eventId=" + eventId +
                 '}';
     }
 
@@ -101,6 +111,7 @@ public class Track {
 
         if (trackId != track.trackId) return false;
         if (length != track.length) return false;
+        if (eventId != track.eventId) return false;
         if (!Objects.equals(competitionName, track.competitionName))
             return false;
         if (!Objects.equals(start, track.start)) return false;
@@ -120,6 +131,7 @@ public class Track {
         result = 31 * result + length;
         result = 31 * result + (difficulty != null ? difficulty.hashCode() : 0);
         result = 31 * result + (terrain != null ? terrain.hashCode() : 0);
+        result = 31 * result + (int) (eventId ^ (eventId >>> 32));
         return result;
     }
 }
