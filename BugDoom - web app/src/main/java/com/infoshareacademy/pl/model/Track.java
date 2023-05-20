@@ -23,6 +23,14 @@ public class Track {
     private String terrain;
     private long eventId;
 
+    public List<Location> getCheckpoints() {
+        return checkpoints;
+    }
+
+    public void setCheckpoints(List<Location> checkpoints) {
+        this.checkpoints = checkpoints;
+    }
+
     public long getTrackId() {
         return trackId;
     }

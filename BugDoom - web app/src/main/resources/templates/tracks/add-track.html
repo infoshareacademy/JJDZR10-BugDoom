@@ -4,9 +4,17 @@
       layout:decorate="~{fragments/main_view}">
 <head>
     <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+        integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+        crossorigin=""/>
 
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+          integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+          crossorigin=""></script>
+
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <title>New track</title>
-
+  <style>#map { height: 400px; }</style>
 </head>
 <body>
 <div layout:fragment ="content" class="container text-left">
@@ -46,12 +54,90 @@
                 th:text="${event.eventName}"></option>
       </select>
     </div>
+    <div id="map" class="container"></div>
+    <div>
+      <table style="margin: 5px"  id="data-table" class="table">
+    <tr th:each="checkpoints, iterStat: ${track.checkpoints}">
+      <td th:value="${checkpoints.latitude}" >Szerokość</td>
+      <td th:value="${checkpoints.longitude}">Długość</td>
+      <td th:text="${checkpoints.locationName}">Nazwa</td>
+    </tr>
+      </table>
+    </div>
+
     <ul th:if="${#fields.hasErrors('*')}">
       <li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
     </ul>
     <p><input class="btn btn-success" type="submit" value="Zatwierdź"/>
       <input class="btn btn-secondary" type="reset" value="Zresetuj"/></p>
   </form>
+
+  <script th:inline="javascript">
+
+    function updateDataTable (map) {
+      let dataTableBody = $('#data-table tbody')
+      dataTableBody.html('<tr></tr>')
+      map.eachLayer(layer => {
+        let popup = layer.getPopup()
+        if (popup) {
+          let text = $(popup.getContent()).find('.popup-span').text()
+          let latLng = layer.getLatLng()
+          dataTableBody.append(
+                  $('<tr></tr>').append(
+                          $('<td></td>').text(latLng.lat),
+                          $('<td></td>').text(latLng.lng),
+                          $('<td></td>').text(text),
+                  )
+          )
+        }
+      })
+    }
+
+    function createPopupContents(marker) {
+      let popupContents = $('<div></div>')
+      popupContents.append(
+              $('<span></span>').addClass('popup-span').text('Checkpoint')
+      )
+
+
+      let trashButton = $('<button><i class="fas fa-trash" />Usuń</button>')
+              .on('click', event => {
+                marker.remove()
+                updateDataTable(map)
+              })
+
+      popupContents.append(trashButton)
+      return popupContents[0]
+    }
+
+    var options = {center: [54.349, 18.651],zoom: 12}
+    var map = L.map('map', options);
+
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 20,
+      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+
+    let popupOpen = null
+    map.on('preclick', mapEvent => {
+      popupOpen = false
+      map.eachLayer(layer => {
+        if (layer.getPopup() && layer.getPopup().isOpen()) {
+          popupOpen = true
+        }
+      })
+    })
+
+    map.on('click', mapEvent => {
+      if (!popupOpen) {
+        let marker = L.marker(mapEvent.latlng)
+        marker.addTo(map).bindPopup(createPopupContents(marker));
+        updateDataTable(map)
+      }
+    })
+    updateDataTable(map)
+
+  </script>
   <script>
     const value = document.querySelector("#value")
     const input = document.querySelector("#length_input")
