@@ -15,10 +15,10 @@
     <div style="margin-top: 5px">
     <p>Nazwa biegu: <input type="text" placeholder="Nazwa nowego biegu" th:field="*{competitionName}"/></p>
     </div>
-    <p>Szerokość geograficzna startu: <input type="number" min="49" max="54.5" placeholder="54.35" step="0.001" th:field="*{start.x}"/></p>
-    <p>Długość geograficzna startu: <input type="number" min="14.07" max="24.09" placeholder="18.65" step="0.001" th:field="*{start.y}"/></p>
-    <p>Szerokość geograficzna mety: <input type="number" min="49" max="54.5" placeholder="54.35" step="0.001" th:field="*{finish.x}"/></p>
-    <p>Długość geograficzna mety: <input type="number" min="14.07" max="24.09" placeholder="18.65" step="0.001" th:field="*{finish.y}"/></p>
+    <p>Szerokość geograficzna startu: <input type="number" min="49" max="54.5" placeholder="54.35" step="0.001" th:field="*{start.latitude}"/></p>
+    <p>Długość geograficzna startu: <input type="number" min="14.07" max="24.09" placeholder="18.65" step="0.001" th:field="*{start.longitude}"/></p>
+    <p>Szerokość geograficzna mety: <input type="number" min="49" max="54.5" placeholder="54.35" step="0.001" th:field="*{finish.latitude}"/></p>
+    <p>Długość geograficzna mety: <input type="number" min="14.07" max="24.09" placeholder="18.65" step="0.001" th:field="*{finish.longitude}"/></p>
     <div style="margin-top: 5px" >Poziom trudności:
       <input type="radio" id="difficultyChoice1" name="difficulty" value="łatwy"/>
       <label for="terrainChoice1">łatwy</label>

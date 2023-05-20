@@ -44,19 +44,19 @@
       <td th:text="${track.difficulty}"></td>
       <td th:text="${track.terrain}"></td>
       <td th:text="${event.eventName}"></td>
-      <td th:text="${track.start.x}"></td>
-      <td th:text="${track.start.y}"></td>
-      <td th:text="${track.finish.x}"></td>
-      <td th:text="${track.finish.y}"></td>
+      <td th:text="${track.start.latitude}"></td>
+      <td th:text="${track.start.longitude}"></td>
+      <td th:text="${track.finish.latitude}"></td>
+      <td th:text="${track.finish.longitude}"></td>
     </tr>
     </tbody>
   </table>
     <div id="map"></div>
     <script th:inline="javascript">
-      var startX = [[${track.start.x}]];
-      var startY = [[${track.start.y}]];
-      var finishX = [[${track.finish.x}]];
-      var finishY = [[${track.finish.y}]];
+      var startX = [[${track.start.latitude}]];
+      var startY = [[${track.start.longitude}]];
+      var finishX = [[${track.finish.latitude}]];
+      var finishY = [[${track.finish.longitude}]];
 
       var map = L.map('map').setView([54.351, 18.65], 12);
 
