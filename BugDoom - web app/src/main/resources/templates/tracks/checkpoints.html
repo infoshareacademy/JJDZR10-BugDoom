@@ -22,17 +22,19 @@
 <div layout:fragment ="content">
   <table style="margin: 5px"  id="data-table" class="table">
     <div id="map" class="container">
-      <form th:action="@{/tracks}" th:object="${track}" method="post">
+      <form th:action="@{/tracks/{trackId}/checkpoints(trackId=${trackId})}" th:object="${checkpoints}" method="post">
         <div class="container">
-          <tr>
-            <th >Szerokość</th>
-            <th>Długość</th>
-            <th>Point Name</th>
+          <tr th:each="checkpoints, iterStat: ${checkpoints}">
+            <td th:value="${checkpoints.latitude}" >Szerokość</td>
+            <td th:value="${checkpoints.longitude}">Długość</td>
+            <td th:text="${checkpoints.locationName}">Nazwa</td>
           </tr>
+          <p><input class="btn btn-success" type="submit" value="Zatwierdź"/></p>
         </div>
       </form>
     </div>
   </table>
+
 
   <script th:inline="javascript">
 
@@ -58,7 +60,7 @@
     function createPopupContents(marker) {
       let popupContents = $('<div></div>')
       popupContents.append(
-              $('<span></span>').addClass('popup-span').text('Checkpoint ')
+              $('<span></span>').addClass('popup-span').text('Checkpoint')
       )
 
 

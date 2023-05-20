@@ -105,8 +105,9 @@ public class TrackController {
         trackService.editTrackById(trackId, track);
         return "redirect:/tracks";
     }
-    @GetMapping("/tracks/checkpoints")
-    public String createCheckpoints (Model model, Location checkpoints) {
+    @GetMapping("/tracks/{trackId}/checkpoints")
+    public String createCheckpoints (@PathVariable("trackId") long trackId, Model model, Location checkpoints) {
+        Track track = trackService.findTrackById(trackId);
         model.addAttribute("checkpoints", checkpoints);
         return "tracks/checkpoints";
     }
