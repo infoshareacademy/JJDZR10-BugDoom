@@ -4,11 +4,12 @@ import com.infoshareacademy.pl.exception.EventNotFoundException;
 import com.infoshareacademy.pl.model.Event;
 import com.infoshareacademy.pl.repository.EventRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Random;
 
 @Service
+@Transactional
 public class EventService {
     private final EventRepository eventRepository;
 

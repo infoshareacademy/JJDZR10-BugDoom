@@ -4,10 +4,12 @@ import com.infoshareacademy.pl.exception.UserNotFoundException;
 import com.infoshareacademy.pl.model.User;
 import com.infoshareacademy.pl.repository.UserRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class UserService {
     private final UserRepository userRepository;
 

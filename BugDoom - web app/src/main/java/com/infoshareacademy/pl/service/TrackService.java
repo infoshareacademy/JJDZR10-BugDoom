@@ -4,10 +4,12 @@ import com.infoshareacademy.pl.exception.TrackNotFoundException;
 import com.infoshareacademy.pl.model.Track;
 import com.infoshareacademy.pl.repository.TrackRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
 @Service
+@Transactional
 public class TrackService {
     private final TrackRepository trackRepository;
 
