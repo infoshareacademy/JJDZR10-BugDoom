@@ -3,6 +3,7 @@ package com.infoshareacademy.pl.service;
 import com.infoshareacademy.pl.exception.EventNotFoundException;
 import com.infoshareacademy.pl.model.Event;
 import com.infoshareacademy.pl.repository.EventRepository;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
@@ -10,11 +11,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.logging.Logger;
+
 
 @Service
 public class EventService implements EventRepository {
-    private static final Logger logger = (Logger) LoggerFactory.getLogger(DataService.class);
+    private static final Logger logger = LoggerFactory.getLogger(DataService.class);
     private static final String EVENT_FILE_PATH = FilePathConstants.EVENT_FILE_PATH;
     private final DataService<Event> dataService;
 
@@ -27,14 +28,14 @@ public class EventService implements EventRepository {
     }
 
     public void addEvent(Event eventToAdd) throws IOException {
-        logger.info("Dodano wydarzenie: {}");
+        logger.info("Added event: {}");
         List<Event> allEvents = getAllEvents();
         allEvents.add(eventToAdd);
         saveEventsToFile(allEvents);
     }
 
     public void removeEventById(long eventId) throws IOException {
-        logger.info("Usunięto wydarzenie: {}");
+        logger.info("Removing event: {}");
         List<Event> allEvents = getAllEvents();
         Event eventToDelete = findEventById(eventId);
         allEvents.remove(eventToDelete);
@@ -56,7 +57,7 @@ public class EventService implements EventRepository {
 
     private void saveEventsToFile(List<Event> eventsToSave) throws IOException {
         dataService.saveToFile(eventsToSave, EVENT_FILE_PATH);
-        logger.info("Wydarzenie zapisano do pliku: {}");
+        logger.info("Event saved to file: {}");
     }
 
     @Override
@@ -68,7 +69,7 @@ public class EventService implements EventRepository {
                 .orElseThrow(() -> new EventNotFoundException("Event with the following id has not been found: %x".formatted(eventId)));
     }
     public long createRandomId() {
-        logger.info("Stworzono random ID: {}");
+        logger.info("Create random ID: {}");
         return new Random().nextLong(1001);
     }
 }

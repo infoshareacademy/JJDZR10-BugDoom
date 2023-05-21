@@ -1,6 +1,5 @@
 package com.infoshareacademy.pl.controller;
 
-import com.infoshareacademy.pl.logger.BaseLogger;
 import com.infoshareacademy.pl.model.Track;
 import com.infoshareacademy.pl.service.TrackService;
 import org.springframework.stereotype.Controller;
@@ -16,7 +15,7 @@ import java.io.IOException;
 
 
 @Controller
-public class TrackController extends BaseLogger {
+public class TrackController {
     private final TrackService trackService;
 
     public TrackController(TrackService trackService) {
@@ -43,14 +42,12 @@ public class TrackController extends BaseLogger {
 
     @GetMapping("tracks/delete/{trackId}")
     public String deleteTrack(@PathVariable long trackId) throws IOException {
-        logger.info("Wywołano metodę deleteTrack()");
         trackService.removeTrackById(trackId);
         return "redirect:/tracks";
     }
 
     @PostMapping("/tracks")
     public String createTrack(@Valid @ModelAttribute Track track, BindingResult bindingResult) throws IOException {
-        logger.info("Wywołano metodę createTrack()");
         if (bindingResult.hasErrors()) {
             return "tracks/add-track";
         }
@@ -86,7 +83,6 @@ public class TrackController extends BaseLogger {
 
     @PostMapping("/tracks/{trackId}/edit")
     public String editTrack(@PathVariable("trackId") Long trackId, @Valid @ModelAttribute Track track, BindingResult bindingResult) throws IOException {
-        logger.info("Wywołano metodę editTrack()");
         if (bindingResult.hasErrors()) {
             return "tracks/edit-track";
         }

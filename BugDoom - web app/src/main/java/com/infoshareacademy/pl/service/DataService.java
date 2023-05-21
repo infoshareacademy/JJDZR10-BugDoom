@@ -24,7 +24,7 @@ public class DataService<T> extends BaseLogger {
         }
         String json = gson.toJson(listToSave);
         Files.write(path, json.getBytes());
-        logger.info("Zapisano dane do pliku: {}");
+        logger.info("Saved data to file: {}");
     }
 
     public List<T> readFromFile(String file, Class<T[]> classToRead) throws IOException {
@@ -34,7 +34,7 @@ public class DataService<T> extends BaseLogger {
             gson = addLocalDateDeserializer();
         }
         T[] arr = gson.fromJson(objectsFromFile, classToRead);
-        logger.info("Odczyt danych z pliku: {}");
+        logger.info("Read data from file: {}");
         return Arrays.asList(arr);
     }
 

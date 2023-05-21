@@ -23,14 +23,14 @@ public class UserService implements UserRepository {
     }
 
     public void addNewUser(User user) throws IOException {
-        logger.info("Stworzenie nowego użytkownika: {}");
+        logger.info("Creating new user: {}");
         List<User> users = getAllUsers();
         users.add(user);
         dataService.saveToFile(users, USERS_FILE_PATH);
     }
 
     public void deleteUser(User userToDelete) throws IOException {
-        logger.info("Usunięcie użytkownika: {}");
+        logger.info("Removing user: {}");
         List<User> users = getAllUsers();
         users.remove(userToDelete);
         dataService.saveToFile(users, USERS_FILE_PATH);
