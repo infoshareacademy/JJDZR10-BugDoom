@@ -54,7 +54,7 @@
                 th:text="${event.eventName}"></option>
       </select>
     </div>
-
+    <div id="map" class="container"></div>
     <div>
       <table id="data-table" class="table">
         <thead>
@@ -71,7 +71,7 @@
         </tbody>
       </table>
     </div>
-    <div id="map" class="container"></div>
+
     <ul th:if="${#fields.hasErrors('*')}">
       <li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
     </ul>
