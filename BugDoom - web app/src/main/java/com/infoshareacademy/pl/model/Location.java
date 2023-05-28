@@ -10,13 +10,14 @@ public class Location {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "x_coordinate")
-
+    @Column(name = "location_name")
     private String locationName;
-    private double x;
 
-    @Column(name = "y_coordinate")
-    private double y;
+    @Column(name = "latitude")
+    private double latitude;
+
+    @Column(name = "longitude")
+    private double longitude;
 
     @Column(name = "is_finish")
     private boolean isTrackFinish;
@@ -33,9 +34,9 @@ public class Location {
     public Location() {
     }
 
-    public Location(double x, double y) {
-        this.x = x;
-        this.y = y;
+    public Location(double latitude, double longitude) {
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     public Long getId() {
@@ -54,20 +55,20 @@ public class Location {
         this.locationName = locationName;
     }
 
-    public double getX() {
-        return x;
+    public double getLatitude() {
+        return latitude;
     }
 
-    public void setX(double x) {
-        this.x = x;
+    public void setLatitude(double x) {
+        this.latitude = x;
     }
 
-    public double getY() {
-        return y;
+    public double getLongitude() {
+        return longitude;
     }
 
-    public void setY(double y) {
-        this.y = y;
+    public void setLongitude(double y) {
+        this.longitude = y;
     }
 
     public boolean isTrackFinish() {
@@ -108,8 +109,8 @@ public class Location {
         if (o == null || getClass() != o.getClass()) return false;
         Location location = (Location) o;
 
-        if (Double.compare(location.x, x) != 0) return false;
-        if (Double.compare(location.y, y) != 0) return false;
+        if (Double.compare(location.latitude, latitude) != 0) return false;
+        if (Double.compare(location.longitude, longitude) != 0) return false;
         if (isTrackFinish != location.isTrackFinish) return false;
         if (isTrackStart != location.isTrackStart) return false;
         if (isCheckpoint != location.isCheckpoint) return false;
@@ -122,9 +123,9 @@ public class Location {
         int result;
         long temp;
         result = id != null ? id.hashCode() : 0;
-        temp = Double.doubleToLongBits(x);
+        temp = Double.doubleToLongBits(latitude);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(y);
+        temp = Double.doubleToLongBits(longitude);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + (isTrackFinish ? 1 : 0);
         result = 31 * result + (isTrackStart ? 1 : 0);
@@ -137,8 +138,8 @@ public class Location {
     public String toString() {
         return "Location{" +
                 "locationName='" + locationName + '\'' +
-                ", x=" + x +
-                ", y=" + y +
+                ", latitude=" + latitude +
+                ", longitude=" + longitude +
                 '}';
     }
 }
