@@ -36,7 +36,7 @@
     </form>
     <div th:if="${tracks.size() == 0}" class="alert alert-danger" role="alert">
         <div>
-            Nie znaleziono trasy, która zawiera w swojej nazwie podaną frazę!
+            Nie znaleziono trasy, która spełnia podane kryteria!
         </div>
     </div>
 
@@ -52,8 +52,8 @@
         <div class="container">
             <tr>
                 <th class="col-1">#</th>
-                <th class="col-3">Nazwa biegu</th>
-                <th class="col-3">
+                <th class="col-2">Nazwa biegu</th>
+                <th class="col-4">
                     <form action="/tracks" method="get">
                         <label for="txtSearch2">Poziom trudności:</label>
                         <select id="txtSearch2" type="text" name="difficulty" th:value="${difficulty}">
@@ -67,6 +67,7 @@
                     </form>
                 </th>
                 <th class="col-1">Teren</th>
+                <th class="col-2">Wydarzenie</th>
                 <th class="col-2">Działania</th>
             </tr>
         </div>
@@ -77,6 +78,7 @@
             <td th:text="${track.getCompetitionName}"></td>
             <td th:text="${track.getDifficulty}"></td>
             <td th:text="${track.getTerrain}"></td>
+            <td th:text="${track.event.eventName}"></td>
             <td>
                 <a th:href="@{/tracks/delete/{id}(id=${track.getTrackId})}" class="btn btn-danger">
                     Usuń

@@ -46,7 +46,6 @@ public class EventController {
         if (bindingResult.hasErrors()) {
             return "events/new-event";
         }
-        event.setEventId(eventService.createRandomId());
         eventService.addEvent(event);
         return "redirect:/events/";
     }
@@ -59,9 +58,7 @@ public class EventController {
 
     @GetMapping("/events/{eventId}")
     public String getEventById(@PathVariable("eventId") long eventId, Model model) {
-        List<Track> tracks = trackService.findTracksByEventId(eventId);
         model.addAttribute("event", eventService.findEventById(eventId));
-        model.addAttribute("track", tracks);
         return "events/single-event";
     }
 
@@ -79,7 +76,7 @@ public class EventController {
         if (bindingResult.hasErrors()) {
             return "events/event-edition";
         }
-        eventService.editEventById(eventId, event);
+        eventService.editEventById(event);
         return "redirect:/events";
     }
 }
