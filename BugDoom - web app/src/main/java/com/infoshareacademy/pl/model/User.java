@@ -1,18 +1,35 @@
 package com.infoshareacademy.pl.model;
 
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.util.Objects;
 
+@Entity
 public class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long userId;
+
     @NotEmpty(message = "Podaj adres email")
     @Email(message = "Niepoprawny adres email")
+    @Column(name = "user_email_address", nullable = false)
     private String userEmailAddress;
+
     @NotEmpty(message = "Podaj imię i nazwisko")
+    @Column(name = "name", nullable = false)
     private String name;
+
     @NotEmpty(message = "Podaj hasło")
+    @Column(name = "password", nullable = false)
     private String password;
+
+    @ManyToOne
+    private Event event;
+
+    public User() {
+    }
 
     public User(String userEmailAddress, String password) {
         this.userEmailAddress = userEmailAddress;

@@ -28,7 +28,7 @@ public class TrackController {
         model.addAttribute("track", emptyTrack);
 
         if (name != null && !name.isBlank()) {
-            model.addAttribute("tracks", trackService.findTracksByKeyword(name));
+            model.addAttribute("tracks", trackService.findTracksByName(name));
             model.addAttribute("name", name);
         } else if (difficulty != null) {
             model.addAttribute("tracks", trackService.filterTracksByDifficulty(difficulty));
@@ -40,7 +40,7 @@ public class TrackController {
     }
 
     @GetMapping("tracks/delete/{trackId}")
-    public String deleteTrack(@PathVariable long trackId) {
+    public String deleteTrack(@PathVariable Long trackId) {
         trackService.removeTrackById(trackId);
         return "redirect:/tracks";
     }
@@ -52,9 +52,7 @@ public class TrackController {
         if (bindingResult.hasErrors()) {
             return "tracks/add-track";
         }
-        newTrack.setTrackId(trackService.createRandomId());
-        newTrack.setEventId(eventId);
-        trackService.assignTrackToEvent(newTrack, eventId);
+        newTrack.setEvent(eventService.findEventById(eventId));
         trackService.addTrack(newTrack);
         return "redirect:/tracks";
     }
@@ -75,7 +73,7 @@ public class TrackController {
             return "tracks/track-error";
         }
         model.addAttribute("track", track);
-        model.addAttribute("event", eventService.findEventById(track.getEventId()));
+        model.addAttribute("event", eventService.findEventById(track.getEvent().getEventId()));
         return "tracks/track-details";
     }
 
@@ -83,7 +81,7 @@ public class TrackController {
     public String getTrackEditForm(@PathVariable("trackId") long trackId, Model model) {
         Track track = trackService.findTrackById(trackId);
         model.addAttribute("track", track);
-        model.addAttribute("currentEvent", eventService.findEventById(track.getEventId()));
+        model.addAttribute("currentEvent", eventService.findEventById(track.getEvent().getEventId()));
         model.addAttribute("allEvents", eventService.getAllEvents());
         return "tracks/edit-track";
     }
@@ -96,12 +94,8 @@ public class TrackController {
         if (bindingResult.hasErrors()) {
             return "tracks/edit-track";
         }
-        if (track.getEventId() != eventId) {
-            trackService.assignTrackToEvent(track, eventId);
-
-        }
-        track.setEventId(eventId);
-        trackService.editTrackById(trackId, track);
+        track.setEvent(eventService.findEventById(eventId));
+        trackService.editTrack(track);
         return "redirect:/tracks";
     }
 }

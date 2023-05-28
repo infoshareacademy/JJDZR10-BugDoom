@@ -4,64 +4,37 @@ import com.infoshareacademy.pl.exception.EventNotFoundException;
 import com.infoshareacademy.pl.model.Event;
 import com.infoshareacademy.pl.repository.EventRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 @Service
-public class EventService implements EventRepository {
-    private static final String EVENT_FILE_PATH = FilePathConstants.EVENT_FILE_PATH;
-    private final DataService<Event> dataService;
+@Transactional
+public class EventService {
+    private final EventRepository eventRepository;
 
-    public EventService(DataService<Event> dataService) {
-        this.dataService = dataService;
+    public EventService(EventRepository eventRepository) {
+        this.eventRepository = eventRepository;
     }
 
     public List<Event> getAllEvents() {
-        return new ArrayList<>(dataService.readFromFile(EVENT_FILE_PATH, Event[].class));
+        return eventRepository.findAll();
     }
 
     public void addEvent(Event eventToAdd) {
-        List<Event> allEvents = getAllEvents();
-        allEvents.add(eventToAdd);
-        saveEventsToFile(allEvents);
+        eventRepository.save(eventToAdd);
     }
 
-    public void removeEventById(long eventId) {
-        List<Event> allEvents = getAllEvents();
-        Event eventToDelete = findEventById(eventId);
-        allEvents.remove(eventToDelete);
-        saveEventsToFile(allEvents);
+    public void removeEventById(Long eventId) {
+        eventRepository.deleteById(eventId);
     }
 
-    @Override
-    public void editEventById(long eventId, Event event){
-        Event eventToEdit = findEventById(eventId);
-        removeEventById(eventId);
-
-        eventToEdit.setEventName(event.getEventName());
-        eventToEdit.setEventDescription(event.getEventDescription());
-        eventToEdit.setEventPrize(event.getEventPrize());
-        eventToEdit.setEventType(event.getEventType());
-        eventToEdit.setEventDate(event.getEventDate());
-        eventToEdit.setTracks(event.getTracks());
-        addEvent(eventToEdit);
+    public void editEventById(Event eventToEdit){
+        eventRepository.save(eventToEdit);
     }
 
-    private void saveEventsToFile(List<Event> eventsToSave){
-        dataService.saveToFile(eventsToSave, EVENT_FILE_PATH);
-    }
-
-    @Override
-    public Event findEventById(long eventId){
-        List<Event> allEvents = getAllEvents();
-        return allEvents.stream()
-                .filter(t -> t.getEventId() == (eventId))
-                .findFirst()
+    public Event findEventById(Long eventId){
+        return eventRepository.findById(eventId)
                 .orElseThrow(() -> new EventNotFoundException("Event with the following id has not been found: %x".formatted(eventId)));
-    }
-    public long createRandomId() {
-        return new Random().nextLong(1001);
     }
 }

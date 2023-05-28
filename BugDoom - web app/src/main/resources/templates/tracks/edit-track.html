@@ -9,17 +9,9 @@
 <div layout:fragment="content" class="container text-left">
     <h1>Edycja trasy</h1>
     <form th:action="@{/tracks/{trackId}/edit(trackId=${track.trackId})}" th:object="${track}" method="post">
-        <input type="hidden" th:field="*{eventId}">
         <div style="margin-top: 5px">
             <p>Nazwa biegu: <input type="text" placeholder="Nazwa nowego biegu" th:field="*{competitionName}"/></p>
         </div>
-        <p>Szerokość geograficzna startu: <input type="number" min="49" max="54.5" step="0.001" th:field="*{start.x}"/>
-        </p>
-        <p>Długość geograficzna startu: <input type="number" min="14.07" max="24.09" step="0.001" th:field="*{start.y}"/></p>
-        <p>Szerokość geograficzna mety: <input type="number" min="49" max="54.5" step="0.001" th:field="*{finish.x}"/>
-        </p>
-        <p>Długość geograficzna mety: <input type="number" min="14.07" max="24.09" step="0.001" th:field="*{finish.y}"/>
-        </p>
         <div style="margin-top: 5px">Poziom trudności:
             <label for="difficultyChoice1"></label><input type="radio" id="difficultyChoice1" name="difficulty" value="łatwy" th:field="*{difficulty}"/>
             <label for="difficultyChoice1">łatwy</label>
@@ -42,7 +34,7 @@
         <div>
             <label for="event">Wydarzenie: </label>
             <select id="event" class="form-control" name="track.eventId">
-                <option th:value="*{eventId}" th:text="${currentEvent.eventName}"></option>
+                <option th:value="*{event.eventId}" th:text="${currentEvent.eventName}"></option>
                 <option th:each="event : ${allEvents}"
                         th:value="${event.eventId}"
                         th:text="${event.eventName}"></option>
