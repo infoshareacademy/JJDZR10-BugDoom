@@ -4,6 +4,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -13,7 +14,7 @@ public class Event {
     private String eventName;
     @NotEmpty(message = "Podaj opis wydarzenia")
     private String eventDescription;
-    private List<Track> tracks;
+    private List<Track> tracks = new ArrayList<>();
     private List<User> participants;
     @PositiveOrZero(message = "Wartość nagrody nie może być ujemna")
     private int eventPrize;

@@ -58,16 +58,17 @@
     <div>
       <table id="data-table" class="table">
         <thead>
-        <th class="col-1">Szerokość</th>
-        <th class="col-3">Długość</th>
-        <th class="col-3">Checkpoint nr</th>
-    <tr th:each="checkpoints, iterStat: ${track.checkpoints}">
-      <td th:value="${checkpoints.latitude}" ></td>
-      <td th:value="${checkpoints.longitude}"></td>
-      <td th:text="${checkpoints.locationName}"></td>
+        <th class="col-4">Szerokość</th>
+        <th class="col-4">Długość</th>
+        <th class="col-4">Checkpoint nr</th>
+
     </tr>
         </thead>
         <tbody>
+        <tr th:each="checkpoints, iterStat: ${track.checkpoints}">
+          <td th:value="${checkpoints.latitude}" ></td>
+          <td th:value="${checkpoints.longitude}"></td>
+          <td th:text="${checkpoints.locationName}"></td>
         </tbody>
       </table>
     </div>
