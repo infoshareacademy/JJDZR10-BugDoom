@@ -1,5 +1,6 @@
 package com.infoshareacademy.pl.controller;
 
+import com.infoshareacademy.pl.model.Event;
 import com.infoshareacademy.pl.model.Track;
 import com.infoshareacademy.pl.service.EventService;
 import com.infoshareacademy.pl.service.TrackService;
@@ -9,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 
 @Controller
@@ -23,9 +25,14 @@ public class TrackController {
 
 
     @GetMapping("/tracks")
-    public String getTracks(Model model, String name, String difficulty) {
+    public String getTracks(Model model,
+                            String name,
+                            String difficulty,
+                            @RequestParam(value = "eventId", required = false) Long eventId) {
         Track emptyTrack = new Track();
+        List<Event> allEvents = eventService.getAllEvents();
         model.addAttribute("track", emptyTrack);
+        model.addAttribute("allEvents", allEvents);
 
         if (name != null && !name.isBlank()) {
             model.addAttribute("tracks", trackService.findTracksByName(name));
@@ -33,6 +40,10 @@ public class TrackController {
         } else if (difficulty != null) {
             model.addAttribute("tracks", trackService.filterTracksByDifficulty(difficulty));
             model.addAttribute("difficulty", difficulty);
+        } else if (eventId != null){
+            model.addAttribute("tracks", trackService.findTracksByEventId(eventId));
+            model.addAttribute("eventId", eventId);
+            model.addAttribute("selectedEvent", eventService.findEventById(eventId));
         } else {
             model.addAttribute("tracks", trackService.getAllTracks());
         }

@@ -15,31 +15,42 @@
 
 </head>
 <body>
-<form style="margin: 5px" action="/tracks" method="get">
-    <label for="txtSearch1">Wyszukaj trasę:</label>
-    <input id="txtSearch1" type="text" name="name" th:value="${name}">
-    <button class="btn btn-primary btn-sm" type="submit">Wyszukaj</button>
-    <a th:if="${name} != null" class="btn btn-outline-dark btn-sm" href="/tracks">Resetuj</a>
-</form>
-<div th:if="${tracks.size() == 0}" class="alert alert-danger" role="alert">
-    <div>
-        Nie znaleziono trasy
-    </div>
-</div>
-
 <div layout:fragment="content" class="container text-left">
-    <form style="margin: 5px" action="/tracks" method="get">
-        <label for="txtSearch">Wyszukaj trasę:</label>
-        <input id="txtSearch" type="text" name="name" th:value="${name}">
-        <button class="btn btn-primary btn-sm" type="submit">Wyszukaj</button>
-        <a th:if="${name} != null" class="btn btn-outline-dark btn-sm" href="/tracks">Resetuj</a>
-    </form>
-    <div th:if="${tracks.size() == 0}" class="alert alert-danger" role="alert">
-        <div>
-            Nie znaleziono trasy, która spełnia podane kryteria!
+    <div class="row">
+        <div class="col-5">
+            <form style="margin: 6px" action="/tracks" method="get">
+                <label for="txtSearch">Wyszukaj trasę:</label>
+                <input id="txtSearch" type="text" name="name" th:value="${name}">
+                <button class="btn btn-primary btn-sm" type="submit">Wyszukaj</button>
+                <a th:if="${name} != null" class="btn btn-outline-dark btn-sm" href="/tracks">Resetuj</a>
+            </form>
+        </div>
+        <div class="col-7">
+            <form style="margin: 6px" action="/tracks" method="get" class="row align-items-center">
+                <div class="col-auto">
+                    <label for="event">Filtruj po wydarzeniu: </label>
+                </div>
+                <div class="col-auto">
+                    <select style="width:275px" id="event" class="form-select form-select-sm" name="eventId">
+                        <option th:if="${eventId} == null" th:value="-1">Wybierz wydarzenie do sortowania</option>
+                        <option th:if="${eventId} != null" th:value="eventId" th:text="${selectedEvent.eventName}"></option>
+                        <option th:each="singleEvent : ${allEvents}" th:value="${singleEvent.eventId}" th:text="${singleEvent.eventName}"></option>
+                    </select>
+                </div>
+                <div class="col-auto">
+                    <button class="btn btn-primary btn-sm" type="submit">Wyszukaj</button>
+                </div>
+                <div class="col-auto">
+                    <a th:if="${eventId} != null" class="btn btn-outline-dark btn-sm" href="/tracks">Resetuj</a>
+                </div>
+            </form>
+        </div>
+        <div th:if="${tracks.size() == 0}" class="alert alert-danger" role="alert">
+            <div>
+                Nie znaleziono trasy, która spełnia podane kryteria!
+            </div>
         </div>
     </div>
-
     <table class="table table-striped">
         <thead>
         <tr>
@@ -67,7 +78,8 @@
                     </form>
                 </th>
                 <th class="col-1">Teren</th>
-                <th class="col-2">Wydarzenie</th>
+                <th class="col-2">Wydarzenie <br>
+                </th>
                 <th class="col-2">Działania</th>
             </tr>
         </div>
