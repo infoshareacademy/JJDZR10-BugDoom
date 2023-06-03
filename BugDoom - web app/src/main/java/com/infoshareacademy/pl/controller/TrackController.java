@@ -3,6 +3,7 @@ package com.infoshareacademy.pl.controller;
 import com.infoshareacademy.pl.model.Track;
 import com.infoshareacademy.pl.service.EventService;
 import com.infoshareacademy.pl.service.TrackService;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -38,7 +39,7 @@ public class TrackController {
         }
         return "tracks/track";
     }
-
+    @Secured("ROLE_ADMIN")
     @GetMapping("tracks/delete/{trackId}")
     public String deleteTrack(@PathVariable Long trackId) {
         trackService.removeTrackById(trackId);
@@ -56,7 +57,7 @@ public class TrackController {
         trackService.addTrack(newTrack);
         return "redirect:/tracks";
     }
-
+    @Secured({"ROLE_ADMIN", "ROLE_MANAGER"})
     @GetMapping("/tracks/create")
     public String showCreateForm(Model model) {
         model.addAttribute("track", new Track());
