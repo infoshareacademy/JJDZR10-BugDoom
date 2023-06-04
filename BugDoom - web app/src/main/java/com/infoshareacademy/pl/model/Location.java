@@ -59,16 +59,16 @@ public class Location {
         return latitude;
     }
 
-    public void setLatitude(double x) {
-        this.latitude = x;
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
     }
 
     public double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(double y) {
-        this.longitude = y;
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 
     public boolean isTrackFinish() {
