@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.w3.org/1999/xhtml"
-      layout:decorate="~{fragments/main_view}">
+      layout:decorate="~{fragments/main_view}" xmlns:sd="http://www.w3.org/1999/xhtml">
 <head>
 
     <meta charset="UTF-8">
@@ -52,7 +52,7 @@
         <div class="container">
             <tr>
                 <th class="col-1">#</th>
-                <th class="col-2">Nazwa biegu</th>
+                <th class="col-2"><a class="sorted" sd:pagination-sort="eventName">Nazwa biegu</a></th>
                 <th class="col-4">
                     <form action="/tracks" method="get">
                         <label for="txtSearch2">Poziom trudności:</label>
@@ -91,6 +91,16 @@
         </tr>
         </tbody>
     </table>
+    <div class="row">
+        <div class="col-sm-8">
+            Pokaż <span sd:page-size-selector="javascript"></span> wyników
+        </div>
+        <div class="col-sm-4">
+            <nav class="pull-right">
+                <ul class="pagination" sd:pagination="full"></ul>
+            </nav>
+        </div>
+    </div>
     <a th:href="@{/tracks/create}" class="btn btn-info">
         Utwórz nową trasę
     </a>

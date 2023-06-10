@@ -3,6 +3,8 @@ package com.infoshareacademy.pl.service;
 import com.infoshareacademy.pl.exception.EventNotFoundException;
 import com.infoshareacademy.pl.model.Event;
 import com.infoshareacademy.pl.repository.EventRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +23,9 @@ public class EventService {
         return eventRepository.findAll();
     }
 
+    public Page<Event> getPage(Pageable pageable) {
+        return eventRepository.findAll(pageable);
+    }
     public void addEvent(Event eventToAdd) {
         eventRepository.save(eventToAdd);
     }

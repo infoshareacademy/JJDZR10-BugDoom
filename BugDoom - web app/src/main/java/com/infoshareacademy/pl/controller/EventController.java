@@ -1,9 +1,9 @@
 package com.infoshareacademy.pl.controller;
 
 import com.infoshareacademy.pl.model.Event;
-import com.infoshareacademy.pl.model.Track;
 import com.infoshareacademy.pl.service.EventService;
-import com.infoshareacademy.pl.service.TrackService;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.SortDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,25 +13,19 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
-import java.util.List;
+
 
 @Controller
 public class EventController {
     private final EventService eventService;
-    private final TrackService trackService;
 
-    public EventController(EventService eventService, TrackService trackService) {
+    public EventController(EventService eventService) {
         this.eventService = eventService;
-        this.trackService = trackService;
     }
 
     @GetMapping("/events")
-    public String getEvents(Model model) {
-        Event emptyEvent = new Event();
-        model.addAttribute("event", emptyEvent);
-
-        List<Event> events = eventService.getAllEvents();
-        model.addAttribute("events", events);
+    public String getEvents(Model model, @SortDefault("eventName") Pageable pageable) {
+        model.addAttribute("events", eventService.getPage(pageable));
         return "events/event";
     }
 
