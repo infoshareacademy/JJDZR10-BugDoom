@@ -4,6 +4,8 @@ import com.infoshareacademy.pl.model.Event;
 import com.infoshareacademy.pl.model.Track;
 import com.infoshareacademy.pl.service.EventService;
 import com.infoshareacademy.pl.service.TrackService;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.SortDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -28,24 +30,22 @@ public class TrackController {
     public String getTracks(Model model,
                             String name,
                             String difficulty,
-                            @RequestParam(value = "eventId", required = false) Long eventId) {
-        Track emptyTrack = new Track();
-        List<Event> allEvents = eventService.getAllEvents();
-        model.addAttribute("track", emptyTrack);
-        model.addAttribute("allEvents", allEvents);
+                            @RequestParam(value = "eventId", required = false) Long eventId,
+                            @SortDefault("competitionName") Pageable pageable) {
+        model.addAttribute("allEvents", eventService.getAllEvents());
 
         if (name != null && !name.isBlank()) {
-            model.addAttribute("tracks", trackService.findTracksByName(name));
+            model.addAttribute("tracks", trackService.findTracksByName(pageable, name));
             model.addAttribute("name", name);
         } else if (difficulty != null) {
-            model.addAttribute("tracks", trackService.filterTracksByDifficulty(difficulty));
+            model.addAttribute("tracks", trackService.filterTracksByDifficulty(pageable, difficulty));
             model.addAttribute("difficulty", difficulty);
         } else if (eventId != null){
-            model.addAttribute("tracks", trackService.findTracksByEventId(eventId));
+            model.addAttribute("tracks", trackService.findTracksByEventId(pageable, eventId));
             model.addAttribute("eventId", eventId);
             model.addAttribute("selectedEvent", eventService.findEventById(eventId));
         } else {
-            model.addAttribute("tracks", trackService.getAllTracks());
+            model.addAttribute("tracks", trackService.getAllTracks(pageable));
         }
         return "tracks/track";
     }
