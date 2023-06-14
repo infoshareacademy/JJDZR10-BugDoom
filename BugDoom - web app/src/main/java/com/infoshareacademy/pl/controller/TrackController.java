@@ -3,6 +3,7 @@ package com.infoshareacademy.pl.controller;
 import com.infoshareacademy.pl.model.Location;
 import com.infoshareacademy.pl.model.Track;
 import com.infoshareacademy.pl.service.EventService;
+import com.infoshareacademy.pl.service.LocationService;
 import com.infoshareacademy.pl.service.TrackService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,10 +17,12 @@ import javax.validation.Valid;
 public class TrackController {
     private final TrackService trackService;
     private final EventService eventService;
+    private final LocationService locationService;
 
-    public TrackController(TrackService trackService, EventService eventService) {
+    public TrackController(TrackService trackService, EventService eventService, LocationService locationService) {
         this.trackService = trackService;
         this.eventService = eventService;
+        this.locationService = locationService;
     }
 
 
@@ -106,9 +109,16 @@ public class TrackController {
         return "redirect:/tracks";
     }
     @GetMapping("/tracks/{trackId}/checkpoints")
+    public String showCheckpoints(@PathVariable("trackId") long trackId, Model model, Location checkpoints){
+        Track track = trackService.findTrackById(trackId);
+        model.addAttribute("checkpoints", checkpoints);
+        return "tracks/checkpoints";
+    }
+    @PostMapping("/tracks/{trackId}/checkpoints")
     public String createCheckpoints (@PathVariable("trackId") long trackId, Model model, Location checkpoints) {
         Track track = trackService.findTrackById(trackId);
         model.addAttribute("checkpoints", checkpoints);
+        locationService.addLocation(checkpoints);
         return "tracks/checkpoints";
     }
 }

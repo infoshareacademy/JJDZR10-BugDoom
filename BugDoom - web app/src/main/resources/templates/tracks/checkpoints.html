@@ -24,7 +24,7 @@
     <div id="map" class="container">
       <form th:action="@{/tracks/{trackId}/checkpoints(trackId=${trackId})}" th:object="${checkpoints}" method="post">
         <div class="container">
-          <tr th:each="checkpoints, iterStat: ${checkpoints}">
+          <tr th:each="checkpoint, iterStat: ${checkpoints}">
             <td th:value="${checkpoints.latitude}" >Szerokość</td>
             <td th:value="${checkpoints.longitude}">Długość</td>
             <td th:text="${checkpoints.locationName}">Nazwa</td>
@@ -36,6 +36,72 @@
   </table>
 
 
+<!--  <script th:inline="javascript">-->
+
+<!--    function updateDataTable (map) {-->
+<!--      let dataTableBody = $('#data-table tbody')-->
+<!--      dataTableBody.html('<tr></tr>')-->
+<!--      map.eachLayer(layer => {-->
+<!--        let popup = layer.getPopup()-->
+<!--        if (popup) {-->
+<!--          let text = $(popup.getContent()).find('.popup-span').text()-->
+<!--          let latLng = layer.getLatLng()-->
+<!--          dataTableBody.append(-->
+<!--                  $('<tr></tr>').append(-->
+<!--                          $('<td></td>').text(latLng.lat),-->
+<!--                          $('<td></td>').text(latLng.lng),-->
+<!--                          $('<td></td>').text(text),-->
+<!--                  )-->
+<!--          )-->
+<!--        }-->
+<!--      })-->
+<!--    }-->
+
+<!--    function createPopupContents(marker) {-->
+<!--      let popupContents = $('<div></div>')-->
+<!--      popupContents.append(-->
+<!--              $('<span></span>').addClass('popup-span').text('Checkpoint')-->
+<!--      )-->
+
+
+<!--      let trashButton = $('<button><i class="fas fa-trash" />Usuń</button>')-->
+<!--              .on('click', event => {-->
+<!--                marker.remove()-->
+<!--                updateDataTable(map)-->
+<!--              })-->
+
+<!--      popupContents.append(trashButton)-->
+<!--      return popupContents[0]-->
+<!--    }-->
+
+<!--    var options = {center: [54.349, 18.651],zoom: 12}-->
+<!--    var map = L.map('map', options);-->
+
+<!--    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {-->
+<!--      maxZoom: 20,-->
+<!--      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'-->
+<!--    }).addTo(map);-->
+
+<!--    let popupOpen = null-->
+<!--    map.on('preclick', mapEvent => {-->
+<!--      popupOpen = false-->
+<!--      map.eachLayer(layer => {-->
+<!--        if (layer.getPopup() && layer.getPopup().isOpen()) {-->
+<!--          popupOpen = true-->
+<!--        }-->
+<!--      })-->
+<!--    })-->
+
+<!--    map.on('click', mapEvent => {-->
+<!--      if (!popupOpen) {-->
+<!--        let marker = L.marker(mapEvent.latlng)-->
+<!--        marker.addTo(map).bindPopup(createPopupContents(marker));-->
+<!--        updateDataTable(map)-->
+<!--      }-->
+<!--    })-->
+<!--    updateDataTable(map)-->
+
+<!--  </script>-->
   <script th:inline="javascript">
 
     function updateDataTable (map) {
@@ -102,7 +168,6 @@
     updateDataTable(map)
 
   </script>
-
   <a href="/tracks" class="btn btn-primary"><i class="fas fa-angle-double-left"></i> Powrót do listy tras</a>
 </div>
 
