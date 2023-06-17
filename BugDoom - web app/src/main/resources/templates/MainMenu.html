@@ -11,7 +11,7 @@
             rel="stylesheet"
             integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
             crossorigin="anonymous">
-
+    <link href="/css/style.css" th:href="@{/css/style.css}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 
 </head>
@@ -120,9 +120,9 @@
                     <div class="card">
                         <img src="/images/Photo4.png" class="card-img-top" alt="card">
                         <div class="card-body">
-                            <h5 class="card-title">Wydarzenia</h5>
+                            <h5 class="card-title">Kalendarz Biegów Tradycyjnych</h5>
                             <p class="card-text">Jeśli chcesz spróbować tradycyjnych biegów - koniecznie zajrzyj.</p>
-                            <a href="#" class="btn btn-info">Sprawdź <i class="bi bi-heart"></i></a>
+                            <a th:href="@{https://kalendarzbiegowy.pl/}" class="btn btn-info">Sprawdź <i class="bi bi-heart"></i></a>
                         </div>
                     </div>
                 </div>
@@ -133,7 +133,7 @@
                             <h5 class="card-title">Biegaj całą rodziną</h5>
                             <p class="card-text">Nie ograniczaj się! Sprawdź porady dla biegania całą rodziną.
                                 Wspomnienia gwarantowane. </p>
-                            <a href="#" class="btn btn-info">Sprawdź <i class="bi bi-heart"></i></a>
+                            <a th:href="@{/family-run}" class="btn btn-info">Sprawdź <i class="bi bi-heart"></i></a>
                         </div>
                     </div>
                 </div>
@@ -144,7 +144,7 @@
                             <h5 class="card-title">Obuwie Biegowe</h5>
                             <p class="card-text">Nigdy nie zapominaj o dobraniu odpowiedniego obuwia do danego
                                 podłoża.</p>
-                            <a href="#" class="btn btn-info">Sprawdź <i class="bi bi-heart"></i></a>
+                            <a th:href="@{/running-shoes}" class="btn btn-info">Sprawdź <i class="bi bi-heart"></i></a>
                         </div>
                     </div>
                 </div>

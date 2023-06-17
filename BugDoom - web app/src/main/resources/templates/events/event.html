@@ -8,19 +8,28 @@
 </head>
 <body>
 <div layout:fragment ="content">
-<table class="table">
-    <thead>
+    <div class="container">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <p class="p-1"></p>
+            <th>Wydarzenia GeoRunners</th>
+        </tr>
+        </thead>
+    </table>
+</div>
+    <div class="container">
+        <table class="table table-bordered">
+
     <tr>
-        <th scope="col">#</th>
-        <th scope="col">Nazwa wydarzenia</th>
+        <th class="col-1">#</th>
+        <th scope="col-2">Nazwa wydarzenia</th>
         <th scope="col">Opis wydarzenia</th>
         <th scope="col">Rodzaj wydarzenia</th>
         <th scope="col">Data wydarzenia</th>
         <th scope="col">Nagroda</th>
         <th scope="col">Działania</th>
     </tr>
-    </thead>
-    <tbody>
     <tr th:each="event,iterStat: ${events}">
         <td th:text="${iterStat.count}"></td>
         <td th:text="${event.eventName}">eventName</td>
@@ -29,17 +38,19 @@
         <td th:text="${event.eventDate}">eventDate</td>
         <td th:text="${event.eventPrize}">eventPrize</td>
         <td>
-            <a style="border: outset black" th:href="@{/events/{id}(id=${event.eventId})}" class="btn btn-light">
+
+            <a th:href="@{/events/{id}(id=${event.eventId})}" class="btn btn-outline-success">
                 Pokaż szczegóły wydarzenia
             </a>
         </td>
     </tr>
-    </tbody>
-</table>
-<div style="text-align:center" class="container">
+        </table>
+</div>
+<div style="text-align:left" class="container">
     <div class="row-flex"><a th:href="@{/events/new-event}" class="btn btn-info">
-        DODAJ NOWE WYDARZENIE
+        Dodaj nowe wydarzenie
     </a></div>
+</div>
 </div>
 </div>
 </body>

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
@@ -90,12 +91,14 @@ public class TrackController {
     public String editTrack(@PathVariable("trackId") long trackId,
                             @Valid @ModelAttribute Track track,
                             BindingResult bindingResult,
-                            @RequestParam("track.eventId") long eventId) {
+                            @RequestParam("track.eventId") long eventId, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("fail", "Edycja trasy nie powiodła się");
             return "tracks/edit-track";
         }
         track.setEvent(eventService.findEventById(eventId));
         trackService.editTrack(track);
+        redirectAttributes.addFlashAttribute("success", "Edycja trasy wykonana poprawnie!");
         return "redirect:/tracks";
     }
 }

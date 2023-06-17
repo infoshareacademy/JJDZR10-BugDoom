@@ -32,6 +32,8 @@
             <label for="terrainChoice3">górzysty</label>
         </div>
         <div>
+            <div class="row">
+                <div class="col-4">
             <label for="event">Wydarzenie: </label>
             <select id="event" class="form-control" name="track.eventId">
                 <option th:value="*{event.eventId}" th:text="${currentEvent.eventName}"></option>
@@ -39,10 +41,13 @@
                         th:value="${event.eventId}"
                         th:text="${event.eventName}"></option>
             </select>
+                </div>
+            </div>
         </div>
         <ul th:if="${#fields.hasErrors('*')}">
             <li th:each="err : ${#fields.errors('*')}" th:text="${err}"/>
         </ul>
+        <p></p>
         <p><input class="btn btn-success" type="submit" value="Zatwierdź"/>
             <input class="btn btn-secondary" type="reset" value="Zresetuj"/></p>
     </form>

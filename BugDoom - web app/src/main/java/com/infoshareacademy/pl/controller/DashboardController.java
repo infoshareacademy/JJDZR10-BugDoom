@@ -7,13 +7,26 @@ public class DashboardController {
 
     @GetMapping("/")
 
-    public String getDashboard(){
+    public String getDashboard() {
         return "MainMenu";
     }
+
     @GetMapping("/about")
-    public String getabout() {
+    public String getAbout() {
 
         return "AboutUs";
 
+    }
+
+    @GetMapping("/family-run")
+    public String getFamilyRun() {
+
+        return "FamilyRun";
+    }
+
+    @GetMapping("/running-shoes")
+    public String getRunningShoes() {
+
+        return "RunningShoes";
     }
 }

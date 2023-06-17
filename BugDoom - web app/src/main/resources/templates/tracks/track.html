@@ -28,6 +28,27 @@
 </div>
 
 <div layout:fragment="content" class="container text-left">
+    <div class="container">
+        <div th:if="${success} !=null">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <i class="oi oi-check"></i>
+                <span>
+          <a th:text="${success}"></a>
+         </span>
+                <button type="button" class="btn-close" data-bs-dismiss ="alert" aria-label="Close">
+                </button>
+            </div>
+            <div th:if="${fail} != null">
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <i class="oi oi-check"></i>
+                    <span>
+          <a th:text="${fail}"></a>
+         </span>
+                    <button type="button" class="btn-close" data-bs-dismiss ="alert" aria-label="Close">
+                    </button>
+                </div>
+            </div>
+        </div>
     <form style="margin: 5px" action="/tracks" method="get">
         <label for="txtSearch">Wyszukaj trasę:</label>
         <input id="txtSearch" type="text" name="name" th:value="${name}">
@@ -94,6 +115,7 @@
     <a th:href="@{/tracks/create}" class="btn btn-info">
         Utwórz nową trasę
     </a>
+</div>
 </div>
 </body>
 </html>

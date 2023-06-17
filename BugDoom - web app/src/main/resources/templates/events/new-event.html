@@ -8,7 +8,7 @@
 </head>
 <body>
 <div layout:fragment="content" style="width: 500px" class="container text-center">
-    <h1 style="font-family: 'Times New Roman', Times, serif">Nowe wydarzenie</h1>
+    <h1>Nowe wydarzenie</h1>
     <form th:action="@{/events}" th:object="${event}" method="post">
         <div class="form-group">
             <label for="eventName">Nazwa wydarzenia:</label>
@@ -43,7 +43,7 @@
     </form>
 
 <div style="margin-top: 15px" class="row-flex text-center"><a th:href="@{/events}" class="btn btn-primary">
-    POWRÓT
+    <i class="fas fa-angle-double-left"></i>Powrót do lity wydarzeń
 </a></div>
 </div>
 </body>
