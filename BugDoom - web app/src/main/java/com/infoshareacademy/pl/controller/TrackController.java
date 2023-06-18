@@ -41,16 +41,11 @@ public class TrackController {
     }
 
     @GetMapping("tracks/delete/{trackId}")
-    public String deleteTrack(@PathVariable Long trackId,BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String deleteTrack(@PathVariable Long trackId, RedirectAttributes redirectAttributes) {
         trackService.removeTrackById(trackId);
 
-        if (bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("fail", "Usunięcie trasy powiodło się");
-            return "tracks";
-        }
-
-        redirectAttributes.addFlashAttribute("success", "Trasa została usunięta poprawnie!");
-        return "tracks";
+        redirectAttributes.addFlashAttribute("delete", "Trasa została usunięta poprawnie!");
+        return "redirect:/tracks/";
 
     }
 
