@@ -44,8 +44,8 @@ public class TrackController {
     public String deleteTrack(@PathVariable Long trackId, RedirectAttributes redirectAttributes) {
         trackService.removeTrackById(trackId);
 
-        redirectAttributes.addFlashAttribute("delete", "Trasa została usunięta poprawnie!");
-        return "redirect:/tracks/";
+        redirectAttributes.addFlashAttribute("trackDeletionSuccess", "Trasa została usunięta poprawnie!");
+        return "redirect:/tracks";
 
     }
 
@@ -96,12 +96,12 @@ public class TrackController {
                             BindingResult bindingResult,
                             @RequestParam("track.eventId") long eventId, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("fail", "Edycja trasy nie powiodła się");
+            redirectAttributes.addFlashAttribute("trackEditionFail", "Edycja trasy nie powiodła się");
             return "tracks/edit-track";
         }
         track.setEvent(eventService.findEventById(eventId));
         trackService.editTrack(track);
-        redirectAttributes.addFlashAttribute("success", "Edycja trasy wykonana poprawnie!");
+        redirectAttributes.addFlashAttribute("trackEditionSuccess", "Edycja trasy wykonana poprawnie!");
         return "redirect:/tracks";
     }
     }

@@ -15,51 +15,37 @@
 
 </head>
 <body>
-<form style="margin: 5px" action="/tracks" method="get">
-    <label for="txtSearch1">Wyszukaj trasę:</label>
-    <input id="txtSearch1" type="text" name="name" th:value="${name}">
-    <button class="btn btn-primary btn-sm" type="submit">Wyszukaj</button>
-    <a th:if="${name} != null" class="btn btn-outline-dark btn-sm" href="/tracks">Resetuj</a>
-</form>
-<div th:if="${tracks.size() == 0}" class="alert alert-danger" role="alert">
-    <div>
-        Nie znaleziono trasy
-    </div>
-</div>
-
 <div layout:fragment="content" class="container text-left">
-    <div class="container">
-        <div th:if="${success} !=null">
+        <div th:if="${trackEditionSuccess} !=null">
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 <i class="oi oi-check"></i>
                 <span>
-          <a th:text="${success}"></a>
+          <a th:text="${trackEditionSuccess}"></a>
          </span>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
                 </button>
             </div>
-            <div th:if="${fail} != null">
+        </div>
+        <div th:if="${trackEditionFail} != null">
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                     <i class="oi oi-check"></i>
                     <span>
-          <a th:text="${fail}"></a>
+          <a th:text="${trackEditionFail}"></a>
          </span>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
                     </button>
                 </div>
-            </div>
-            <div th:if="${delete} !=null">
+        </div>
+        <div th:if="${trackDeletionSuccess} != null">
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                     <i class="oi oi-check"></i>
                     <span>
-          <a th:text="${delete}"></a>
+          <a th:text="${trackDeletionSuccess}"></a>
          </span>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
                     </button>
                 </div>
-            </div>
         </div>
-    </div>
 
     <form style="margin: 5px" action="/tracks" method="get">
         <label for="txtSearch">Wyszukaj trasę:</label>
