@@ -3,19 +3,20 @@
       xmlns:layout="http://www.w3.org/1999/xhtml"
       layout:decorate="~{fragments/main_view}">
 <head>
-    <meta charset="UTF-8">
+  <meta charset="UTF-8">
 
   <title>New track</title>
 
 </head>
 <body>
-<div layout:fragment ="content" class="container text-left">
-  <h1 >Nowa trasa</h1>
+<div layout:fragment="content" class="container text-left">
+  <p></p>
+  <h1>Nowa trasa</h1>
   <form th:action="@{/tracks}" th:object="${track}" method="post">
     <div style="margin-top: 5px">
-    <p>Nazwa biegu: <input type="text" placeholder="Nazwa nowego biegu" th:field="*{competitionName}"/></p>
+      <p>Nazwa biegu: <input type="text" placeholder="Nazwa nowego biegu" th:field="*{competitionName}"/></p>
     </div>
-    <div style="margin-top: 5px" >Poziom trudności:
+    <div style="margin-top: 5px">Poziom trudności:
       <input type="radio" id="difficultyChoice1" name="difficulty" value="łatwy"/>
       <label for="terrainChoice1">łatwy</label>
       <input type="radio" id="difficultyChoice2" name="difficulty" value="średni"/>
@@ -34,14 +35,19 @@
       <label for="terrainChoice3">górzysty</label>
     </div>
     <div>
-      <label for="event">Wydarzenie: </label>
-      <select id="event" class="form-control" name="event.eventId">
-        <option value="-1" th:text="#{track.select-event}"></option>
-        <option th:each="event : ${allEvents}"
-                th:value="${event.eventId}"
-                th:text="${event.eventName}"></option>
-      </select>
+      <div class="row">
+        <div class="col-4">
+          <label for="event">Wydarzenie: </label>
+          <select id="event" class="form-control" name="event.eventId">
+            <option value="-1" th:text="#{track.select-event}"></option>
+            <option th:each="event : ${allEvents}"
+                    th:value="${event.eventId}"
+                    th:text="${event.eventName}"></option>
+          </select>
+        </div>
+      </div>
     </div>
+    <p></p>
     <ul th:if="${#fields.hasErrors('*')}">
       <li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
     </ul>
@@ -58,6 +64,5 @@
   </script>
   <a href="/tracks" class="btn btn-primary"><i class="fas fa-angle-double-left"></i> Powrót do listy tras</a>
 </div>
-
 </body>
 </html>

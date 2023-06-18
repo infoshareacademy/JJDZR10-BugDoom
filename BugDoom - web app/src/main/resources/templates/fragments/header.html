@@ -12,30 +12,34 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" th:href="@{/welcome}"><i class="bi bi-house"></i> Home </a>
+                        <a class="nav-link active" aria-current="page" th:href="@{/welcome}"><i class="bi bi-house"></i>
+                            Home </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-light" th:href="@{/about}">O nas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-light" th:href="@{https://kalendarzbiegowy.pl/}">Kalendarz biegów tradycyjnych</a>
+                        <a class="nav-link text-light" th:href="@{https://kalendarzbiegowy.pl/}">Kalendarz biegów
+                            tradycyjnych</a>
                     </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Blog
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" th:href="@{/family-run}">Biegaj z rodziną</a></li>
-                        <li><a class="dropdown-item" th:href="@{/running-shoes}">Obuwie Biegowe</a></li>
-                    </ul>
-                </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                           aria-expanded="false">
+                            Blog
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" th:href="@{/family-run}">Biegaj z rodziną</a></li>
+                            <li><a class="dropdown-item" th:href="@{/running-shoes}">Obuwie Biegowe</a></li>
+                        </ul>
+                    </li>
                 </ul>
                 <form class="d-flex d-none d-md-flex" role="search">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                     <button type="button" class="btn btn-outline-light">Szukaj</button>
                 </form>
                 <div class="d-grid gap-2 d-md-block">
-                    <a th:href="@{/}" class="btn btn-light module-label-in-package-5 ms-2"  type="button">Wyloguj się <i class="bi bi-arrow-right"></i> <i class="bi bi-door-open-fill"></i></a>
+                    <a th:href="@{/}" class="btn btn-light module-label-in-package-5 ms-2" type="button">Wyloguj się <i
+                            class="bi bi-arrow-right"></i> <i class="bi bi-door-open-fill"></i></a>
                 </div>
             </div>
         </div>

@@ -28,16 +28,19 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" th:href="@{/welcome}"><i class="bi bi-house"></i> Home </a>
+                    <a class="nav-link active" aria-current="page" th:href="@{/welcome}"><i class="bi bi-house"></i>
+                        Home </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-light" th:href="@{/about}">O nas</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-light" th:href="@{https://kalendarzbiegowy.pl/}">Kalendarz biegów tradycyjnych</a>
+                    <a class="nav-link text-light" th:href="@{https://kalendarzbiegowy.pl/}">Kalendarz biegów
+                        tradycyjnych</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                       aria-expanded="false">
                         Blog
                     </a>
                     <ul class="dropdown-menu">
@@ -53,25 +56,25 @@
         </div>
     </div>
 </nav>
-  <div class="container min-vh-100 d-flex justify-content-center align-items-center">
-      <div class="col-md-5">
-          <form>
+<div class="container min-vh-100 d-flex justify-content-center align-items-center">
+    <div class="col-md-5">
+        <form>
             <h1 class="mb-3" style="text-align: center;"><i class="bi bi-person-circle"></i></h1>
-              <div class="mb-3" th:action="@{/user}" th:object="${user}">
-              <label for="userEmailAddress" class="form-label">Email</label>
-               <input type="text" class="form-control" id="userEmailAddress" placeholder="Podaj swój adres email">
-              </div>
-              <div class="mb-3">
+            <div class="mb-3" th:action="@{/user}" th:object="${user}">
+                <label for="userEmailAddress" class="form-label">Email</label>
+                <input type="text" class="form-control" id="userEmailAddress" placeholder="Podaj swój adres email">
+            </div>
+            <div class="mb-3">
                 <label for="password" class="form-label">Hasło</label>
                 <input type="text" class="form-control" id="password" placeholder="Podaj swoje hasło">
-              </div>
-              <div class="mb-3 form-check">
+            </div>
+            <div class="mb-3 form-check">
                 <input type="checkbox" class="form-check-input" id="exampleCheck1">
                 <label class="form-check-label" for="exampleCheck1">Zapamiętaj mnie</label>
-              </div>
-              <a th:href="@{/welcome}" class="btn btn-outline-success mt-3">Zaloguj się</a>
-          </form>
-        </div>
-      </div>
+            </div>
+            <a th:href="@{/welcome}" class="btn btn-outline-success mt-3">Zaloguj się</a>
+        </form>
+    </div>
+</div>
 </body>
 </html>

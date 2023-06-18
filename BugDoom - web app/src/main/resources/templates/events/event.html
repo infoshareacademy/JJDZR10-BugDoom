@@ -7,50 +7,55 @@
     <title>Events</title>
 </head>
 <body>
-<div layout:fragment ="content">
+<div layout:fragment="content">
     <div class="container">
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <p class="p-1"></p>
-            <th>Wydarzenia GeoRunners</th>
-        </tr>
-        </thead>
-    </table>
-</div>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <p class="p-1"></p>
+                <th>Wydarzenia GeoRunners</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
     <div class="container">
         <table class="table table-bordered">
 
-    <tr>
-        <th class="col-1">#</th>
-        <th scope="col-2">Nazwa wydarzenia</th>
-        <th scope="col">Opis wydarzenia</th>
-        <th scope="col">Rodzaj wydarzenia</th>
-        <th scope="col">Data wydarzenia</th>
-        <th scope="col">Nagroda</th>
-        <th scope="col">Działania</th>
-    </tr>
-    <tr th:each="event,iterStat: ${events}">
-        <td th:text="${iterStat.count}"></td>
-        <td th:text="${event.eventName}">eventName</td>
-        <td th:text="${event.eventDescription}">eventDescription</td>
-        <td th:text="${event.eventType}">eventType</td>
-        <td th:text="${event.eventDate}">eventDate</td>
-        <td th:text="${event.eventPrize}">eventPrize</td>
-        <td>
-
-            <a th:href="@{/events/{id}(id=${event.eventId})}" class="btn btn-outline-success">
-                Pokaż szczegóły wydarzenia
-            </a>
-        </td>
-    </tr>
+            <tr>
+                <th class="col-1">#</th>
+                <th scope="col-2">Nazwa wydarzenia</th>
+                <th scope="col">Opis wydarzenia</th>
+                <th scope="col">Rodzaj wydarzenia</th>
+                <th scope="col">Data wydarzenia</th>
+                <th scope="col">Nagroda</th>
+                <th scope="col">Działania</th>
+            </tr>
+            <tr th:each="event,iterStat: ${events}">
+                <td th:text="${iterStat.count}"></td>
+                <td th:text="${event.eventName}">eventName</td>
+                <td th:text="${event.eventDescription}">eventDescription</td>
+                <td th:text="${event.eventType}">eventType</td>
+                <td th:text="${event.eventDate}">eventDate</td>
+                <td th:text="${event.eventPrize}">eventPrize</td>
+                <td>
+                    <a th:href="@{/events/delete/{id}(id=${event.eventId})}" class="btn btn-danger">
+                        Usuń
+                    </a>
+                    <a th:href="@{/events/edition-form/{id}/(id=${event.eventId})}" class="btn btn-info">
+                        Edytuj
+                    </a>
+                    <a th:href="@{/events/{id}(id=${event.eventId})}" class="btn btn-outline-success">
+                        Pokaż szczegóły wydarzenia
+                    </a>
+                </td>
+            </tr>
         </table>
-</div>
-<div style="text-align:left" class="container">
-    <div class="row-flex"><a th:href="@{/events/new-event}" class="btn btn-info">
-        Dodaj nowe wydarzenie
-    </a></div>
-</div>
+    </div>
+    <div style="text-align:left" class="container">
+        <div class="row-flex"><a th:href="@{/events/new-event}" class="btn btn-info">
+            Dodaj nowe wydarzenie
+        </a></div>
+    </div>
 </div>
 </div>
 </body>
