@@ -18,11 +18,17 @@
                         <a class="nav-link text-light" th:href="@{/about}">O nas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-light" th:href="@{/tracks}">Dostępne trasy</a>
+                        <a class="nav-link text-light" th:href="@{https://kalendarzbiegowy.pl/}">Kalendarz biegów tradycyjnych</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link text-light" th:href="@{/events}">Wydarzenia</a>
-                    </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Blog
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" th:href="@{/family-run}">Biegaj z rodziną</a></li>
+                        <li><a class="dropdown-item" th:href="@{/running-shoes}">Obuwie Biegowe</a></li>
+                    </ul>
+                </li>
                 </ul>
                 <form class="d-flex d-none d-md-flex" role="search">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
