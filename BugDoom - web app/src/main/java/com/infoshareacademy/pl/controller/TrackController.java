@@ -52,12 +52,14 @@ public class TrackController {
     @PostMapping("/tracks")
     public String createTrack(@Valid @ModelAttribute Track newTrack,
                               BindingResult bindingResult,
-                              @RequestParam("event.eventId") long eventId) {
+                              @RequestParam("event.eventId") long eventId,
+                              RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
             return "tracks/add-track";
         }
         newTrack.setEvent(eventService.findEventById(eventId));
         trackService.addTrack(newTrack);
+        redirectAttributes.addFlashAttribute("trackAdditionSuccess", "Dodawanie trasy wykonana poprawnie!");
         return "redirect:/tracks";
     }
 
