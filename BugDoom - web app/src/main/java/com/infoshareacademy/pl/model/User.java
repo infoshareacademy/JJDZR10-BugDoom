@@ -18,8 +18,8 @@ public class User {
     private String userEmailAddress;
 
     @NotEmpty(message = "Podaj imię i nazwisko")
-    @Column(name = "name", nullable = false)
-    private String name;
+    @Column(name = "userName", nullable = false)
+    private String userName;
 
     @NotEmpty(message = "Podaj hasło")
     @Column(name = "password", nullable = false)
@@ -31,8 +31,8 @@ public class User {
     public User() {
     }
 
-    public User(String userEmailAddress, String password) {
-        this.userEmailAddress = userEmailAddress;
+    public User(String userName, String password) {
+        this.userName = userName;
         this.password = password;
     }
 
@@ -44,8 +44,8 @@ public class User {
         return userEmailAddress;
     }
 
-    public String getName() {
-        return name;
+    public String getUserName() {
+        return userName;
     }
 
     public String getPassword() {
@@ -57,12 +57,12 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return userId == user.userId && Objects.equals(userEmailAddress, user.userEmailAddress) && Objects.equals(name, user.name) && Objects.equals(password, user.password);
+        return userId == user.userId && Objects.equals(userEmailAddress, user.userEmailAddress) && Objects.equals(userName, user.userName) && Objects.equals(password, user.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userId, userEmailAddress, name, password);
+        return Objects.hash(userId, userEmailAddress, userName, password);
     }
 
     @Override
@@ -70,7 +70,7 @@ public class User {
         return "User{" +
                 "userId=" + userId +
                 ", userEmailAddress='" + userEmailAddress + '\'' +
-                ", name='" + name + '\'' +
+                ", name='" + userName + '\'' +
                 ", password='" + password + '\'' +
                 '}';
 
