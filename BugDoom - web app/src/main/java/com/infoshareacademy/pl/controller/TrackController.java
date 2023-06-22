@@ -3,7 +3,6 @@ package com.infoshareacademy.pl.controller;
 import com.infoshareacademy.pl.model.Track;
 import com.infoshareacademy.pl.service.EventService;
 import com.infoshareacademy.pl.service.TrackService;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -39,13 +38,13 @@ public class TrackController {
         }
         return "tracks/track";
     }
-    @Secured({"ROLE_ADMIN"})
+
     @GetMapping("tracks/delete/{trackId}")
     public String deleteTrack(@PathVariable Long trackId) {
         trackService.removeTrackById(trackId);
         return "redirect:/tracks";
     }
-    @Secured({"ROLE_ADMIN", "ROLE_MANAGER"})
+
     @PostMapping("/tracks")
     public String createTrack(@Valid @ModelAttribute Track newTrack,
                               BindingResult bindingResult,
@@ -57,7 +56,7 @@ public class TrackController {
         trackService.addTrack(newTrack);
         return "redirect:/tracks";
     }
-    @Secured({"ROLE_ADMIN", "ROLE_MANAGER"})
+
     @GetMapping("/tracks/create")
     public String showCreateForm(Model model) {
         model.addAttribute("track", new Track());
@@ -77,7 +76,7 @@ public class TrackController {
         model.addAttribute("event", eventService.findEventById(track.getEvent().getEventId()));
         return "tracks/track-details";
     }
-    @Secured({"ROLE_ADMIN", "ROLE_MANAGER"})
+
     @GetMapping("/tracks/edit-track/{trackId}")
     public String getTrackEditForm(@PathVariable("trackId") long trackId, Model model) {
         Track track = trackService.findTrackById(trackId);
@@ -86,7 +85,7 @@ public class TrackController {
         model.addAttribute("allEvents", eventService.getAllEvents());
         return "tracks/edit-track";
     }
-    @Secured({"ROLE_ADMIN", "ROLE_MANAGER"})
+
     @PostMapping("/tracks/{trackId}/edit")
     public String editTrack(@PathVariable("trackId") long trackId,
                             @Valid @ModelAttribute Track track,

@@ -4,7 +4,6 @@ import com.infoshareacademy.pl.model.Event;
 import com.infoshareacademy.pl.model.Track;
 import com.infoshareacademy.pl.service.EventService;
 import com.infoshareacademy.pl.service.TrackService;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -35,7 +34,7 @@ public class EventController {
         model.addAttribute("events", events);
         return "events/event";
     }
-    @Secured({"ROLE_ADMIN", "ROLE_MANAGER"})
+
     @GetMapping("/events/new-event")
     public String showCreateForm(Model model) {
         model.addAttribute("event", new Event());
@@ -50,7 +49,7 @@ public class EventController {
         eventService.addEvent(event);
         return "redirect:/events/";
     }
-    @Secured({"ROLE_ADMIN"})
+
     @GetMapping("events/delete/{eventId}")
     public String deleteEvent(@PathVariable long eventId) {
         eventService.removeEventById(eventId);
@@ -62,14 +61,14 @@ public class EventController {
         model.addAttribute("event", eventService.findEventById(eventId));
         return "events/single-event";
     }
-    @Secured({"ROLE_ADMIN", "ROLE_MANAGER"})
+
     @GetMapping("/events/edition-form/{eventId}")
     public String getEventEditForm(@PathVariable("eventId") long eventId, Model model) {
         Event event = eventService.findEventById(eventId);
         model.addAttribute("event", event);
         return "events/event-edition";
     }
-    @Secured({"ROLE_ADMIN", "ROLE_MANAGER"})
+
     @PostMapping("/events/{eventId}/edit")
     public String editEvent(@PathVariable("eventId") long eventId,
                             @Valid @ModelAttribute Event event,
