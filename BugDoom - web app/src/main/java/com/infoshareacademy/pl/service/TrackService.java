@@ -1,97 +1,58 @@
 package com.infoshareacademy.pl.service;
 
 import com.infoshareacademy.pl.exception.TrackNotFoundException;
+import com.infoshareacademy.pl.model.Event;
 import com.infoshareacademy.pl.model.Track;
 import com.infoshareacademy.pl.repository.TrackRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 @Service
-public class TrackService implements TrackRepository {
-    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
+@Transactional
+public class TrackService {
+    private final TrackRepository trackRepository;
+    private static final Logger logger = LoggerFactory.getLogger(TrackService.class);
 
-    private static final String TRACK_FILE_PATH = FilePathConstants.TRACK_FILE_PATH;
-    private final DataService<Track> dataService;
-
-    public TrackService(DataService<Track> dataService) {
-        this.dataService = dataService;
+    public TrackService(TrackRepository trackRepository) {
+        this.trackRepository = trackRepository;
     }
 
-    public long createRandomId() {
-        return new Random().nextLong(1000);
+    public List<Track> getAllTracks() {
+        return trackRepository.findAll();
     }
 
-    @Override
-    public List<Track> getAllTracks() throws IOException {
-        return new ArrayList<>(dataService.readFromFile(TRACK_FILE_PATH, Track[].class));
+    public void addTrack(Track trackToAdd){
+        logger.info("Adding track: {}", trackToAdd);
+        trackRepository.save(trackToAdd);
     }
 
-    @Override
-    public void addTrack(Track trackToAdd) throws IOException {
-        logger.info("Adding track: {}");
-        List<Track> allTracks = getAllTracks();
-        allTracks.add(trackToAdd);
-        saveTracksToFile(allTracks);
-    }
-
-    @Override
-    public void removeTrackById(long trackId) throws IOException {
+    public void removeTrackById(Long trackId){
         logger.info("Removing track: {}");
-        List<Track> allTracks = getAllTracks();
-        Track trackToDelete = findTrackById(trackId);
-        allTracks.remove(trackToDelete);
-        saveTracksToFile(allTracks);
+        trackRepository.deleteById(trackId);
     }
 
-    @Override
-    public void saveTracksToFile(List<Track> tracksToSave) throws IOException {
-        dataService.saveToFile(tracksToSave, TRACK_FILE_PATH);
-        logger.info("Saving to file: {}");
+    public List<Track> findTracksByName(String trackName){
+        return trackRepository.findTracksByName(trackName);
     }
 
-    @Override
-    public List<Track> findTracksByKeyword(String keyword) throws IOException {
-        List<Track> allTracks = getAllTracks();
-        return allTracks.stream()
-                .filter(track -> track.getCompetitionName().toLowerCase().contains(keyword.toLowerCase()))
-                .toList();
-    }
-
-    @Override
-    public Track findTrackById(long trackId) throws IOException {
-        List<Track> allTracks = getAllTracks();
-        return allTracks.stream()
-                .filter(track -> track.getTrackId() == trackId)
-                .findFirst()
+    public Track findTrackById(Long trackId){
+        return trackRepository.findById(trackId)
                 .orElseThrow(() -> new TrackNotFoundException("Track with given id: '%s' not found".formatted(trackId)));
     }
 
-    @Override
-    public void editTrackById(long trackId, Track track) throws IOException {
-        Track trackToEdit = findTrackById(trackId);
-        removeTrackById(trackId);
-
-        trackToEdit.setCompetitionName(track.getCompetitionName());
-        trackToEdit.setLength(track.getLength());
-        trackToEdit.setTerrain(track.getTerrain());
-        trackToEdit.setDifficulty(track.getDifficulty());
-        trackToEdit.setStart(track.getStart());
-        trackToEdit.setFinish(track.getFinish());
-
-        addTrack(trackToEdit);
+    public void editTrack(Track trackToEdit) {
+        trackRepository.save(trackToEdit);
     }
 
-    @Override
-    public List<Track> filterTracksByDifficulty(String difficulty) throws IOException{
-        List<Track>allTracks = getAllTracks();
-        return allTracks.stream()
-                .filter(track-> track.getDifficulty().equals(difficulty))
-                .toList();
+    public List<Track> filterTracksByDifficulty(String difficulty) {
+        return trackRepository.filterTracksByDifficulty(difficulty);
+    }
+
+    public List<Track> findTracksByEventId(long eventId) {
+        return trackRepository.findTracksByEventId(eventId);
     }
 }

@@ -6,70 +6,41 @@ import com.infoshareacademy.pl.repository.EventRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-
 
 @Service
-public class EventService implements EventRepository {
-    private static final Logger logger = LoggerFactory.getLogger(DataService.class);
-    private static final String EVENT_FILE_PATH = FilePathConstants.EVENT_FILE_PATH;
-    private final DataService<Event> dataService;
+@Transactional
+public class EventService {
+    private final EventRepository eventRepository;
+    private static final Logger logger = LoggerFactory.getLogger(EventService.class);
 
-    public EventService(DataService<Event> dataService) {
-        this.dataService = dataService;
+    public EventService(EventRepository eventRepository) {
+        this.eventRepository = eventRepository;
     }
 
-    public List<Event> getAllEvents() throws IOException {
-        return new ArrayList<>(dataService.readFromFile(EVENT_FILE_PATH, Event[].class));
+    public List<Event> getAllEvents() {
+        return eventRepository.findAll();
     }
 
-    public void addEvent(Event eventToAdd) throws IOException {
-        logger.info("Added event: {}");
-        List<Event> allEvents = getAllEvents();
-        allEvents.add(eventToAdd);
-        saveEventsToFile(allEvents);
+    public void addEvent(Event eventToAdd) {
+        logger.info("Added event: {}", eventToAdd);
+        eventRepository.save(eventToAdd);
     }
 
-    public void removeEventById(long eventId) throws IOException {
+    public void removeEventById(Long eventId) {
         logger.info("Removing event: {}");
-        List<Event> allEvents = getAllEvents();
-        Event eventToDelete = findEventById(eventId);
-        allEvents.remove(eventToDelete);
-        saveEventsToFile(allEvents);
+        eventRepository.deleteById(eventId);
     }
 
-    @Override
-    public void editEventById(long eventId, Event event) throws IOException{
-        Event eventToEdit = findEventById(eventId);
-        removeEventById(eventId);
-
-        eventToEdit.setEventName(event.getEventName());
-        eventToEdit.setEventDescription(event.getEventDescription());
-        eventToEdit.setEventPrize(event.getEventPrize());
-        eventToEdit.setEventType(event.getEventType());
-        eventToEdit.setEventDate(event.getEventDate());
-        addEvent(eventToEdit);
+    public void editEventById(Event eventToEdit){
+        logger.info("Replacing event: {}, with event {}");
+        eventRepository.save(eventToEdit);
     }
 
-    private void saveEventsToFile(List<Event> eventsToSave) throws IOException {
-        dataService.saveToFile(eventsToSave, EVENT_FILE_PATH);
-        logger.info("Event saved to file: {}");
-    }
-
-    @Override
-    public Event findEventById(long eventId) throws IOException {
-        List<Event> allEvents = getAllEvents();
-        return allEvents.stream()
-                .filter(t -> t.getEventId() == (eventId))
-                .findFirst()
+    public Event findEventById(Long eventId){
+        return eventRepository.findById(eventId)
                 .orElseThrow(() -> new EventNotFoundException("Event with the following id has not been found: %x".formatted(eventId)));
-    }
-    public long createRandomId() {
-        logger.info("Create random ID: {}");
-        return new Random().nextLong(1001);
     }
 }

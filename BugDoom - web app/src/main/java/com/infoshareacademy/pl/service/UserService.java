@@ -1,68 +1,41 @@
 package com.infoshareacademy.pl.service;
 
+import com.infoshareacademy.pl.exception.UserNotFoundException;
 import com.infoshareacademy.pl.model.User;
 import com.infoshareacademy.pl.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @Service
-public class UserService implements UserRepository {
+@Transactional
+public class UserService {
+    private final UserRepository userRepository;
     private static final Logger logger = LoggerFactory.getLogger(UserService.class);
-    private final String USERS_FILE_PATH = FilePathConstants.USERS_FILE_PATH;
-    private final DataService<User> dataService;
-    private User currentUser;
 
-    public UserService(DataService<User> dataService) {
-        this.dataService = dataService;
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
-    public void addNewUser(User user) throws IOException {
-        logger.info("Creating new user: {}");
-        List<User> users = getAllUsers();
-        users.add(user);
-        dataService.saveToFile(users, USERS_FILE_PATH);
+    public void addNewUser(User user) {
+        logger.info("Creating new user: {}", user);
+        userRepository.save(user);
     }
 
-    public void deleteUser(User userToDelete) throws IOException {
+    public void deleteUserById(Long userId) {
         logger.info("Removing user: {}");
-        List<User> users = getAllUsers();
-        users.remove(userToDelete);
-        dataService.saveToFile(users, USERS_FILE_PATH);
+        userRepository.deleteById(userId);
     }
 
-    public User findUserById(long id) throws NoSuchElementException, IOException {
-        List<User> users = getAllUsers();
-        return users.stream()
-                .filter(user -> user.getUserId() == id)
-                .findFirst()
-                .orElseThrow();
+    public User findUserById(Long userId) {
+        return userRepository.findById(userId)
+                .orElseThrow(() -> new UserNotFoundException("User with given id: '%s' not found".formatted(userId)));
     }
 
-    public boolean loginValidation(String emailAddress, String password) throws IOException {
-        List<User> users = dataService.readFromFile(USERS_FILE_PATH, User[].class);
-        for (User user : users) {
-            if (user.getUserEmailAddress() != null
-                    && !user.getUserEmailAddress().isEmpty()
-                    && user.getUserEmailAddress().equals(emailAddress)
-                    && user.getPassword().equals(password)) {
-                currentUser = user;
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public User getCurrentUser() {
-        return currentUser;
-    }
-
-    public List<User> getAllUsers() throws IOException {
-        return new ArrayList<>(dataService.readFromFile(USERS_FILE_PATH, User[].class));
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
     }
 }

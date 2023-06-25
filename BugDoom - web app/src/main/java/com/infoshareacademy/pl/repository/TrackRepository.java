@@ -2,27 +2,22 @@
 package com.infoshareacademy.pl.repository;
 
 import com.infoshareacademy.pl.model.Track;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
-import java.io.IOException;
 import java.util.List;
 
-public interface TrackRepository {
-    void saveTracksToFile(List<Track> tracksToSave) throws IOException;
+@Repository
+public interface TrackRepository extends JpaRepository<Track, Long> {
 
-    Track findTrackById(long trackId) throws IOException;
+    @Query(value = "SELECT t FROM Track t WHERE t.competitionName LIKE %:name%")
+    List<Track> findTracksByName(@Param("name") String name);
 
-    List<Track> getAllTracks() throws IOException;
+    @Query(value = "SELECT t FROM Track t WHERE t.difficulty = :difficulty")
+    List<Track> filterTracksByDifficulty(@Param("difficulty") String difficulty);
 
-    List<Track> findTracksByKeyword(String keyword) throws IOException;
-
-    void addTrack(Track trackToAdd) throws IOException;
-
-    void removeTrackById(long trackId) throws IOException;
-
-
-    long createRandomId();
-
-    void editTrackById(long trackId, Track track) throws IOException;
-
-    List<Track> filterTracksByDifficulty(String difficulty) throws IOException;
+    @Query(value = "SELECT t FROM Track t WHERE t.event.eventId = :eventId")
+    List<Track> findTracksByEventId(@Param("eventId") long eventId);
 }
