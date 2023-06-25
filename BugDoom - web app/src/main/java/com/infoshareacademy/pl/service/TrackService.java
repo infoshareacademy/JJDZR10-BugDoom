@@ -31,7 +31,7 @@ public class TrackService {
     }
 
     public void removeTrackById(Long trackId){
-        logger.info("Removing track: {}");
+        logger.info("Removing track with id: {}", trackId);
         trackRepository.deleteById(trackId);
     }
 

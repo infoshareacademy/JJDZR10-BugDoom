@@ -30,12 +30,12 @@ public class EventService {
     }
 
     public void removeEventById(Long eventId) {
-        logger.info("Removing event: {}");
+        logger.info("Removing event with id: {}", eventId);
         eventRepository.deleteById(eventId);
     }
 
     public void editEventById(Event eventToEdit){
-        logger.info("Replacing event: {}, with event {}");
+        logger.info("Replacing event with id: {}, with event {}", findEventById(eventToEdit.getEventId()), eventToEdit);
         eventRepository.save(eventToEdit);
     }
 
