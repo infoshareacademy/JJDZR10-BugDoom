@@ -57,8 +57,4 @@ public class TrackService {
     public Page<Track> findTracksByEventId(Pageable pageable, long eventId) {
         return trackRepository.findTracksByEventId(pageable, eventId);
     }
-
-    public List<Track> findTracksByEventId(long eventId) {
-        return trackRepository.findTracksByEventId(eventId);
-    }
 }

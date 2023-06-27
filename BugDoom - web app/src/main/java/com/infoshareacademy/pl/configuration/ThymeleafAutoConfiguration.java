@@ -1,4 +1,4 @@
-package com.infoshareacademy.pl.config;
+package com.infoshareacademy.pl.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

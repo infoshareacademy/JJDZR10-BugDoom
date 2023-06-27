@@ -6,14 +6,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class DashboardController {
 
     @GetMapping("/")
-
     public String getDashboard(){
         return "MainMenu";
     }
+
     @GetMapping("/about")
-    public String getabout() {
-
+    public String getAboutUs() {
         return "AboutUs";
-
     }
 }
