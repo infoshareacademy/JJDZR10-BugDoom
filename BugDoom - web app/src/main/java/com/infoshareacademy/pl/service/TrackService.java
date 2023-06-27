@@ -6,6 +6,8 @@ import com.infoshareacademy.pl.model.Track;
 import com.infoshareacademy.pl.repository.TrackRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +17,7 @@ import java.util.*;
 @Transactional
 public class TrackService {
     private final TrackRepository trackRepository;
+    private static final Logger logger = LoggerFactory.getLogger(TrackService.class);
 
     public TrackService(TrackRepository trackRepository) {
         this.trackRepository = trackRepository;
@@ -25,10 +28,12 @@ public class TrackService {
     }
 
     public void addTrack(Track trackToAdd){
+        logger.info("Adding track: {}", trackToAdd);
         trackRepository.save(trackToAdd);
     }
 
     public void removeTrackById(Long trackId){
+        logger.info("Removing track with id: {}", trackId);
         trackRepository.deleteById(trackId);
     }
 
@@ -51,5 +56,9 @@ public class TrackService {
 
     public Page<Track> findTracksByEventId(Pageable pageable, long eventId) {
         return trackRepository.findTracksByEventId(pageable, eventId);
+    }
+
+    public List<Track> findTracksByEventId(long eventId) {
+        return trackRepository.findTracksByEventId(eventId);
     }
 }

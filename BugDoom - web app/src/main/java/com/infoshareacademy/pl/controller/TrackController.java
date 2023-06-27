@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -33,7 +34,7 @@ public class TrackController {
                             @RequestParam(value = "eventId", required = false) Long eventId,
                             @SortDefault("competitionName") Pageable pageable) {
         model.addAttribute("allEvents", eventService.getAllEvents());
-
+      
         if (name != null && !name.isBlank()) {
             model.addAttribute("tracks", trackService.findTracksByName(pageable, name));
             model.addAttribute("name", name);
@@ -51,20 +52,25 @@ public class TrackController {
     }
 
     @GetMapping("tracks/delete/{trackId}")
-    public String deleteTrack(@PathVariable Long trackId) {
+    public String deleteTrack(@PathVariable Long trackId, RedirectAttributes redirectAttributes) {
         trackService.removeTrackById(trackId);
+
+        redirectAttributes.addFlashAttribute("trackDeletionSuccess", "Trasa została usunięta poprawnie!");
         return "redirect:/tracks";
+
     }
 
     @PostMapping("/tracks")
     public String createTrack(@Valid @ModelAttribute Track newTrack,
                               BindingResult bindingResult,
-                              @RequestParam("event.eventId") long eventId) {
+                              @RequestParam("event.eventId") long eventId,
+                              RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
             return "tracks/add-track";
         }
         newTrack.setEvent(eventService.findEventById(eventId));
         trackService.addTrack(newTrack);
+        redirectAttributes.addFlashAttribute("trackAdditionSuccess", "Dodawanie trasy wykonano poprawnie!");
         return "redirect:/tracks";
     }
 
@@ -101,13 +107,16 @@ public class TrackController {
     public String editTrack(@PathVariable("trackId") long trackId,
                             @Valid @ModelAttribute Track track,
                             BindingResult bindingResult,
-                            @RequestParam("track.eventId") long eventId) {
+                            @RequestParam("track.eventId") long eventId, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("trackEditionFail", "Edycja trasy nie powiodła się");
             return "tracks/edit-track";
         }
         track.setEvent(eventService.findEventById(eventId));
         trackService.editTrack(track);
+        redirectAttributes.addFlashAttribute("trackEditionSuccess", "Edycja trasy wykonana poprawnie!");
         return "redirect:/tracks";
     }
-}
+    }
+
 
