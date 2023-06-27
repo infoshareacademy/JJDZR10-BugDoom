@@ -1,46 +1,73 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.w3.org/1999/xhtml"
-      layout:decorate="~{fragments/main_view}">
+      layout:decorate="~{fragments/main_view}"
+      xmlns:sd="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Events</title>
+    <style>
+        table.table thead .sorted:after{
+            display: inline-block;
+            font-family: 'FontAwesome';
+            opacity: 0.8;
+            margin-left: 1em;
+        }
+        table.table thead .sorted {
+            content: "\f15e";
+        }
+        table.table thead .sorted {
+            content: "\f15d";
+        }
+
+    </style>
 </head>
 <body>
-<div layout:fragment ="content">
-<table class="table">
-    <thead>
-    <tr>
-        <th scope="col">#</th>
-        <th scope="col">Nazwa wydarzenia</th>
-        <th scope="col">Opis wydarzenia</th>
-        <th scope="col">Rodzaj wydarzenia</th>
-        <th scope="col">Data wydarzenia</th>
-        <th scope="col">Nagroda</th>
-        <th scope="col">Działania</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="event,iterStat: ${events}">
-        <td th:text="${iterStat.count}"></td>
-        <td th:text="${event.eventName}">eventName</td>
-        <td th:text="${event.eventDescription}">eventDescription</td>
-        <td th:text="${event.eventType}">eventType</td>
-        <td th:text="${event.eventDate}">eventDate</td>
-        <td th:text="${event.eventPrize}">eventPrize</td>
-        <td>
-            <a style="border: outset black" th:href="@{/events/{id}(id=${event.eventId})}" class="btn btn-light">
-                Pokaż szczegóły wydarzenia
-            </a>
-        </td>
-    </tr>
-    </tbody>
-</table>
-<div style="text-align:center" class="container">
-    <div class="row-flex"><a th:href="@{/events/new-event}" class="btn btn-info">
-        DODAJ NOWE WYDARZENIE
-    </a></div>
-</div>
+<div layout:fragment="content">
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col"><a class="sorted" sd:pagination-sort="eventName">Nazwa wydarzenia</a></th>
+            <th scope="col">Opis wydarzenia</th>
+            <th scope="col">Rodzaj wydarzenia</th>
+            <th scope="col"><a class="sorted" sd:pagination-sort="eventDate">Data wydarzenia</a></th>
+            <th scope="col"><a class="sorted" sd:pagination-sort="eventPrize">Nagroda</a></th>
+            <th scope="col">Działania</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="event,iterStat: ${events}">
+            <td th:text="${iterStat.count}"></td>
+            <td th:text="${event.eventName}">eventName</td>
+            <td th:text="${event.eventDescription}">eventDescription</td>
+            <td th:text="${event.eventType}">eventType</td>
+            <td th:text="${event.eventDate}">eventDate</td>
+            <td th:text="${event.eventPrize}">eventPrize</td>
+            <td>
+                <a style="border: outset black" th:href="@{/events/{id}(id=${event.eventId})}" class="btn btn-light">
+                    Pokaż szczegóły wydarzenia
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="row">
+        <div class="col-sm-8">
+            Pokaż <span sd:page-size-selector="javascript"></span> wyników
+        </div>
+        <div class="col-sm-4">
+            <nav class="pull-right">
+                <ul class="pagination" sd:pagination="full"></ul>
+            </nav>
+        </div>
+    </div>
+    <div style="text-align:center" class="container">
+        <div class="row-flex"><a th:href="@{/events/new-event}" class="btn btn-info">
+            DODAJ NOWE WYDARZENIE
+        </a></div>
+    </div>
 </div>
 </body>
 </html>
