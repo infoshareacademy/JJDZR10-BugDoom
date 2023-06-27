@@ -1,7 +1,6 @@
 package com.infoshareacademy.pl.service;
 
 import com.infoshareacademy.pl.exception.TrackNotFoundException;
-import com.infoshareacademy.pl.model.Event;
 import com.infoshareacademy.pl.model.Track;
 import com.infoshareacademy.pl.repository.TrackRepository;
 import org.slf4j.Logger;
