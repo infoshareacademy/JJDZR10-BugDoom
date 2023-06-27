@@ -140,7 +140,6 @@ public class Event {
                 "eventId=" + eventId +
                 ", eventName='" + eventName + '\'' +
                 ", eventDescription='" + eventDescription + '\'' +
-                ", tracks=" + tracks +
                 ", participants=" + participants +
                 ", eventPrize=" + eventPrize +
                 ", eventDate=" + eventDate +

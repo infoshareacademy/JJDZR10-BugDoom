@@ -102,8 +102,7 @@
         </div>
         </thead>
         <tbody>
-        <tr th:each="track, iterStat: ${tracks}"
-            th:onclick="|window.location.href='/tracks/' + ${track.trackId}|">
+        <tr th:each="track, iterStat: ${tracks}" th:onclick="|window.location.href='/tracks/' + ${track.trackId}|">
             <td th:text="${iterStat.count}"></td>
             <td th:text="${track.getCompetitionName}"></td>
             <td th:text="${track.getDifficulty}"></td>
@@ -124,7 +123,6 @@
     <a th:href="@{/tracks/create}" class="btn btn-info">
         Utwórz nową trasę
     </a>
-</div>
 </div>
 </body>
 </html>
