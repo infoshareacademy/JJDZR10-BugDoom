@@ -1,6 +1,7 @@
 package com.infoshareacademy.pl.controller;
 
 import com.infoshareacademy.pl.model.Event;
+import com.infoshareacademy.pl.model.Location;
 import com.infoshareacademy.pl.model.Track;
 import com.infoshareacademy.pl.service.EventService;
 import com.infoshareacademy.pl.service.TrackService;
@@ -40,7 +41,7 @@ public class TrackController {
         } else if (difficulty != null) {
             model.addAttribute("tracks", trackService.filterTracksByDifficulty(difficulty));
             model.addAttribute("difficulty", difficulty);
-        } else if (eventId != null){
+        } else if (eventId != null) {
             model.addAttribute("tracks", trackService.findTracksByEventId(eventId));
             model.addAttribute("eventId", eventId);
             model.addAttribute("selectedEvent", eventService.findEventById(eventId));
@@ -108,6 +109,24 @@ public class TrackController {
         track.setEvent(eventService.findEventById(eventId));
         trackService.editTrack(track);
         return "redirect:/tracks";
+    }
+
+    @GetMapping("/tracks/{trackId}/location")
+    public String getLocations(@PathVariable("trackId")long trackId, Model model) {
+        Track track = trackService.findTrackById(trackId);
+        model.addAttribute("track", track);
+        List<Location> locations = trackService.getLocations();
+        model.addAttribute("locations", locations);
+        return "tracks/location";
+    }
+    @PostMapping("/tracks/{trackId}/location")
+    public String addLocations(@PathVariable("trackId")long trackId, @Valid @ModelAttribute Track track, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "tracks/add-location";
+        }
+        trackService.findTrackById(trackId);
+        track.getLocations();
+        return "redirect:/tracks/location";
     }
 }
 

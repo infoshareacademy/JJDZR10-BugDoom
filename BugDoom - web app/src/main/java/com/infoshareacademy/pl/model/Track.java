@@ -87,6 +87,14 @@ public class Track {
         this.event = event;
     }
 
+    public List<Location> getLocations() {
+        return locations;
+    }
+
+    public void setLocations(List<Location> locations) {
+        this.locations = locations;
+    }
+
     public Location getFinish() {
         return locations.stream()
                 .filter(Location::isTrackFinish)
