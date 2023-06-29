@@ -8,7 +8,7 @@
 </head>
 <body>
 <div layout:fragment="content" class="container text-left">
-    <form th:action="@{/tasks/l}" th:object="${task}" method="post">
+    <form th:action="@{/tracks/{trackId}/location(trackId=${trackId})}" th:object="${locations}" method="post">
 
 
 </div>

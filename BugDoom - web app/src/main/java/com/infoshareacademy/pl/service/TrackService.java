@@ -14,7 +14,7 @@ import java.util.*;
 @Transactional
 public class TrackService {
     private final TrackRepository trackRepository;
-    private List<Location>locations = new ArrayList<>();
+//    private List<Location>locations = new ArrayList<>();
 
     public TrackService(TrackRepository trackRepository) {
         this.trackRepository = trackRepository;
@@ -53,7 +53,7 @@ public class TrackService {
         return trackRepository.findTracksByEventId(eventId);
     }
 
-    public List<Location>getLocations(){
-        return locations;
-    }
+//    public List<Location>getLocations(){
+//        return locations;
+//    }
 }

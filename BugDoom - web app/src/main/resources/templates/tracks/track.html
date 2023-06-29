@@ -5,11 +5,6 @@
 <head>
 
     <meta charset="UTF-8">
-    <style>
-        tbody tr:hover {
-            background-color: #f5f5f5;
-        }
-    </style>
 
     <title>Tracks</title>
 
@@ -64,7 +59,7 @@
             <tr>
                 <th class="col-1">#</th>
                 <th class="col-2">Nazwa biegu</th>
-                <th class="col-4">
+                <th class="col-2">
                     <form action="/tracks" method="get">
                         <label for="txtSearch2">Poziom trudności:</label>
                         <select id="txtSearch2" type="text" name="difficulty" th:value="${difficulty}">
@@ -80,7 +75,9 @@
                 <th class="col-1">Teren</th>
                 <th class="col-2">Wydarzenie <br>
                 </th>
-                <th class="col-2">Działania</th>
+                <th class="col-1">Długość</th>
+                <th class="col-1">Szerokość</th>
+                <th class="col-1">Działania</th>
             </tr>
         </div>
         </thead>
@@ -91,6 +88,24 @@
             <td th:text="${track.getDifficulty}"></td>
             <td th:text="${track.getTerrain}"></td>
             <td th:text="${track.event.eventName}"></td>
+
+            <td>
+                <table>
+                    <tr th:each="location : ${track.locations}">
+                        <td th:text="${location.longitude}"></td>
+                    </tr>
+                </table>
+            </td>
+
+            <td>
+                <table>
+                    <tr th:each="location : ${track.locations}">
+                        <td th:text="${location.latitude}"></td>
+                    </tr>
+                </table>
+            </td>
+
+
             <td>
                 <a th:href="@{/tracks/delete/{id}(id=${track.getTrackId})}" class="btn btn-danger">
                     Usuń

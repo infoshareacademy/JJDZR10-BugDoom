@@ -95,30 +95,31 @@ public class Track {
         this.locations = locations;
     }
 
-    public Location getFinish() {
-        return locations.stream()
-                .filter(Location::isTrackFinish)
-                .findFirst().orElse(new Location(0.0, 0.0));
-    }
+//    public Location getFinish() {
+//        return locations.stream()
+//                .filter(Location::isTrackFinish)
+//                .findFirst().orElse(new Location(0.0, 0.0));
+//    }
+//
+//    public Location getStart() {
+//        return locations.stream()
+//                .filter(Location::isTrackStart)
+//                .findFirst().orElse(new Location(0.0, 0.0));
+//    }
 
-    public Location getStart() {
-        return locations.stream()
-                .filter(Location::isTrackStart)
-                .findFirst().orElse(new Location(0.0, 0.0));
-    }
+//    public List<Location> getCheckpoints() {
+//        return locations.stream()
+//                .filter(Location::isCheckpoint)
+//                .toList();
+//    }
 
-    public List<Location> getCheckpoints() {
-        return locations.stream()
-                .filter(Location::isCheckpoint)
-                .toList();
-    }
 
     @Override
     public String toString() {
         return "Track{" +
                 "trackId=" + trackId +
                 ", competitionName='" + competitionName + '\'' +
-                ", checkpoints=" + locations +
+                ", locations=" + locations +
                 ", length=" + length +
                 ", difficulty='" + difficulty + '\'' +
                 ", terrain='" + terrain + '\'' +

@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -66,6 +67,7 @@ public class TrackController {
         }
         newTrack.setEvent(eventService.findEventById(eventId));
         trackService.addTrack(newTrack);
+
         return "redirect:/tracks";
     }
 
@@ -111,22 +113,22 @@ public class TrackController {
         return "redirect:/tracks";
     }
 
-    @GetMapping("/tracks/{trackId}/location")
-    public String getLocations(@PathVariable("trackId")long trackId, Model model) {
-        Track track = trackService.findTrackById(trackId);
-        model.addAttribute("track", track);
-        List<Location> locations = trackService.getLocations();
-        model.addAttribute("locations", locations);
-        return "tracks/location";
-    }
-    @PostMapping("/tracks/{trackId}/location")
-    public String addLocations(@PathVariable("trackId")long trackId, @Valid @ModelAttribute Track track, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "tracks/add-location";
-        }
-        trackService.findTrackById(trackId);
-        track.getLocations();
-        return "redirect:/tracks/location";
-    }
+//    @GetMapping("/tracks/{trackId}/location")
+//    public String getLocations(@PathVariable("trackId")long trackId, Model model) {
+//        Track track = trackService.findTrackById(trackId);
+//        model.addAttribute("track", track);
+//        List<Location> locations = trackService.getLocations();
+//        model.addAttribute("locations", locations);
+//        return "tracks/location";
+//    }
+//    @PostMapping("/tracks/{trackId}/location")
+//    public String addLocations(@PathVariable("trackId")long trackId, @Valid @ModelAttribute Track track, BindingResult bindingResult) {
+//        if (bindingResult.hasErrors()) {
+//            return "tracks/add-location";
+//        }
+//        trackService.findTrackById(trackId);
+//        track.getLocations();
+//        return "redirect:/tracks/location";
+//    }
 }
 
