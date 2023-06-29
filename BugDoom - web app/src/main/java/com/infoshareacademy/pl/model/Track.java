@@ -3,6 +3,7 @@ package com.infoshareacademy.pl.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Positive;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -18,7 +19,7 @@ public class Track {
     private String competitionName;
 
     @OneToMany(mappedBy = "track")
-    private List<Location> locations;
+    private List<Location> locations = new ArrayList<>();
 
     @Positive(message = "Długość biegu musi być większa od 0")
     @Column(name = "track_length")
@@ -38,6 +39,7 @@ public class Track {
 
     public Track() {
     }
+
 
     public long getTrackId() {
         return trackId;

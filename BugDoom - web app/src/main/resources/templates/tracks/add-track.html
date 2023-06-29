@@ -4,14 +4,24 @@
       layout:decorate="~{fragments/main_view}">
 <head>
     <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+        integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+        crossorigin=""/>
 
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+          integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+          crossorigin=""></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <title>New track</title>
-
+  <style>#map { height: 500px; }</style>
+<!--  <style>#longitude_input, #latitude_input { display: none; }</style>-->
 </head>
 <body>
 <div layout:fragment ="content" class="container text-left">
   <h1 >Nowa trasa</h1>
+
   <form th:action="@{/tracks}" th:object="${track}" method="post">
+
     <div style="margin-top: 5px">
     <p>Nazwa biegu: <input type="text" placeholder="Nazwa nowego biegu" th:field="*{competitionName}"/></p>
     </div>
@@ -42,12 +52,27 @@
                 th:text="${event.eventName}"></option>
       </select>
     </div>
+
+    <div style="margin-top: 5px">
+      <p>Start (współrzędne): <input type="text" placeholder="start" id="coordinate_input" onchange="splitCoordinates()"/></p>
+    </div>
+    <div style="margin-top: 5px">
+      <p>Start (długość geograficzna): <input type="text" placeholder="start" id="longitude_input" /></p>
+    </div>
+    <div style="margin-top: 5px">
+      <p>Start (szerokość geograficzna): <input type="text" placeholder="start" id="latitude_input"/></p>
+    </div>
+
+
+    <div id="map" class="container"></div>
     <ul th:if="${#fields.hasErrors('*')}">
       <li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
     </ul>
     <p><input class="btn btn-success" type="submit" value="Zatwierdź"/>
       <input class="btn btn-secondary" type="reset" value="Zresetuj"/></p>
   </form>
+
+  <a href="/tracks" class="btn btn-primary"><i class="fas fa-angle-double-left"></i> Powrót do listy tras</a>
   <script>
     const value = document.querySelector("#value")
     const input = document.querySelector("#length_input")
@@ -56,8 +81,55 @@
       value.textContent = event.target.value
     })
   </script>
-  <a href="/tracks" class="btn btn-primary"><i class="fas fa-angle-double-left"></i> Powrót do listy tras</a>
+
+  <script th:inline="javascript">
+
+
+    var options = { center: [54.349, 18.651], zoom: 12 };
+    var map = L.map('map', options);
+
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 20,
+      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+
+    map.on('click', function(e) {
+      var lt = String(e.latlng.lat),
+              lg = String(e.latlng.lng);
+      var popup = L.popup()
+              .setLatLng(e.latlng)
+              .setContent("Kopiuj współrzędne\n" + lt + "," + lg)
+              .openOn(map);
+    });
+    function splitCoordinates() {
+      var coordinateInput = document.getElementById("coordinate_input").value;
+      var coordinates = coordinateInput.split(/[ ,]+/);
+
+      if (coordinates.length >= 2) {
+        var longitudeInput = document.getElementById("longitude_input");
+        var latitudeInput = document.getElementById("latitude_input");
+
+        longitudeInput.value = coordinates[0];
+        latitudeInput.value = coordinates[1];
+      }
+    }
+
+    function splitCoordinates() {
+      var coordinateInput = document.getElementById("coordinate_input").value;
+      var coordinates = coordinateInput.split(/[ ,]+/);
+
+      if (coordinates.length >= 2) {
+        var longitudeInput = document.getElementById("longitude_input");
+        var latitudeInput = document.getElementById("latitude_input");
+
+        longitudeInput.value = coordinates[0];
+        latitudeInput.value = coordinates[1];
+      }
+    }
+  </script>
 </div>
 
 </body>
+
+
 </html>

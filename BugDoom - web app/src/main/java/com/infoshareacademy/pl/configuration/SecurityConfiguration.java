@@ -40,9 +40,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/", "/login", "/register", "/tracks", "/events", "/about", "/welcome", "/images/**").permitAll()
-                .antMatchers(HttpMethod.POST).hasAnyRole("ADMIN", "MANAGER")
-                .antMatchers("/users").hasAnyRole("ADMIN")
-                .anyRequest().authenticated()
+//                .antMatchers(HttpMethod.POST).hasAnyRole("ADMIN", "MANAGER")
+//                .antMatchers("/users").hasAnyRole("ADMIN")
+//                .anyRequest().authenticated()
                 .and()
                 .formLogin().permitAll()
                 .defaultSuccessUrl("/welcome", true)

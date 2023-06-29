@@ -10,6 +10,13 @@
 <div layout:fragment="content" class="container text-left">
     <form th:action="@{/tasks/l}" th:object="${task}" method="post">
 
+    </form>
+
+        <div>
+            <input type="text" id="locations" name="locations" min="2" max="10" th:field="*{locations}" value="">Ilość checkpointów:<br/>
+            <button type="button" id="fill-details" onclick="addFields()">Dodaj checkpointy (2-10)</button>
+            <div id="container"/>
+        </div>
 
 </div>
 </body>

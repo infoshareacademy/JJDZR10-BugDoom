@@ -40,4 +40,23 @@
 </table>
 </div>
 </body>
+<script>
+    function addFields() {
+        var number = document.getElementById("locations").value;
+        var container = document.getElementById("container");
+        while (container.hasChildNodes()) {
+            container.removeChild(container.lastChild);
+        }
+        for (i = 0; i < number; i++) {
+            container.appendChild(document.createTextNode("Checkpoint " + (i + 1)));
+
+            var input = document.createElement("input");
+            input.type = "text";
+            input.name = "location[" + i + "]";
+            container.appendChild(input);
+
+            container.appendChild(document.createElement("br"));
+        }
+    }
+</script>
 </html>
