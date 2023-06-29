@@ -120,7 +120,7 @@ public class Track {
         return "Track{" +
                 "trackId=" + trackId +
                 ", competitionName='" + competitionName + '\'' +
-                ", checkpoints=" + locations +
+                ", locations=" + locations +
                 ", length=" + length +
                 ", difficulty='" + difficulty + '\'' +
                 ", terrain='" + terrain + '\'' +
