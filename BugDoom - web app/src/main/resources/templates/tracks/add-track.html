@@ -54,14 +54,22 @@
     </div>
 
     <div style="margin-top: 5px">
-      <p>Start (współrzędne): <input type="text" placeholder="start" id="coordinate_input" onchange="splitCoordinates()"/></p>
+      <p>Start dł. geograf.: <input type="text" placeholder="start X" th:field="*{start.latitude}"/></p>
     </div>
     <div style="margin-top: 5px">
-      <p>Start (długość geograficzna): <input type="text" placeholder="start" id="longitude_input" /></p>
+      <p>Start sz. geograf.: <input type="text" placeholder="start Y" th:field="*{start.longitude}"/></p>
     </div>
-    <div style="margin-top: 5px">
-      <p>Start (szerokość geograficzna): <input type="text" placeholder="start" id="latitude_input"/></p>
-    </div>
+
+
+<!--    <div style="margin-top: 5px">-->
+<!--      <p>Start (współrzędne): <input type="text" placeholder="start" id="coordinate_input" onchange="splitCoordinates()"/></p>-->
+<!--    </div>-->
+<!--    <div style="margin-top: 5px">-->
+<!--      <p>Start (długość geograficzna): <input type="text" placeholder="start" id="longitude_input" /></p>-->
+<!--    </div>-->
+<!--    <div style="margin-top: 5px">-->
+<!--      <p>Start (szerokość geograficzna): <input type="text" placeholder="start" id="latitude_input"/></p>-->
+<!--    </div>-->
 
 
     <div id="map" class="container"></div>
