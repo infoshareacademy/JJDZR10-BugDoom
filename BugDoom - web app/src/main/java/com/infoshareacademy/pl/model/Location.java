@@ -1,6 +1,7 @@
 package com.infoshareacademy.pl.model;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Objects;
 
 @Entity
@@ -14,10 +15,10 @@ public class Location {
     private String locationName;
 
     @Column(name = "latitude")
-    private double latitude;
+    private BigDecimal latitude;
 
     @Column(name = "longitude")
-    private double longitude;
+    private BigDecimal longitude;
 
     @Column(name = "is_finish")
     private boolean isTrackFinish;
@@ -34,7 +35,7 @@ public class Location {
     public Location() {
     }
 
-    public Location(double latitude, double longitude) {
+    public Location(BigDecimal latitude, BigDecimal longitude) {
         this.latitude = latitude;
         this.longitude = longitude;
     }
@@ -55,19 +56,19 @@ public class Location {
         this.locationName = locationName;
     }
 
-    public double getLatitude() {
+    public BigDecimal getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(double latitude) {
+    public void setLatitude(BigDecimal latitude) {
         this.latitude = latitude;
     }
 
-    public double getLongitude() {
+    public BigDecimal getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(double longitude) {
+    public void setLongitude(BigDecimal longitude) {
         this.longitude = longitude;
     }
 
@@ -107,26 +108,26 @@ public class Location {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         Location location = (Location) o;
 
-        if (Double.compare(location.latitude, latitude) != 0) return false;
-        if (Double.compare(location.longitude, longitude) != 0) return false;
         if (isTrackFinish != location.isTrackFinish) return false;
         if (isTrackStart != location.isTrackStart) return false;
         if (isCheckpoint != location.isCheckpoint) return false;
         if (!Objects.equals(id, location.id)) return false;
+        if (!Objects.equals(locationName, location.locationName))
+            return false;
+        if (!Objects.equals(latitude, location.latitude)) return false;
+        if (!Objects.equals(longitude, location.longitude)) return false;
         return Objects.equals(track, location.track);
     }
 
     @Override
     public int hashCode() {
-        int result;
-        long temp;
-        result = id != null ? id.hashCode() : 0;
-        temp = Double.doubleToLongBits(latitude);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(longitude);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (locationName != null ? locationName.hashCode() : 0);
+        result = 31 * result + (latitude != null ? latitude.hashCode() : 0);
+        result = 31 * result + (longitude != null ? longitude.hashCode() : 0);
         result = 31 * result + (isTrackFinish ? 1 : 0);
         result = 31 * result + (isTrackStart ? 1 : 0);
         result = 31 * result + (isCheckpoint ? 1 : 0);

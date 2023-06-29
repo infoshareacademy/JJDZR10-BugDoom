@@ -3,6 +3,7 @@ package com.infoshareacademy.pl.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Positive;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -100,13 +101,13 @@ public class Track {
     public Location getFinish() {
         return locations.stream()
                 .filter(Location::isTrackFinish)
-                .findFirst().orElse(new Location(0.0, 0.0));
+                .findFirst().orElse(new Location(BigDecimal.ZERO, BigDecimal.ZERO));
     }
 
     public Location getStart() {
         return locations.stream()
                 .filter(Location::isTrackStart)
-                .findFirst().orElse(new Location(0.0, 0.0));
+                .findFirst().orElse(new Location(BigDecimal.ZERO , BigDecimal.ZERO));
     }
 
     public List<Location> getCheckpoints() {
