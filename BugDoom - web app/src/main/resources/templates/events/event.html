@@ -20,6 +20,9 @@
         table.table thead .sorted {
             content: "\f15d";
         }
+        tbody tr:hover {
+             background-color: #f5f5f5;
+        }
 
     </style>
 </head>
@@ -47,7 +50,7 @@
                 <th scope="col">Nagroda</th>
                 <th scope="col">Działania</th>
             </tr>
-            <tr th:each="event,iterStat: ${events}">
+            <tr th:each="event,iterStat: ${events}" th:onclick="|window.location.href='/events/' + ${event.eventId}|">
                 <td th:text="${iterStat.count}"></td>
                 <td th:text="${event.eventName}">eventName</td>
                 <td th:text="${event.eventDescription}">eventDescription</td>
@@ -60,9 +63,6 @@
                     </a>
                     <a th:href="@{/events/edition-form/{id}/(id=${event.eventId})}" class="btn btn-info">
                         Edytuj
-                    </a>
-                    <a th:href="@{/events/{id}(id=${event.eventId})}" class="btn btn-outline-success">
-                        Pokaż szczegóły wydarzenia
                     </a>
                 </td>
             </tr>
