@@ -23,7 +23,7 @@ public class Event {
     @Column(name = "event_description", nullable = false)
     private String eventDescription;
 
-    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "event")
     private List<Track> tracks;
 
     @OneToMany(mappedBy = "event")
