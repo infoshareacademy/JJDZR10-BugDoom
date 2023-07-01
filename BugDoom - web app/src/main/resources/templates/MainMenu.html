@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.w3.org/1999/xhtml"
-      layout:decorate="~{fragments/main_view}">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Page</title>
+    <link href="/css/style.css" th:href="@{/css/style.css}" rel="stylesheet">
     <link
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
             rel="stylesheet"
@@ -16,10 +16,48 @@
 
 </head>
 <body>
-
-<div layout:fragment ="content" class="container-md">
-    <div class="p-2"></div>
-    <div class="p-2"></div>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid text-light">
+        <a class="navbar=brand" href="#">
+            <img th:src="@{/images/Logo.png}" width="50" height="50">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/welcome}"><i class="bi bi-house"></i>
+                        Home </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" th:href="@{/about}">O nas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" th:href="@{https://kalendarzbiegowy.pl/}">Kalendarz biegów
+                        tradycyjnych</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                       aria-expanded="false">
+                        Blog
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" th:href="@{/family-run}">Biegaj z rodziną</a></li>
+                        <li><a class="dropdown-item" th:href="@{/running-shoes}">Obuwie Biegowe</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <form class="d-flex d-none d-md-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button type="button" class="btn btn-outline-light">Szukaj</button>
+            </form>
+        </div>
+    </div>
+</nav>
+<p></p>
+<div class="container-md">
     <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="false">
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
@@ -36,8 +74,12 @@
                     <h1 class="display-3 fw-bolder">Witaj w GeoRunners !</h1>
                     <h5 class="fs-3">Miło Cię tu widzieć</h5>
                     <div class="d-grid gap-2 col-3 mx-auto">
-                        <a th:href="@{/login}" class="btn btn-outline-light" type="button">Zaloguj się</a>
-                        <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <button type="button" class="btn btn-outline-light" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal2">
+                            Zaloguj się
+                        </button>
+                        <button type="button" class="btn btn-outline-light" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal">
                             Zarejestruj się
                         </button>
                     </div>
@@ -49,8 +91,12 @@
                     <h3 class="display-3 fw-bolder">Zaplanuj swój bieg <i class="bi bi-list-check"></i></h3>
                     <h5 class="fs-3">Jesteś Organizatorem? </h5>
                     <div class="d-grid gap-2 col-3 mx-auto">
-                        <a th:href="@{/login}" class="btn btn-outline-light" type="button">Zaloguj się</a>
-                        <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <button type="button" class="btn btn-outline-light" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal2">
+                            Zaloguj się
+                        </button>
+                        <button type="button" class="btn btn-outline-light" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal">
                             Zarejestruj się
                         </button>
                     </div>
@@ -62,8 +108,12 @@
                     <h3 class="display-3 fw-bolder">Po prostu biegaj <i class="bi bi-geo"></i></h3>
                     <h5 class="fs-3">Weź udział w biegu na orientacje</h5>
                     <div class="d-grid gap-2 col-3 mx-auto">
-                        <a th:href="@{/login}" class="btn btn-outline-light" type="button">Zaloguj się</a>
-                        <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <button type="button" class="btn btn-outline-light" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal2">
+                            Zaloguj się
+                        </button>
+                        <button type="button" class="btn btn-outline-light" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal">
                             Zarejestruj się
                         </button>
                     </div>
@@ -122,7 +172,8 @@
                         <div class="card-body">
                             <h5 class="card-title">Wydarzenia</h5>
                             <p class="card-text">Jeśli chcesz spróbować tradycyjnych biegów - koniecznie zajrzyj.</p>
-                            <a href="#" class="btn btn-info">Sprawdź <i class="bi bi-heart"></i></a>
+                            <a th:href="@{https://kalendarzbiegowy.pl/}" class="btn btn-info">Sprawdź <i
+                                    class="bi bi-heart"></i></a>
                         </div>
                     </div>
                 </div>
@@ -133,7 +184,7 @@
                             <h5 class="card-title">Biegaj całą rodziną</h5>
                             <p class="card-text">Nie ograniczaj się! Sprawdź porady dla biegania całą rodziną.
                                 Wspomnienia gwarantowane. </p>
-                            <a href="#" class="btn btn-info">Sprawdź <i class="bi bi-heart"></i></a>
+                            <a th:href="@{/family-run}" class="btn btn-info">Sprawdź <i class="bi bi-heart"></i></a>
                         </div>
                     </div>
                 </div>
@@ -144,7 +195,7 @@
                             <h5 class="card-title">Obuwie Biegowe</h5>
                             <p class="card-text">Nigdy nie zapominaj o dobraniu odpowiedniego obuwia do danego
                                 podłoża.</p>
-                            <a href="#" class="btn btn-info">Sprawdź <i class="bi bi-heart"></i></a>
+                            <a th:href="@{/running-shoes}" class="btn btn-info">Sprawdź <i class="bi bi-heart"></i></a>
                         </div>
                     </div>
                 </div>
@@ -161,16 +212,43 @@
                 </div>
                 <div class="modal-body">
                     <div class="d-flex flex-column my-2">
+                        <a th:href="@{/register}" class="btn btn-outline-success mt-3">Administrator</a>
+                    </div>
+                    <div class="d-flex flex-column my-2">
                         <a th:href="@{/register}" class="btn btn-outline-success mt-3">Organizator</a>
                     </div>
                     <div class="d-flex flex-column my-2">
-                        <a href="" class="btn btn-outline-success mt-3">Uczestnik</a>
+                        <a th:href="@{/register}" class="btn btn-outline-success mt-3">Uczestnik</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content text-bg-dark p-3">
+                <div class="modal-header">
+                    <h1 class="text-center mt-3 modal-title fs-5" id="exampleModalLabel2">Zaloguj się jako</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="d-flex flex-column my-2">
+                        <a th:href="@{/login}" class="btn btn-outline-success mt-3">Administrator</a>
+                    </div>
+                    <div class="d-flex flex-column my-2">
+                        <a th:href="@{/login}" class="btn btn-outline-success mt-3">Organizator</a>
+                    </div>
+                    <div class="d-flex flex-column my-2">
+                        <a th:href="@{/login}" class="btn btn-outline-success mt-3">Uczestnik</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-</div>
+<p class=" text text-center footer">
+    @BugDoom Runners
+</p>
 <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
@@ -178,4 +256,3 @@
 </script>
 </body>
 </html>
-

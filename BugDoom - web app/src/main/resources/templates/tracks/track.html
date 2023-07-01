@@ -56,7 +56,7 @@
             </button>
         </div>
     </div>
-  <div class="row">
+    <div class="row">
         <div class="col-5">
             <form style="margin: 6px" action="/tracks" method="get">
                 <label for="txtSearch">Wyszukaj trasę:</label>
@@ -72,9 +72,11 @@
                 </div>
                 <div class="col-auto">
                     <select style="width:275px" id="event" class="form-select form-select-sm" name="eventId">
-                        <option th:if="${eventId} == null" th:value="-1">Wybierz wydarzenie do sortowania</option>
-                        <option th:if="${eventId} != null" th:value="eventId" th:text="${selectedEvent.eventName}"></option>
-                        <option th:each="singleEvent : ${allEvents}" th:value="${singleEvent.eventId}" th:text="${singleEvent.eventName}"></option>
+                        <option th:if="${eventId} == null" th:value="-1">Wybierz wydarzenie do filtrowania</option>
+                        <option th:if="${eventId} != null" th:value="eventId"
+                                th:text="${selectedEvent.eventName}"></option>
+                        <option th:each="singleEvent : ${allEvents}" th:value="${singleEvent.eventId}"
+                                th:text="${singleEvent.eventName}"></option>
                     </select>
                 </div>
                 <div class="col-auto">
@@ -90,72 +92,63 @@
                 Nie znaleziono trasy, która spełnia podane kryteria!
             </div>
         </div>
-    </div>
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>Wyścigi GeoRunners</th>
-        </tr>
-        </thead>
-    </table>
-    <table class="table table-bordered">
-        <thead>
-        <div class="container">
+        <table class="table table-striped">
+            <thead>
             <tr>
-                <th class="col-1">#</th>
-                <th class="col-2"><a class="sorted" sd:pagination-sort="competitionName">Nazwa biegu</a></th>
-                <th class="col-4">
-                    <form action="/tracks" method="get">
-                        <label for="txtSearch2">Poziom trudności:</label>
-                        <select id="txtSearch2" type="text" name="difficulty" th:value="${difficulty}">
-                            <option selected>---</option>
-                            <option th:value="łatwy">łatwy</option>
-                            <option th:value="średni">średni</option>
-                            <option th:value="trudny">trudny</option>
-                        </select>
-                        <button class="btn btn-outline-success btn-sm" type="submit">Filtruj</button>
-                        <a th:if="${difficulty} != null" class="btn btn-outline-info btn-sm" href="/tracks">Powrót</a>
-                    </form>
-                </th>
-                <th class="col-1">Teren</th>
-                <th class="col-2">Wydarzenie <br>
-                </th>
-                <th class="col-2">Działania</th>
+                <th>Dostępne Trasy</th>
             </tr>
-        </div>
-        </thead>
-        <tbody>
-        <tr th:each="track, iterStat: ${tracks}" th:onclick="|window.location.href='/tracks/' + ${track.trackId}|">
-            <td th:text="${iterStat.count}"></td>
-            <td th:text="${track.getCompetitionName}"></td>
-            <td th:text="${track.getDifficulty}"></td>
-            <td th:text="${track.getTerrain}"></td>
-            <td th:text="${track.event.eventName}"></td>
-            <td>
-                <a th:href="@{/tracks/delete/{id}(id=${track.getTrackId})}" class="btn btn-danger">
-                    Usuń
-                </a>
-                <a th:href="@{/tracks/edit-track/{trackId}/(trackId=${track.trackId})}" class="btn btn-info">
-                    Edytuj
-                </a>
-
-            </td>
-        </tr>
-        </tbody>
-    </table>
-    <div class="row">
-        <div class="col-sm-8">
-            Pokaż <span sd:page-size-selector="javascript"></span> wyników
-        </div>
-        <div class="col-sm-4">
-            <nav class="pull-right">
-                <ul class="pagination" sd:pagination="full"></ul>
-            </nav>
+            </thead>
+        </table>
+        <table class="table table-bordered">
+            <thead>
+            <div class="container">
+                <tr>
+                    <th class="col-1">#</th>
+                    <th class="col-2">Nazwa biegu</th>
+                    <th class="col-4">
+                        <form action="/tracks" method="get">
+                            <label for="txtSearch2">Poziom trudności:</label>
+                            <select id="txtSearch2" type="text" name="difficulty" th:value="${difficulty}">
+                                <option selected>---</option>
+                                <option th:value="łatwy">łatwy</option>
+                                <option th:value="średni">średni</option>
+                                <option th:value="trudny">trudny</option>
+                            </select>
+                            <button class="btn btn-outline-success btn-sm" type="submit">Filtruj</button>
+                            <a th:if="${difficulty} != null" class="btn btn-outline-info btn-sm"
+                               href="/tracks">Powrót</a>
+                        </form>
+                    </th>
+                    <th class="col-1">Teren</th>
+                    <th class="col-2">Wydarzenie</th>
+                    <th class="col-2">Działania</th>
+                </tr>
+            </div>
+            </thead>
+            <tbody>
+            <tr th:each="track, iterStat: ${tracks}" th:onclick="|window.location.href='/tracks/' + ${track.trackId}|">
+                <td th:text="${iterStat.count}"></td>
+                <td th:text="${track.getCompetitionName}"></td>
+                <td th:text="${track.getDifficulty}"></td>
+                <td th:text="${track.getTerrain}"></td>
+                <td th:text="${track.event.eventName}"></td>
+                <td>
+                    <a th:href="@{/tracks/delete/{id}(id=${track.getTrackId})}" class="btn btn-danger">
+                        Usuń
+                    </a>
+                    <a th:href="@{/tracks/edit-track/{trackId}/(trackId=${track.trackId})}" class="btn btn-info">
+                        Edytuj
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="row-flex">
+            <a th:href="@{/tracks/create}" class="btn btn-info">
+                Utwórz nową trasę
+            </a>
         </div>
     </div>
-    <a th:href="@{/tracks/create}" class="btn btn-info">
-        Utwórz nową trasę
-    </a>
 </div>
 </body>
 </html>

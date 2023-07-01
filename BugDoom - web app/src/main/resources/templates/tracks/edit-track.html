@@ -7,17 +7,21 @@
 </head>
 <body>
 <div layout:fragment="content" class="container text-left">
+    <p></p>
     <h1>Edycja trasy</h1>
     <form th:action="@{/tracks/{trackId}/edit(trackId=${track.trackId})}" th:object="${track}" method="post">
         <div style="margin-top: 5px">
             <p>Nazwa biegu: <input type="text" placeholder="Nazwa nowego biegu" th:field="*{competitionName}"/></p>
         </div>
         <div style="margin-top: 5px">Poziom trudności:
-            <label for="difficultyChoice1"></label><input type="radio" id="difficultyChoice1" name="difficulty" value="łatwy" th:field="*{difficulty}"/>
+            <label for="difficultyChoice1"></label><input type="radio" id="difficultyChoice1" name="difficulty"
+                                                          value="łatwy" th:field="*{difficulty}"/>
             <label for="difficultyChoice1">łatwy</label>
-            <label for="difficultyChoice2"></label><input type="radio" id="difficultyChoice2" name="difficulty" value="średni" th:field="*{difficulty}"/>
+            <label for="difficultyChoice2"></label><input type="radio" id="difficultyChoice2" name="difficulty"
+                                                          value="średni" th:field="*{difficulty}"/>
             <label for="difficultyChoice2">średni</label>
-            <label for="difficultyChoice3"></label><input type="radio" id="difficultyChoice3" name="difficulty" value="trudny" th:field="*{difficulty}"/>
+            <label for="difficultyChoice3"></label><input type="radio" id="difficultyChoice3" name="difficulty"
+                                                          value="trudny" th:field="*{difficulty}"/>
             <label for="difficultyChoice3">trudny</label>
         </div>
         <p>Dystans (km): <input id="length_input" type="range" min="2" max="20" step="1" th:field="*{length}"/>
@@ -32,17 +36,22 @@
             <label for="terrainChoice3">górzysty</label>
         </div>
         <div>
-            <label for="event">Wydarzenie: </label>
-            <select id="event" class="form-control" name="track.eventId">
-                <option th:value="*{event.eventId}" th:text="${currentEvent.eventName}"></option>
-                <option th:each="event : ${allEvents}"
-                        th:value="${event.eventId}"
-                        th:text="${event.eventName}"></option>
-            </select>
+            <div class="row">
+                <div class="col-4">
+                    <label for="event">Wydarzenie: </label>
+                    <select id="event" class="form-control" name="track.eventId">
+                        <option th:value="*{event.eventId}" th:text="${currentEvent.eventName}"></option>
+                        <option th:each="event : ${allEvents}"
+                                th:value="${event.eventId}"
+                                th:text="${event.eventName}"></option>
+                    </select>
+                </div>
+            </div>
         </div>
         <ul th:if="${#fields.hasErrors('*')}">
             <li th:each="err : ${#fields.errors('*')}" th:text="${err}"/>
         </ul>
+        <p></p>
         <p><input class="btn btn-success" type="submit" value="Zatwierdź"/>
             <input class="btn btn-secondary" type="reset" value="Zresetuj"/></p>
     </form>
@@ -56,8 +65,5 @@
         })
     </script>
 </div>
-
-
 </body>
-
 </html>

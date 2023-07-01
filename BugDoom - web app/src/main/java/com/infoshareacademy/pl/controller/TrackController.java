@@ -62,8 +62,11 @@ public class TrackController {
     public String createTrack(@Valid @ModelAttribute Track newTrack,
                               BindingResult bindingResult,
                               @RequestParam("event.eventId") long eventId,
-                              RedirectAttributes redirectAttributes) {
-        if (bindingResult.hasErrors()) {
+                              RedirectAttributes redirectAttributes,
+                              Model model) {
+        if (bindingResult.hasErrors() || eventId == -1) {
+            model.addAttribute("allEvents", eventService.getAllEvents());
+            model.addAttribute("eventNotChosen", true);
             return "tracks/add-track";
         }
         newTrack.setEvent(eventService.findEventById(eventId));
