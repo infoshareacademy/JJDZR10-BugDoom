@@ -6,27 +6,22 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class DashboardController {
 
     @GetMapping("/")
-
     public String getDashboard() {
         return "MainMenu";
     }
 
     @GetMapping("/about")
-    public String getAbout() {
-
+    public String getAboutUs() {
         return "AboutUs";
-
     }
 
     @GetMapping("/family-run")
     public String getFamilyRun() {
-
         return "FamilyRun";
     }
 
     @GetMapping("/running-shoes")
     public String getRunningShoes() {
-
         return "RunningShoes";
     }
 }

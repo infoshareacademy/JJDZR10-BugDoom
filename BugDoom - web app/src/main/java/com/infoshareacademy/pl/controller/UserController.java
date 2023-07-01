@@ -36,7 +36,6 @@ public class UserController {
 
     @GetMapping("/welcome")
     public String getWelcome(){
-
         return "WelcomePage";
     }
 

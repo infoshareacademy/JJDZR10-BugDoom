@@ -2,6 +2,7 @@ package com.infoshareacademy.pl.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.util.List;
 import java.util.Objects;
@@ -106,19 +107,6 @@ public class Track {
     }
 
     @Override
-    public String toString() {
-        return "Track{" +
-                "trackId=" + trackId +
-                ", competitionName='" + competitionName + '\'' +
-                ", checkpoints=" + locations +
-                ", length=" + length +
-                ", difficulty='" + difficulty + '\'' +
-                ", terrain='" + terrain + '\'' +
-                ", event=" + event +
-                '}';
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -145,5 +133,18 @@ public class Track {
         result = 31 * result + (terrain != null ? terrain.hashCode() : 0);
         result = 31 * result + (event != null ? event.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Track{" +
+                "trackId=" + trackId +
+                ", competitionName='" + competitionName + '\'' +
+                ", locations=" + locations +
+                ", length=" + length +
+                ", difficulty='" + difficulty + '\'' +
+                ", terrain='" + terrain + '\'' +
+                ", event=" + event +
+                '}';
     }
 }
