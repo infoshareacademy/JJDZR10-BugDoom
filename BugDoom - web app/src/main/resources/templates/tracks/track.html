@@ -72,7 +72,7 @@
                 </div>
                 <div class="col-auto">
                     <select style="width:275px" id="event" class="form-select form-select-sm" name="eventId">
-                        <option th:if="${eventId} == null" th:value="-1">Wybierz wydarzenie do sortowania</option>
+                        <option th:if="${eventId} == null" th:value="-1">Wybierz wydarzenie do filtrowania</option>
                         <option th:if="${eventId} != null" th:value="eventId" th:text="${selectedEvent.eventName}"></option>
                         <option th:each="singleEvent : ${allEvents}" th:value="${singleEvent.eventId}" th:text="${singleEvent.eventName}"></option>
                     </select>
