@@ -1,7 +1,6 @@
 package com.infoshareacademy.service;
 
 import com.infoshareacademy.model.User;
-import com.infoshareacademy.pl.service.DataService;
 
 import java.io.IOException;
 import java.util.ArrayList;
